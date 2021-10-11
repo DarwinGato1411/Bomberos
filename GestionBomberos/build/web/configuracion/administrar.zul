@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+     viewModel="@id('vm') @init('com.ec.controlador.AdministrarConfiguracion')" >
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="start"  >
+        <tabbox  width="100%"  tabscroll="true" >
+            <tabs >
+                <tab label="${labels.app.perfiles}" sclass="menutabs" />
+                <tab label="${labels.app.opciones}" sclass="menutabs"/>  
+                <tab label="${labels.app.peropciones}" sclass="menutabs"/>
+                <tab label="${labels.app.usuarios}" sclass="menutabs"/>           
+                <tab label="${labels.app.parametrosmail}" sclass="menutabs"/>                    
+            </tabs>
+            <tabpanels >
+                <tabpanel  height="auto"   >
+                    <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <button    iconSclass="z-icon-plus-circle"
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarPerfil')" 
+                                       tooltiptext="${labels.app.agregar}"/>
+                           
+
+                            <listbox  width="99%"
+                                      model="@load(vm.listaPerfil)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="${labels.app.perfil}"  align="left" hflex="11"></listheader>
+<!--                                    <listheader label=""  align="center" hflex="10%"></listheader>-->
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <!--<listheader label=""  align="left" width="33px"></listheader>-->
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  > 
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.perNombre)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                                  
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-edit"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificarPerfil',valor=each)" 
+                                                       tooltiptext="${labels.app.editar}"/> 
+                                    
+                                        </listcell>  
+<!--                                        <listcell zclass = "mycss-listcell">    
+                                            <button    iconSclass="z-icon-trash-o"
+                                                       class="btn btn-danger btn-xs botonlistbox"                                                            
+                                                       onClick="@command('desactivar',valor=each)" 
+                                                       tooltiptext="${labels.app.desactivar}"/>
+                                    
+                                            </listcell>   -->
+                               
+                                        </listitem>
+                                    </template>   
+                       
+                                </listbox>
+                            </div>
+                        
+                        </div>    
+                    </div>                    
+                </tabpanel>
+                <tabpanel  height="100%" hflex="min"  >
+                    <include src="/configuracion/opcion.zul"/>  
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    perfil opcion
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <button    iconSclass="z-icon-plus-circle"
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('nuevoPerfil')" 
+                                       tooltiptext="${labels.app.agregar}"/>
+                 
+
+                            <listbox  width="99%"
+                                      model="@load(vm.listaUsuarios)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="${labels.app.usuario}"  align="left" hflex="11"></listheader>
+                                    <listheader label="${labels.app.login}"  align="left" hflex="11"></listheader>
+                                    <listheader label="${labels.app.password}"  align="left" hflex="11"></listheader>
+                                    <listheader label="${labels.app.email}"  align="left" hflex="11"></listheader>
+                                    <listheader label="${labels.app.tipousuario}"  align="left" hflex="11"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  > 
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.usuNombre)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.usuLogin)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     type="password"
+                                                     value="@bind(each.usuPassword)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.usuCorreo)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.idPerfil.perNombre)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                                  
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-edit"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificar',valor=each)" 
+                                                       tooltiptext="${labels.app.editar}"/> 
+                                    
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">    
+                                            <button    iconSclass="z-icon-trash-o"
+                                                       class="btn btn-danger btn-xs botonlistbox"                                                            
+                                                       onClick="@command('desactivar',valor=each)" 
+                                                       tooltiptext="${labels.app.desactivar}"/>
+                                    
+                                        </listcell>   
+                               
+                                    </listitem>
+                                </template>   
+                       
+                            </listbox>
+                        </div>
+                        
+                    </div>                        
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    email
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+    </div>
+</div>
+
+
+
