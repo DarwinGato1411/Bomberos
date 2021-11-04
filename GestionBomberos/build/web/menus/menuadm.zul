@@ -18,11 +18,11 @@
         min-height: 24px;
         border: 1px solid #a9a9a9;
         -webkit-border-radius: 4px;
-        border-radius: 4px;
+        border-radius: 40px;
         padding: 10px 12px;
         padding-top: 10px
         line-height: 14px;
-        <!--background: #c9e6ff;-->        
+<!--        background: #c9e6ff;        -->
         text-shadow: 7 5px #fff;
         cursor: pointer;
         white-space: normal;
@@ -31,7 +31,9 @@
        
         
         .bigbutton {
-        border-radius: 100px;
+        border-left: 3px solid gray;
+        border-right: 0px;
+        height: 500px;
         }
         .bigbutton > i {
         font-size: 100px;
@@ -58,26 +60,25 @@
             class="col-12 col-sm-12 col-md-12 col-lg-12 ">
   
         <!--<caption label="Big Button (custom styling)" />-->
-        <div class="container">
+        <div class="container" style="background:#EEEEEE; padding: 200px">
             <div class="row" align="center" >
                
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
+                <div class="col-12 col-sm-6 col-md-12 col-lg-12 " align="center">
                     <button sclass="bigbutton" iconSclass="z-icon-desktop"  
                             onClick="@command('btnPermisos')"
                             label="Permisos"  width="200px" height="200px" />
-                </div>
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
-                    <button sclass="bigbutton" iconSclass="z-icon-ambulance"  
+                
+<!--                <div>
+                 <button sclass="bigbutton" iconSclass="z-icon-ambulance"  
                             onClick="@command('Emergencias')"
                             label="Emergencias"  width="200px" height="200px" />
                 </div>
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
+               <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
                     <button sclass="bigbutton" iconSclass="z-icon-tasks"
                      onClick="@command('Operacion')" 
                             label="Operacion y Control"  width="200px" height="200px" />
                    
-                </div>
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
+                </div>-->
                     <button sclass="bigbutton" iconSclass="z-icon-gear"
                      onClick="@command('Configuracion')"
                             label="Configuraciones" width="200px" height="200px" />

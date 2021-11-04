@@ -38,6 +38,16 @@ public class MenuOpciones extends SelectorComposer<Component> {
     Menu menuReportes;
     @Wire("#btnAdministarVenta")
     Menuitem btnAdministarVenta;
+    @Wire("#btnPerIngresados")
+    Menuitem btnPerIngresados;
+    @Wire("#btnPerRevisados")
+    Menuitem btnPerRevisados;
+    @Wire("#btnPerAprobados")
+    Menuitem btnPerAprobados;
+    @Wire("#btnPerRechazados")
+    Menuitem btnPerRechazados;
+    @Wire("#btnPerAnulados")
+    Menuitem btnPerAnulados;
     UserCredential credential = new UserCredential();
     private String acceso = "";
 
@@ -51,8 +61,8 @@ public class MenuOpciones extends SelectorComposer<Component> {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         if (credential.getUsuarioSistema() != null) {
-
-           
+            
+            
         }
     }
 
@@ -67,9 +77,15 @@ public class MenuOpciones extends SelectorComposer<Component> {
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                     "/nuevo/cierrecaja.zul", null, null);
             window.doModal();
-
-
     }
+    
+    @Listen("onClick = #btnCierreCajaUsu")
+    public void btn() {
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/nuevo/cierrecaja.zul", null, null);
+            window.doModal();
+    }
+
 
     @Command
     public void nuevoProducto() {
@@ -87,6 +103,26 @@ public class MenuOpciones extends SelectorComposer<Component> {
                 "/nuevo/cliente.zul", null, null);
         window.doModal();
 
+    }
+    @Listen("onClick = #btnPerIngresados")
+    public void btnPerIngresados() {
+        Executions.sendRedirect("/menus/permiso_ingresado.zul");
+    }
+    @Listen("onClick = #btnPerRevisados")
+    public void btnPerRevisados() {
+        Executions.sendRedirect("/menus/permiso_revisado.zul");
+    }
+    @Listen("onClick = #btnPerAprobados")
+    public void btnPerAprobados() {
+        Executions.sendRedirect("/menus/permiso_aprobado.zul");
+    }
+    @Listen("onClick = #btnPerRechazados")
+    public void btnPerRechazados() {
+        Executions.sendRedirect("/menus/permiso_rechazado.zul");
+    }
+    @Listen("onClick = #btnPerAnulados")
+    public void btnPerAnulados() {
+        Executions.sendRedirect("/menus/permiso_anulado.zul");
     }
 
     public UserCredential getCredential() {

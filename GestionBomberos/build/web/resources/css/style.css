@@ -42,7 +42,7 @@ element.style {
 }
 .banner {
     /*background-color:#002551;*/
-    background-color:#008cb5;
+    background-color: white;
     color: white;
     padding: 10px 5px 5px 10px;
 }
@@ -571,24 +571,24 @@ z-menu-text, .z-menuitem-text {
 
 .z-button:focus {
     color: #000;
-    border-color: #00b9ff;
+    border-color: #006EB9;
 
-    background: -webkit-linear-gradient(top, #82c4da 0%, #82c4da 100%);
-    background: linear-gradient(to bottom, #82c4da 0%, #82c4da 100%);
+    background: -webkit-linear-gradient(top, #006EB9 0%, #006EB9 100%);
+    background: linear-gradient(to bottom, #82c4da 0%, #FF000B 100%);
     -webkit-box-shadow: inset 0 0 2px #0CBCFF;
 
     box-shadow: inset 0 0 2px #0CBCFF;
 }
 
 .z-button:hover {
-    border-color: #8fb9d0;
-    background: -webkit-linear-gradient(top, #82c4da 0%, #82c4da 100%);
-    background: linear-gradient(to bottom, #82c4da 0%, #82c4da 100%);
+    border-color: #006EB9;
+    background: -webkit-linear-gradient(top, #006EB9 0%, #006EB9 100%);
+    background: linear-gradient(to bottom, #006EB9 0%, #006EB9 100%);
 }
 
 .z-menu-content:hover, .z-menuitem-content:hover {
     border-color: #8fb9d0;
-    background: -webkit-linear-gradient(top, #337ab7 0%, #337ab7 100%);
+    background: -webkit-linear-gradient(top, #FF0000 0%, #FF0000 100%);
     background: linear-gradient(to bottom, #2196F3 0%, #2196F3 100%);
 }
 .letrasMenuOpcionesBoost{
@@ -616,8 +616,8 @@ z-menu-text, .z-menuitem-text {
 .z-east-splitter, .z-west-splitter, .z-north-splitter, .z-south-splitter {
     width: 8px;
     height: 8px;
-    background: -webkit-linear-gradient(left, #fdfdfd 0%, #337ab7 100%);
-    background: linear-gradient(to right, #fdfdfd 0%, #337ab7 100%);
+    background: -webkit-linear-gradient(left, #FF0000 0%, #FF0000 100%);
+    background: linear-gradient(to right, #FF0000 0%, #FF0000 100%);
     position: absolute;
     overflow: hidden;
     cursor: e-resize;
@@ -635,6 +635,7 @@ z-menu-text, .z-menuitem-text {
 img ~ .z-menu-text, img ~ .z-menuitem-text {
     vertical-align: middle;
     color: white;
+    
 }
 
 .z-listheader-content, .z-listcell-content, .z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
@@ -660,14 +661,14 @@ img ~ .z-menu-text, img ~ .z-menuitem-text {
 
 .z-paging-button:active {
     border-color: #a9a9a9 #cfcfcf;
-    background: -webkit-linear-gradient(top, #337ab7 0%, #337ab7 100%);
-    background: linear-gradient(to bottom, #337ab7 0%, #337ab7 100%);
+    background: -webkit-linear-gradient(top, #FF0000 0%, #FF0000 100%);
+    background: linear-gradient(to bottom, #FF0000 0%, #FF0000 100%);
     color: white;
 }
 .z-paging-button:focus {
     border-color: #a9a9a9 #cfcfcf;
-    background: -webkit-linear-gradient(top, #337ab7 0%, #337ab7 100%);
-    background: linear-gradient(to bottom, #337ab7 0%, #337ab7 100%);
+    background: -webkit-linear-gradient(top, #FF0000 0%, #FF0000 100%);
+    background: linear-gradient(to bottom, #FF0000 0%, #FF0000 100%);
     color: white;
 }
 
@@ -676,7 +677,7 @@ img ~ .z-menu-text, img ~ .z-menuitem-text {
     font-size: 12px;
     font-weight: normal;
     font-style: normal;
-    color: #337ab7;
+    color: #FF0000;
     display: inline-block;
     min-width: 24px;
     height: 24px;
@@ -753,9 +754,9 @@ img ~ .z-menu-text, img ~ .z-menuitem-text {
 }
 
 .z-menu-content:focus, .z-menuitem-content:focus {
-    border-color: #8fb9d0;
-    background: -webkit-linear-gradient(top, #2196F3 0%, #2196F3 100%);
-    background: linear-gradient(to bottom, #2196F3 0%, #2196F3 100%);
+    border-color: #FF0000;
+    background: -webkit-linear-gradient(top, #FF0000 0%, #FF0000 100%);
+    background: linear-gradient(to bottom, #FF0000 0%, #FF0000 100%);
 }
 
 .z-menu-selected>.z-menu-content{
@@ -769,4 +770,48 @@ img ~ .z-menu-text, img ~ .z-menuitem-text {
     background:	-webkit-linear-gradient(top, #fefefe 0%, #eeeeee 100%); /* Chrome10+,Safari5.1+ */
     background:	linear-gradient(to bottom, #fefefe 0%, #eeeeee 100%); /* W3C */
     -webkit-box-shadow:	 inset 1px 1px 1px rgba(210, 210, 210, 0.75);
+}
+
+/*Estilos Bomberos*/
+.fondoBanner{
+    background-color:#FFFFFF;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px 5px 10px;
+}
+.letraBannerFirst{
+    font-size: 1em;
+    color: #000000;
+    text-align: center;
+    height: auto;
+    font-weight: bold;
+}
+.letraBanner {
+  background-color: white; 
+  color: black; 
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.letraBanner:hover {
+  background-color: #FF000B;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.letraBannerSecundary {
+  background-color: white; 
+  color: black; 
+  border-color: grey;
+  font-size: 12px;
+}
+
+.letraBannerSecundary:hover {
+  background-color: #FF000B;
+  color: white;
+  border: none;
+  font-size: 12px;
 }

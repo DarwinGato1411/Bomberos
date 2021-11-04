@@ -95,6 +95,31 @@ public class ServicioPermiso {
 
         return listaClientes;
     }
+    /*PERMISOS INGRESADOS*/
+    public List<SolicitudPermiso> findLikePermisoIng(String valor) {
+
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla='ING' ");
+//            query.setParameter("solNumCedula", "%" + valor + "%");
+//            query.setParameter("solpNombreSol", "%" + valor + "%");
+//            query.setParameter("solpApellidoSol", "%" + valor + "%");
+            query.setParameter("idEstadoDocumento", valor );
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePermisoIng  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaClientes;
+    }
 
     public SolicitudPermiso findByPerSigla(String perSigla) {
 

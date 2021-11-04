@@ -24,15 +24,25 @@ public class AdministrarPermiso {
     ServicioPermiso servicioPermiso = new ServicioPermiso();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscar = "";
+    
+    /*PERMISOS INGRESADOS*/
+    ServicioPermiso servicioPermisoIng = new ServicioPermiso();
+    private List<SolicitudPermiso> listaSolicitudPermisosIng = new ArrayList<SolicitudPermiso>();
+    private String buscarIng = "";
 
     public AdministrarPermiso() {
 
         consultar();
+        
     }
 
     private void consultar() {
 
         listaSolicitudPermisos = servicioPermiso.findLikePermiso(buscar);
+    }
+    private void consultarPermisosIng() {
+
+        listaSolicitudPermisos = servicioPermiso.findLikePermisoIng(buscarIng);
     }
 
     /*Perfil*/
@@ -64,5 +74,14 @@ public class AdministrarPermiso {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
     }
 
+    public List<SolicitudPermiso> getListaSolicitudPermisosIng() {
+        return listaSolicitudPermisosIng;
+    }
+
+    public void setListaSolicitudPermisosIng(List<SolicitudPermiso> listaSolicitudPermisosIng) {
+        this.listaSolicitudPermisosIng = listaSolicitudPermisosIng;
+    }
+    
+    
 
 }

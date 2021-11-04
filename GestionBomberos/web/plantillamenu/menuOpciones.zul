@@ -1,0 +1,25 @@
+<?init class="com.ec.seguridad.Autentificador"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<zk  >
+ 
+    <div class="btn-group-vertical"    style="text-align:lefth;"
+         viewModel="@id('vm')"     apply="com.ec.controlador.MenuOpciones" >
+        <menubar id="menubar" orient="vertical"  autodrop="true">
+            
+            <menuitem label="Ingresado"  id="btnPerIngresados"/> 
+            <menuitem label="Revisado"  id="btnPerRevisados"/> 
+            <menuitem label="Aprobados"  id="btnPerAprobados"/>  
+            <menuitem label="Rechazados" id="btnPerRechazados"/> 
+            <menuitem label="Anulados" id="btnPerAnulados"/>     
+                 
+        </menubar>
+<!--        <button label="Aprobados" id="btnAdministarVenta" class="btn letraBanner" 
+        onClick="@command('agregarPer   miso')"/>
+        <button label="Pendientes" id="menuVentas" class="btn letraBanner" />
+        <button label="Rechazados" id="menuCompras" class="btn letraBanner" />
+ -->
+    </div>  
+     
+                       
+</zk>

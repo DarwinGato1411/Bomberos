@@ -19,18 +19,18 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="start">
                 <button iconSclass="z-icon-home   " 
                         id="btnHome" 
-                        style=" border-radius: 100%;color:white; background:transparent"
+                        style=" border-radius: 100%;color:red; background:transparent; font-size:20px"
                         sclass="bannerbutton"
-                        label="Inicio "   >
+                        label="Inicio"   >
                 </button>
      
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="end" style="float: right; " >
                 <label value="Usuario: " 
                        if="${not sessionScope.userCredential.anonymous}" 
-                       class="labelUsuarioBanner" />
+                       style=" border-radius: 100%;color:red; background:transparent; font-size:20px" />
                 <label value="${sessionScope.usuario.nombreUsuario}" 
-                       class="labelUsuarioBanner" 
+                       style=" border-radius: 100%;color:red; background:transparent; font-size:20px"
                        if="${not sessionScope.userCredential.anonymous}" />
      
                 <a sclass="logout labelLogout" id="logout" >  
