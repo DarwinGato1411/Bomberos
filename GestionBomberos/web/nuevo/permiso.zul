@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window  id="wOpcion"  position="center" class="col-12 col-sm-12 col-md-10 col-lg-10" closable="true"  
+<window  id="wOpcion"  position="center" class="col-12 col-sm-12 col-md-11 col-lg-11" closable="true"  
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.NuevoPermiso')">
     
-    <caption label="${labels.app.solicitudinsp}" style="font-weight:bold"
-    /> 
+    <caption label="${labels.app.solicitudinsp}" style="font-weight:bold"/> 
     <div  class="container-fluid" >
         <div  class="row" >  
             
-           
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>N° Solicitud
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelected.solpNumero)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >                                 
+                            <label value="(*)" style="color:red;font-weight:bold"/>Fecha emisión:
+                            <datebox compact="true"  value="@bind(vm.entidadSelected.solpFecha)" 
+                            readonly="true" style="font-weight:bold;" 
+                            buttonVisible="true" 
+                            lenient="true" format="dd/MM/yyyy" 
+                            constraint="no empty: Ingrese la fecha "/>
+
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >                                 
+                            <label value="(*)" style="color:red;font-weight:bold"/>Fecha Inpección:
+                            <datebox compact="true"  value="@bind(vm.entidadSelected.solpFechaReinspeccion)" 
+                            readonly="true" style="font-weight:bold;" 
+                            buttonVisible="true" 
+                            lenient="true" format="dd/MM/yyyy" 
+                            constraint="no empty: Ingrese la fecha "/>
+
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ci} 
                 
                     <textbox  maxlength="100" 
@@ -18,7 +42,7 @@
                               value="@bind(vm.entidadSelected.solNumCedula)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombre} 
                 
                     <textbox  maxlength="100" 
@@ -26,7 +50,7 @@
                               value="@bind(vm.entidadSelected.solpNombreSol)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.apellido} 
                 
                     <textbox  maxlength="100" 
@@ -34,7 +58,7 @@
                               value="@bind(vm.entidadSelected.solpApellidoSol)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Telefono:
                 
                     <textbox  maxlength="100" 
@@ -42,8 +66,23 @@
                               value="@bind(vm.entidadSelected.solpTelefono)" 
                               class="form-control" />
                 </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Nombre del local
                 
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelected.solpNombreNegocio)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.actividad} 
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelected.solpActividad)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Parroquia 
                 
                     <combobox   model="@load(vm.listaParrquia)"                                        
@@ -57,7 +96,7 @@
                     </combobox>
 
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-8 col-lg-8  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Barrio/ Urbanizacion 
                 
                     <textbox  maxlength="100" 
@@ -65,40 +104,43 @@
                               value="@bind(vm.entidadSelected.solpBarrioUrbanizacion)" 
                               class="form-control" />
                 </div>
-            
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Nombre del negocio 
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Recinto 
                 
-                    <textbox  maxlength="100" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpNombreNegocio)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.actividad} 
-                
-                    <textbox  maxlength="100" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpActividad)" 
-                              class="form-control" />
+                    <combobox   model="@load(vm.listaParrquia)"                                        
+                                selectedItem="@bind(vm.parroquiaSelected)" 
+                                value="Seleccione una parroquia" 
+                                readonly="true"                         
+                                width="100%">
+                        <template name="model">
+                            <comboitem  label="@bind(each.parrDescripcion)"/>
+                        </template>                                      
+                    </combobox>
+
                 </div>
                 
-            </div>
-            <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group "  >
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Calle 
+                <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Calle principal 
                 
                     <textbox  maxlength="100" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpCalle)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Numero 
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>N° Calle
                 
                     <textbox  maxlength="100" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpNumero)" 
+                              value="@bind(vm.entidadSelected.solpNumCalle)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Lote
+                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelected.solpLote)" 
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
@@ -109,117 +151,40 @@
                               value="@bind(vm.entidadSelected.solpInterseccion)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Edificio 
-                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    Observaciones                
                     <textbox  maxlength="100" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpEdificio)" 
+                              value="@bind(vm.entidadSelected.solpNota)" 
                               class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Piso 
-                
-                    <intbox  value="@bind(vm.entidadSelected.solpPiso)" 
-                             class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Departamento 
-                
-                    <textbox  maxlength="100" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpDepartamento)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Persona de contacto 
-                
-                    <textbox  maxlength="100" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpPersonaContacto)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Telefono de contacto 
-                
-                    <textbox  maxlength="100" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelected.solpTelefonoContacto)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Numero de ocupantes
-                
-                    <intbox  value="@bind(vm.entidadSelected.solpNumeroOcupantes)" 
-                             class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Area  de construccion
-                
-                    <decimalbox format="###.##" value="@bind(vm.entidadSelected.solpAreaConstruccion)" 
-                                class="form-control" />
-                </div> 
-            </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  > 
-                            <label value="(*)  " style="color:red;font-weight:bold"/>Croquis (Subir una imagen)
-                            <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
-                                       class="btn btn-primary btn-xs"
-                                       onClick="@command('subirCroquis')" 
-                                       tooltiptext="${labels.app.editar}"/> 
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  > 
-                            <label  value="@bind(vm.entidadSelected.solpArchivoCroquis)"  />
-                        </div>
-                    </div>
-                     
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  > 
-                            <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ruc} (Subir un PDF) 
+                            Solicitud  (Subir PDF)
                             <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
                                        class="btn btn-primary btn-xs"
-                                       onClick="@command('subirRuc')" 
+                                       onClick="@command('subirSolicitud')" 
                                        tooltiptext="${labels.app.editar}"/> 
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  > 
-                            <label  value="@bind(vm.entidadSelected.solpArchivoRuc)"  />
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  > 
-                            <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.pagoimpuesto}  (Subir un PDF)
-                            <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
-                                       class="btn btn-primary btn-xs"
-                                       onClick="@command('subirImpuesto')" 
-                                       tooltiptext="${labels.app.editar}"/> 
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  > 
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  > 
                             <label   value="@bind(vm.entidadSelected.solpArchivoImpuesto)"  />
                         </div>
                     </div>
-                
-                
-               
-                
                 </div>
             </div>
-           
-            
-                                            
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                <iframe height="550px" class="col-12 col-sm-12 col-md-12 col-lg-12" id="reportframe1"                
+                content="@bind(vm.fileContent)"/>   
+            </div>                
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
                 <button    iconSclass="z-icon-save"
                            class="btn btn-primary btn-xs botongeneral"                                                               
                            onClick="@command('guardar')"
-                           tooltiptext="${labels.app.agregar}"/>
-       
-
+                           tooltiptext="GUARDAR"/>     
+            </div> 
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
+                <label value="GUARDAR" style="color:red;font-weight:bold"/>      
             </div> 
         </div>
    

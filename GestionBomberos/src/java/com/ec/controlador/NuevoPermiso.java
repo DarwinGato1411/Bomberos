@@ -13,11 +13,15 @@ import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPermiso;
+import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -26,6 +30,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.image.AImage;
 import org.zkoss.io.Files;
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -55,6 +60,7 @@ public class NuevoPermiso {
     byte[] buffer = new byte[1024 * 1024];
     private AImage fotoCedula = null;
     public static String FOLDER_IMG = "";
+    AMedia fileContent = null;
 
     UserCredential credential = new UserCredential();
 
@@ -66,9 +72,16 @@ public class NuevoPermiso {
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         if (valor != null) {
-            tipoAccion = "update";
-            entidadSelected = valor;
-            parroquiaSelected = valor.getIdParroquia();
+            try {
+                tipoAccion = "update";
+                entidadSelected = valor;
+                parroquiaSelected = valor.getIdParroquia();
+                if (valor.getSolPathSolicitud() != null) {
+                    fileContent = new AMedia("Visor", "pdf", "application/pdf", ArchivoUtils.Imagen_A_Bytes(valor.getSolPathSolicitud()));
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             tipoAccion = "new";
             entidadSelected = new SolicitudPermiso();
@@ -97,10 +110,12 @@ public class NuevoPermiso {
                 && entidadSelected.getSolNumCedula() != null
                 && entidadSelected.getSolpNombreSol() != null
                 && entidadSelected.getSolpApellidoSol() != null
-                && entidadSelected.getSolpPathCroquis() != null
-                && entidadSelected.getSolpPagoImpuesto() != null
-                && entidadSelected.getSolpPathRuc() != null) {
-            entidadSelected.setSolpFecha(new Date());
+//                && entidadSelected.getSolNombreSolicitud() != null
+//                && entidadSelected.getSolPathSolicitud()!= null
+//                && entidadSelected.getSolpNota()!= null
+//                && entidadSelected.getSolpFechaReinspeccion()!= null
+                && entidadSelected.getSolpFecha() != null) {
+//                   entidadSelected.setSolpFecha(new Date());
             if (tipoAccion.equals("new")) {
 
                 entidadSelected.setIdEstadoDocumento(servicioEstadoDocumento.findBySigla("ING"));
@@ -136,50 +151,8 @@ public class NuevoPermiso {
     }
 
     @Command
-    @NotifyChange({"entidadSelected", "fotoGeneral"})
-    public void subirCroquis() {
-
-        try {
-            org.zkoss.util.media.Media media = Fileupload.get();
-//            if (media instanceof org.zkoss.util.media.AMedia) {
-
-            if (media instanceof org.zkoss.image.Image) {
-                String nombre = media != null ? media.getName() : "";
-                if (media.getByteData().length > 2 * 1024 * 1024) {
-                    Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 2Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
-
-                    return;
-                }
-                File baseDir = new File(FOLDER_IMG);
-                if (!baseDir.exists()) {
-                    baseDir.mkdirs();
-                }
-//                    String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-//                    .getRealPath("/img_pedido");
-                filePath = FOLDER_IMG + File.separator + media.getName();
-//                    filePath = reportFile + File.separator;
-
-                System.out.println("PATHH COPIAR ARCHIVO CEDULA " + filePath);
-                Files.copy(new File(filePath),
-                        media.getStreamData());
-                //fotoCedula = new AImage("fotoCedula", media.getStreamData());
-                entidadSelected.setSolpArchivoCroquis(nombre);
-                entidadSelected.setSolpPathCroquis(filePath);
-//                valor.setPathImgPedido(filePath + nombre);
-                Clients.showNotification("Cédula cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);
-            } else {
-                Clients.showNotification("Debe cargar una imagen", Clients.NOTIFICATION_TYPE_ERROR, null, "end_before", 1000, true);
-            }
-
-//          
-        } catch (IOException e) {
-            System.out.println("ERROR al subir la imagen " + e.getMessage());
-        }
-    }
-
-    @Command
-    @NotifyChange({"entidadSelected", "fotoGeneral"})
-    public void subirRuc() {
+    @NotifyChange({"entidadSelected", "fileContent"})
+    public void subirSolicitud() {
 
         try {
             org.zkoss.util.media.Media media = Fileupload.get();
@@ -201,54 +174,15 @@ public class NuevoPermiso {
                 filePath = FOLDER_IMG + File.separator + media.getName();
 //                    filePath = reportFile + File.separator;
 
-                System.out.println("PATHH COPIAR ARCHIVO CEDULA " + filePath);
+                System.out.println("PATHH COPIAR ARCHIVO SOLICITUD " + filePath);
                 Files.copy(new File(filePath),
                         media.getStreamData());
                 //fotoCedula = new AImage("fotoCedula", media.getStreamData());
-                entidadSelected.setSolpArchivoRuc(nombre);
-                entidadSelected.setSolpPathRuc(filePath);
+                entidadSelected.setSolPathSolicitud(filePath);
+                entidadSelected.setSolNombreSolicitud(nombre);
+                fileContent = new AMedia("report", "pdf", "application/pdf", media.getStreamData());
 //                valor.setPathImgPedido(filePath + nombre);
-                Clients.showNotification("Cédula cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);
-            } else {
-                Clients.showNotification("Debe cargar un documento PDF", Clients.NOTIFICATION_TYPE_ERROR, null, "end_before", 1000, true);
-            }
-        } catch (IOException e) {
-            System.out.println("ERROR al subir la imagen " + e.getMessage());
-        }
-    }
-
-    @Command
-    @NotifyChange({"entidadSelected", "fotoGeneral"})
-    public void subirImpuesto() {
-
-        try {
-            org.zkoss.util.media.Media media = Fileupload.get();
-//            if (media instanceof org.zkoss.util.media.AMedia) {
-            String nombre = media != null ? media.getName() : "";
-            if (nombre.contains("pdf")) {
-
-                if (media.getByteData().length > 2 * 1024 * 1024) {
-                    Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 2Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
-
-                    return;
-                }
-                File baseDir = new File(FOLDER_IMG);
-                if (!baseDir.exists()) {
-                    baseDir.mkdirs();
-                }
-//                    String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-//                    .getRealPath("/img_pedido");
-                filePath = FOLDER_IMG + File.separator + media.getName();
-//                    filePath = reportFile + File.separator;
-
-                System.out.println("PATHH COPIAR ARCHIVO CEDULA " + filePath);
-                Files.copy(new File(filePath),
-                        media.getStreamData());
-                //fotoCedula = new AImage("fotoCedula", media.getStreamData());
-                entidadSelected.setSolpArchivoImpuesto(nombre);
-                entidadSelected.setSolpPagoImpuesto(filePath);
-//                valor.setPathImgPedido(filePath + nombre);
-                Clients.showNotification("Cédula cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);
+                Clients.showNotification("Solicitud cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);
             } else {
                 Clients.showNotification("Debe cargar un documento PDF", Clients.NOTIFICATION_TYPE_ERROR, null, "end_before", 1000, true);
             }
@@ -279,6 +213,14 @@ public class NuevoPermiso {
 
     public void setParroquiaSelected(Parroquia parroquiaSelected) {
         this.parroquiaSelected = parroquiaSelected;
+    }
+
+    public AMedia getFileContent() {
+        return fileContent;
+    }
+
+    public void setFileContent(AMedia fileContent) {
+        this.fileContent = fileContent;
     }
 
 }

@@ -33,9 +33,10 @@ public class NuevoUsuario {
     private String tipoAccion = "new";
 
     @AfterCompose
-    public void afterCompose(@ExecutionArgParam("usuario") Usuario usuarioSistema, @ContextParam(ContextType.VIEW) Component view) {
+    public void afterCompose(@ExecutionArgParam("valor") Usuario usuarioSistema, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         if (usuarioSistema != null) {
+            tipoAccion = "update";
             this.entidadSelected = usuarioSistema;
             tipoUSuario = this.entidadSelected.getUsuNivel().toString();
         } else {
@@ -62,5 +63,32 @@ public class NuevoUsuario {
             Clients.showNotification("Verifique la informacion... ",
                     Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
+        wUsuario.detach();
     }
+
+    public Usuario getEntidadSelected() {
+        return entidadSelected;
+    }
+
+    public void setEntidadSelected(Usuario entidadSelected) {
+        this.entidadSelected = entidadSelected;
+    }
+
+    public String getTipoUSuario() {
+        return tipoUSuario;
+    }
+
+    public void setTipoUSuario(String tipoUSuario) {
+        this.tipoUSuario = tipoUSuario;
+    }
+
+    public String getTipoAccion() {
+        return tipoAccion;
+    }
+
+    public void setTipoAccion(String tipoAccion) {
+        this.tipoAccion = tipoAccion;
+    }
+    
+    
 }

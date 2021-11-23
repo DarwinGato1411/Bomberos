@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantillamenu/plantilla.zul"?>
+<div  self="@define(content)"  apply="org.zkoss.bind.BindComposer" width="100%" align="start" 
+      viewModel="@id('vm') @init('com.ec.controlador.AdministrarPermisoEntrega')" >
+ 
+    
+<!--    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
+    <label value="Cuerpo de Bomberos" style ="color:red; font-size: 40px"/>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
+        <image src="/imagenes/LogoBomberosPVM.png" class="imgRedondaLogoLogin" width="25%" style="center"  />
+    
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
+    <label value="''Pedro Vicente Maldonado''" style ="color:red; font-size: 40px"/>
+    </div>-->
+    
+    <tabbox id="tboxPrincipal"  width="100%">
+        <tabs>
+                <tab label="Permisos aprobados por entregar" sclass="menutabs" /> 
+        </tabs>
+        
+        <tabpanels>
+            <tabpanel  height="98%" width="99%"  >
+                <listbox  width="99%"
+                          model="@load(vm.listaSolicitudPermisos)" 
+                          nonselectableTags="*" 
+                          mold="paging" pageSize="20">
+                
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                
+                    
+                    <listhead sizable="false">
+                        <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>
+                        <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.apellido}"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
+                        <listheader label="Barrio"  align="left" hflex="6"></listheader>
+                        <listheader label="Calle principal"  align="left" hflex="6"></listheader>
+                        <listheader label=""  align="left" width="33px"></listheader>
+                        <listheader label=""  align="left" width="33px"></listheader>
+                        <listheader label=""  align="left" width="33px"></listheader>
+                        <listheader label=""  align="left" width="33px"></listheader>
+                    </listhead>
+                   
+                
+                    <template name="model">
+                        <listitem  >
+                            <listcell zclass = "mycss-listcell">
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpNumero)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell">
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solNumCedula)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell">
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpNombreSol)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell">
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpApellidoSol)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell">                                          
+                                <datebox compact="true" value="@bind(each.solpFecha)" 
+                                                     buttonVisible="false" lenient="true" readonly="true"
+                                                     format="medium" width="98%"  />
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell" >                                          
+                              
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpBarrioUrbanizacion)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                            <listcell zclass = "mycss-listcell" >                                          
+                              
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpCalle)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
+                                                  
+                            <listcell zclass = "mycss-listcell">
+                                                     
+                                <button    style="width:30px;height:30px; background: grey" iconSclass="z-icon-print"
+                                
+                                                       class="btn btn-primary btn-xs"
+                                                       tooltiptext="Imprimir permiso"/> 
+                                    
+                            </listcell>  
+<!--                            <listcell zclass = "mycss-listcell">
+                                                     
+                                <button    style="width:30px;height:30px; background: orange" iconSclass="z-icon-cloud-upload"
+                                
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('cargarArchivos',valor=each)" 
+                                                       tooltiptext="Cargar archivos"/> 
+                                    
+                            </listcell>-->
+                            <listcell zclass = "mycss-listcell">
+                                                     
+                                <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('cambiarEstado',valor=each)" 
+                                                       tooltiptext="Parte diario"/> 
+                                    
+                            </listcell>
+                            <listcell zclass = "mycss-listcell">
+                                                     
+                                <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('EstadoParteDiario',valor=each)" 
+                                                       tooltiptext="Parte diario"/> 
+                                    
+                            </listcell>                                
+                        </listitem>
+                    </template>   
+                </listbox>
+            </tabpanel>
+        </tabpanels>
+    </tabbox>
+
+</div>
+
+
+

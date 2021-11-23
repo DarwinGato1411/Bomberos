@@ -83,9 +83,9 @@ public class AdministrarConfiguracion {
 
     @Command
     @NotifyChange("listaUsuarios")
-    public void modificarUsario(@BindingParam("usuario") Usuario usuario) {
+    public void modificarUsario(@BindingParam("valor") Usuario usuario) {
         final HashMap<String, Usuario> map = new HashMap<String, Usuario>();
-        map.put("usuario", usuario);
+        map.put("valor", usuario);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/usuario.zul", null, map);
         window.doModal();

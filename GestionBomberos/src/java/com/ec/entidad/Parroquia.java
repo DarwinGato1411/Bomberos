@@ -79,6 +79,7 @@ public class Parroquia implements Serializable {
         this.parrPeso = parrPeso;
     }
 
+    
     @XmlTransient
     public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
         return solicitudPermisoCollection;

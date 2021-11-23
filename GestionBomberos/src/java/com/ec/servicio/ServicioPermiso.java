@@ -95,8 +95,9 @@ public class ServicioPermiso {
 
         return listaClientes;
     }
+
     /*PERMISOS INGRESADOS*/
-    public List<SolicitudPermiso> findLikePermisoIng(String valor) {
+    public List<SolicitudPermiso> findLikePermisoForEstadoCedulaNombre(String valor, String buscar) {
 
         List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
@@ -104,11 +105,13 @@ public class ServicioPermiso {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla='ING' ");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");
-            query.setParameter("idEstadoDocumento", valor );
+            query.setParameter("estSigla", valor);
+            query.setParameter("solNumCedula", "%" + buscar + "%");
+            query.setParameter("solpNombreSol", "%" + buscar + "%");
             listaClientes = (List<SolicitudPermiso>) query.getResultList();
 
             em.getTransaction().commit();
@@ -120,6 +123,7 @@ public class ServicioPermiso {
 
         return listaClientes;
     }
+    
 
     public SolicitudPermiso findByPerSigla(String perSigla) {
 

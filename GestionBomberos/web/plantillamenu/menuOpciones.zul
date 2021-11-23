@@ -5,20 +5,51 @@
  
     <div class="btn-group-vertical"    style="text-align:lefth;"
          viewModel="@id('vm')"     apply="com.ec.controlador.MenuOpciones" >
-        <menubar id="menubar" orient="vertical"  autodrop="true">
-            
+        <menubar id="menubar" orient="vertical"  autodrop="false" >
+            <!--Menu Recaudacion-->
+            <!--<menuitem label="Nueva solicitud"  id="btnNuevaSolicitud" style="backgroud:green"/>--> 
             <menuitem label="Ingresado"  id="btnPerIngresados"/> 
-            <menuitem label="Revisado"  id="btnPerRevisados"/> 
-            <menuitem label="Aprobados"  id="btnPerAprobados"/>  
-            <menuitem label="Rechazados" id="btnPerRechazados"/> 
-            <menuitem label="Anulados" id="btnPerAnulados"/>     
-                 
+            <!--<menuitem label="Por revisar (Pendientes aprobar)"  id="btnPorRevisar"/>-->
+            <menuitem label="Aprobados"  id="btnPerAprobados"/>
+            <menuitem label="Entrega de Permiso"  id="btnEntregaPermiso"/>
+            <!--menu tesoreria-->
+            <menuitem label="Revision (documentacion)"  id="btnPerRevisados"/> 
+            <menuitem label="Parte Diario"  id="btnParteDiario"/>
+            <!--PREVENCION DE INCENDIOS-->
+            <menuitem label="Inspeccion pendiente"  id="btnPorInspeccionar"/>
+            <menuitem label="Reinspección"  id="btnPerReinspeccion"/>
+            <!--GENERAL-->
+             <menuitem label="Anulados" id="btnPerAnulados"/>   
+             <!--ADMINISTRADOR-->  
+              <menuitem label="Configuracion" id="btnConfigurar"/>
+            
+            
+          
         </menubar>
-<!--        <button label="Aprobados" id="btnAdministarVenta" class="btn letraBanner" 
-        onClick="@command('agregarPer   miso')"/>
-        <button label="Pendientes" id="menuVentas" class="btn letraBanner" />
-        <button label="Rechazados" id="menuCompras" class="btn letraBanner" />
- -->
+        <!--
+        <label value="TESORERIA" style="color:black" />
+        <menubar id="menubar2" orient="vertical"  autodrop="false" >
+            <menuitem label="Revision (documentacion)"  id="btnPerRevisados"/> 
+            <menuitem label="Parte Diario"  id="btnParteDiario"/>
+        </menubar>
+        <label value="PREVENCION DE INCENDIOS" style="color:black" />
+        <menubar id="menubar3" orient="vertical"  autodrop="false" >
+            <menuitem label="Inspeccion pendiente"  id="btnPorInspeccionar"/>
+            <menuitem label="Reinspección"  id="btnPerReinspeccion"/>
+        </menubar>
+        <label value="GENERAL" style="color:black" />
+        <menubar id="menubar4" orient="vertical"  autodrop="false" >
+            <menuitem label="Anulados" id="btnPerAnulados"/>     
+        </menubar>
+        <label value="ADMINISTRADOR" style="color:black" />
+        <menubar id="menubar5" orient="vertical"  autodrop="false" > 
+            <menuitem label="Configuracion" id="btnConfigurar"/>
+        </menubar>-->
+        <!--        <button label="Aprobados" id="btnAdministarVenta" class="btn letraBanner" 
+               onClick="@command('agregarPer   miso')"/>
+               <button label="Pendientes" id="menuVentas" class="btn letraBanner" />
+               <button label="Rechazados" id="menuCompras" class="btn letraBanner" />
+        -->
     </div>  
      
                        

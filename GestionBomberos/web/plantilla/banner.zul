@@ -16,33 +16,34 @@
          apply="com.ec.controlador.LogoutController" >
         <div class="row" >
            
-            
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="start">
-                <button src="/imagenes/estaciondebomberos.png"
-                        id="btnHome" 
-                        style=" color:red; background:transparent; font-size:20px"
-                        sclass="bannerbutton"
-                        label="Inicio"   >
-                </button>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " style="background:white;" align="start">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  " style="background:white;" align="start">
+                    <button src="/imagenes/estaciondebomberos.png"
+                            id="btnHome" 
+                            style=" color:red; background:transparent; font-size:20px"
+                            sclass="bannerbutton"
+                            label="Inicio"   >
+                    </button>
      
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="end" style="float: right; " >
-                <label value="Usuario: " 
-                       if="${not sessionScope.userCredential.anonymous}" 
-                       style=" border-radius: 100%;color:red; background:transparent; font-size:20px" />
-                <label value="${sessionScope.usuario.nombreUsuario}" 
-                       style=" border-radius: 100%;color:red; background:transparent; font-size:20px" 
-                       if="${not sessionScope.userCredential.anonymous}" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="end" style="float: right; background:white;" >
+                    <label value="Usuario: " 
+                           if="${not sessionScope.userCredential.anonymous}" 
+                           style=" border-radius: 100%;color:red; background:transparent; font-size:20px" />
+                    <label value="${sessionScope.usuario.nombreUsuario}" 
+                           style=" border-radius: 100%;color:red; background:transparent; font-size:20px" 
+                           if="${not sessionScope.userCredential.anonymous}" />
      
-                <a sclass="logout labelLogout" id="logout" >  
-                    <label  value="Salir " 
-                            if="${not sessionScope.userCredential.anonymous}" 
-                            sclass="labelLogout"/> 
-                    <image src="/iconos/logout-24.png"  />  
+                    <a sclass="logout labelLogout" id="logout" >  
+                        <label  value="Salir " 
+                               if="${not sessionScope.userCredential.anonymous}" 
+                               sclass="labelLogout"/> 
+                        <image src="/iconos/logout-24.png"  />  
                        
-                </a>
+                    </a>
                
-            </div>           
+                </div>           
+            </div>
         </div>
         
     </div>

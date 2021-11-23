@@ -104,6 +104,21 @@ public class SolicitudPermiso implements Serializable {
     private Integer solpNumeroOcupantes;
     @Column(name = "solp_area_construccion")
     private BigDecimal solpAreaConstruccion;
+    @Column(name = "solp_lote")
+    private String solpLote;
+    @Column(name = "solp_recinto")
+    private String solpRecinto;
+    @Column(name = "sol_path_solicitud")
+    private String solPathSolicitud;
+    @Column(name = "sol_nombre_solicitud")
+    private String solNombreSolicitud;
+    @Column(name = "solp_num_calle")
+    private String solpNumCalle;
+    @Column(name = "solp_nota")
+    private String solpNota;
+    @Column(name = "solp_fecha_reinspeccion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date solpFechaReinspeccion;
     @OneToMany(mappedBy = "idSolcitudPer")
     private Collection<DocumentosAdjunto> documentosAdjuntoCollection;
     @OneToMany(mappedBy = "idSolcitudPer")
@@ -416,9 +431,63 @@ public class SolicitudPermiso implements Serializable {
     public void setSolpArchivoCroquis(String solpArchivoCroquis) {
         this.solpArchivoCroquis = solpArchivoCroquis;
     }
-    
-    
 
+    public String getSolpLote() {
+        return solpLote;
+    }
+
+    public void setSolpLote(String solpLote) {
+        this.solpLote = solpLote;
+    }
+
+    public String getSolpRecinto() {
+        return solpRecinto;
+    }
+
+    public void setSolpRecinto(String solpRecinto) {
+        this.solpRecinto = solpRecinto;
+    }
+
+    public String getSolPathSolicitud() {
+        return solPathSolicitud;
+    }
+
+    public void setSolPathSolicitud(String solPathSolicitud) {
+        this.solPathSolicitud = solPathSolicitud;
+    }
+
+    public String getSolNombreSolicitud() {
+        return solNombreSolicitud;
+    }
+
+    public void setSolNombreSolicitud(String solNombreSolicitud) {
+        this.solNombreSolicitud = solNombreSolicitud;
+    }
+
+    public String getSolpNumCalle() {
+        return solpNumCalle;
+    }
+
+    public void setSolpNumCalle(String solpNumCalle) {
+        this.solpNumCalle = solpNumCalle;
+    }
+
+    public String getSolpNota() {
+        return solpNota;
+    }
+
+    public void setSolpNota(String solpNota) {
+        this.solpNota = solpNota;
+    }
+
+    public Date getSolpFechaReinspeccion() {
+        return solpFechaReinspeccion;
+    }
+
+    public void setSolpFechaReinspeccion(Date solpFechaReinspeccion) {
+        this.solpFechaReinspeccion = solpFechaReinspeccion;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

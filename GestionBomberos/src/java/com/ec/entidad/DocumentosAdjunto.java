@@ -43,6 +43,8 @@ public class DocumentosAdjunto implements Serializable {
     private String adjDescripcion;
     @Column(name = "adj_path")
     private String adjPath;
+    @Column(name = "adj_estado_archivo")
+    private Boolean adjEstadoArchivo;
     @Column(name = "adj_fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date adjFecha;
@@ -96,6 +98,15 @@ public class DocumentosAdjunto implements Serializable {
     public void setIdSolcitudPer(SolicitudPermiso idSolcitudPer) {
         this.idSolcitudPer = idSolcitudPer;
     }
+
+    public Boolean getAdjEstadoArchivo() {
+        return adjEstadoArchivo;
+    }
+
+    public void setAdjEstadoArchivo(Boolean adjEstadoArchivo) {
+        this.adjEstadoArchivo = adjEstadoArchivo;
+    }
+    
 
     @Override
     public int hashCode() {

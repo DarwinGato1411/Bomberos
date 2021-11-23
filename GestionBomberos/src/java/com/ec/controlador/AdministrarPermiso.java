@@ -4,16 +4,25 @@
  */
 package com.ec.controlador;
 
+import com.ec.entidad.DocumentosAdjunto;
+import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
+import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioPermiso;
+import com.ec.utilitario.ArchivoUtils;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Messagebox;
 
 /**
  *
@@ -21,30 +30,25 @@ import org.zkoss.zk.ui.Executions;
  */
 public class AdministrarPermiso {
 
-    ServicioPermiso servicioPermiso = new ServicioPermiso();
-    private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
-    private String buscar = "";
-    
-    /*PERMISOS INGRESADOS*/
-    ServicioPermiso servicioPermisoIng = new ServicioPermiso();
-    private List<SolicitudPermiso> listaSolicitudPermisosIng = new ArrayList<SolicitudPermiso>();
-    private String buscarIng = "";
+   
 
+    /*PERMISOS INGRESADOS*/
+     ServicioPermiso servicioPermiso = new ServicioPermiso();
+     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
+    private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
+    private String buscarIng = "ING";
+    private String buscar = "";
+    AMedia fileContent = null;
+    
     public AdministrarPermiso() {
 
-        consultar();
-        
+        consultarPermisosIng();
     }
 
-    private void consultar() {
-
-        listaSolicitudPermisos = servicioPermiso.findLikePermiso(buscar);
-    }
+   
     private void consultarPermisosIng() {
-
-        listaSolicitudPermisos = servicioPermiso.findLikePermisoIng(buscarIng);
+        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarIng , buscar);
     }
-
     /*Perfil*/
     @Command
     @NotifyChange("listaSolicitudPermisos")
@@ -52,7 +56,7 @@ public class AdministrarPermiso {
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/permiso.zul", null, null);
         window.doModal();
-         consultar();
+        consultarPermisosIng();
     }
 
     @Command
@@ -63,9 +67,38 @@ public class AdministrarPermiso {
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/permiso.zul", null, map);
         window.doModal();
-        consultar();
+     consultarPermisosIng();
     }
-
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
+        if (Messagebox.show("Confirmar cambio de estado?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
+            valor.setIdEstadoDocumento(estadoDocumento);
+            servicioPermiso.modificar(valor);
+            consultarPermisosIng();
+        }
+    }
+    
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
+        if (Messagebox.show("Desea anular la solicitud", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ANU");
+            valor.setIdEstadoDocumento(estadoDocumento);
+            servicioPermiso.modificar(valor);
+            consultarPermisosIng();
+        }
+    }
+    @Command
+    @NotifyChange({"listadoAdjuntos", "fileContent"})
+    public void verArchivo(@BindingParam("valor") DocumentosAdjunto valor) {
+        try {
+            fileContent = new AMedia("Visor", "pdf", "application/pdf", ArchivoUtils.Imagen_A_Bytes(valor.getAdjPath()));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
     public List<SolicitudPermiso> getListaSolicitudPermisos() {
         return listaSolicitudPermisos;
     }
@@ -73,15 +106,5 @@ public class AdministrarPermiso {
     public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
     }
-
-    public List<SolicitudPermiso> getListaSolicitudPermisosIng() {
-        return listaSolicitudPermisosIng;
-    }
-
-    public void setListaSolicitudPermisosIng(List<SolicitudPermiso> listaSolicitudPermisosIng) {
-        this.listaSolicitudPermisosIng = listaSolicitudPermisosIng;
-    }
-    
-    
 
 }

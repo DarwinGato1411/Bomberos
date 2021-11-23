@@ -2,10 +2,10 @@
 
 <zk  >
     <borderlayout >
-        <north   border="none" height="10%" >
+        <north   border="none" height="7%" >
             <include src="/plantillamenu/banner.zul"/>
         </north>
-                <west  border="none" class="banner" autoscroll="true"  
+        <west  border="none" class="banner" autoscroll="true"  
                        collapsible="true" splittable="true"  >
             <include src="/plantillamenu/menuOpciones.zul"/>
         </west>
@@ -13,9 +13,9 @@
             
         </center>
         <south>
-            <div style="background:black;color:white;" height="30px" align="center">
-                <image src="../imagenes/logosinfondo.png" height="28px" />   
-                <label>DECKXEL </label>       
+            <div style="background:black;color:white;" height="20px" align="center">
+<!--                <image src="../imagenes/logosinfondo.png" height="28px" />   
+                <label>DECKXEL </label>       -->
             </div>
         </south>
     </borderlayout>

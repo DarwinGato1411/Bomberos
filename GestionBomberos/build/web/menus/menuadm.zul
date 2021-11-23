@@ -64,23 +64,23 @@
             <div class="row" align="center" >
                
                 <div class="col-12 col-sm-6 col-md-12 col-lg-12 " align="center">
+                    <button sclass="bigbutton" iconSclass="z-icon-tasks"
+                            onClick="@command('Operacion')" 
+                            label="Solicitudes"  width="200px" height="200px" />
+                    
                     <button sclass="bigbutton" iconSclass="z-icon-desktop"  
                             onClick="@command('btnPermisos')"
                             label="Permisos"  width="200px" height="200px" />
                 
-<!--                <div>
-                 <button sclass="bigbutton" iconSclass="z-icon-ambulance"  
+<!--                 <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
+                            <button sclass="bigbutton" iconSclass="z-icon-ambulance"  
                             onClick="@command('Emergencias')"
                             label="Emergencias"  width="200px" height="200px" />
-                </div>
-               <div class="col-12 col-sm-6 col-md-3 col-lg-3 ">
-                    <button sclass="bigbutton" iconSclass="z-icon-tasks"
-                     onClick="@command('Operacion')" 
-                            label="Operacion y Control"  width="200px" height="200px" />
+                    
                    
                 </div>-->
                     <button sclass="bigbutton" iconSclass="z-icon-gear"
-                     onClick="@command('Configuracion')"
+                            onClick="@command('Configuracion')"
                             label="Configuraciones" width="200px" height="200px" />
                 </div>
                 

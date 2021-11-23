@@ -23,6 +23,6 @@ public class LogoutController extends SelectorComposer<Component> {
     }
     @Listen("onClick=#btnHome")
     public void home() {        
-        Executions.sendRedirect("/menus/menuadm.zul");
+        Executions.sendRedirect("/configuracion/permiso.zul");
     }
 }
