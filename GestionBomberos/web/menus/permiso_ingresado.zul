@@ -3,7 +3,7 @@
 <?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
 <?init class="com.ec.seguridad.Autentificador"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantillamenu/plantilla.zul"?>
-<div  self="@define(content)"  apply="org.zkoss.bind.BindComposer" width="100%" align="start" 
+<div  self="@define(content)"   apply="org.zkoss.bind.BindComposer"  align="start" 
       viewModel="@id('vm') @init('com.ec.controlador.AdministrarPermiso')" >
  
     
@@ -45,14 +45,13 @@
                         <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
-                        <listheader label="${labels.app.apellido}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
                         <listheader label="Barrio"  align="left" hflex="6"></listheader>
                         <listheader label="Calle principal"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
-                        <listheader label=""  align="left" width="33px"></listheader>
+                        <!--<listheader label=""  align="left" width="33px"></listheader>-->
                     </listhead>
                    
                 
@@ -72,12 +71,7 @@
                                 <label sclass="letraLisbox" 
                                                    value="@bind(each.solpNombreSol)" style="font-weight:bold" 
                                                    width="100%"/>
-                            </listcell>  
-                            <listcell zclass = "mycss-listcell">
-                                <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpApellidoSol)" style="font-weight:bold" 
-                                                   width="100%"/>
-                            </listcell>  
+                            </listcell>                            
                             <listcell zclass = "mycss-listcell">                                          
                                 <datebox compact="true" value="@bind(each.solpFecha)" 
                                                      buttonVisible="false" lenient="true" readonly="true"

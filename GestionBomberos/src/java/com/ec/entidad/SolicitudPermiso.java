@@ -130,9 +130,16 @@ public class SolicitudPermiso implements Serializable {
     @ManyToOne
     private Usuario idUsuario;
 
+    @JoinColumn(name = "id_tipo_solicitud", referencedColumnName = "id_tipo_solicitud")
+    @ManyToOne
+    private TipoSolicitud idTipoSolicitud;
+
     @JoinColumn(name = "id_parroquia", referencedColumnName = "id_parroquia")
     @ManyToOne
     private Parroquia idParroquia;
+    @JoinColumn(name = "id_recinto", referencedColumnName = "id_recinto")
+    @ManyToOne
+    private Recinto idRecinto;
 
     public SolicitudPermiso() {
     }
@@ -487,6 +494,24 @@ public class SolicitudPermiso implements Serializable {
     public void setSolpFechaReinspeccion(Date solpFechaReinspeccion) {
         this.solpFechaReinspeccion = solpFechaReinspeccion;
     }
+
+    public TipoSolicitud getIdTipoSolicitud() {
+        return idTipoSolicitud;
+    }
+
+    public void setIdTipoSolicitud(TipoSolicitud idTipoSolicitud) {
+        this.idTipoSolicitud = idTipoSolicitud;
+    }
+
+    public Recinto getIdRecinto() {
+        return idRecinto;
+    }
+
+    public void setIdRecinto(Recinto idRecinto) {
+        this.idRecinto = idRecinto;
+    }
+
+    
     
     @Override
     public int hashCode() {

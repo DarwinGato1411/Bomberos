@@ -16,7 +16,7 @@
                     <tabpanels>
                         <tabpanel  height="98%" width="99%"  >
                              
-                            Escoger archivo
+                            Seleccionar los archivos necesarios archivo:
                             <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
                                        class="btn btn-primary btn-xs"
                                        onClick="@command('cargarArchivo')" 

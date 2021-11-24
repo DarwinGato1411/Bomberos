@@ -1,0 +1,97 @@
+-- Table: public.recinto
+
+-- DROP TABLE public.recinto;
+
+CREATE TABLE IF NOT EXISTS public.recinto
+(
+    id_recinto integer NOT NULL DEFAULT nextval('parroquia_seq'::regclass),
+    rec_descripcion character varying(150) COLLATE pg_catalog."default",
+    rec_sigla character varying(10) COLLATE pg_catalog."default",
+    rec_peso integer,
+    CONSTRAINT pk_id_recinto PRIMARY KEY (id_recinto)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.recinto
+    OWNER to postgres;
+-- Index: recinto_pk
+
+-- DROP INDEX public.recinto_pk;
+
+CREATE UNIQUE INDEX recinto_pk
+    ON public.recinto USING btree
+    (id_recinto ASC NULLS LAST)
+    TABLESPACE pg_default;
+	
+	
+	-- Column: public.solicitud_permiso.id_recinto
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN id_recinto;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN id_recinto integer;
+	
+	
+	
+	-- Constraint: fk_solicitud_recinto
+
+-- ALTER TABLE public.solicitud_permiso DROP CONSTRAINT fk_solicitud_recinto;
+
+ALTER TABLE public.solicitud_permiso
+    ADD CONSTRAINT fk_solicitud_recinto FOREIGN KEY (id_recinto)
+    REFERENCES public.recinto (id_recinto) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+
+-- Table: public.tipo_solicitud
+
+-- DROP TABLE public.tipo_solicitud;
+
+CREATE TABLE IF NOT EXISTS public.tipo_solicitud
+(
+    id_tipo_solicitud integer NOT NULL DEFAULT nextval('tipo_solicitud_seq'::regclass),
+    tips_drescripcion character varying(150) COLLATE pg_catalog."default",
+    tips_sigla character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT pk_tipo_soliditud PRIMARY KEY (id_tipo_solicitud)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.tipo_solicitud
+    OWNER to postgres;
+-- Index: tipo_solicitud_pk
+
+-- DROP INDEX public.tipo_solicitud_pk;
+
+CREATE UNIQUE INDEX tipo_solicitud_pk
+    ON public.tipo_solicitud USING btree
+    (id_tipo_solicitud ASC NULLS LAST)
+    TABLESPACE pg_default;
+	
+	-- Column: public.solicitud_permiso.id_tipo_solicitud
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN id_tipo_solicitud;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN id_tipo_solicitud integer;
+	
+	ALTER TABLE public.solicitud_permiso
+    ADD CONSTRAINT "fk-tipo_solicitud" FOREIGN KEY (id_tipo_solicitud)
+    REFERENCES public.tipo_solicitud (id_tipo_solicitud) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+
+
+
+
+	
+	
+	
+	

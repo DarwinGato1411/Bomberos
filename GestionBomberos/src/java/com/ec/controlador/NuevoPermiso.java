@@ -6,13 +6,17 @@ package com.ec.controlador;
 
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Parroquia;
+import com.ec.entidad.Recinto;
 import com.ec.entidad.SolicitudPermiso;
+import com.ec.entidad.TipoSolicitud;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioRecinto;
+import com.ec.servicio.ServicioTipoSolicitud;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,6 +57,9 @@ public class NuevoPermiso {
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
     private String tipoAccion = "new";
+    private List<TipoSolicitud> listaTipoSolicitud = new ArrayList<TipoSolicitud>();
+    private TipoSolicitud tipoSoliSelected = null;
+    ServicioTipoSolicitud servicioTipoSolicitud = new ServicioTipoSolicitud();
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
 //    para cargar el pdf de la cedula
@@ -67,6 +74,10 @@ public class NuevoPermiso {
     ServicioParroquia servicioParroquia = new ServicioParroquia();
     private List<Parroquia> listaParrquia = new ArrayList<Parroquia>();
     private Parroquia parroquiaSelected;
+
+    private List<Recinto> listaRecintos = new ArrayList<Recinto>();
+    private Recinto recintoSelected = null;
+    ServicioRecinto servicioRecinto = new ServicioRecinto();
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -85,8 +96,12 @@ public class NuevoPermiso {
         } else {
             tipoAccion = "new";
             entidadSelected = new SolicitudPermiso();
+            entidadSelected.setSolpFechaReinspeccion(new Date());
+            entidadSelected.setSolpFecha(new Date());
         }
         listaParrquia = servicioParroquia.findLikeParrDecripcion("");
+        listaTipoSolicitud = servicioTipoSolicitud.findByAll();
+        listaRecintos = servicioRecinto.findByAll();
     }
 
     public NuevoPermiso() {
@@ -109,14 +124,24 @@ public class NuevoPermiso {
         if (entidadSelected != null && entidadSelected.getSolNumCedula() != null
                 && entidadSelected.getSolNumCedula() != null
                 && entidadSelected.getSolpNombreSol() != null
-                && entidadSelected.getSolpApellidoSol() != null
-//                && entidadSelected.getSolNombreSolicitud() != null
-//                && entidadSelected.getSolPathSolicitud()!= null
-//                && entidadSelected.getSolpNota()!= null
-//                && entidadSelected.getSolpFechaReinspeccion()!= null
-                && entidadSelected.getSolpFecha() != null) {
+                && entidadSelected.getSolpFecha() != null
+                && entidadSelected.getSolpNumero() != null) {
+            if (tipoSoliSelected == null) {
+                Clients.showNotification("Seleccione un tipo de solicitud... ",
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
+                return;
+            }
 //                   entidadSelected.setSolpFecha(new Date());
+            entidadSelected.setIdTipoSolicitud(tipoSoliSelected);
             if (tipoAccion.equals("new")) {
+
+                if (recintoSelected != null) {
+                    entidadSelected.setIdRecinto(recintoSelected);
+                }
+
+                if (parroquiaSelected != null) {
+                    entidadSelected.setIdParroquia(parroquiaSelected);
+                }
 
                 entidadSelected.setIdEstadoDocumento(servicioEstadoDocumento.findBySigla("ING"));
                 if (credential.getNivelUsuario() != null) {
@@ -221,6 +246,38 @@ public class NuevoPermiso {
 
     public void setFileContent(AMedia fileContent) {
         this.fileContent = fileContent;
+    }
+
+    public List<TipoSolicitud> getListaTipoSolicitud() {
+        return listaTipoSolicitud;
+    }
+
+    public void setListaTipoSolicitud(List<TipoSolicitud> listaTipoSolicitud) {
+        this.listaTipoSolicitud = listaTipoSolicitud;
+    }
+
+    public TipoSolicitud getTipoSoliSelected() {
+        return tipoSoliSelected;
+    }
+
+    public void setTipoSoliSelected(TipoSolicitud tipoSoliSelected) {
+        this.tipoSoliSelected = tipoSoliSelected;
+    }
+
+    public List<Recinto> getListaRecintos() {
+        return listaRecintos;
+    }
+
+    public void setListaRecintos(List<Recinto> listaRecintos) {
+        this.listaRecintos = listaRecintos;
+    }
+
+    public Recinto getRecintoSelected() {
+        return recintoSelected;
+    }
+
+    public void setRecintoSelected(Recinto recintoSelected) {
+        this.recintoSelected = recintoSelected;
     }
 
 }

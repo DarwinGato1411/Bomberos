@@ -635,7 +635,7 @@ z-menu-text, .z-menuitem-text {
 img ~ .z-menu-text, img ~ .z-menuitem-text {
     vertical-align: middle;
     color: white;
-    
+
 }
 
 .z-listheader-content, .z-listcell-content, .z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
@@ -787,31 +787,92 @@ img ~ .z-menu-text, img ~ .z-menuitem-text {
     font-weight: bold;
 }
 .letraBanner {
-  background-color: white; 
-  color: black; 
-  border: none;
-  font-weight: bold;
-  font-size: 12px;
+    background-color: white; 
+    color: black; 
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .letraBanner:hover {
-  background-color: #FF000B;
-  color: white;
-  border: none;
-  font-weight: bold;
-  font-size: 12px;
+    background-color: #FF000B;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .letraBannerSecundary {
-  background-color: white; 
-  color: black; 
-  border-color: grey;
-  font-size: 12px;
+    background-color: white; 
+    color: black; 
+    border-color: grey;
+    font-size: 12px;
 }
 
 .letraBannerSecundary:hover {
-  background-color: #FF000B;
-  color: white;
-  border: none;
-  font-size: 12px;
+    background-color: #FF000B;
+    color: white;
+    border: none;
+    font-size: 12px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+
+    line-height: normal;
+    margin-right: 2px;
+}
+
+label, select, button, input[type="button"], input[type="reset"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+
+/*.z-scrollbar-horizontal .z-scrollbar-indicator {
+    height: 14px;
+    border: transparent;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: transparent;
+    background: transparent;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+    z-index: 100;
+}*/
+
+/*.z-scrollbar-left, .z-scrollbar-right {
+    font-size: 14px;
+    color: transparent;
+    width: 16px;
+    height: 16px;
+    padding: 1px 6px 0 5px;
+    background: transparent;
+    position: absolute;
+    cursor: pointer;
+}
+
+.z-scrollbar-horizontal .z-scrollbar-icon {
+    color: transparent;
+    margin-left: -8px;
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    -webkit-transform: rotate(
+        90deg) scale(0.5, 0.7);
+    transform: rotate(
+        90deg) scale(0.5, 0.7);
+}
+
+.z-scrollbar-horizontal .z-scrollbar-rail {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}*/
+
+.z-scrollbar-horizontal {
+    width: 100%;
+    height: 0px;
+    left: 0;
+    bottom: 0;
 }
