@@ -37,7 +37,6 @@
                     <listhead sizable="false">
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
-                        <listheader label="${labels.app.apellido}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.direccion}"  align="left" hflex="9"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
@@ -57,12 +56,7 @@
                                 <label sclass="letraLisbox" 
                                                    value="@bind(each.solpNombreSol)" style="font-weight:bold" 
                                                    width="100%"/>
-                            </listcell>  
-                            <listcell zclass = "mycss-listcell">
-                                <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpApellidoSol)" style="font-weight:bold" 
-                                                   width="100%"/>
-                            </listcell>  
+                            </listcell>   
                             <listcell zclass = "mycss-listcell">                                          
                                 <datebox compact="true" value="@bind(each.solpFecha)" 
                                                      buttonVisible="false" lenient="true" readonly="true"

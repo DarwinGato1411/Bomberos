@@ -64,7 +64,7 @@ public class AdministrarPorInspeccionar {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Confirmar cambio de estado?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+        if (Messagebox.show("Aprobar documento?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
             valor.setIdEstadoDocumento(estadoDocumento);
             servicioPermiso.modificar(valor);
@@ -74,7 +74,7 @@ public class AdministrarPorInspeccionar {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void EstadoReinspeccion(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Confirmar cambio de estado?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+        if (Messagebox.show("Enviar a reinspeccion?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("REINS");
             valor.setIdEstadoDocumento(estadoDocumento);
             servicioPermiso.modificar(valor);
@@ -85,7 +85,7 @@ public class AdministrarPorInspeccionar {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Desea anular la solicitud", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+        if (Messagebox.show("Anular documento", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ANU");
             valor.setIdEstadoDocumento(estadoDocumento);
             servicioPermiso.modificar(valor);
@@ -99,7 +99,7 @@ public class AdministrarPorInspeccionar {
         final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                "/nuevo/cargarArchivosPrevencion.zul", null, map);
+                "/nuevo/cargarArchivos.zul", null, map);
         window.doModal();
         consultarPermisosPorInspec();
     }

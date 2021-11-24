@@ -89,7 +89,7 @@ public class AdministrarPermisoRevisado {
         final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-        "/nuevo/cargarArchivosTesoreria.zul", null, map);
+        "/nuevo/cargarArchivos.zul", null, map);
         window.doModal();
         consultarPermisosRev();
     }

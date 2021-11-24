@@ -14,8 +14,8 @@
         </center>
         <south>
             <div style="background:black;color:white;" height="20px" align="center">
-<!--                <image src="../imagenes/logosinfondo.png" height="28px" />   
-                <label>DECKXEL </label>       -->
+                <image src="../imagenes/logosinfondo.png" height="28px" />   
+                <label>DECKXEL </label>       
             </div>
         </south>
     </borderlayout>

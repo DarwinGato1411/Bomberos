@@ -45,6 +45,13 @@
                           value="@bind(vm.entidadSelected.usuPassword)"
                           class="form-control" />
             </div> 
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <label value="(*)" style="color:transparent;font-weight:bold"/>Correo:
+              
+                <textbox  maxlength="150"
+                          value="@bind(vm.entidadSelected.usuCorreo)"
+                          class="form-control" />
+            </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
                     
