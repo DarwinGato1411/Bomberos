@@ -13,7 +13,7 @@
                 <tab label="${labels.app.parametrosmail}" sclass="menutabs"/>                    
             </tabs>
             <tabpanels >
-<!--                
+                <!--                
                 <tabpanel  height="100%" hflex="min"  >
                     <include src="/configuracion/opcion.zul"/>  
                 </tabpanel>-->
@@ -94,6 +94,84 @@
                             </listbox>
                         </div>
                         
+                    </div>                        
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4S  form-group"  >
+                                <label value="RUTA BASE:"/>
+                                <combobox  model="@load(vm.listaDicos)" readonly="false"
+                                           class="badge badge-default btn-secondary  textoFechaDateBox"  
+                                           selectedItem="@bind(vm.parametrizarselected.parDisco)"
+                                           tooltiptext="Ruta base dependiendo del sistema operativo (D: ó /Documentos)" >
+                                          
+                                    <template name="model">
+                                        <comboitem  label="@bind(each)"/>
+                                    </template>                                      
+                                </combobox> 
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Contacto Empresa
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parContactoEmpresa)" 
+                                          class="form-control" />
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Empresa
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parEmpresa)" 
+                                          class="form-control" />
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Ruc Empresa
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parRucEmpresa)" 
+                                          class="form-control" />
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Impresora
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parNombreImpresora)" 
+                                          class="form-control" />
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Correo por defecto
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parCorreoDefecto)" 
+                                          class="form-control" />
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Carpeta
+                                <div class="input-group "  >
+                                    <textbox value="@bind(vm.parametrizarselected.parCarpeta)" 
+                                             placeholder="Logotipo de la empresa"
+                                             class="form-control form-control-sm"
+                                             tooltiptext="Agregar imagen" />
+                                    <image src="./imagenes/folder.png" 
+                                           onClick="@command('subirPathImagen')"  
+                                           tooltiptext="Subir logotipo de la empresa"
+                                           style="font-size:20px;font-weight:bold"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
+                    
+                                <button src="/iconos/guardar.png"  
+                                        class="btn btn btn-secondary btn-sm "
+                                        onClick="@command('guardar')"
+                                        tooltiptext="Guardar informacion"/>
+                            </div> 
+                        </div>
                     </div>                        
                 </tabpanel>
             </tabpanels>
