@@ -4,6 +4,7 @@
  */
 package com.ec.controlador;
 
+import static com.ec.controlador.NuevoPermiso.FOLDER_IMG;
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Parametrizar;
@@ -65,6 +66,8 @@ public class CargarArchivoPermiso {
     private AImage fotoCedula = null;
     public static String FOLDER_IMG = "";
     AMedia fileContent = null;
+    
+     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -77,6 +80,15 @@ public class CargarArchivoPermiso {
 
     private void cargarLista() {
         listadoAdjuntos = servicioArchivoAdjunto.findBySolicitud(permiso, Boolean.TRUE);
+    }
+
+    public CargarArchivoPermiso() {
+        Parametrizar param = servicioParametrizar.findActivo();
+        FOLDER_IMG = param != null ? param.getParDisco() + File.separator + param.getParCarpeta() : "";
+        File folderAu = new File(FOLDER_IMG);
+        if (!folderAu.exists()) {
+            folderAu.mkdirs();
+        }
     }
 
     @Command

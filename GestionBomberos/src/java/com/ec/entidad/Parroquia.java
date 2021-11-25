@@ -43,6 +43,12 @@ public class Parroquia implements Serializable {
     public Parroquia() {
     }
 
+    public Parroquia(String parrDescripcion, String parrSigla, Integer parrPeso) {
+        this.parrDescripcion = parrDescripcion;
+        this.parrSigla = parrSigla;
+        this.parrPeso = parrPeso;
+    }
+
     public Parroquia(Integer idParroquia) {
         this.idParroquia = idParroquia;
     }

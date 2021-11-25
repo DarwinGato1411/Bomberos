@@ -74,7 +74,7 @@ public class ServicioRecinto {
 
     public List<Recinto> findBySigla(String sigla) {
 
-        List<Recinto> listaClientes = new ArrayList<Recinto>();        
+        List<Recinto> listaClientes = new ArrayList<Recinto>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
@@ -93,10 +93,10 @@ public class ServicioRecinto {
 
         return listaClientes;
     }
-    
+
     public List<Recinto> findByAll() {
 
-        List<Recinto> listaClientes = new ArrayList<Recinto>();        
+        List<Recinto> listaClientes = new ArrayList<Recinto>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
@@ -116,6 +116,26 @@ public class ServicioRecinto {
         return listaClientes;
     }
 
-   
+    public List<Recinto> findLikeDescripcion(String descripcion) {
+
+        List<Recinto> listaClientes = new ArrayList<Recinto>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Recinto u WHERE u.recDescripcion LIKE :recDescripcion ORDER BY u.recDescripcion ASC");
+            query.setParameter("recDescripcion", "%" + descripcion + "%");
+            listaClientes = (List<Recinto>) query.getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta recinto  findLikePerNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaClientes;
+    }
 
 }

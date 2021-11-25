@@ -96,6 +96,8 @@ public class Parametrizar implements Serializable {
     private String parCarpeta;
     @Column(name = "par_folder_adicional")
     private String parFolderAdicional;
+    @Column(name = "par_path_logo")
+    private String parPathLogo;
 
     public Parametrizar() {
     }
@@ -262,6 +264,14 @@ public class Parametrizar implements Serializable {
 
     public void setParFolderAdicional(String parFolderAdicional) {
         this.parFolderAdicional = parFolderAdicional;
+    }
+
+    public String getParPathLogo() {
+        return parPathLogo;
+    }
+
+    public void setParPathLogo(String parPathLogo) {
+        this.parPathLogo = parPathLogo;
     }
 
     @Override

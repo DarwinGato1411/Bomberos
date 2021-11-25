@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="permiso" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="55"/>
-	<property name="ireport.y" value="75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select * from solicitud_permiso;]]>
+		<![CDATA[select * from parametrizar pa, solicitud_permiso sp
+where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 	</queryString>
+	<field name="cod_parametrizar" class="java.lang.Integer"/>
+	<field name="par_contacto_empresa" class="java.lang.String"/>
+	<field name="par_empresa" class="java.lang.String"/>
+	<field name="par_ruc_empresa" class="java.lang.String"/>
+	<field name="par_codigo_iva" class="java.lang.String"/>
+	<field name="par_iva_actual" class="java.math.BigDecimal"/>
+	<field name="par_caduca" class="java.sql.Date"/>
+	<field name="par_host" class="java.lang.String"/>
+	<field name="par_port" class="java.lang.String"/>
+	<field name="par_protocol" class="java.lang.String"/>
+	<field name="par_usuario_smpt" class="java.lang.String"/>
+	<field name="par_password" class="java.lang.String"/>
+	<field name="par_imp_automatico" class="java.lang.Boolean"/>
+	<field name="par_nombre_impresora" class="java.lang.String"/>
+	<field name="par_ciudad" class="java.lang.String"/>
+	<field name="par_correo_defecto" class="java.lang.String"/>
+	<field name="isprincipal" class="java.lang.Boolean"/>
+	<field name="par_disco" class="java.lang.String"/>
+	<field name="par_carpeta" class="java.lang.String"/>
+	<field name="par_folder_adicional" class="java.lang.String"/>
+	<field name="par_path_logo" class="java.lang.String"/>
 	<field name="id_solcitud_per" class="java.lang.Integer"/>
 	<field name="id_estado_documento" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -45,15 +67,16 @@
 	<field name="sol_path_solicitud" class="java.lang.String"/>
 	<field name="sol_nombre_solicitud" class="java.lang.String"/>
 	<field name="solp_num_calle" class="java.lang.String"/>
+	<field name="solp_nota" class="java.lang.String"/>
+	<field name="solp_fecha_reinspeccion" class="java.sql.Timestamp"/>
+	<field name="id_recinto" class="java.lang.Integer"/>
+	<field name="id_tipo_solicitud" class="java.lang.Integer"/>
+	<field name="id_parametrizar" class="java.lang.Integer"/>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="381" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="-2" width="144" height="118"/>
-				<imageExpression class="java.lang.String"><![CDATA["D:\\DECKXEL\\z-empresas\\Bomberos Pedro Vicente Maldonado\\LogoBomberosPVM.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement positionType="Float" x="144" y="0" width="411" height="40" forecolor="#CC0000"/>
 				<textElement textAlignment="Center">
@@ -68,6 +91,10 @@
 				</textElement>
 				<text><![CDATA[DE PEDRO VICENTE MALDONADO]]></text>
 			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="22" y="11" width="100" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -88,13 +115,6 @@
 					<font size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Direccion: By Pass 1 y margen derecho frente al Colegio Vicente Anda Aguirre]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="164" y="353" width="188" height="39" forecolor="#CC0000"/>
-				<textElement textAlignment="Center">
-					<font size="20" isBold="false"/>
-				</textElement>
-				<text><![CDATA[mkm]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="189" y="22" width="138" height="15" forecolor="#000099"/>

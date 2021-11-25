@@ -4,13 +4,17 @@
  */
 package com.ec.controlador;
 
-import com.ec.entidad.Opciones;
+import static com.ec.controlador.CargarArchivoPermiso.FOLDER_IMG;
 import com.ec.entidad.Parametrizar;
+import com.ec.entidad.Parroquia;
 import com.ec.entidad.Perfil;
+import com.ec.entidad.Recinto;
 import com.ec.entidad.Usuario;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioParametrizar;
+import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPerfil;
+import com.ec.servicio.ServicioRecinto;
 import com.ec.servicio.ServicioUsuario;
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ContextParam;
-import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Fileupload;
@@ -49,22 +48,40 @@ public class AdministrarConfiguracion {
     private List<Perfil> listaPerfil = new ArrayList<Perfil>();
     private Parametrizar parametrizarselected = new Parametrizar();
     private List<String> listaDicos = new ArrayList<String>();
-    private String tipoAccion = "new";
+    private String tipoAccion = "update";
+
+    ServicioParroquia servicioParroquia = new ServicioParroquia();
+    ServicioRecinto servicioRecinto = new ServicioRecinto();
+    private List<Parroquia> listaParroquia = new ArrayList<Parroquia>();
+    private List<Recinto> listaRecinto = new ArrayList<Recinto>();
+    private String buscarParroquia = "";
+    private String buscarRecinto = "";
 
     UserCredential credential = new UserCredential();
 
+    public static String FOLDER_IMG = "";
+
     public AdministrarConfiguracion() {
-//        Selectors.wireComponents(view, this, false);
-//        if (valor != null) {
-//            tipoAccion = "update";
-//            parametrizarselected = valor;
-//            
-//        } else {
-//            tipoAccion = "new";
-//            parametrizarselected = new Parametrizar();
-//        }
+        listaDiscos();
         cosultarUsuarios("");
         cosultarPerfiles("");
+        consultarParroquia();
+        consultarRecinto();
+        parametrizarselected = servicioParametrizar.findActivo();
+
+        FOLDER_IMG = parametrizarselected != null ? parametrizarselected.getParDisco() + parametrizarselected.getParCarpeta() : "";
+        File folderAu = new File(FOLDER_IMG);
+        if (!folderAu.exists()) {
+            folderAu.mkdirs();
+        }
+    }
+
+    private void consultarParroquia() {
+        listaParroquia = servicioParroquia.findLikeParrDecripcion(buscarParroquia);
+    }
+
+    private void consultarRecinto() {
+        listaRecinto = servicioRecinto.findLikeDescripcion(buscarRecinto);
     }
 
     private void cosultarUsuarios(String buscar) {
@@ -136,53 +153,58 @@ public class AdministrarConfiguracion {
                 System.out.println("getPath " + f.getPath());
             }
         }
-
     }
     //Imagen ruta 
-    private String filePathImg;
+    private String filePathImg = "";
 
     @Command
-    @NotifyChange({"fileContent", "tipoambiente"})
+    @NotifyChange({"fileContent", "parametrizarselected"})
     public void subirPathImagen() throws InterruptedException, IOException {
 
         org.zkoss.util.media.Media media = Fileupload.get();
         if (media instanceof org.zkoss.image.Image) {
             String nombre = media.getName();
-            if (media instanceof Image) {
+            if (media instanceof org.zkoss.image.Image) {
 
+                System.out.println(" Valida ");
                 if (media.getByteData().length > 10 * 1024 * 1024) {
                     Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
-
+                    System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = parametrizarselected.getParCarpeta() + File.separator + parametrizarselected.getParFolderAdicional() + File.separator;
-
+                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
                     baseDir.mkdirs();
                 }
                 Files.copy(new File(filePathImg + media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParCarpeta(filePathImg + File.separator + nombre);
+                parametrizarselected.setParPathLogo(filePathImg);
+                servicioParametrizar.modificar(parametrizarselected);
             }
-
+            System.out.println(" no es imagen ");
         }
     }
 
     @Command
     @NotifyChange("parametrizarselected")
     public void guardar() {
-        if (parametrizarselected != null && parametrizarselected.getParEmpresa() != null
-                && parametrizarselected.getParRucEmpresa() != null) {
-            if (tipoAccion.equals("new")) {
-                servicioParametrizar.crear(parametrizarselected);
+        try {
+            if (parametrizarselected != null && parametrizarselected.getParEmpresa() != null
+                    && parametrizarselected.getParRucEmpresa() != null) {
+                if (tipoAccion.equals("new")) {
+                    servicioParametrizar.crear(parametrizarselected);
+                } else {
+                    servicioParametrizar.modificar(parametrizarselected);
+                }
+                Clients.showNotification("Registrado correctamente",
+                        Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
             } else {
-                servicioParametrizar.modificar(parametrizarselected);
+                Clients.showNotification("Verifique la informacion... ",
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
             }
-            wParametrizar.detach();
-        } else {
-            Clients.showNotification("Verifique la informacion... ",
-                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        } catch (Exception e) {
         }
     }
 
@@ -258,4 +280,71 @@ public class AdministrarConfiguracion {
         this.filePathImg = filePathImg;
     }
 
+    public List<Parroquia> getListaParroquia() {
+        return listaParroquia;
+    }
+
+    public void setListaParroquia(List<Parroquia> listaParroquia) {
+        this.listaParroquia = listaParroquia;
+    }
+
+    public List<Recinto> getListaRecinto() {
+        return listaRecinto;
+    }
+
+    public void setListaRecinto(List<Recinto> listaRecinto) {
+        this.listaRecinto = listaRecinto;
+    }
+
+    public String getBuscarParroquia() {
+        return buscarParroquia;
+    }
+
+    public void setBuscarParroquia(String buscarParroquia) {
+        this.buscarParroquia = buscarParroquia;
+    }
+
+    public String getBuscarRecinto() {
+        return buscarRecinto;
+    }
+
+    
+    public void setBuscarRecinto(String buscarRecinto) {
+        this.buscarRecinto = buscarRecinto;
+    }
+
+    @Command
+    @NotifyChange("listaParroquia")
+    public void agregarParroquia() {
+        Parroquia nueva = new Parroquia("", "", 1);
+        servicioParroquia.crear(nueva);
+        consultarParroquia();
+
+    }
+
+    @Command
+    @NotifyChange("listaUsuarios")
+    public void modificarParroquia(@BindingParam("valor") Parroquia valor) {
+        servicioParroquia.modificar(valor);
+        Clients.showNotification("Registrado correctamente",
+                Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        consultarParroquia();
+    }
+
+    @Command
+    @NotifyChange("listaRecinto")
+    public void agregarRecinto() {
+        Recinto nueva = new Recinto("", "", 1);
+        servicioRecinto.crear(nueva);
+        consultarRecinto();
+    }
+
+    @Command
+    @NotifyChange("listaUsuarios")
+    public void modificarRecinto(@BindingParam("valor") Recinto valor) {
+        servicioRecinto.modificar(valor);
+        Clients.showNotification("Registrado correctamente",
+                Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        consultarRecinto();
+    }
 }

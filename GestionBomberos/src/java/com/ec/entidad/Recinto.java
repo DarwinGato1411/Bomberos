@@ -42,6 +42,11 @@ public class Recinto implements Serializable {
 
     public Recinto() {
     }
+    public Recinto(String recDescripcion, String recSigla, Integer recPeso) {
+        this.recDescripcion = recDescripcion;
+        this.recSigla = recSigla;
+        this.recPeso = recPeso;
+    }
 
     public Integer getIdRecinto() {
         return idRecinto;
@@ -67,6 +72,15 @@ public class Recinto implements Serializable {
         this.recSigla = recSigla;
     }
 
+    public Integer getRecPeso() {
+        return recPeso;
+    }
+
+    public void setRecPeso(Integer recPeso) {
+        this.recPeso = recPeso;
+    }
+    
+
     public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
         return solicitudPermisoCollection;
     }
@@ -75,6 +89,29 @@ public class Recinto implements Serializable {
         this.solicitudPermisoCollection = solicitudPermisoCollection;
     }
 
-    
+      @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idRecinto != null ? idRecinto.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Recinto)) {
+            return false;
+        }
+        Recinto other = (Recinto) object;
+        if ((this.idRecinto == null && other.idRecinto != null) || (this.idRecinto != null && !this.idRecinto.equals(other.idRecinto))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.ec.entidades.Recinto[ idRecinto=" + idRecinto + " ]";
+    }
+ 
 }
