@@ -22,55 +22,74 @@ import javax.persistence.Table;
  * @author Best
  */
 @Entity
-@Table(name = "tipo_solicitud")
+@Table(name = "tarifa")
 public class Tarifa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipo_solicitud")
-    private Integer idTipoSolicitud;
-    @Column(name = "tips_drescripcion")
-    private String tipsDescripcion;
-    @Column(name = "tips_sigla")
-    private String tipsSigla;
-    @OneToMany(mappedBy = "idTipoSolicitud")
-    private Collection<SolicitudPermiso> solicitudPermisoCollection;
+    @Column(name = "id_tarifa")
+    private Integer idTarifa;
+    @Column(name = "tar_codigo")
+    private String tarCodigo;
+    @Column(name = "tar_descripcion")
+    private String tarDescripcion;
+    @Column(name = "tar_valor")
+    private Integer tarValor;
+    @Column(name = "tar_estado")
+    private Boolean tarEstado;
+    
+//    @OneToMany(mappedBy = "idTipoSolicitud")
+//    private Collection<SolicitudPermiso> solicitudPermisoCollection;
 
     public Tarifa() {
     }
-
-    public Integer getIdTipoSolicitud() {
-        return idTipoSolicitud;
+    
+    public Tarifa(String tarCodigo, String tarDescripcion, Integer tarValor) {
+        this.tarCodigo = tarCodigo;
+        this.tarDescripcion = tarDescripcion;
+        this.tarValor = tarValor;
     }
 
-    public void setIdTipoSolicitud(Integer idTipoSolicitud) {
-        this.idTipoSolicitud = idTipoSolicitud;
+    public Integer getIdTarifa() {
+        return idTarifa;
     }
 
-    public String getTipsDescripcion() {
-        return tipsDescripcion;
+    public void setIdTarifa(Integer idTarifa) {
+        this.idTarifa = idTarifa;
     }
 
-    public void setTipsDescripcion(String tipsDescripcion) {
-        this.tipsDescripcion = tipsDescripcion;
+    public String getTarCodigo() {
+        return tarCodigo;
     }
 
-    public String getTipsSigla() {
-        return tipsSigla;
+    public void setTarCodigo(String tarCodigo) {
+        this.tarCodigo = tarCodigo;
     }
 
-    public void setTipsSigla(String tipsSigla) {
-        this.tipsSigla = tipsSigla;
+    public String getTarDescripcion() {
+        return tarDescripcion;
     }
 
-    public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
-        return solicitudPermisoCollection;
+    public void setTarDescripcion(String tarDescripcion) {
+        this.tarDescripcion = tarDescripcion;
     }
 
-    public void setSolicitudPermisoCollection(Collection<SolicitudPermiso> solicitudPermisoCollection) {
-        this.solicitudPermisoCollection = solicitudPermisoCollection;
+    public Integer getTarValor() {
+        return tarValor;
     }
 
+    public void setTarValor(Integer tarValor) {
+        this.tarValor = tarValor;
+    }
+
+    public Boolean getTarEstado() {
+        return tarEstado;
+    }
+
+    public void setTarEstado(Boolean tarEstado) {
+        this.tarEstado = tarEstado;
+    }
+    
 }
