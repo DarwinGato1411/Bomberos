@@ -56,7 +56,7 @@
                              constraint="no empty: Ingrese la fecha "/>
 
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.numsol}
                 
                     <textbox  maxlength="100" 

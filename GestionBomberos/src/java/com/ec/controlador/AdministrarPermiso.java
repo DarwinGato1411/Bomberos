@@ -7,16 +7,24 @@ package com.ec.controlador;
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Opciones;
+import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
+import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioRecinto;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
+import net.sf.jasperreports.engine.JRException;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -30,25 +38,26 @@ import org.zkoss.zul.Messagebox;
  */
 public class AdministrarPermiso {
 
-   
-
     /*PERMISOS INGRESADOS*/
-     ServicioPermiso servicioPermiso = new ServicioPermiso();
-     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
+    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarIng = "ING";
     private String buscar = "";
     AMedia fileContent = null;
-    
-    public AdministrarPermiso() {
 
+    ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
+    private Parametrizar parametrizar = new Parametrizar();
+
+    public AdministrarPermiso() {
+        parametrizar = servicioParametrizar.findActivo();
         consultarPermisosIng();
     }
 
-   
     private void consultarPermisosIng() {
-        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarIng , buscar);
+        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarIng, buscar);
     }
+
     /*Perfil*/
     @Command
     @NotifyChange("listaSolicitudPermisos")
@@ -67,8 +76,9 @@ public class AdministrarPermiso {
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/permiso.zul", null, map);
         window.doModal();
-     consultarPermisosIng();
+        consultarPermisosIng();
     }
+
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
@@ -79,7 +89,31 @@ public class AdministrarPermiso {
             consultarPermisosIng();
         }
     }
-    
+
+    @Command
+    public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("numeracion", valor.getSolpNumeracion());
+        try {
+            String nombreReporte = "solicitudInspeccion.jasper";
+            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+        } catch (JRException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
@@ -90,6 +124,7 @@ public class AdministrarPermiso {
             consultarPermisosIng();
         }
     }
+
     @Command
     @NotifyChange({"listadoAdjuntos", "fileContent"})
     public void verArchivo(@BindingParam("valor") DocumentosAdjunto valor) {
@@ -98,7 +133,8 @@ public class AdministrarPermiso {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
+
     public List<SolicitudPermiso> getListaSolicitudPermisos() {
         return listaSolicitudPermisos;
     }

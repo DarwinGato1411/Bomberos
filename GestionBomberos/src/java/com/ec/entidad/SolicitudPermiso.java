@@ -135,6 +135,8 @@ public class SolicitudPermiso implements Serializable {
     private String solpTetefonoProyecto;
     @Column(name = "solp_otro")
     private String solpOtro;
+    @Column(name = "solp_numeracion")
+    private Integer solpNumeracion;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -160,6 +162,13 @@ public class SolicitudPermiso implements Serializable {
     @JoinColumn(name = "id_recinto", referencedColumnName = "id_recinto")
     @ManyToOne
     private Recinto idRecinto;
+
+    @JoinColumn(name = "id_parametrizar", referencedColumnName = "cod_parametrizar")
+    @ManyToOne
+    private Parametrizar idParametrizar;
+    @JoinColumn(name = "id_tarifa", referencedColumnName = "id_tarifa")
+    @ManyToOne
+    private Tarifa idTarifa;
 
     public SolicitudPermiso() {
     }
@@ -594,9 +603,30 @@ public class SolicitudPermiso implements Serializable {
     public void setSolpOtro(String solpOtro) {
         this.solpOtro = solpOtro;
     }
-    
-    
-    
+
+    public Integer getSolpNumeracion() {
+        return solpNumeracion;
+    }
+
+    public void setSolpNumeracion(Integer solpNumeracion) {
+        this.solpNumeracion = solpNumeracion;
+    }
+
+    public Parametrizar getIdParametrizar() {
+        return idParametrizar;
+    }
+
+    public void setIdParametrizar(Parametrizar idParametrizar) {
+        this.idParametrizar = idParametrizar;
+    }
+
+    public Tarifa getIdTarifa() {
+        return idTarifa;
+    }
+
+    public void setIdTarifa(Tarifa idTarifa) {
+        this.idTarifa = idTarifa;
+    }
 
     @Override
     public int hashCode() {

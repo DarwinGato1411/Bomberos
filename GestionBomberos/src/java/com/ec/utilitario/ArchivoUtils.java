@@ -1,7 +1,10 @@
 package com.ec.utilitario;
 
-
+import com.ec.entidad.Parametrizar;
 import com.ec.servicio.HelperPersistencia;
+import com.ec.servicio.ServicioParametrizar;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -30,6 +33,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Copies;
+import javax.print.attribute.standard.MediaSizeName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -52,6 +61,10 @@ import org.zkoss.zk.ui.Executions;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -61,8 +74,18 @@ import org.w3c.dom.Text;
 import org.w3c.dom.DOMException;
 
 import org.xml.sax.SAXException;
+import org.zkoss.util.media.AMedia;
 
 public class ArchivoUtils {
+
+//    private static Parametrizar parametrizar = null;
+    ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
+    private static Connection con = null;
+    private static AMedia fileContent = null;
+
+    public ArchivoUtils() {
+
+    }
 
     public static String archivoToString(String rutaArchivo) {
         /*  70 */ StringBuffer buffer = new StringBuffer();
@@ -154,9 +177,6 @@ public class ArchivoUtils {
         /* 183 */ return respuesta;
     }
 
- 
-   
-
     public static boolean adjuntarArchivo(File respuesta, File comprobante) {
         /* 507 */ boolean exito = false;
         try {
@@ -227,7 +247,6 @@ public class ArchivoUtils {
         /* 598 */ return resultado;
     }
 
-    
     public static void FileCopy(String sourceFile, String destinationFile) {
         System.out.println("Desde: " + sourceFile);
         System.out.println("Hacia: " + destinationFile);
@@ -268,7 +287,6 @@ public class ArchivoUtils {
 //        }
 //        return "";
 //    }
-
     public static void reporteGeneralPdfMail(String pathPDF, Integer numeroFactura, String tipo) throws JRException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, NamingException {
         EntityManager emf = HelperPersistencia.getEMF();
         Connection con = null;
@@ -484,7 +502,7 @@ public class ArchivoUtils {
         resultado = (divide.add(BigDecimal.valueOf(parteEntera))).doubleValue();
         return BigDecimal.valueOf(resultado);
     }
-    
+
 //    public static AduanaJson obtenerdatoAduana(String cedulaParam) {
 ////        final String url = "http://www.ecuadorlegalonline.com/apijson/aduana.api.php";
 //        //final String url = cont.getString(R.string.host) + "validacliente/";
@@ -570,4 +588,134 @@ public class ArchivoUtils {
         byte[] bytes = bos.toByteArray();
         return bytes;
     }
+
+    public static void reporteGeneral(Map<String, Object> parametros, Parametrizar parametrizar, String nombreReporte) throws JRException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, NamingException {
+        EntityManager emf = HelperPersistencia.getEMF();
+
+        try {
+
+            emf.getTransaction().begin();
+            /*CONEXION A LA BASE DE DATOS*/
+            con = emf.unwrap(Connection.class);
+
+            //  con = emf.unwrap(Connection.class);
+            String reportFile = Executions.getCurrent().getDesktop().getWebApp()
+                    .getRealPath("/reportes");
+            String reportPath = "";
+            reportPath = reportFile + File.separator + nombreReporte;
+//                con = ConexionReportes.Conexion.conexion();
+
+            /*PARAMETROS DEL REPORTE*/
+            if (con != null) {
+                System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            }
+
+            FileInputStream is = null;
+            is = new FileInputStream(reportPath);
+            /*COMPILAS EL ARCHIVO.JASPER*/
+            byte[] buf = JasperRunManager.runReportToPdf(is, parametros, con);
+            /*EN MI CASO LO PRESENTO EN UNA VENTANA EMERGENTE  PERO LO ANTERIOR SERIA TODO*/
+            InputStream mediais = new ByteArrayInputStream(buf);
+
+            AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
+            fileContent = amedia;
+            final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
+            //para pasar al visor
+            map.put("pdf", fileContent);
+
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/visor/visorreporte.zul", null, map);
+            window.doModal();
+
+            if (parametrizar.getParImpAutomatico()) {
+                /*imprime la factura */
+ /*para la factura*/
+                FileInputStream is1 = null;
+                is1 = new FileInputStream(reportFile + File.separator + "puntoventa.jasper");
+                JasperPrint jasperprint = JasperFillManager.fillReport(is1, parametros, con);
+                PrinterJob pj = PrinterJob.getPrinterJob();
+                // 
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+                /*ESCOGE LA IMPRESORA */
+                for (PrintService printService : services) {
+                    System.out.println("printService.getName() " + printService.getName());
+                    if (printService.getName().equals(parametrizar.getParNombreImpresora())) {
+
+                        System.out.println("printService.getName() " + printService.getName());
+//                    if (printService.getName().equals("Microsoft Print to PDF")) {
+                        pj.setPrintService(printService);
+                        //JasperPrintManager.printReport(print, false);
+                    }
+                }
+
+                imprimirTecket(pj, jasperprint);
+
+            }
+
+        } catch (PrinterException e) {
+            System.out.println("Error PrinterException en generar el reporte " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Error FileNotFoundException en generar el reporte " + e.getMessage());
+        } catch (JRException e) {
+            System.out.println("Error JRException en generar el reporte " + e.getMessage());
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (emf != null) {
+                emf.close();
+                System.out.println("cerro entity");
+            }
+        }
+
+    }
+
+    private static void imprimirTecket(PrinterJob pj, JasperPrint jasperprint) {
+        try {
+            /*REALIZA LA IMPRESION DE LA FACTURA*/
+            JRPrintServiceExporter exporter;
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            printRequestAttributeSet.add(MediaSizeName.NA_LETTER);
+            printRequestAttributeSet.add(new Copies(1));
+
+            // these are deprecated
+            exporter = new JRPrintServiceExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperprint);
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, pj.getPrintService());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, pj.getPrintService().getAttributes());
+            exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
+            exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
+
+            exporter.exportReport();
+
+            /*REALIZAE EL CORTE DE PAPEL*/
+ /*
+            PrintService printService = PrinterOutputStream.getPrintServiceByName("LR2000");
+            PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+            EscPos escpos = new EscPos(printerOutputStream);
+            escpos.writeLF("");
+            escpos.writeLF("");
+            escpos.feed(5);
+            escpos.cut(EscPos.CutMode.PART);
+            escpos.close();
+             */
+        } catch (IllegalArgumentException e) {
+            System.out.println("ERRO AL IMPRIMIR LA FACTURA " + e.getMessage());
+        } catch (JRException e) {
+            System.out.println("ERRO AL IMPRIMIR LA FACTURA " + e.getMessage());
+        }
+
+    }
+
+    public static String numeroTexto(Integer numero) {
+        String numeroFacturaText = "";
+        for (int i = numero.toString().length(); i < 8; i++) {
+            numeroFacturaText = numeroFacturaText + "0";
+        }
+        numeroFacturaText = numeroFacturaText + numero;
+        System.out.println(" Numero en texto " + numeroFacturaText);
+        return numeroFacturaText;
+    }
+
 }

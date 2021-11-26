@@ -23,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tipo_solicitud")
-public class TipoSolicitud implements Serializable {
+public class Tarifa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,7 +38,7 @@ public class TipoSolicitud implements Serializable {
     @OneToMany(mappedBy = "idTipoSolicitud")
     private Collection<SolicitudPermiso> solicitudPermisoCollection;
 
-    public TipoSolicitud() {
+    public Tarifa() {
     }
 
     public Integer getIdTipoSolicitud() {
