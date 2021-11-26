@@ -116,6 +116,26 @@ public class SolicitudPermiso implements Serializable {
     private String solpNumCalle;
     @Column(name = "solp_nota")
     private String solpNota;
+
+    @Column(name = "solp_esinspeccion")
+    private Boolean solpEsinspeccion;
+    @Column(name = "solp_esplanos")
+    private Boolean solpEsplanos;
+
+    @Column(name = "solp_esotro")
+    private Boolean solpEsotro;
+
+    @Column(name = "solp_nombre_local")
+    private String solpNombreLocal;
+    @Column(name = "solp_telefono_inspeccion")
+    private String solpTelefonoInspeccion;
+    @Column(name = "solp_proyecto")
+    private String solpProyecto;
+    @Column(name = "solp_telefono_proyecto")
+    private String solpTetefonoProyecto;
+    @Column(name = "solp_otro")
+    private String solpOtro;
+
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date solpFechaReinspeccion;
@@ -511,8 +531,73 @@ public class SolicitudPermiso implements Serializable {
         this.idRecinto = idRecinto;
     }
 
+    public Boolean getSolpEsinspeccion() {
+        return solpEsinspeccion;
+    }
+
+    public void setSolpEsinspeccion(Boolean solpEsinspeccion) {
+        this.solpEsinspeccion = solpEsinspeccion;
+    }
+
+    public Boolean getSolpEsplanos() {
+        return solpEsplanos;
+    }
+
+    public void setSolpEsplanos(Boolean solpEsplanos) {
+        this.solpEsplanos = solpEsplanos;
+    }
+
+    public Boolean getSolpEsotro() {
+        return solpEsotro;
+    }
+
+    public void setSolpEsotro(Boolean solpEsotro) {
+        this.solpEsotro = solpEsotro;
+    }
+
+    public String getSolpNombreLocal() {
+        return solpNombreLocal;
+    }
+
+    public void setSolpNombreLocal(String solpNombreLocal) {
+        this.solpNombreLocal = solpNombreLocal;
+    }
+
+    public String getSolpTelefonoInspeccion() {
+        return solpTelefonoInspeccion;
+    }
+
+    public void setSolpTelefonoInspeccion(String solpTelefonoInspeccion) {
+        this.solpTelefonoInspeccion = solpTelefonoInspeccion;
+    }
+
+    public String getSolpProyecto() {
+        return solpProyecto;
+    }
+
+    public void setSolpProyecto(String solpProyecto) {
+        this.solpProyecto = solpProyecto;
+    }
+
+    public String getSolpTetefonoProyecto() {
+        return solpTetefonoProyecto;
+    }
+
+    public void setSolpTetefonoProyecto(String solpTetefonoProyecto) {
+        this.solpTetefonoProyecto = solpTetefonoProyecto;
+    }
+
+    public String getSolpOtro() {
+        return solpOtro;
+    }
+
+    public void setSolpOtro(String solpOtro) {
+        this.solpOtro = solpOtro;
+    }
     
     
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
