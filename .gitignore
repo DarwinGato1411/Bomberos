@@ -31,4 +31,8 @@ hs_err_pid*
 /.nb-gradle/
 build/
 !**/src/main/**/build/
+<<<<<<< HEAD
 !**/src/test/**/build/
+=======
+!**/src/test/**/build/
+>>>>>>> b0b9c292c09e89ce7d5e95ba478a94684229f5e7

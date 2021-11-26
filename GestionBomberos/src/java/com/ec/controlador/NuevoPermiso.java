@@ -21,11 +21,16 @@ import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
+import net.sf.jasperreports.engine.JRException;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -78,6 +83,7 @@ public class NuevoPermiso {
     private List<Recinto> listaRecintos = new ArrayList<Recinto>();
     private Recinto recintoSelected = null;
     ServicioRecinto servicioRecinto = new ServicioRecinto();
+    private Parametrizar parametrizar = new Parametrizar();
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -105,8 +111,8 @@ public class NuevoPermiso {
     }
 
     public NuevoPermiso() {
-        Parametrizar param = servicioParametrizar.findActivo();
-        FOLDER_IMG = param != null ? param.getParDisco() + File.separator + param.getParCarpeta() : "";
+        parametrizar = servicioParametrizar.findActivo();
+        FOLDER_IMG = parametrizar != null ? parametrizar.getParDisco() + File.separator + parametrizar.getParCarpeta() : "";
         File folderAu = new File(FOLDER_IMG);
         if (!folderAu.exists()) {
             folderAu.mkdirs();
@@ -118,14 +124,27 @@ public class NuevoPermiso {
         credential = cre;
     }
 
+    private Integer generarNumeracion() {
+        SolicitudPermiso recuperada = servicio.findUltimoPermiso();
+        Integer numeracion = 0;
+        if (recuperada != null) {
+            // System.out.println("numero de factura " + recuperada);
+            numeracion = recuperada.getSolpNumeracion() + 1;
+
+        } else {
+            numeracion = 1;
+
+        }
+        return numeracion;
+    }
+
     @Command
     @NotifyChange("entidadSelected")
     public void guardar() {
         if (entidadSelected != null && entidadSelected.getSolNumCedula() != null
                 && entidadSelected.getSolNumCedula() != null
                 && entidadSelected.getSolpNombreSol() != null
-                && entidadSelected.getSolpFecha() != null
-                && entidadSelected.getSolpNumero() != null) {
+                && entidadSelected.getSolpFecha() != null) {
             if (tipoSoliSelected == null) {
                 Clients.showNotification("Seleccione un tipo de solicitud... ",
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
@@ -134,7 +153,10 @@ public class NuevoPermiso {
 //                   entidadSelected.setSolpFecha(new Date());
             entidadSelected.setIdTipoSolicitud(tipoSoliSelected);
             if (tipoAccion.equals("new")) {
-
+                Integer numeracion = generarNumeracion();
+                entidadSelected.setSolpNumeracion(numeracion);
+                entidadSelected.setIdParametrizar(parametrizar);
+                entidadSelected.setSolpNumero(ArchivoUtils.numeroTexto(numeracion));
                 if (recintoSelected != null) {
                     entidadSelected.setIdRecinto(recintoSelected);
                 }
@@ -149,6 +171,26 @@ public class NuevoPermiso {
                 }
                 servicio.crear(entidadSelected);
 
+                Map<String, Object> parametros = new HashMap<String, Object>();
+                parametros.put("numeracion", entidadSelected.getSolpNumeracion());
+                try {
+                    String nombreReporte = "solicitudInspeccion.jasper";
+                    ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+                } catch (JRException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NamingException ex) {
+                    Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 servicio.modificar(entidadSelected);
             }

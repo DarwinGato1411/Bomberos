@@ -123,7 +123,6 @@ public class ServicioPermiso {
 
         return listaClientes;
     }
-    
 
     public SolicitudPermiso findByPerSigla(String perSigla) {
 
@@ -152,6 +151,33 @@ public class ServicioPermiso {
         }
 
         return solicitudPermisoObtenido;
+    }
+
+    public SolicitudPermiso findUltimoPermiso() {
+
+        SolicitudPermiso retorno = new SolicitudPermiso();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u ORDER BY u.solpNumeracion desc");
+            query.setMaxResults(1);
+
+            List<SolicitudPermiso> lista = (List<SolicitudPermiso>) query.getResultList();
+            if (lista.isEmpty()) {
+                return null;
+            } else {
+                retorno = lista.get(0);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return retorno;
     }
 
 }
