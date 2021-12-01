@@ -22,6 +22,7 @@ import com.ec.servicio.ServicioTarifa;
 import com.ec.servicio.ServicioUsuario;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -410,7 +411,7 @@ public class AdministrarConfiguracion {
     @Command
     @NotifyChange("listaTarifa")
     public void agregarTarifa() {
-        Tarifa nueva = new Tarifa("", "", 1);
+        Tarifa nueva = new Tarifa("", "", BigDecimal.ONE);
         servicioTarifa.crear(nueva);
         consultarTarifa();
     }

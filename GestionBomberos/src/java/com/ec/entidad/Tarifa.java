@@ -46,7 +46,7 @@ public class Tarifa implements Serializable {
     public Tarifa() {
     }
 
-    public Tarifa(String tarCodigo, String tarDescripcion, Integer tarValor) {
+    public Tarifa(String tarCodigo, String tarDescripcion, BigDecimal tarValor) {
         this.tarCodigo = tarCodigo;
         this.tarDescripcion = tarDescripcion;
         this.tarValor = tarValor;

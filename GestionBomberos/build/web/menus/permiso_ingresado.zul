@@ -102,36 +102,36 @@
                             </listcell>  -->
                             <listcell zclass = "mycss-listcell">
                                                      
-                                <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
-                                
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('verPermiso',valor=each)" 
-                                                       tooltiptext="${labels.app.editar}"/> 
+                                <button    style="width:30px;height:30px; background: blue" 
+                                           iconSclass="z-icon-print "                                
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('verPermiso',valor=each)" 
+                                           tooltiptext="${labels.app.editar}"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
                                 
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('modificarPermiso',valor=each)" 
-                                                       tooltiptext="${labels.app.editar}"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('modificarPermiso',valor=each)" 
+                                           tooltiptext="${labels.app.editar}"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('cambiarEstado',valor=each)" 
-                                                       tooltiptext="Enviar a Prevención de Incendios"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('cambiarEstado',valor=each)" 
+                                           tooltiptext="Enviar a Prevención de Incendios"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('anularSolicitud',valor=each)" 
-                                                       tooltiptext="Anular Solicitud"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('anularSolicitud',valor=each)" 
+                                           tooltiptext="Anular Solicitud"/> 
                                     
                             </listcell>                                
                         </listitem>
