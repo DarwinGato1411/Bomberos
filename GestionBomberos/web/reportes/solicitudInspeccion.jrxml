@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudInspeccion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1000000000000023"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="432"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -333,7 +333,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				</graphicElement>
 			</line>
 			<image hAlign="Right">
-				<reportElement x="392" y="27" width="163" height="110"/>
+				<reportElement x="384" y="27" width="171" height="110"/>
 				<imageExpression class="java.awt.Image"><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
     new com.google.zxing.qrcode.QRCodeWriter().encode(
         "NUMERO DOCUMENTO: "+$F{solp_numero}+"\n"+
@@ -388,7 +388,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 			</staticText>
 			<staticText>
 				<reportElement x="90" y="309" width="34" height="26" forecolor="#000099">
-					<printWhenExpression><![CDATA[$F{solp_esplanos}]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{solp_esotro}]]></printWhenExpression>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.0"/>
@@ -546,7 +546,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				</graphicElement>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="81" y="22" width="459" height="20"/>
+				<reportElement x="81" y="45" width="243" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_descripcion}]]></textFieldExpression>
 			</textField>
@@ -556,7 +556,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="81" y="45" width="243" height="20"/>
+				<reportElement x="81" y="23" width="459" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_barrio_urbanizacion}]]></textFieldExpression>
 			</textField>

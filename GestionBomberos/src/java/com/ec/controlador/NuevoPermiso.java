@@ -46,6 +46,8 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
@@ -58,6 +60,8 @@ public class NuevoPermiso {
 
     @Wire
     Window wOpcion;
+    @Wire
+    Combobox idTipoSolCmb;
     ServicioPermiso servicio = new ServicioPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
@@ -84,6 +88,8 @@ public class NuevoPermiso {
     private Recinto recintoSelected = null;
     ServicioRecinto servicioRecinto = new ServicioRecinto();
     private Parametrizar parametrizar = new Parametrizar();
+    private Boolean activaOtro = Boolean.FALSE;
+    private Boolean activaConstruccion = Boolean.FALSE;
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -104,9 +110,11 @@ public class NuevoPermiso {
             entidadSelected = new SolicitudPermiso();
             entidadSelected.setSolpFechaReinspeccion(new Date());
             entidadSelected.setSolpFecha(new Date());
+            entidadSelected.setSolpBarrioUrbanizacion("PEDRO VICENTE MALDONADO");
+
         }
         listaParrquia = servicioParroquia.findLikeParrDecripcion("");
-        listaTipoSolicitud = servicioTipoSolicitud.findByAll();
+        listaTipoSolicitud = servicioTipoSolicitud.findLikeSigla("");
         listaRecintos = servicioRecinto.findByAll();
     }
 
@@ -122,6 +130,7 @@ public class NuevoPermiso {
         Session sess = Sessions.getCurrent();
         UserCredential cre = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         credential = cre;
+
     }
 
     private Integer generarNumeracion() {
@@ -139,6 +148,35 @@ public class NuevoPermiso {
     }
 
     @Command
+    @NotifyChange({"activaOtro", "activaConstruccion"})
+    public void tipoPermiso() {
+        activaOtro = Boolean.FALSE;
+        activaConstruccion = Boolean.FALSE;
+        if (tipoSoliSelected.getTipsSigla().equals("CC")) {
+            entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
+            entidadSelected.setSolpEsotro(Boolean.FALSE);
+            entidadSelected.setSolpEsplanos(Boolean.TRUE);
+            activaOtro = Boolean.FALSE;
+            activaConstruccion = Boolean.TRUE;
+
+        } else if (tipoSoliSelected.getTipsSigla().equals("OT")) {
+            entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
+            entidadSelected.setSolpEsotro(Boolean.TRUE);
+            entidadSelected.setSolpEsplanos(Boolean.FALSE);
+            activaOtro = Boolean.TRUE;
+            activaConstruccion = Boolean.FALSE;
+        } else {
+            entidadSelected.setSolpEsinspeccion(Boolean.TRUE);
+            entidadSelected.setSolpEsotro(Boolean.FALSE);
+            entidadSelected.setSolpEsplanos(Boolean.FALSE);
+            activaOtro = Boolean.FALSE;
+            activaConstruccion = Boolean.FALSE;
+        }
+
+        System.out.println("ingresa a verificar " + tipoSoliSelected.getTipsSigla());
+    }
+
+    @Command
     @NotifyChange("entidadSelected")
     public void guardar() {
         if (entidadSelected != null && entidadSelected.getSolNumCedula() != null
@@ -147,10 +185,30 @@ public class NuevoPermiso {
                 && entidadSelected.getSolpFecha() != null) {
             if (tipoSoliSelected == null) {
                 Clients.showNotification("Seleccione un tipo de solicitud... ",
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
                 return;
             }
+
+            if (tipoSoliSelected.getTipsSigla().equals("CC")) {
+                if (entidadSelected.getSolpProyecto() == null || entidadSelected.getSolpTetefonoProyecto()== null) {
+                    Clients.showNotification("Debe llenar los campos Nombre proyecto y Telefono del proyecto ",
+                            Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                    return;
+                }
+
+            } else if (tipoSoliSelected.getTipsSigla().equals("OT")) {
+                if (entidadSelected.getSolpOtro() == null) {
+                    Clients.showNotification("Debe llenar el campo Descripcion de otros permisos ",
+                            Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                    return;
+                }
+            } else {
+
+            }
+
 //                   entidadSelected.setSolpFecha(new Date());
+            entidadSelected.setSolpNombreLocal(entidadSelected.getSolpNombreNegocio());
+            entidadSelected.setSolpTelefonoInspeccion(entidadSelected.getSolpTelefonoContacto() != null ? entidadSelected.getSolpTelefonoContacto() : "");
             entidadSelected.setIdTipoSolicitud(tipoSoliSelected);
             if (tipoAccion.equals("new")) {
                 Integer numeracion = generarNumeracion();
@@ -320,6 +378,22 @@ public class NuevoPermiso {
 
     public void setRecintoSelected(Recinto recintoSelected) {
         this.recintoSelected = recintoSelected;
+    }
+
+    public Boolean getActivaOtro() {
+        return activaOtro;
+    }
+
+    public void setActivaOtro(Boolean activaOtro) {
+        this.activaOtro = activaOtro;
+    }
+
+    public Boolean getActivaConstruccion() {
+        return activaConstruccion;
+    }
+
+    public void setActivaConstruccion(Boolean activaConstruccion) {
+        this.activaConstruccion = activaConstruccion;
     }
 
 }
