@@ -5,16 +5,20 @@
 package com.ec.controlador;
 
 import static com.ec.controlador.CargarArchivoPermiso.FOLDER_IMG;
+import com.ec.entidad.Bombero;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Parroquia;
 import com.ec.entidad.Perfil;
 import com.ec.entidad.Recinto;
+import com.ec.entidad.Tarifa;
 import com.ec.entidad.Usuario;
 import com.ec.seguridad.UserCredential;
+import com.ec.servicio.ServicioBombero;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPerfil;
 import com.ec.servicio.ServicioRecinto;
+import com.ec.servicio.ServicioTarifa;
 import com.ec.servicio.ServicioUsuario;
 import java.io.File;
 import java.io.IOException;
@@ -52,10 +56,17 @@ public class AdministrarConfiguracion {
 
     ServicioParroquia servicioParroquia = new ServicioParroquia();
     ServicioRecinto servicioRecinto = new ServicioRecinto();
+    ServicioTarifa servicioTarifa = new ServicioTarifa();
+    ServicioBombero servicioBombero = new ServicioBombero();
     private List<Parroquia> listaParroquia = new ArrayList<Parroquia>();
     private List<Recinto> listaRecinto = new ArrayList<Recinto>();
+    private List<Tarifa> listaTarifa = new ArrayList<Tarifa>();
+    private List<Bombero> listaBombero = new ArrayList<Bombero>();
+    private Bombero bombero = new Bombero();
     private String buscarParroquia = "";
     private String buscarRecinto = "";
+    private String buscarTarifa = "";
+    private String buscarBombero = "";
 
     UserCredential credential = new UserCredential();
 
@@ -67,6 +78,8 @@ public class AdministrarConfiguracion {
         cosultarPerfiles("");
         consultarParroquia();
         consultarRecinto();
+        consultarTarifa();
+        consultarBombero();
         parametrizarselected = servicioParametrizar.findActivo();
 
         FOLDER_IMG = parametrizarselected != null ? parametrizarselected.getParDisco() + parametrizarselected.getParCarpeta() : "";
@@ -82,6 +95,12 @@ public class AdministrarConfiguracion {
 
     private void consultarRecinto() {
         listaRecinto = servicioRecinto.findLikeDescripcion(buscarRecinto);
+    }
+    private void consultarTarifa() {
+        listaTarifa = servicioTarifa.findLikeTariDecripcion(buscarTarifa);
+    }
+    private void consultarBombero() {
+        listaBombero = servicioBombero.findLikeNombreBombero(buscarBombero);
     }
 
     private void cosultarUsuarios(String buscar) {
@@ -313,6 +332,47 @@ public class AdministrarConfiguracion {
         this.buscarRecinto = buscarRecinto;
     }
 
+    public List<Tarifa> getListaTarifa() {
+        return listaTarifa;
+    }
+
+    public void setListaTarifa(List<Tarifa> listaTarifa) {
+        this.listaTarifa = listaTarifa;
+    }
+
+    public String getBuscarTarifa() {
+        return buscarTarifa;
+    }
+
+    public void setBuscarTarifa(String buscarTarifa) {
+        this.buscarTarifa = buscarTarifa;
+    }
+
+    public List<Bombero> getListaBombero() {
+        return listaBombero;
+    }
+
+    public void setListaBombero(List<Bombero> listaBombero) {
+        this.listaBombero = listaBombero;
+    }
+
+    public String getBuscarBombero() {
+        return buscarBombero;
+    }
+
+    public void setBuscarBombero(String buscarBombero) {
+        this.buscarBombero = buscarBombero;
+    }
+
+    public Bombero getBombero() {
+        return bombero;
+    }
+
+    public void setBombero(Bombero bombero) {
+        this.bombero = bombero;
+    }
+    
+    
     @Command
     @NotifyChange("listaParroquia")
     public void agregarParroquia() {
@@ -346,5 +406,46 @@ public class AdministrarConfiguracion {
         Clients.showNotification("Registrado correctamente",
                 Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
         consultarRecinto();
+    }
+    @Command
+    @NotifyChange("listaTarifa")
+    public void agregarTarifa() {
+        Tarifa nueva = new Tarifa("", "", 1);
+        servicioTarifa.crear(nueva);
+        consultarTarifa();
+    }
+
+    @Command
+    @NotifyChange("listaUsuarios")
+    public void modificarTarifa(@BindingParam("valor") Tarifa valor) {
+        servicioTarifa.modificar(valor);
+        Clients.showNotification("Registrado correctamente",
+                Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        consultarTarifa();
+    }
+    @Command
+    @NotifyChange("listaBombero")
+    public void agregarBombero() {
+        Bombero nueva = new Bombero("", "", "");
+        servicioBombero.crear(nueva);
+        consultarBombero();
+    }
+
+    @Command
+    @NotifyChange("listaUsuarios")
+    public void modificarBombero(@BindingParam("valor") Bombero valor) {
+
+        if (bombero.getBomCedula() != null
+                && bombero.getBomNombre() != null
+                && bombero.getBomDireccion() != null) {
+            Clients.showNotification("Datos solicitados incompletos",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
+        } else {
+
+            Clients.showNotification("Registrado correctamente",
+                    Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+            servicioBombero.modificar(valor);
+        }
+        consultarBombero();
     }
 }

@@ -63,6 +63,12 @@ public class Bombero implements Serializable {
 
     public Bombero() {
     }
+    
+    public Bombero(String bomCedula, String bomNombre, String bomDireccion) {
+        this.bomCedula = bomCedula;
+        this.bomNombre = bomNombre;
+        this.bomDireccion = bomDireccion;
+    }
 
     public Bombero(Integer idBombero) {
         this.idBombero = idBombero;

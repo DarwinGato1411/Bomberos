@@ -46,6 +46,12 @@ public class Tarifa implements Serializable {
     public Tarifa() {
     }
 
+    public Tarifa(String tarCodigo, String tarDescripcion, Integer tarValor) {
+        this.tarCodigo = tarCodigo;
+        this.tarDescripcion = tarDescripcion;
+        this.tarValor = tarValor;
+    }
+
     public Integer getIdTarifa() {
         return idTarifa;
     }
@@ -84,16 +90,7 @@ public class Tarifa implements Serializable {
 
     public void setTarEstado(Boolean tarEstado) {
         this.tarEstado = tarEstado;
-    }
 
-    public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
-        return solicitudPermisoCollection;
     }
-
-    public void setSolicitudPermisoCollection(Collection<SolicitudPermiso> solicitudPermisoCollection) {
-        this.solicitudPermisoCollection = solicitudPermisoCollection;
-    }
-
-    
 
 }

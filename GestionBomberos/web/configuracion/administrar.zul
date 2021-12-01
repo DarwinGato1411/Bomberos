@@ -13,6 +13,8 @@
                 <tab label="${labels.app.parametrizar}" sclass="menutabs"/>                    
                 <tab label="${labels.app.barrio}" sclass="menutabs"/>                    
                 <tab label="${labels.app.recinto}" sclass="menutabs"/>                    
+                <tab label="${labels.app.tarifa}" sclass="menutabs"/>                    
+                <tab label="${labels.app.tramitador}" sclass="menutabs"/>                    
             </tabs>
             <tabpanels >
                 <!--                
@@ -153,17 +155,17 @@
                                           value="@bind(vm.parametrizarselected.parCorreoDefecto)" 
                                           class="form-control" />
                             </div>
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                                 <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion del logo
                                 <div class="input-group "  >
                                     <textbox value="@bind(vm.parametrizarselected.parPathLogo)" 
                                              placeholder="Logotipo de la empresa"
                                              class="form-control form-control-sm"
                                              tooltiptext="Agregar imagen" />
-                                    <image src="./imagenes/folder.png" 
+                                    <image src="/imagenes/folder.png" 
                                            onClick="@command('subirPathImagen')"  
                                            tooltiptext="Subir logotipo de la empresa"
-                                           style="font-size:20px;font-weight:bold"/>
+                                           style="font-size:20px;font-weight:bold"/>Agregar imagen
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
@@ -191,7 +193,7 @@
                                       mold="paging" pageSize="20">
                                                              
                                 <listhead sizable="false">
-                                    <listheader label="${labels.app.barrio}"  align="left " width="90%"></listheader>
+                                    <listheader label="${labels.app.barrio}"  align="left " width="100%"></listheader>
                                     <listheader label=""  align="left" width="33px"></listheader>
                                 </listhead>
                    
@@ -232,7 +234,7 @@
                                       mold="paging" pageSize="20">
                                                              
                                 <listhead sizable="false">
-                                    <listheader label="${labels.app.recinto}"  align="left " width="90%"></listheader>
+                                    <listheader label="${labels.app.recinto}"  align="left " width="100%"></listheader>
                                     <listheader label=""  align="left" width="33px"></listheader>
                                 </listhead>
                    
@@ -248,6 +250,110 @@
                                             <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
                                                        class="btn btn-primary btn-xs"
                                                        onClick="@command('modificarRecinto',valor=each)" 
+                                                       tooltiptext="${labels.app.guardar}"/> 
+                                    
+                                        </listcell>
+                               
+                                    </listitem>
+                                </template>   
+                       
+                            </listbox>
+                        </div>
+                    </div> 
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <button    iconSclass="z-icon-plus-circle"
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarTarifa')" 
+                                       tooltiptext="${labels.app.agregar}"/>
+                            <listbox  width="99%"
+                                      model="@load(vm.listaTarifa)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="${labels.app.codtarifa}"  align="left " width="20%"></listheader>
+                                    <listheader label="${labels.app.tarifa}"  align="left " width="60%"></listheader>
+                                    <listheader label="${labels.app.valortarifa}"  align="left " width="20%"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  > 
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.tarCodigo)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.tarDescripcion)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.tarValor)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">  
+                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificarTarifa',valor=each)" 
+                                                       tooltiptext="${labels.app.guardar}"/> 
+                                    
+                                        </listcell>
+                               
+                                    </listitem>
+                                </template>   
+                       
+                            </listbox>
+                        </div>
+                    </div> 
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <button    iconSclass="z-icon-plus-circle"
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarBombero')" 
+                                       tooltiptext="${labels.app.agregar}"/>
+                            <listbox  width="99%"
+                                      model="@load(vm.listaBombero)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="${labels.app.cedulatramitador}"  align="left " width="33%"></listheader>
+                                    <listheader label="${labels.app.nombretramitador}"  align="left " width="33%"></listheader>
+                                    <listheader label="${labels.app.direcciontramitador}"  align="left " width="33%"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  > 
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.bomCedula)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.bomNombre)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.bomDireccion)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">  
+                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificarBombero',valor=each)" 
                                                        tooltiptext="${labels.app.guardar}"/> 
                                     
                                         </listcell>
