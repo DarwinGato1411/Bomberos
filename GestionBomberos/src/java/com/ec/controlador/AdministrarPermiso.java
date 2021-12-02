@@ -82,7 +82,7 @@ public class AdministrarPermiso {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Enviar a prevencion de insendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+        if (Messagebox.show("Enviar a prevencion de incendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
             valor.setIdEstadoDocumento(estadoDocumento);
             servicioPermiso.modificar(valor);

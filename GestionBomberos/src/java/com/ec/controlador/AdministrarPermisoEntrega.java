@@ -9,6 +9,7 @@ import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Opciones;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
+import com.ec.entidad.TipoSolicitud;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioPermiso;
@@ -121,9 +122,20 @@ public class AdministrarPermisoEntrega {
     public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("numeracion", valor.getSolpNumeracion());
+        parametros.put("tipoDocumento", valor.getIdTipoSolicitud());
+        
         try {
-            String nombreReporte = "permiso.jasper";
-            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+            if (valor.getIdTipoSolicitud().getTipsSigla().equals("PF")) {
+                String nombreReporte = "permiso.jasper";
+                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+            }else if(valor.getIdTipoSolicitud().getTipsSigla().equals("CC")){
+                String nombreReporteConstruccion = "certificadoConstruccion.jasper";
+                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteConstruccion);
+            }
+            else if(valor.getIdTipoSolicitud().getTipsSigla().equals("VA")){
+                String nombreReporteVehiculo = "certificadoVehiculo.jasper";
+                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteVehiculo);
+            }
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

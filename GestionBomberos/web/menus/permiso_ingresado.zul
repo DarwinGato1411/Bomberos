@@ -46,8 +46,8 @@
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>                       
-                        <listheader label="Calle principal"  align="left" hflex="6"></listheader>
-                         <listheader label="${labels.app.tramitador}"  align="left" hflex="6"></listheader>
+                        <listheader label="Agente"  align="left" hflex="6"></listheader>
+                        <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
@@ -81,23 +81,23 @@
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpCalle)" style="font-weight:bold" 
-                                                   width="100%"/>
-                            </listcell>  
-                            <listcell zclass = "mycss-listcell" >                                          
-                              
-                                <label sclass="letraLisbox" 
                                                    value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
                                                    width="100%"/>
                                 
-                            </listcell>  
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" >                                          
+                              
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell> 
                             <listcell zclass = "mycss-listcell">
                                                      
-                                <button    style="width:30px;height:30px; background: blue" 
+                                <button    style="width:30px;height:30px; background: grey" 
                                            iconSclass="z-icon-print "                                
                                            class="btn btn-primary btn-xs"
                                            onClick="@command('verPermiso',valor=each)" 
-                                           tooltiptext="${labels.app.editar}"/> 
+                                           tooltiptext="Ver permiso"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
