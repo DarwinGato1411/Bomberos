@@ -12,6 +12,7 @@ import com.ec.entidad.SolicitudPermiso;
 import com.ec.entidad.Tarifa;
 import com.ec.entidad.TipoSolicitud;
 import com.ec.entidad.TipoTarifa;
+import com.ec.entidad.Vehiculo;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioBombero;
@@ -71,6 +72,7 @@ public class NuevoPermiso {
     ServicioPermiso servicio = new ServicioPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
+    private Vehiculo entidadSelectedvehiculo = new Vehiculo();
     private String tipoAccion = "new";
     private List<TipoSolicitud> listaTipoSolicitud = new ArrayList<TipoSolicitud>();
     private TipoSolicitud tipoSoliSelected = null;
@@ -96,6 +98,7 @@ public class NuevoPermiso {
     private Parametrizar parametrizar = new Parametrizar();
     private Boolean activaOtro = Boolean.FALSE;
     private Boolean activaConstruccion = Boolean.FALSE;
+    private Boolean activaVehiculo = Boolean.FALSE;
 
     private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
     private Tarifa tarifaSelected = new Tarifa();
@@ -168,29 +171,43 @@ public class NuevoPermiso {
     }
 
     @Command
-    @NotifyChange({"activaOtro", "activaConstruccion"})
+    @NotifyChange({"activaOtro", "activaConstruccion", "activaVehiculo"})
     public void tipoPermiso() {
         activaOtro = Boolean.FALSE;
         activaConstruccion = Boolean.FALSE;
+        activaVehiculo = Boolean.FALSE;
         if (tipoSoliSelected.getTipsSigla().equals("CC")) {
             entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
             entidadSelected.setSolpEsotro(Boolean.FALSE);
             entidadSelected.setSolpEsplanos(Boolean.TRUE);
+            entidadSelected.setSolpEsvehiculo(Boolean.FALSE);
             activaOtro = Boolean.FALSE;
             activaConstruccion = Boolean.TRUE;
+            activaVehiculo = Boolean.FALSE;
 
         } else if (tipoSoliSelected.getTipsSigla().equals("OT")) {
             entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
             entidadSelected.setSolpEsotro(Boolean.TRUE);
             entidadSelected.setSolpEsplanos(Boolean.FALSE);
+            entidadSelected.setSolpEsvehiculo(Boolean.FALSE);
             activaOtro = Boolean.TRUE;
             activaConstruccion = Boolean.FALSE;
+            activaVehiculo = Boolean.FALSE;
+        } else if (tipoSoliSelected.getTipsSigla().equals("VA")) {
+            entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
+            entidadSelected.setSolpEsotro(Boolean.FALSE);
+            entidadSelected.setSolpEsplanos(Boolean.FALSE);
+            entidadSelected.setSolpEsvehiculo(Boolean.TRUE);
+            activaOtro = Boolean.FALSE;
+            activaConstruccion = Boolean.FALSE;
+            activaVehiculo = Boolean.TRUE;
         } else {
             entidadSelected.setSolpEsinspeccion(Boolean.TRUE);
             entidadSelected.setSolpEsotro(Boolean.FALSE);
             entidadSelected.setSolpEsplanos(Boolean.FALSE);
             activaOtro = Boolean.FALSE;
             activaConstruccion = Boolean.FALSE;
+            activaVehiculo = Boolean.FALSE;
         }
 
         System.out.println("ingresa a verificar " + tipoSoliSelected.getTipsSigla());
@@ -299,6 +316,14 @@ public class NuevoPermiso {
         this.entidadSelected = entidadSelected;
     }
 
+    public Vehiculo getEntidadSelectedvehiculo() {
+        return entidadSelectedvehiculo;
+    }
+
+    public void setEntidadSelectedvehiculo(Vehiculo entidadSelectedvehiculo) {
+        this.entidadSelectedvehiculo = entidadSelectedvehiculo;
+    }
+    
     public String getTipoAccion() {
         return tipoAccion;
     }
@@ -428,6 +453,14 @@ public class NuevoPermiso {
         this.activaConstruccion = activaConstruccion;
     }
 
+    public Boolean getActivaVehiculo() {
+        return activaVehiculo;
+    }
+
+    public void setActivaVehiculo(Boolean activaVehiculo) {
+        this.activaVehiculo = activaVehiculo;
+    }
+    
     public List<Tarifa> getListTarifa() {
         return listTarifa;
     }

@@ -121,9 +121,10 @@ public class SolicitudPermiso implements Serializable {
     private Boolean solpEsinspeccion;
     @Column(name = "solp_esplanos")
     private Boolean solpEsplanos;
-
     @Column(name = "solp_esotro")
     private Boolean solpEsotro;
+    @Column(name = "solp_esvehiculo")
+    private Boolean solpEsvehiculo;
 
     @Column(name = "solp_nombre_local")
     private String solpNombreLocal;
@@ -567,6 +568,15 @@ public class SolicitudPermiso implements Serializable {
         this.solpEsotro = solpEsotro;
     }
 
+    public Boolean getSolpEsvehiculo() {
+        return solpEsvehiculo;
+    }
+
+    public void setSolpEsvehiculo(Boolean solpEsvehiculo) {
+        this.solpEsvehiculo = solpEsvehiculo;
+    }
+
+    
     public String getSolpNombreLocal() {
         return solpNombreLocal;
     }
