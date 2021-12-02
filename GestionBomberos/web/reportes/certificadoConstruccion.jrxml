@@ -149,25 +149,25 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 	<columnHeader>
 		<band height="139" splitType="Stretch">
 			<line>
-				<reportElement x="119" y="23" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="30" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="119" y="45" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="56" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="119" y="91" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="99" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="61" y="68" width="478" height="1" forecolor="#000000"/>
+				<reportElement x="62" y="76" width="478" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -180,7 +180,7 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 				<text><![CDATA[Teléfono]]></text>
 			</staticText>
 			<line>
-				<reportElement x="51" y="114" width="227" height="1" forecolor="#000000"/>
+				<reportElement x="51" y="122" width="227" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -213,6 +213,21 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 				</textElement>
 				<text><![CDATA[Tipo de Construcción]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="120" y="34" width="434" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="60" width="243" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_barrio_urbanizacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="51" y="99" width="248" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_telefono}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>

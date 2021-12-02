@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoVehiculo" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select * from parametrizar pa, solicitud_permiso sp
 where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
@@ -219,7 +219,7 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Color]]></text>
+				<text><![CDATA[Caduca]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="22" y="238" width="240" height="16" forecolor="#000099"/>
@@ -241,6 +241,21 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 			<line>
 				<reportElement x="313" y="227" width="218" height="1" forecolor="#0000FF"/>
 			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="53" y="1" width="166" height="16"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="29" width="266" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="29" width="207" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sol_num_cedula}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
