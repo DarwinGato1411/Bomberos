@@ -60,6 +60,8 @@ public class Bombero implements Serializable {
     private GradoBombero idGradoBombero;
     @OneToMany(mappedBy = "idBombero")
     private Collection<Emergencia> emergenciaCollection;
+    @OneToMany(mappedBy = "idBombero")
+    private Collection<SolicitudPermiso> solicitudPermisoCollection;
 
     public Bombero() {
     }
@@ -154,6 +156,14 @@ public class Bombero implements Serializable {
 
     public void setIdGradoBombero(GradoBombero idGradoBombero) {
         this.idGradoBombero = idGradoBombero;
+    }
+
+    public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
+        return solicitudPermisoCollection;
+    }
+
+    public void setSolicitudPermisoCollection(Collection<SolicitudPermiso> solicitudPermisoCollection) {
+        this.solicitudPermisoCollection = solicitudPermisoCollection;
     }
 
     @XmlTransient

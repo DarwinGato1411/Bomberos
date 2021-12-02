@@ -155,7 +155,7 @@ public class ServicioPermiso {
 
     public SolicitudPermiso findUltimoPermiso() {
 
-        SolicitudPermiso retorno = new SolicitudPermiso();
+        SolicitudPermiso retorno = null;
         try {
             //Connection connection = em.unwrap(Connection.class);
 

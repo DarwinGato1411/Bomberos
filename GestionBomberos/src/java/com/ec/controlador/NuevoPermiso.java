@@ -4,19 +4,25 @@
  */
 package com.ec.controlador;
 
+import com.ec.entidad.Bombero;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Parroquia;
 import com.ec.entidad.Recinto;
 import com.ec.entidad.SolicitudPermiso;
+import com.ec.entidad.Tarifa;
 import com.ec.entidad.TipoSolicitud;
+import com.ec.entidad.TipoTarifa;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
+import com.ec.servicio.ServicioBombero;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPermiso;
 import com.ec.servicio.ServicioRecinto;
+import com.ec.servicio.ServicioTarifa;
 import com.ec.servicio.ServicioTipoSolicitud;
+import com.ec.servicio.ServicioTipoTarifa;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,6 +97,14 @@ public class NuevoPermiso {
     private Boolean activaOtro = Boolean.FALSE;
     private Boolean activaConstruccion = Boolean.FALSE;
 
+    private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
+    private Tarifa tarifaSelected = new Tarifa();
+    ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
+
+    private List<Bombero> listBomberos = new ArrayList<Bombero>();
+    private Bombero bomberoSelected = new Bombero();
+    ServicioBombero servicioBombero = new ServicioBombero();
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
@@ -99,9 +113,13 @@ public class NuevoPermiso {
                 tipoAccion = "update";
                 entidadSelected = valor;
                 parroquiaSelected = valor.getIdParroquia();
+                tarifaSelected = entidadSelected.getIdTarifa() != null ? entidadSelected.getIdTarifa() : null;
+                tipoSoliSelected = entidadSelected.getIdTipoSolicitud() != null ? entidadSelected.getIdTipoSolicitud() : null;
+                bomberoSelected = entidadSelected.getIdBombero() != null ? entidadSelected.getIdBombero() : null;
                 if (valor.getSolPathSolicitud() != null) {
                     fileContent = new AMedia("Visor", "pdf", "application/pdf", ArchivoUtils.Imagen_A_Bytes(valor.getSolPathSolicitud()));
                 }
+                tipoPermiso();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -116,6 +134,8 @@ public class NuevoPermiso {
         listaParrquia = servicioParroquia.findLikeParrDecripcion("");
         listaTipoSolicitud = servicioTipoSolicitud.findLikeSigla("");
         listaRecintos = servicioRecinto.findByAll();
+        listTarifa = servicioTipoTarifa.findLikeTariDecripcion("");
+        listBomberos = servicioBombero.findLikeNombreBombero("");
     }
 
     public NuevoPermiso() {
@@ -188,9 +208,19 @@ public class NuevoPermiso {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
                 return;
             }
+            if (tarifaSelected == null) {
+                Clients.showNotification("Seleccione una tarifa... ",
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                return;
+            }
+            if (bomberoSelected == null) {
+                Clients.showNotification("Seleccione una agente de inspeccion... ",
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                return;
+            }
 
             if (tipoSoliSelected.getTipsSigla().equals("CC")) {
-                if (entidadSelected.getSolpProyecto() == null || entidadSelected.getSolpTetefonoProyecto()== null) {
+                if (entidadSelected.getSolpProyecto() == null || entidadSelected.getSolpTetefonoProyecto() == null) {
                     Clients.showNotification("Debe llenar los campos Nombre proyecto y Telefono del proyecto ",
                             Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
                     return;
@@ -207,6 +237,8 @@ public class NuevoPermiso {
             }
 
 //                   entidadSelected.setSolpFecha(new Date());
+            entidadSelected.setIdTarifa(tarifaSelected);
+            entidadSelected.setIdBombero(bomberoSelected);
             entidadSelected.setSolpNombreLocal(entidadSelected.getSolpNombreNegocio());
             entidadSelected.setSolpTelefonoInspeccion(entidadSelected.getSolpTelefonoContacto() != null ? entidadSelected.getSolpTelefonoContacto() : "");
             entidadSelected.setIdTipoSolicitud(tipoSoliSelected);
@@ -394,6 +426,38 @@ public class NuevoPermiso {
 
     public void setActivaConstruccion(Boolean activaConstruccion) {
         this.activaConstruccion = activaConstruccion;
+    }
+
+    public List<Tarifa> getListTarifa() {
+        return listTarifa;
+    }
+
+    public void setListTarifa(List<Tarifa> listTarifa) {
+        this.listTarifa = listTarifa;
+    }
+
+    public Tarifa getTarifaSelected() {
+        return tarifaSelected;
+    }
+
+    public void setTarifaSelected(Tarifa tarifaSelected) {
+        this.tarifaSelected = tarifaSelected;
+    }
+
+    public List<Bombero> getListBomberos() {
+        return listBomberos;
+    }
+
+    public void setListBomberos(List<Bombero> listBomberos) {
+        this.listBomberos = listBomberos;
+    }
+
+    public Bombero getBomberoSelected() {
+        return bomberoSelected;
+    }
+
+    public void setBomberoSelected(Bombero bomberoSelected) {
+        this.bomberoSelected = bomberoSelected;
     }
 
 }

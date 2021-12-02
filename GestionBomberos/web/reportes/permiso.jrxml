@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="numeracion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select * from parametrizar pa, solicitud_permiso sp
 where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>

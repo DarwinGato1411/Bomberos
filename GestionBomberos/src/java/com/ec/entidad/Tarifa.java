@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -42,6 +44,9 @@ public class Tarifa implements Serializable {
     private Boolean tarEstado;
     @OneToMany(mappedBy = "idTarifa")
     private Collection<SolicitudPermiso> solicitudPermisoCollection;
+    @JoinColumn(name = "id_tipo_tarifa", referencedColumnName = "id_tipo_tarifa")
+    @ManyToOne
+    private TipoTarifa idTipoTarifa;
 
     public Tarifa() {
     }
@@ -91,6 +96,22 @@ public class Tarifa implements Serializable {
     public void setTarEstado(Boolean tarEstado) {
         this.tarEstado = tarEstado;
 
+    }
+
+    public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
+        return solicitudPermisoCollection;
+    }
+
+    public void setSolicitudPermisoCollection(Collection<SolicitudPermiso> solicitudPermisoCollection) {
+        this.solicitudPermisoCollection = solicitudPermisoCollection;
+    }
+
+    public TipoTarifa getIdTipoTarifa() {
+        return idTipoTarifa;
+    }
+
+    public void setIdTipoTarifa(TipoTarifa idTipoTarifa) {
+        this.idTipoTarifa = idTipoTarifa;
     }
 
 }

@@ -39,12 +39,13 @@
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
-                        <listheader label="Barrio"  align="left" hflex="6"></listheader>
+                        <!--<listheader label="Barrio"  align="left" hflex="6"></listheader>-->
                         <listheader label="Calle principal"  align="left" hflex="6"></listheader>
+                        <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
-                        <listheader label=""  align="left" width="33px"></listheader>
+                        <!--<listheader label=""  align="left" width="33px"></listheader>-->
                     </listhead>
                    
                 
@@ -70,23 +71,29 @@
                                                      buttonVisible="false" lenient="true" readonly="true"
                                                      format="medium" width="98%"  />
                             </listcell>  
-                            <listcell zclass = "mycss-listcell" >                                          
+<!--                            <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
                                                    value="@bind(each.solpBarrioUrbanizacion)" style="font-weight:bold" 
                                                    width="100%"/>
-                            </listcell>  
+                            </listcell>  -->
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
                                                    value="@bind(each.solpCalle)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>  
+                            <listcell zclass = "mycss-listcell" >                                          
+                              
+                                <label sclass="letraLisbox" 
+                                                   value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                                   width="100%"/>
+                            </listcell>  
                                                   
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: grey" iconSclass="z-icon-print"
-                                
+                                onClick="@command('verPermiso',valor=each)"
                                                        class="btn btn-primary btn-xs"
                                                        tooltiptext="Imprimir permiso"/> 
                                     
@@ -103,17 +110,17 @@
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('cambiarEstado',valor=each)" 
-                                                       tooltiptext="Parte diario"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('cambiarEstado',valor=each)" 
+                                           tooltiptext="Parte diario"/> 
                                     
                             </listcell>
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('EstadoParteDiario',valor=each)" 
-                                                       tooltiptext="Parte diario"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('EstadoParteDiario',valor=each)" 
+                                           tooltiptext="Parte diario"/> 
                                     
                             </listcell>                                
                         </listitem>

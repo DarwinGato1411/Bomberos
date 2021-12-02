@@ -11,6 +11,7 @@ import com.ec.entidad.Parroquia;
 import com.ec.entidad.Perfil;
 import com.ec.entidad.Recinto;
 import com.ec.entidad.Tarifa;
+import com.ec.entidad.TipoTarifa;
 import com.ec.entidad.Usuario;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioBombero;
@@ -19,6 +20,7 @@ import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioPerfil;
 import com.ec.servicio.ServicioRecinto;
 import com.ec.servicio.ServicioTarifa;
+import com.ec.servicio.ServicioTipoTarifa;
 import com.ec.servicio.ServicioUsuario;
 import java.io.File;
 import java.io.IOException;
@@ -63,11 +65,14 @@ public class AdministrarConfiguracion {
     private List<Recinto> listaRecinto = new ArrayList<Recinto>();
     private List<Tarifa> listaTarifa = new ArrayList<Tarifa>();
     private List<Bombero> listaBombero = new ArrayList<Bombero>();
+    private List<TipoTarifa> listaCatgoria = new ArrayList<TipoTarifa>();
+    ServicioTipoTarifa servicioTipoTarifa = new ServicioTipoTarifa();
     private Bombero bombero = new Bombero();
     private String buscarParroquia = "";
     private String buscarRecinto = "";
     private String buscarTarifa = "";
     private String buscarBombero = "";
+    private String buscartipoTarifa = "";
 
     UserCredential credential = new UserCredential();
 
@@ -81,6 +86,7 @@ public class AdministrarConfiguracion {
         consultarRecinto();
         consultarTarifa();
         consultarBombero();
+        consultarTipoTarifa();
         parametrizarselected = servicioParametrizar.findActivo();
 
         FOLDER_IMG = parametrizarselected != null ? parametrizarselected.getParDisco() + parametrizarselected.getParCarpeta() : "";
@@ -97,15 +103,22 @@ public class AdministrarConfiguracion {
     private void consultarRecinto() {
         listaRecinto = servicioRecinto.findLikeDescripcion(buscarRecinto);
     }
+
     private void consultarTarifa() {
         listaTarifa = servicioTarifa.findLikeTariDecripcion(buscarTarifa);
     }
+
     private void consultarBombero() {
         listaBombero = servicioBombero.findLikeNombreBombero(buscarBombero);
     }
 
     private void cosultarUsuarios(String buscar) {
         listaUsuarios = servicioUsuario.FindALlUsuarioPorLikeNombre(buscar);
+
+    }
+
+    private void consultarTipoTarifa() {
+        listaCatgoria = servicioTipoTarifa.findLikeTariDecripcion(buscartipoTarifa);
 
     }
 
@@ -328,7 +341,6 @@ public class AdministrarConfiguracion {
         return buscarRecinto;
     }
 
-    
     public void setBuscarRecinto(String buscarRecinto) {
         this.buscarRecinto = buscarRecinto;
     }
@@ -372,8 +384,7 @@ public class AdministrarConfiguracion {
     public void setBombero(Bombero bombero) {
         this.bombero = bombero;
     }
-    
-    
+
     @Command
     @NotifyChange("listaParroquia")
     public void agregarParroquia() {
@@ -408,22 +419,27 @@ public class AdministrarConfiguracion {
                 Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
         consultarRecinto();
     }
+
     @Command
     @NotifyChange("listaTarifa")
     public void agregarTarifa() {
-        Tarifa nueva = new Tarifa("", "", BigDecimal.ONE);
-        servicioTarifa.crear(nueva);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/tarifa.zul", null, null);
+        window.doModal();
         consultarTarifa();
     }
 
     @Command
-    @NotifyChange("listaUsuarios")
+    @NotifyChange("listaTarifa")
     public void modificarTarifa(@BindingParam("valor") Tarifa valor) {
-        servicioTarifa.modificar(valor);
-        Clients.showNotification("Registrado correctamente",
-                Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        final HashMap<String, Tarifa> map = new HashMap<String, Tarifa>();
+        map.put("valor", valor);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/tarifa.zul", null, map);
+        window.doModal();
         consultarTarifa();
     }
+
     @Command
     @NotifyChange("listaBombero")
     public void agregarBombero() {
@@ -436,9 +452,9 @@ public class AdministrarConfiguracion {
     @NotifyChange("listaUsuarios")
     public void modificarBombero(@BindingParam("valor") Bombero valor) {
 
-        if (bombero.getBomCedula() != null
-                && bombero.getBomNombre() != null
-                && bombero.getBomDireccion() != null) {
+        if (valor.getBomCedula() == null
+                || valor.getBomNombre() == null
+                || valor.getBomDireccion() == null) {
             Clients.showNotification("Datos solicitados incompletos",
                     Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
         } else {
@@ -449,4 +465,46 @@ public class AdministrarConfiguracion {
         }
         consultarBombero();
     }
+
+    @Command
+    @NotifyChange("listaCatgoria")
+    public void modificarCategoria(@BindingParam("valor") TipoTarifa valor) {
+
+        if (valor.getTiptDescripcion() != null) {
+
+            servicioTipoTarifa.modificar(valor);
+            Clients.showNotification("Modificado correctamente",
+                    Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        } else {
+            Clients.showNotification("Datos solicitados incompletos",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 2000, true);
+
+        }
+        consultarTipoTarifa();
+    }
+
+    @Command
+    @NotifyChange("listaCatgoria")
+    public void agregarCategoria() {
+        TipoTarifa nueva = new TipoTarifa("");
+        servicioTipoTarifa.crear(nueva);
+        consultarTipoTarifa();
+    }
+
+    public List<TipoTarifa> getListaCatgoria() {
+        return listaCatgoria;
+    }
+
+    public void setListaCatgoria(List<TipoTarifa> listaCatgoria) {
+        this.listaCatgoria = listaCatgoria;
+    }
+
+    public String getBuscartipoTarifa() {
+        return buscartipoTarifa;
+    }
+
+    public void setBuscartipoTarifa(String buscartipoTarifa) {
+        this.buscartipoTarifa = buscartipoTarifa;
+    }
+
 }

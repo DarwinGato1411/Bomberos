@@ -8,13 +8,28 @@
         <div  class="row" >  
             
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                    <label    value="(*) "  >Tarifa</label>
+          
+                    <combobox id="cmbCategoria"  model="@load(vm.listTarifa)"  
+                              width="100%"
+                              readonly="true"       
+                              selectedItem="@bind(vm.tarifaSelected)"
+                              value="@bind(vm.tarifaSelected.tarDescripcion)" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.tarDescripcion)"/>
+                        </template>                                      
+                    </combobox>
+      
+
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Tipo de solicitud 
                 
-                    <combobox  id="idTipoSolCmb" model="@load(vm.listaTipoSolicitud)"                                        
+                    <combobox   model="@load(vm.listaTipoSolicitud)"                                        
                                selectedItem="@bind(vm.tipoSoliSelected)" 
-                               onSelect="@command('tipoPermiso')" 
-                               value="Seleccione un tipo de solicitud" 
+                               value="@bind(vm.tipoSoliSelected.tipsDescripcion)"
+                               onSelect="@command('tipoPermiso')"                                 
                                readonly="true"                         
                                width="100%">
                         <template name="model">
@@ -22,32 +37,47 @@
                         </template>                                      
                     </combobox>
                 </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                    <label    value="(*) "  >Agente</label>
+          
+                    <combobox  model="@load(vm.listBomberos)"  
+                              width="100%"
+                              readonly="true"       
+                              selectedItem="@bind(vm.bomberoSelected)"
+                              value="@bind(vm.bomberoSelected.bomNombre)" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.bomNombre)"/>
+                        </template>                                      
+                    </combobox>
+      
+
+                </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 "  >
-                <div class="col-12 col-sm-12 col-md-8 col-lg-8  form-group "  >
-                    <!--<div class="row">-->
-                    <!--<div class="col-12 col-sm-12 col-md-8 col-lg-8  "  >--> 
-                    Subir la solicitud en formato PDF
-                    <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
-                               class="btn btn-primary btn-xs"
-                               onClick="@command('subirSolicitud')" 
-                               tooltiptext="${labels.app.editar}"/> 
-                    <!--                        </div>
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  > -->
-                    <label   value="@bind(vm.entidadSelected.solpArchivoImpuesto)"  />
-                    <!--</div>-->
-                    <!--</div>-->
-                </div>
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8  form-group "  >
+                        <!--<div class="row">-->
+                        <!--<div class="col-12 col-sm-12 col-md-8 col-lg-8  "  >--> 
+                        Subir la solicitud en formato PDF
+                        <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
+                                   class="btn btn-primary btn-xs"
+                                   onClick="@command('subirSolicitud')" 
+                                   tooltiptext="${labels.app.editar}"/> 
+                        <!--                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  > -->
+                        <label   value="@bind(vm.entidadSelected.solpArchivoImpuesto)"  />
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
                 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
-                    <label value="#"  style="color:red;font-weight:bold; font-size:20px" />
-                 <label  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
+                        <label value="#"  style="color:red;font-weight:bold; font-size:20px" />
+                        <label  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>
 
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'new')" >
-                    <label value=" Solicitud Nueva"  style="color:red;font-weight:bold; font-size:20px" />
-                 <!--<label  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>-->
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'new')" >
+                        <label value=" Solicitud Nueva"  style="color:red;font-weight:bold; font-size:20px" />
+                        <!--<label  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>-->
 
-                </div>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >                                 
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.fechaemi}
@@ -228,13 +258,12 @@
             </div>                
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
                 <button    iconSclass="z-icon-save"
-                           class="btn btn-primary btn-xs botongeneral"                                                               
+                label="Guardar"
+                           class="btn btn-primary btn-xs "                                                               
                            onClick="@command('guardar')"
                            tooltiptext="GUARDAR"/>     
             </div> 
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
-                <label value="GUARDAR" style="color:red;font-weight:bold"/>      
-            </div> 
+           
         </div>
    
     </div>

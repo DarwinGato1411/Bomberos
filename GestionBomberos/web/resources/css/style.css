@@ -540,8 +540,9 @@ element.style {
 
 .z-label, .z-radio-cnt, .z-checkbox-cnt, .z-loading {
     font-family: arial, sans-serif;
-    /*font-size: 11px;*/
+    font-size: 11px;
     font-weight: normal;
+    padding-left: 3px;
 }
 .z-notification .z-notification-cl, .z-notification .z-notification-cnt {
     width: 100%;
@@ -894,3 +895,8 @@ label, select, button, input[type="button"], input[type="reset"], input[type="su
     box-shadow: 1px 1px 3px rgb(0 0 0 / 35%);
 }
 
+.btn-primary {
+     color: white; 
+    background-color: #000000;
+    border-color: #000000;
+}

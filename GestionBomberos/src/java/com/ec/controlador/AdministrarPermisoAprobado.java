@@ -65,7 +65,7 @@ public class AdministrarPermisoAprobado {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Confirmar cambio de estado?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+        if (Messagebox.show("Enviar a revision de documetos?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("REV");
             valor.setIdEstadoDocumento(estadoDocumento);
             servicioPermiso.modificar(valor);

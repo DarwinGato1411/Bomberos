@@ -169,6 +169,9 @@ public class SolicitudPermiso implements Serializable {
     @JoinColumn(name = "id_tarifa", referencedColumnName = "id_tarifa")
     @ManyToOne
     private Tarifa idTarifa;
+    @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
+    @ManyToOne
+    private Bombero idBombero;
 
     public SolicitudPermiso() {
     }
@@ -626,6 +629,14 @@ public class SolicitudPermiso implements Serializable {
 
     public void setIdTarifa(Tarifa idTarifa) {
         this.idTarifa = idTarifa;
+    }
+
+    public Bombero getIdBombero() {
+        return idBombero;
+    }
+
+    public void setIdBombero(Bombero idBombero) {
+        this.idBombero = idBombero;
     }
 
     @Override

@@ -13,6 +13,7 @@
                 <tab label="${labels.app.parametrizar}" sclass="menutabs"/>                    
                 <tab label="${labels.app.barrio}" sclass="menutabs"/>                    
                 <tab label="${labels.app.recinto}" sclass="menutabs"/>                    
+                <tab label="${labels.app.categorianegocio}" sclass="menutabs"/>                    
                 <tab label="${labels.app.tarifa}" sclass="menutabs"/>                    
                 <tab label="${labels.app.tramitador}" sclass="menutabs"/>                    
             </tabs>
@@ -72,7 +73,7 @@
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                             <label sclass="letraLisbox" 
-                                                   value="@bind(each.idPerfil.perNombre)" style="font-weight:bold" 
+                                                   value="@bind(each.idPerfil.usuTipoUsuario)" style="font-weight:bold" 
                                                    width="100%"/>
                                         </listcell>  
                                                   
@@ -202,6 +203,7 @@
                                     <listitem  > 
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase())"
                                                      value="@bind(each.parrDescripcion)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
@@ -243,6 +245,7 @@
                                     <listitem  > 
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase())"
                                                      value="@bind(each.recDescripcion)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
@@ -250,6 +253,48 @@
                                             <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
                                                        class="btn btn-primary btn-xs"
                                                        onClick="@command('modificarRecinto',valor=each)" 
+                                                       tooltiptext="${labels.app.guardar}"/> 
+                                    
+                                        </listcell>
+                               
+                                    </listitem>
+                                </template>   
+                       
+                            </listbox>
+                        </div>
+                    </div> 
+                </tabpanel>
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <button    iconSclass="z-icon-plus-circle"
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarCategoria')" 
+                                       tooltiptext="${labels.app.agregar}"/>
+                            <listbox  width="99%"
+                                      model="@load(vm.listaCatgoria)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="${labels.app.categoria}"  align="left " width="100%"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  > 
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     value="@bind(each.tiptDescripcion)" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase())"
+                                                     style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">  
+                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificarCategoria',valor=each)" 
                                                        tooltiptext="${labels.app.guardar}"/> 
                                     
                                         </listcell>
@@ -274,9 +319,10 @@
                                       mold="paging" pageSize="20">
                                                              
                                 <listhead sizable="false">
-                                    <listheader label="${labels.app.codtarifa}"  align="left " width="20%"></listheader>
-                                    <listheader label="${labels.app.tarifa}"  align="left " width="60%"></listheader>
-                                    <listheader label="${labels.app.valortarifa}"  align="left " width="20%"></listheader>
+                                    <listheader label="${labels.app.codtarifa}"  align="left " width="15%"></listheader>
+                                    <listheader label="${labels.app.tarifa}"  align="left " width="45%"></listheader>
+                                    <listheader label="${labels.app.categoria}"  align="left " width="30%"></listheader>
+                                    <listheader label="${labels.app.valortarifa}"  align="left " width="10%"></listheader>
                                     <listheader label=""  align="left" width="33px"></listheader>
                                 </listhead>
                    
@@ -285,21 +331,31 @@
                                     <listitem  > 
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     readonly="true"
                                                      value="@bind(each.tarCodigo)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     readonly="true"
                                                      value="@bind(each.tarDescripcion)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     readonly="true"
+                                                     value="@bind(each.idTipoTarifa.tiptDescripcion)" style="font-weight:bold" 
+                                                     width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <textbox sclass="letraLisbox" 
+                                                     readonly="true"
                                                      value="@bind(each.tarValor)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">  
-                                            <button    style="width:30px;height:30px;" iconSclass="z-icon-save"
+                                            <button    style="width:30px;height:30px;" 
+                                                       iconSclass="z-icon-edit"
                                                        class="btn btn-primary btn-xs"
                                                        onClick="@command('modificarTarifa',valor=each)" 
                                                        tooltiptext="${labels.app.guardar}"/> 
@@ -337,16 +393,19 @@
                                     <listitem  > 
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase())"
                                                      value="@bind(each.bomCedula)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase())"
                                                      value="@bind(each.bomNombre)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
-                                            <textbox sclass="letraLisbox" 
+                                            <textbox sclass="letraLisbox"   onChange="self.setValue(self.getValue().toUpperCase())"
+
                                                      value="@bind(each.bomDireccion)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
