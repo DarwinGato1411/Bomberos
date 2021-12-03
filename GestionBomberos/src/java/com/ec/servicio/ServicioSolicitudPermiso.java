@@ -35,6 +35,7 @@ public class ServicioSolicitudPermiso {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en insertar solicitudPermiso " + e.getMessage());
+            e.printStackTrace();
         } finally {
             em.close();
         }
@@ -178,6 +179,33 @@ public class ServicioSolicitudPermiso {
         }
 
         return retorno;
+    }
+
+    public SolicitudPermiso findLikeRuc(String valor) {
+
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula =:solNumCedula ORDER BY u.idSolcitudPer DESC");
+            query.setParameter("solNumCedula", valor);
+
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
+            em.getTransaction().commit();
+            if (!listaClientes.isEmpty()) {
+                return listaClientes.get(0);
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        return null;
     }
 
 }

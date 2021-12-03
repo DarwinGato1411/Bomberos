@@ -4,7 +4,7 @@
  */
 package com.ec.servicio;
 
-import com.ec.entidad.Inspeccion;
+import com.ec.entidad.Permiso;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioInspeccion {
+public class ServicioPermiso {
 
     private EntityManager em;
 
@@ -26,68 +26,70 @@ public class ServicioInspeccion {
         this.em = em;
     }
 
-    public void crear(Inspeccion inspeccion) {
+    public void crear(Permiso permiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.persist(inspeccion);
+            em.persist(permiso);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar inspeccion " + e.getMessage());
+            System.out.println("Error en insertar permiso " + e.getMessage());
+            e.printStackTrace();
         } finally {
             em.close();
         }
 
     }
 
-    public void eliminar(Inspeccion inspeccion) {
+    public void eliminar(Permiso permiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.remove(em.merge(inspeccion));
+            em.remove(em.merge(permiso));
             em.getTransaction().commit();
 
         } catch (Exception e) {
-            System.out.println("Error en eliminar  inspeccion " + e.getMessage());
+            System.out.println("Error en eliminar  permiso " + e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public void modificar(Inspeccion inspeccion) {
+    public void modificar(Permiso permiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.merge(inspeccion);
+            em.merge(permiso);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en modificar inspeccion " + e.getMessage());
+            System.out.println("Error en modificar permiso " + e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public List<Inspeccion> findLikeDescripcion(String valor) {
+    public List<Permiso> findLikePermiso(String valor) {
 
-        List<Inspeccion> listaClientes = new ArrayList<Inspeccion>();
+        List<Permiso> listaClientes = new ArrayList<Permiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.insDescripcion LIKE :insDescripcion ORDER BY u.idInspeccion ASC");
-            query.setParameter("insDescripcion", "%" + valor + "%");
-
-            listaClientes = (List<Inspeccion>) query.getResultList();
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol OR u.solpApellidoSol LIKE :solpApellidoSol");
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
+            query.setParameter("solpApellidoSol", "%" + valor + "%");
+            listaClientes = (List<Permiso>) query.getResultList();
 
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta inspeccion  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -96,26 +98,26 @@ public class ServicioInspeccion {
     }
 
     /*PERMISOS INGRESADOS*/
-    public List<Inspeccion> findLikePermisoForEstadoCedulaNombre(String valor, String buscar) {
+    public List<Permiso> findLikePermisoForEstadoCedulaNombre(String valor, String buscar) {
 
-        List<Inspeccion> listaClientes = new ArrayList<Inspeccion>();
+        List<Permiso> listaClientes = new ArrayList<Permiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");
             query.setParameter("estSigla", valor);
             query.setParameter("solNumCedula", "%" + buscar + "%");
             query.setParameter("solpNombreSol", "%" + buscar + "%");
-            listaClientes = (List<Inspeccion>) query.getResultList();
+            listaClientes = (List<Permiso>) query.getResultList();
 
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta inspeccion  findLikePermisoIng  " + e.getMessage());
+            System.out.println("Error en lsa consulta permiso  findLikePermisoIng  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -123,47 +125,47 @@ public class ServicioInspeccion {
         return listaClientes;
     }
 
-    public Inspeccion findByPerSigla(String perSigla) {
+    public Permiso findByPerSigla(String perSigla) {
 
-        List<Inspeccion> listaClientes = new ArrayList<Inspeccion>();
-        Inspeccion inspeccionObtenido = new Inspeccion();
+        List<Permiso> listaClientes = new ArrayList<Permiso>();
+        Permiso permisoObtenido = new Permiso();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.opcSigla =:perSigla");
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.opcSigla =:perSigla");
             query.setParameter("perSigla", perSigla);
-            listaClientes = (List<Inspeccion>) query.getResultList();
+            listaClientes = (List<Permiso>) query.getResultList();
             if (listaClientes.size() > 0) {
-                for (Inspeccion inspeccion : listaClientes) {
-                    inspeccionObtenido = inspeccion;
+                for (Permiso permiso : listaClientes) {
+                    permisoObtenido = permiso;
                 }
             } else {
-                inspeccionObtenido = null;
+                permisoObtenido = null;
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta inspeccion  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
 
-        return inspeccionObtenido;
+        return permisoObtenido;
     }
 
-    public Inspeccion findUltimoPermiso() {
+    public Permiso findUltimoPermiso() {
 
-        Inspeccion retorno = null;
+        Permiso retorno = null;
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u ORDER BY u.solpNumeracion desc");
+            Query query = em.createQuery("SELECT u FROM Permiso u ORDER BY u.solpNumeracion desc");
             query.setMaxResults(1);
 
-            List<Inspeccion> lista = (List<Inspeccion>) query.getResultList();
+            List<Permiso> lista = (List<Permiso>) query.getResultList();
             if (lista.isEmpty()) {
                 return null;
             } else {
@@ -171,7 +173,7 @@ public class ServicioInspeccion {
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta inspeccion  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -179,27 +181,31 @@ public class ServicioInspeccion {
         return retorno;
     }
 
-    public List<Inspeccion> findLikeDescripcionRev(String valor, String buscar) {
+    public Permiso findLikeRuc(String valor) {
 
-        List<Inspeccion> listaClientes = new ArrayList<Inspeccion>();
+        List<Permiso> listaClientes = new ArrayList<Permiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.insObservacion LIKE :insObservacion AND u.idSolcitudPer.idEstadoDocumento.estSigla =:estSigla ORDER BY u.idInspeccion ASC");
-            query.setParameter("insObservacion", "%" + buscar + "%");
-            query.setParameter("estSigla", valor);
-            listaClientes = (List<Inspeccion>) query.getResultList();
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.solNumCedula =:solNumCedula ORDER BY u.idSolcitudPer DESC");
+            query.setParameter("solNumCedula", valor);
 
+            listaClientes = (List<Permiso>) query.getResultList();
             em.getTransaction().commit();
+            if (!listaClientes.isEmpty()) {
+                return listaClientes.get(0);
+            } else {
+                return null;
+            }
+
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta inspeccion  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
-
-        return listaClientes;
+        return null;
     }
 
 }

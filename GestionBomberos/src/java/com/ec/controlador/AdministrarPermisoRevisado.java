@@ -5,6 +5,7 @@
 package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
+import com.ec.entidad.Inspeccion;
 import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
@@ -28,7 +29,9 @@ public class AdministrarPermisoRevisado {
     /*PERMISOS INGRESADOS*/
     ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
+    ServicioInspeccion servicioInspeccion = new ServicioInspeccion();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
+    private List<Inspeccion> listaInspeccion = new ArrayList<Inspeccion>();
     private String buscarRev = "REV";
     private String buscar = "";
 
@@ -38,7 +41,8 @@ public class AdministrarPermisoRevisado {
     }
 
     private void consultarPermisosRev() {
-        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarRev, buscar);
+//        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarRev, buscar);
+        listaInspeccion = servicioInspeccion.findLikeDescripcionRev(buscarRev, buscar);
     }
 
     /*Perfil*/
@@ -63,14 +67,15 @@ public class AdministrarPermisoRevisado {
     }
 
     @Command
-    @NotifyChange("listaSolicitudPermisos")
-    public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Enviar a entrega de permiso?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("PORENTR");
-            valor.setIdEstadoDocumento(estadoDocumento);
-            servicioPermiso.modificar(valor);
-            consultarPermisosRev();
-        }
+    @NotifyChange("listaInspeccion")
+    public void cambiarEstado(@BindingParam("valor") Inspeccion valor) {
+        final HashMap<String, Inspeccion> map = new HashMap<String, Inspeccion>();
+        map.put("valor", valor);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/observacionpermiso.zul", null, map);
+        window.doModal();
+        consultarPermisosRev();
+
     }
 
     @Command
@@ -90,7 +95,7 @@ public class AdministrarPermisoRevisado {
         final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-        "/nuevo/cargarArchivos.zul", null, map);
+                "/nuevo/cargarArchivos.zul", null, map);
         window.doModal();
         consultarPermisosRev();
     }
@@ -101,6 +106,30 @@ public class AdministrarPermisoRevisado {
 
     public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
+    }
+
+    public List<Inspeccion> getListaInspeccion() {
+        return listaInspeccion;
+    }
+
+    public void setListaInspeccion(List<Inspeccion> listaInspeccion) {
+        this.listaInspeccion = listaInspeccion;
+    }
+
+    public String getBuscarRev() {
+        return buscarRev;
+    }
+
+    public void setBuscarRev(String buscarRev) {
+        this.buscarRev = buscarRev;
+    }
+
+    public String getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(String buscar) {
+        this.buscar = buscar;
     }
 
 }
