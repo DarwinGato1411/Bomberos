@@ -149,8 +149,56 @@
                               value="@bind(vm.entidadSelected.solpTetefonoProyecto)" 
                               class="form-control" />
                 </div>
-              
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Capacidad
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehCapacidad)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Placas
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehPlaca)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Modelo
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehModelo)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Marca
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehMarca)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Color
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehColor)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
+                    <label value="(*)" style="color:red;font-weight:bold"/>Fecha caduca
+                    <datebox compact="true"  value="@bind(vm.entidadSelectedvehiculo.vehFechaCaduca)" 
+                             readonly="true" style="font-weight:bold;" 
+                             buttonVisible="true" 
+                             lenient="true" format="dd/MM/yyyy" 
+                             constraint="no empty: Ingrese la fecha "/>
 
+                </div>
+              
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.telefono} 
                 

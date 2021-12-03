@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="permiso" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboCobro" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -97,80 +97,110 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 		<band height="381" splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="84" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="144" y="0" width="411" height="40" forecolor="#CC0000"/>
+				<reportElement positionType="Float" x="105" y="0" width="310" height="21" forecolor="#000099"/>
 				<textElement textAlignment="Center">
-					<font size="30" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CUERPO DE BOMBEROS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="144" y="40" width="411" height="39" forecolor="#CC0000"/>
+				<reportElement positionType="Float" x="105" y="21" width="310" height="20" forecolor="#000099"/>
 				<textElement textAlignment="Center">
-					<font size="20" isBold="false"/>
+					<font size="14" isBold="false"/>
 				</textElement>
-				<text><![CDATA[DE PEDRO VICENTE MALDONADO]]></text>
+				<text><![CDATA[GADC DE PEDRO VICENTE MALDONADO]]></text>
 			</staticText>
 			<image onErrorType="Blank">
-				<reportElement x="22" y="11" width="100" height="50"/>
+				<reportElement x="22" y="11" width="48" height="61"/>
 				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="40" splitType="Stretch">
-			<rectangle radius="10">
-				<reportElement x="176" y="0" width="298" height="37" forecolor="#000066"/>
-			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="176" y="0" width="290" height="11" forecolor="#000066"/>
+				<reportElement positionType="Float" x="105" y="41" width="310" height="10" forecolor="#000066"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="false"/>
+					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RUC: 1768077250001]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="105" y="51" width="310" height="11" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Creado el 29 de Noviembre de 1999 - Acuerdo Ministerial 00320]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="176" y="11" width="298" height="24" forecolor="#000099"/>
+				<reportElement positionType="Float" x="105" y="72" width="310" height="12" forecolor="#000099"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="false"/>
+					<font size="6" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Direccion: By Pass 1 y margen derecho frente al Colegio Vicente Anda Aguirre]]></text>
+				<text><![CDATA[Direccion: By Pass 1 y margen derecho - Telfs: 2392-363 // 2392-519]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="189" y="22" width="138" height="15" forecolor="#000099"/>
+				<reportElement positionType="Float" x="105" y="62" width="310" height="10" forecolor="#000066"/>
 				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
+					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[EMERGENCIAS: 2392363]]></text>
+				<text><![CDATA[ORDENANZA MUNICIPAL N| 019-2015]]></text>
+			</staticText>
+			<rectangle radius="0">
+				<reportElement x="415" y="0" width="140" height="62" forecolor="#000066"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="415" y="0" width="140" height="21" forecolor="#003399" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE COBRO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="327" y="22" width="147" height="18" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="11" isBold="false" isItalic="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[-     RUC: 1768077250001]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="474" y="0" width="81" height="37" forecolor="#CC0000"/>
+				<reportElement positionType="Float" x="415" y="24" width="140" height="27" forecolor="#CC0000"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[0000746]]></text>
 			</staticText>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="415" y="12" width="140" height="28" forecolor="#000066"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="377" y="12" width="38" height="17" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[POR $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="22" y="2" width="107" height="26" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Pedro V. Maldonado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="129" y="12" width="172" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="3" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="58" splitType="Stretch">
+		<band height="87" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="0" y="0" width="47" height="19" forecolor="#000099"/>
+				<reportElement positionType="Float" x="0" y="0" width="105" height="19" forecolor="#000099"/>
 				<textElement>
 					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[El Sr. (a)]]></text>
+				<text><![CDATA[Recibo del  Sr. (es)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="38" width="57" height="16" forecolor="#000099"/>
@@ -194,7 +224,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_negocio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="47" y="0" width="508" height="18"/>
+				<reportElement x="105" y="0" width="450" height="18"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
 			</textField>
@@ -203,88 +233,51 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_descripcion}+" / "+$F{rec_descripcion}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="54" width="80" height="16" forecolor="#000099"/>
+				<textElement>
+					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[La cantidad de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="70" width="90" height="16" forecolor="#000099"/>
+				<textElement>
+					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Por concepto de]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="48" splitType="Stretch">
+		<band height="58" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" x="0" y="0" width="555" height="16" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="10" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[HABIENDO CUMPLIDO CON LOS REQUISITOS EXIGIDOS POR EL DEPARTAMENTO DE PREVENCIÓN CONTRA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="16" width="555" height="16" forecolor="#000099"/>
+				<reportElement positionType="Float" x="10" y="31" width="271" height="19" forecolor="#000099"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[INCENDIOS, SEGÚN INFORME DEINSPECCIÓN N°................]]></text>
+				<text><![CDATA[RECAUDACIÓN]]></text>
 			</staticText>
+			<line>
+				<reportElement x="57" y="30" width="172" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<rectangle radius="0">
+				<reportElement x="328" y="1" width="227" height="51" forecolor="#000066"/>
+			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="32" width="555" height="16" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				<reportElement positionType="Float" x="328" y="1" width="227" height="51" forecolor="#000066"/>
+				<textElement textAlignment="Justified">
+					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[SE LE OTORGA EL RESPECTIVO]]></text>
+				<text><![CDATA[Art. 35 (Facultades especiales de los primeros jefes de cuerpos de bomberos). Facultades a los primeros jefes de los cuerpos de bomberos conceder permisos anuales y ocasionales cobrar las tasas de servicios, ordenar clausuras de locales y adoptar todas las medidas necesarias para prevenir flagelos. Dentro de su respectiva jurisdicción conforme a los previsto en el Reglamento General de esta Ley. ETC]]></text>
 			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="115" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="0" y="0" width="555" height="28" forecolor="#CC0000"/>
-				<textElement textAlignment="Center">
-					<font size="22" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[PERMISO DE FUNCIONAMIENTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="28" width="105" height="16" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[VALIDO HASTA EL ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="55" width="555" height="19" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Pedro Vicente Maldonado, a]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="88" width="271" height="19" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Tesorería]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="271" y="87" width="284" height="19" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Recaudación]]></text>
-			</staticText>
-			<line>
-				<reportElement x="47" y="87" width="172" height="1" forecolor="#000099"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="327" y="86" width="172" height="1" forecolor="#000099"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-				<reportElement x="105" y="28" width="166" height="16"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="5" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band height="6" splitType="Stretch"/>

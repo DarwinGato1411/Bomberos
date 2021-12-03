@@ -67,7 +67,6 @@ public class AdministrarPermisoEntrega {
 //        window.doModal();
 //        consultarPermisosIng();
 //    }
-
 //    @Command
 //    @NotifyChange("listaSolicitudPermisos")
 //    public void modificarPermiso(@BindingParam("valor") SolicitudPermiso valor) {
@@ -122,19 +121,17 @@ public class AdministrarPermisoEntrega {
     public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("numeracion", valor.getSolpNumeracion());
-        parametros.put("tipoDocumento", valor.getIdTipoSolicitud());
-        
+
         try {
-            if (valor.getIdTipoSolicitud().getTipsSigla().equals("PF")) {
-                String nombreReporte = "permiso.jasper";
-                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
-            }else if(valor.getIdTipoSolicitud().getTipsSigla().equals("CC")){
+            if (valor.getIdTipoSolicitud().getTipsSigla().equals("CC")) {
                 String nombreReporteConstruccion = "certificadoConstruccion.jasper";
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteConstruccion);
-            }
-            else if(valor.getIdTipoSolicitud().getTipsSigla().equals("VA")){
+            } else if (valor.getIdTipoSolicitud().getTipsSigla().equals("VA")) {
                 String nombreReporteVehiculo = "certificadoVehiculo.jasper";
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteVehiculo);
+            } else {
+                String nombreReporte = "permiso.jasper";
+                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
             }
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);

@@ -3,9 +3,16 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="numeracion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[select * from parametrizar pa, solicitud_permiso sp
-where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
+		<![CDATA[select pa.*,sp.*
+, (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
+(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion
+from parametrizar pa,
+ solicitud_permiso sp, parroquia pr, recinto rc
+where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracion} limit 1;]]>
 	</queryString>
 	<field name="cod_parametrizar" class="java.lang.Integer"/>
 	<field name="par_contacto_empresa" class="java.lang.String"/>
@@ -69,9 +76,23 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 	<field name="solp_num_calle" class="java.lang.String"/>
 	<field name="solp_nota" class="java.lang.String"/>
 	<field name="solp_fecha_reinspeccion" class="java.sql.Timestamp"/>
-	<field name="id_recinto" class="java.lang.Integer"/>
 	<field name="id_tipo_solicitud" class="java.lang.Integer"/>
+	<field name="id_recinto" class="java.lang.Integer"/>
 	<field name="id_parametrizar" class="java.lang.Integer"/>
+	<field name="solp_esinspeccion" class="java.lang.Boolean"/>
+	<field name="solp_esplanos" class="java.lang.Boolean"/>
+	<field name="solp_esotro" class="java.lang.Boolean"/>
+	<field name="solp_nombre_local" class="java.lang.String"/>
+	<field name="solp_telefono_inspeccion" class="java.lang.String"/>
+	<field name="solp_proyecto" class="java.lang.String"/>
+	<field name="solp_telefono_proyecto" class="java.lang.String"/>
+	<field name="solp_otro" class="java.lang.String"/>
+	<field name="solp_numeracion" class="java.lang.Integer"/>
+	<field name="id_tarifa" class="java.lang.Integer"/>
+	<field name="id_bombero" class="java.lang.Integer"/>
+	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
+	<field name="par_descripcion" class="java.lang.String"/>
+	<field name="rec_descripcion" class="java.lang.String"/>
 	<background>
 		<band height="381" splitType="Stretch"/>
 	</background>
@@ -149,25 +170,25 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 	<columnHeader>
 		<band height="139" splitType="Stretch">
 			<line>
-				<reportElement x="119" y="23" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="30" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="119" y="45" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="56" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="119" y="91" width="420" height="1" forecolor="#000000"/>
+				<reportElement x="120" y="99" width="420" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="61" y="68" width="478" height="1" forecolor="#000000"/>
+				<reportElement x="62" y="76" width="478" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -180,7 +201,7 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 				<text><![CDATA[Teléfono]]></text>
 			</staticText>
 			<line>
-				<reportElement x="51" y="114" width="227" height="1" forecolor="#000000"/>
+				<reportElement x="51" y="122" width="227" height="1" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -213,6 +234,21 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 				</textElement>
 				<text><![CDATA[Tipo de Construcción]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="120" y="34" width="434" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="60" width="243" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_barrio_urbanizacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="51" y="99" width="248" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_telefono}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
@@ -267,6 +303,11 @@ where pa.cod_parametrizar=sp.id_parametrizar limit 1]]>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<textField pattern="yyyy">
+				<reportElement x="459" y="30" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>

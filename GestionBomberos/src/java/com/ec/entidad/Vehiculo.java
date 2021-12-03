@@ -57,6 +57,12 @@ public class Vehiculo implements Serializable {
     private String vehColor;
     @Column(name = "veh_modelo")
     private String vehModelo;
+    @Column(name = "veh_capacidad")
+    private String vehCapacidad;
+    @Column(name = "veh_marca")
+    private String vehMarca;
+    @Column(name = "veh_fecha_caduca")
+    private String vehFechaCaduca;
     @OneToMany(mappedBy = "idVehiculo")
     private Collection<SalidaVehiculo> salidaVehiculoCollection;
     @OneToMany(mappedBy = "idVehiculo")
@@ -148,6 +154,31 @@ public class Vehiculo implements Serializable {
         this.vehModelo = vehModelo;
     }
 
+    public String getVehCapacidad() {
+        return vehCapacidad;
+    }
+
+    public void setVehCapacidad(String vehCapacidad) {
+        this.vehCapacidad = vehCapacidad;
+    }
+
+    public String getVehMarca() {
+        return vehMarca;
+    }
+
+    public void setVehMarca(String vehMarca) {
+        this.vehMarca = vehMarca;
+    }
+
+    public String getVehFechaCaduca() {
+        return vehFechaCaduca;
+    }
+
+    public void setVehFechaCaduca(String vehFechaCaduca) {
+        this.vehFechaCaduca = vehFechaCaduca;
+    }
+    
+    
     @XmlTransient
     public Collection<SalidaVehiculo> getSalidaVehiculoCollection() {
         return salidaVehiculoCollection;
