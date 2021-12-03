@@ -11,8 +11,9 @@ import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioRecinto;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,7 +40,7 @@ import org.zkoss.zul.Messagebox;
 public class AdministrarPermiso {
 
     /*PERMISOS INGRESADOS*/
-    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarIng = "ING";

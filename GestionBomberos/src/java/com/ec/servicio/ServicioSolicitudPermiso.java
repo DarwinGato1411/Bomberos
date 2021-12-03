@@ -14,7 +14,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioPermiso {
+public class ServicioSolicitudPermiso {
 
     private EntityManager em;
 

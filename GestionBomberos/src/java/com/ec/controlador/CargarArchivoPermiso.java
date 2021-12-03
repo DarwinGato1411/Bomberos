@@ -16,7 +16,7 @@ import com.ec.servicio.ServicioArchivoAdjunto;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,7 +54,7 @@ public class CargarArchivoPermiso {
 
     @Wire
     Window wCargaArchivos;
-    ServicioPermiso servicio = new ServicioPermiso();
+    ServicioInspeccion servicio = new ServicioInspeccion();
     ServicioArchivoAdjunto servicioArchivoAdjunto = new ServicioArchivoAdjunto();
     private List<DocumentosAdjunto> listadoAdjuntos = new ArrayList<DocumentosAdjunto>();
     private DocumentosAdjunto adjunto = new DocumentosAdjunto();

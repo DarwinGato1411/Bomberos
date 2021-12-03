@@ -8,7 +8,8 @@ import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ import org.zkoss.zul.Messagebox;
 public class AdministrarPermisoRevisado {
 
     /*PERMISOS INGRESADOS*/
-    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarRev = "REV";

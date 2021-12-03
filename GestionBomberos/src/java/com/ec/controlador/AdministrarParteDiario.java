@@ -7,7 +7,8 @@ package com.ec.controlador;
 import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.List;
 import org.zkoss.bind.annotation.BindingParam;
@@ -24,7 +25,7 @@ public class AdministrarParteDiario {
    
 
     /*PERMISOS INGRESADOS*/
-     ServicioPermiso servicioPermiso = new ServicioPermiso();
+     ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
      ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarEntr = "ENTR";
