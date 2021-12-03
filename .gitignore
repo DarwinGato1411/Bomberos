@@ -29,6 +29,7 @@ hs_err_pid*
 **/nbproject/Package-*.bash
 core
 nbproject/**
+nbproject/private/*  
 nbproject/project.properties
 nbproject/project.xml
 build/
