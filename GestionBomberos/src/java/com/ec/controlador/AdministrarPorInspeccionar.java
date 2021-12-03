@@ -5,11 +5,13 @@
 package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
+import com.ec.entidad.Inspeccion;
 import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioPermiso;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.zkoss.bind.annotation.BindingParam;
@@ -27,6 +29,7 @@ public class AdministrarPorInspeccionar {
     /*PERMISOS INGRESADOS*/
     ServicioPermiso servicioPermiso = new ServicioPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
+    private Inspeccion entidadInspeccion = new Inspeccion();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarPorinspec = "INSPEC";
     private String buscar = "";
@@ -63,13 +66,21 @@ public class AdministrarPorInspeccionar {
 
     @Command
     @NotifyChange("listaSolicitudPermisos")
+    public void observacionpre(@BindingParam("valor") SolicitudPermiso valor) {
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/observacionprevencion.zul", null, null);
+        window.doModal();
+        consultarPermisosPorInspec();
+    }
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Aprobar documento?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
-            valor.setIdEstadoDocumento(estadoDocumento);
-            servicioPermiso.modificar(valor);
-            consultarPermisosPorInspec();
-        }
+            entidadInspeccion.setInsFecha(new Date());
+            entidadInspeccion.setInsObservacion("");
+//            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
+//            valor.setIdEstadoDocumento(estadoDocumento);
+//            servicioPermiso.modificar(valor);
+//            consultarPermisosPorInspec();
     }
     @Command
     @NotifyChange("listaSolicitudPermisos")
@@ -112,4 +123,11 @@ public class AdministrarPorInspeccionar {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
     }
 
+    public Inspeccion getEntidadInspeccion() {
+        return entidadInspeccion;
+    }
+
+    public void setEntidadInspeccion(Inspeccion entidadInspeccion) {
+        this.entidadInspeccion = entidadInspeccion;
+    }
 }
