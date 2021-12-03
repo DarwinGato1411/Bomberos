@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -718,4 +719,15 @@ public class ArchivoUtils {
         return numeroFacturaText;
     }
 
+    public static Date finDeAno(Date fecha) {
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(calendar.get(Calendar.YEAR)+1, 12, 31);
+
+      //  calendar.add(Calendar.DAY_OF_YEAR, dias);
+
+        return calendar.getTime();
+
+    }
 }

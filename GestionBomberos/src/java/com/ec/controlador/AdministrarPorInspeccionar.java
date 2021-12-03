@@ -6,10 +6,10 @@ package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Inspeccion;
-import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import org.zkoss.zul.Messagebox;
 public class AdministrarPorInspeccionar {
 
     /*PERMISOS INGRESADOS*/
-    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private Inspeccion entidadInspeccion = new Inspeccion();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
@@ -67,8 +67,10 @@ public class AdministrarPorInspeccionar {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void observacionpre(@BindingParam("valor") SolicitudPermiso valor) {
+        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+        map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                "/nuevo/observacionprevencion.zul", null, null);
+                "/nuevo/observacionprevencion.zul", null, map);
         window.doModal();
         consultarPermisosPorInspec();
     }

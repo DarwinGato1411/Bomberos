@@ -11,7 +11,6 @@ import com.ec.entidad.Recinto;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.entidad.Tarifa;
 import com.ec.entidad.TipoSolicitud;
-import com.ec.entidad.TipoTarifa;
 import com.ec.entidad.Vehiculo;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
@@ -19,11 +18,11 @@ import com.ec.servicio.ServicioBombero;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioRecinto;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.servicio.ServicioTarifa;
 import com.ec.servicio.ServicioTipoSolicitud;
-import com.ec.servicio.ServicioTipoTarifa;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,7 +53,6 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
@@ -69,7 +67,7 @@ public class NuevoPermiso {
     Window wOpcion;
     @Wire
     Combobox idTipoSolCmb;
-    ServicioPermiso servicio = new ServicioPermiso();
+    ServicioSolicitudPermiso servicio = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
     private Vehiculo entidadSelectedvehiculo = new Vehiculo();
@@ -101,7 +99,7 @@ public class NuevoPermiso {
     private Boolean activaVehiculo = Boolean.FALSE;
 
     private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
-    private Tarifa tarifaSelected = new Tarifa();
+    private Tarifa tarifaSelected =null;
     ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
 
     private List<Bombero> listBomberos = new ArrayList<Bombero>();
@@ -115,7 +113,7 @@ public class NuevoPermiso {
             try {
                 tipoAccion = "update";
                 entidadSelected = valor;
-                parroquiaSelected = valor.getIdParroquia()!=null?valor.getIdParroquia():null;
+                parroquiaSelected = valor.getIdParroquia() != null ? valor.getIdParroquia() : null;
                 tarifaSelected = entidadSelected.getIdTarifa() != null ? entidadSelected.getIdTarifa() : null;
                 tipoSoliSelected = entidadSelected.getIdTipoSolicitud() != null ? entidadSelected.getIdTipoSolicitud() : null;
                 bomberoSelected = entidadSelected.getIdBombero() != null ? entidadSelected.getIdBombero() : null;
@@ -129,8 +127,12 @@ public class NuevoPermiso {
         } else {
             tipoAccion = "new";
             entidadSelected = new SolicitudPermiso();
-            entidadSelected.setSolpFechaReinspeccion(new Date());
+
+            Date finAno = new Date();
+            finAno.setMonth(11);
+            finAno.setDate(31);
             entidadSelected.setSolpFecha(new Date());
+            entidadSelected.setSolpFechaReinspeccion(finAno);
             entidadSelected.setSolpBarrioUrbanizacion("PEDRO VICENTE MALDONADO");
 
         }
@@ -214,6 +216,28 @@ public class NuevoPermiso {
     }
 
     @Command
+    @NotifyChange({"entidadSelected", "parroquiaSelected", "recintoSelected"})
+    public void buscarInpeccion() {
+        SolicitudPermiso recuperada = servicio.findLikeRuc(entidadSelected.getSolNumCedula());
+        if (recuperada != null) {
+            entidadSelected.setSolpNombreSol(recuperada.getSolpNombreSol());
+            entidadSelected.setSolpNombreNegocio(recuperada.getSolpNombreNegocio());
+            entidadSelected.setSolpTelefono(recuperada.getSolpTelefono());
+            entidadSelected.setSolpActividad(recuperada.getSolpActividad());
+            entidadSelected.setSolpBarrioUrbanizacion(recuperada.getSolpBarrioUrbanizacion());
+            entidadSelected.setSolpCalle(recuperada.getSolpCalle());
+            entidadSelected.setSolpNumCalle(recuperada.getSolpNumCalle());
+            entidadSelected.setSolpLote(recuperada.getSolpLote());
+            entidadSelected.setSolpInterseccion(recuperada.getSolpInterseccion());
+//            entidadSelected.setIdParroquia(); 
+//            entidadSelected.setIdRecinto(); 
+            entidadSelected.setIdParroquia(recuperada.getIdParroquia());
+            parroquiaSelected = recuperada.getIdParroquia();
+            recintoSelected = recuperada.getIdRecinto();
+        }
+    }
+
+    @Command
     @NotifyChange("entidadSelected")
     public void guardar() {
         if (entidadSelected != null && entidadSelected.getSolNumCedula() != null
@@ -225,11 +249,11 @@ public class NuevoPermiso {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
                 return;
             }
-            if (tarifaSelected == null) {
-                Clients.showNotification("Seleccione una tarifa... ",
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
-                return;
-            }
+//            if (tarifaSelected == null) {
+//                Clients.showNotification("Seleccione una tarifa... ",
+//                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+//                return;
+//            }
             if (bomberoSelected == null) {
                 Clients.showNotification("Seleccione una agente de inspeccion... ",
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
@@ -254,7 +278,10 @@ public class NuevoPermiso {
             }
 
 //                   entidadSelected.setSolpFecha(new Date());
-            entidadSelected.setIdTarifa(tarifaSelected);
+            if (tarifaSelected != null) {
+                entidadSelected.setIdTarifa(tarifaSelected);
+            }
+
             entidadSelected.setIdBombero(bomberoSelected);
             entidadSelected.setSolpNombreLocal(entidadSelected.getSolpNombreNegocio());
             entidadSelected.setSolpTelefonoInspeccion(entidadSelected.getSolpTelefonoContacto() != null ? entidadSelected.getSolpTelefonoContacto() : "");
@@ -323,7 +350,7 @@ public class NuevoPermiso {
     public void setEntidadSelectedvehiculo(Vehiculo entidadSelectedvehiculo) {
         this.entidadSelectedvehiculo = entidadSelectedvehiculo;
     }
-    
+
     public String getTipoAccion() {
         return tipoAccion;
     }
@@ -460,7 +487,7 @@ public class NuevoPermiso {
     public void setActivaVehiculo(Boolean activaVehiculo) {
         this.activaVehiculo = activaVehiculo;
     }
-    
+
     public List<Tarifa> getListTarifa() {
         return listTarifa;
     }

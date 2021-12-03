@@ -6,7 +6,8 @@
 package com.ec.controlador;
 
 import com.ec.entidad.SolicitudPermiso;
-import com.ec.servicio.ServicioPermiso;
+import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.List;
 import org.zkoss.bind.annotation.Command;
@@ -21,7 +22,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 public class MenuAdministrador extends SelectorComposer<Component> {
     
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
-    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
     private String buscar = "";
     
     private void consultar() {

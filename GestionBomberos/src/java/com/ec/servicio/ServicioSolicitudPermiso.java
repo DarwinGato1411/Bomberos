@@ -4,7 +4,7 @@
  */
 package com.ec.servicio;
 
-import com.ec.entidad.Permiso;
+import com.ec.entidad.SolicitudPermiso;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioPermiso {
+public class ServicioSolicitudPermiso {
 
     private EntityManager em;
 
@@ -26,15 +26,15 @@ public class ServicioPermiso {
         this.em = em;
     }
 
-    public void crear(Permiso permiso) {
+    public void crear(SolicitudPermiso solicitudPermiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.persist(permiso);
+            em.persist(solicitudPermiso);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar permiso " + e.getMessage());
+            System.out.println("Error en insertar solicitudPermiso " + e.getMessage());
             e.printStackTrace();
         } finally {
             em.close();
@@ -42,54 +42,54 @@ public class ServicioPermiso {
 
     }
 
-    public void eliminar(Permiso permiso) {
+    public void eliminar(SolicitudPermiso solicitudPermiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.remove(em.merge(permiso));
+            em.remove(em.merge(solicitudPermiso));
             em.getTransaction().commit();
 
         } catch (Exception e) {
-            System.out.println("Error en eliminar  permiso " + e.getMessage());
+            System.out.println("Error en eliminar  solicitudPermiso " + e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public void modificar(Permiso permiso) {
+    public void modificar(SolicitudPermiso solicitudPermiso) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.merge(permiso);
+            em.merge(solicitudPermiso);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en modificar permiso " + e.getMessage());
+            System.out.println("Error en modificar solicitudPermiso " + e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public List<Permiso> findLikePermiso(String valor) {
+    public List<SolicitudPermiso> findLikePermiso(String valor) {
 
-        List<Permiso> listaClientes = new ArrayList<Permiso>();
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol OR u.solpApellidoSol LIKE :solpApellidoSol");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol OR u.solpApellidoSol LIKE :solpApellidoSol");
             query.setParameter("solNumCedula", "%" + valor + "%");
             query.setParameter("solpNombreSol", "%" + valor + "%");
             query.setParameter("solpApellidoSol", "%" + valor + "%");
-            listaClientes = (List<Permiso>) query.getResultList();
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
 
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -98,26 +98,26 @@ public class ServicioPermiso {
     }
 
     /*PERMISOS INGRESADOS*/
-    public List<Permiso> findLikePermisoForEstadoCedulaNombre(String valor, String buscar) {
+    public List<SolicitudPermiso> findLikePermisoForEstadoCedulaNombre(String valor, String buscar) {
 
-        List<Permiso> listaClientes = new ArrayList<Permiso>();
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");
             query.setParameter("estSigla", valor);
             query.setParameter("solNumCedula", "%" + buscar + "%");
             query.setParameter("solpNombreSol", "%" + buscar + "%");
-            listaClientes = (List<Permiso>) query.getResultList();
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
 
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta permiso  findLikePermisoIng  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePermisoIng  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -125,47 +125,47 @@ public class ServicioPermiso {
         return listaClientes;
     }
 
-    public Permiso findByPerSigla(String perSigla) {
+    public SolicitudPermiso findByPerSigla(String perSigla) {
 
-        List<Permiso> listaClientes = new ArrayList<Permiso>();
-        Permiso permisoObtenido = new Permiso();
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
+        SolicitudPermiso solicitudPermisoObtenido = new SolicitudPermiso();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.opcSigla =:perSigla");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.opcSigla =:perSigla");
             query.setParameter("perSigla", perSigla);
-            listaClientes = (List<Permiso>) query.getResultList();
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
             if (listaClientes.size() > 0) {
-                for (Permiso permiso : listaClientes) {
-                    permisoObtenido = permiso;
+                for (SolicitudPermiso solicitudPermiso : listaClientes) {
+                    solicitudPermisoObtenido = solicitudPermiso;
                 }
             } else {
-                permisoObtenido = null;
+                solicitudPermisoObtenido = null;
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
 
-        return permisoObtenido;
+        return solicitudPermisoObtenido;
     }
 
-    public Permiso findUltimoPermiso() {
+    public SolicitudPermiso findUltimoPermiso() {
 
-        Permiso retorno = null;
+        SolicitudPermiso retorno = null;
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u ORDER BY u.solpNumeracion desc");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u ORDER BY u.solpNumeracion desc");
             query.setMaxResults(1);
 
-            List<Permiso> lista = (List<Permiso>) query.getResultList();
+            List<SolicitudPermiso> lista = (List<SolicitudPermiso>) query.getResultList();
             if (lista.isEmpty()) {
                 return null;
             } else {
@@ -173,7 +173,7 @@ public class ServicioPermiso {
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -181,18 +181,18 @@ public class ServicioPermiso {
         return retorno;
     }
 
-    public Permiso findLikeRuc(String valor) {
+    public SolicitudPermiso findLikeRuc(String valor) {
 
-        List<Permiso> listaClientes = new ArrayList<Permiso>();
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.solNumCedula =:solNumCedula ORDER BY u.idSolcitudPer DESC");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula =:solNumCedula ORDER BY u.idSolcitudPer DESC");
             query.setParameter("solNumCedula", valor);
 
-            listaClientes = (List<Permiso>) query.getResultList();
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
             em.getTransaction().commit();
             if (!listaClientes.isEmpty()) {
                 return listaClientes.get(0);
@@ -201,7 +201,7 @@ public class ServicioPermiso {
             }
 
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta permiso  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikePerNombre  " + e.getMessage());
         } finally {
             em.close();
         }
