@@ -167,22 +167,6 @@
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Modelo
-                
-                    <textbox  maxlength="15" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelectedvehiculo.vehModelo)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Marca
-                
-                    <textbox  maxlength="15" 
-                              onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelectedvehiculo.vehMarca)" 
-                              class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
                     <label value="(*)" style="color:red;font-weight:bold"/>Color
                 
                     <textbox  maxlength="15" 
@@ -190,7 +174,23 @@
                               value="@bind(vm.entidadSelectedvehiculo.vehColor)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Marca
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehMarca)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Modelo
+                
+                    <textbox  maxlength="15" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="@bind(vm.entidadSelectedvehiculo.vehModelo)" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
                     <label value="(*)" style="color:red;font-weight:bold"/>Fecha caduca
                     <datebox compact="true"  value="@bind(vm.entidadSelectedvehiculo.vehFechaCaduca)" 
                              readonly="true" style="font-weight:bold;" 
@@ -200,7 +200,7 @@
 
                 </div>
               
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.telefono} 
                 
                     <textbox  maxlength="100" 
@@ -209,15 +209,15 @@
                               class="form-control" />
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
+<!--                <div class="col-12 col-sm-12 col-md-4 col-lg-4 form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.actividad} 
                 
                     <textbox  maxlength="100" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpActividad)" 
                               class="form-control" />
-                </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                </div>-->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.parroquia}
                 
                     <textbox  maxlength="100" 
