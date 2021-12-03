@@ -166,14 +166,14 @@
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Modelo
+                    <label value="(*)" style="color:red;font-weight:bold"/>Color
                 
                     <textbox  maxlength="15" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelectedvehiculo.vehModelo)" 
+                              value="@bind(vm.entidadSelectedvehiculo.vehColor)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "    visible="@bind(vm.activaVehiculo)"   >
                     <label value="(*)" style="color:red;font-weight:bold"/>Marca
                 
                     <textbox  maxlength="15" 
@@ -181,12 +181,12 @@
                               value="@bind(vm.entidadSelectedvehiculo.vehMarca)" 
                               class="form-control" />
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "    visible="@bind(vm.activaVehiculo)"   >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Color
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "    visible="@bind(vm.activaVehiculo)"   >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Modelo
                 
                     <textbox  maxlength="15" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
-                              value="@bind(vm.entidadSelectedvehiculo.vehColor)" 
+                              value="@bind(vm.entidadSelectedvehiculo.vehModelo)" 
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
