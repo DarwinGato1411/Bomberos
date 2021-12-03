@@ -30,11 +30,10 @@
                 <button id="buttonEntrar" style="height:50px;font-size:1em;color:white;"
                         class="btn btn-lg btn-primary btn-block" label="Ingresar">
                 </button>   
-                <button  id="btnSolicitarPermiso" style="height:50px;font-size:1em;color:white"
+<!--                <button  id="btnSolicitarPermiso" style="height:50px;font-size:1em;color:white"
                          class="btn btn-lg btn-success btn-block" label="Solicitar Inspeccion"
                          tooltiptext="${labels.app.permiso}">
-                </button>   
-
+                </button>   -->
             </div>
 
         </div>
