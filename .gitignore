@@ -24,13 +24,13 @@ hs_err_pid*
 /GestionBomberos/dist/
 /GestionBomberos/build/
 ### NetBeans ###
-**/nbproject/private/
+**/nbproject/private/**
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
 core
-nbproject/*
-!nbproject/project.properties
-!nbproject/project.xml
+nbproject/**
+nbproject/project.properties
+nbproject/project.xml
 build/
 nbbuild/
 dist/
