@@ -110,7 +110,7 @@
                                                      
                                 <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
                                            class="btn btn-primary btn-xs"
-                                           onClick="@command('anularSolicitud',valor=each.idTipoSolicitud)" 
+                                           onClick="@command('anularSolicitud',valor=each.idSolcitudPer)" 
                                            tooltiptext="Anular Solicitud"/> 
                                     
                             </listcell>                               

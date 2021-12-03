@@ -115,6 +115,7 @@
                                            tooltiptext="Parte diario"/> 
                                     
                             </listcell>
+<<<<<<< HEAD
 <!--                            <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
@@ -123,6 +124,8 @@
                                            tooltiptext="Parte diario"/> 
                                     
                             </listcell>                                -->
+=======
+>>>>>>> 687b483ed537cc8b21103b7569a56e0c85a90300
                         </listitem>
                     </template>   
                 </listbox>
