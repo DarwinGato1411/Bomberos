@@ -101,7 +101,7 @@
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ci} 
                 
-                    <textbox  maxlength="100" 
+                    <textbox  maxlength="13"
                               onOK="@command('buscarInpeccion')"
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solNumCedula)" 

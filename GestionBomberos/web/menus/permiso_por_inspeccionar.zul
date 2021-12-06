@@ -11,7 +11,7 @@
  
         <tabbox id="tboxPrincipal"  width="100%" >
             <tabs>
-                <tab label="Por Inspeccionar" sclass="menutabs" /> 
+                <tab label="Solicitudes por inspeccionar" sclass="menutabs" /> 
             </tabs>
         
             <tabpanels>

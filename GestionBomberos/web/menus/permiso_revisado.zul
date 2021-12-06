@@ -21,7 +21,7 @@
     
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
-            <tab label="Revisado" sclass="menutabs" /> 
+            <tab label="Revisar y adjuntar nuevos documentos (CI-Ruc)" sclass="menutabs" /> 
         </tabs>
         
         <tabpanels>

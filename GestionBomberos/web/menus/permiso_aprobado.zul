@@ -21,7 +21,7 @@
     
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
-                <tab label="Aprobados" sclass="menutabs" /> 
+                <tab label="Documentos aprobados por prevencion de incendios" sclass="menutabs" /> 
         </tabs>
         
         <tabpanels>

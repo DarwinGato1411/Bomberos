@@ -21,7 +21,7 @@
     
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
-                <tab label="Ingresados" sclass="menutabs" /> 
+                <tab label="Ingresar nueva solicitud" sclass="menutabs" /> 
         </tabs>
         
         <tabpanels>

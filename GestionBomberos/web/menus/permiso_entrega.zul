@@ -40,8 +40,8 @@
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
                         <!--<listheader label="Barrio"  align="left" hflex="6"></listheader>-->
-                        <listheader label="Agente"  align="left" hflex="6"></listheader>
-                        <listheader label="T. Solicitud"  align="left" hflex="7"></listheader>
+                        <listheader label="Agente"  align="left" hflex="7"></listheader>
+                        <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <!--<listheader label=""  align="left" width="33px"></listheader>-->
@@ -115,17 +115,6 @@
                                            tooltiptext="Parte diario"/> 
                                     
                             </listcell>
-<<<<<<< HEAD
-<!--                            <listcell zclass = "mycss-listcell">
-                                                     
-                                <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
-                                           class="btn btn-primary btn-xs"
-                                           onClick="@command('EstadoParteDiario',valor=each)" 
-                                           tooltiptext="Parte diario"/> 
-                                    
-                            </listcell>                                -->
-=======
->>>>>>> 687b483ed537cc8b21103b7569a56e0c85a90300
                         </listitem>
                     </template>   
                 </listbox>

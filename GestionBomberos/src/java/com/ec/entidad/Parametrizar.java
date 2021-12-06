@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Parametrizar.findByParNombreImpresora", query = "SELECT p FROM Parametrizar p WHERE p.parNombreImpresora = :parNombreImpresora")
     , @NamedQuery(name = "Parametrizar.findByParCiudad", query = "SELECT p FROM Parametrizar p WHERE p.parCiudad = :parCiudad")
     , @NamedQuery(name = "Parametrizar.findByParCorreoDefecto", query = "SELECT p FROM Parametrizar p WHERE p.parCorreoDefecto = :parCorreoDefecto")
-    , @NamedQuery(name = "Parametrizar.findByIsprincipal", query = "SELECT p FROM Parametrizar p WHERE p.isprincipal = :isprincipal")})
+    , @NamedQuery(name = "Parametrizar.findByIsprincipal", query = "SELECT p FROM Parametrizar p WHERE p.isprincipal = :isprincipal")
+    , @NamedQuery(name = "Parametrizar.findByIsprincipal", query = "SELECT p FROM Parametrizar p WHERE p.parFirmaUno = :parFirmaUno")})
 public class Parametrizar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -89,7 +90,6 @@ public class Parametrizar implements Serializable {
     private String parCiudad;
     @Column(name = "par_correo_defecto")
     private String parCorreoDefecto;
-
     @Column(name = "isprincipal")
     private Boolean isprincipal;
     @Column(name = "par_disco")
@@ -100,6 +100,15 @@ public class Parametrizar implements Serializable {
     private String parFolderAdicional;
     @Column(name = "par_path_logo")
     private String parPathLogo;
+    @Column(name = "par_firma_uno")
+    private String parFirmaUno;
+    @Column(name = "par_respon_firma_uno")
+    private String parResponFirmaUno;
+    @Column(name = "par_firma_dos")
+    private String parFirmaDos;
+    @Column(name = "par_respon_firma_dos")
+    private String parResponFirmaDos;
+    
    @OneToMany(mappedBy = "idParametrizar")
     private Collection<SolicitudPermiso> solicitudPermisoCollection;
     public Parametrizar() {
@@ -275,8 +284,40 @@ public class Parametrizar implements Serializable {
 
     public void setParPathLogo(String parPathLogo) {
         this.parPathLogo = parPathLogo;
+    }   
+
+    public String getParFirmaUno() {
+        return parFirmaUno;
     }
 
+    public void setParFirmaUno(String parFirmaUno) {
+        this.parFirmaUno = parFirmaUno;
+    }
+
+    public String getParResponFirmaUno() {
+        return parResponFirmaUno;
+    }
+
+    public void setParResponFirmaUno(String parResponFirmaUno) {
+        this.parResponFirmaUno = parResponFirmaUno;
+    }
+
+    public String getParFirmaDos() {
+        return parFirmaDos;
+    }
+
+    public void setParFirmaDos(String parFirmaDos) {
+        this.parFirmaDos = parFirmaDos;
+    }
+
+    public String getParResponFirmaDos() {
+        return parResponFirmaDos;
+    }
+
+    public void setParResponFirmaDos(String parResponFirmaDos) {
+        this.parResponFirmaDos = parResponFirmaDos;
+    }
+    
     public Collection<SolicitudPermiso> getSolicitudPermisoCollection() {
         return solicitudPermisoCollection;
     }

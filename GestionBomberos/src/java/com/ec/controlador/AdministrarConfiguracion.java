@@ -221,6 +221,65 @@ public class AdministrarConfiguracion {
     }
 
     @Command
+    @NotifyChange({"fileContent", "parametrizarselected"})
+    public void subirPathImagenFirmaUno() throws InterruptedException, IOException {
+
+        org.zkoss.util.media.Media media = Fileupload.get();
+        if (media instanceof org.zkoss.image.Image) {
+            String nombre = media.getName();
+            if (media instanceof org.zkoss.image.Image) {
+
+                System.out.println(" Valida ");
+                if (media.getByteData().length > 10 * 1024 * 1024) {
+                    Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
+                    System.out.println(" retorna ");
+                    return;
+                }
+                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                System.out.println(" filePathImg " + filePathImg);
+                File baseDir = new File(filePathImg);
+                if (!baseDir.exists()) {
+                    baseDir.mkdirs();
+                }
+                Files.copy(new File(filePathImg + media.getName()),
+                        media.getStreamData());
+                parametrizarselected.setParPathLogo(filePathImg);
+                servicioParametrizar.modificar(parametrizarselected);
+            }
+            System.out.println(" no es imagen ");
+        }
+    }
+    @Command
+    @NotifyChange({"fileContent", "parametrizarselected"})
+    public void subirPathImagenFirmaDos() throws InterruptedException, IOException {
+
+        org.zkoss.util.media.Media media = Fileupload.get();
+        if (media instanceof org.zkoss.image.Image) {
+            String nombre = media.getName();
+            if (media instanceof org.zkoss.image.Image) {
+
+                System.out.println(" Valida ");
+                if (media.getByteData().length > 10 * 1024 * 1024) {
+                    Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
+                    System.out.println(" retorna ");
+                    return;
+                }
+                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                System.out.println(" filePathImg " + filePathImg);
+                File baseDir = new File(filePathImg);
+                if (!baseDir.exists()) {
+                    baseDir.mkdirs();
+                }
+                Files.copy(new File(filePathImg + media.getName()),
+                        media.getStreamData());
+                parametrizarselected.setParPathLogo(filePathImg);
+                servicioParametrizar.modificar(parametrizarselected);
+            }
+            System.out.println(" no es imagen ");
+        }
+    }
+    
+    @Command
     @NotifyChange("parametrizarselected")
     public void guardar() {
         try {

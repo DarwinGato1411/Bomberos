@@ -166,9 +166,51 @@
                                     <image src="/imagenes/folder.png" 
                                            onClick="@command('subirPathImagen')"  
                                            tooltiptext="Subir logotipo de la empresa"
-                                           style="font-size:20px;font-weight:bold"/>Agregar imagen
+                                           style="font-size:20px;font-weight:bold"/>Agregar imagene Logo
                                 </div>
                             </div>
+<!--                            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion firma 1
+                                <div class="input-group "  >
+                                    <textbox value="@bind(vm.parametrizarselected.parFirmaUno)" 
+                                             placeholder="Firma"
+                                             class="form-control form-control-sm"
+                                             tooltiptext="Agregar imagen" />
+                                    <image src="/imagenes/folder.png" 
+                                           onClick="@command('subirPathImagenFirmaUno')"  
+                                           tooltiptext="Subir firma"
+                                           style="font-size:20px;font-weight:bold"/>Agregar firma 1
+                                </div>
+                            </div>-->
+<!--                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Nombre Responsable de la firma 1
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parResponFirmaUno)" 
+                                          class="form-control" />
+                            </div>-->
+<!--                            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion firma 2
+                                <div class="input-group "  >
+                                    <textbox value="@bind(vm.parametrizarselected.parFirmaDos)" 
+                                             placeholder="Logotipo de la empresa"
+                                             class="form-control form-control-sm"
+                                             tooltiptext="Agregar imagen" />
+                                    <image src="/imagenes/folder.png" 
+                                           onClick="@command('subirPathImagenFirmaDos')"  
+                                           tooltiptext="Subir firma"
+                                           style="font-size:20px;font-weight:bold"/>Agregar firma 2
+                                </div>
+                            </div>-->
+<!--                            <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                                <label value="(*)" style="color:red;font-weight:bold"/>Nombre Responsable de la firma 2
+                
+                                <textbox  maxlength="100" 
+                                          onChange="self.setValue(self.getValue().toUpperCase())"
+                                          value="@bind(vm.parametrizarselected.parResponFirmaUno)" 
+                                          class="form-control" />
+                            </div>-->
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
                     
                                 <button src="/iconos/guardar.png"  
