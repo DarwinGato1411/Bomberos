@@ -85,7 +85,7 @@ public class AdministrarPermiso {
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
         if (valor.getSolPathSolicitud() != null) {
-
+                
             if (Messagebox.show("Enviar a prevencion de incendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
                 EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
                 valor.setIdEstadoDocumento(estadoDocumento);
@@ -93,7 +93,7 @@ public class AdministrarPermiso {
                 consultarPermisosIng();
             }
         }else{
-         Clients.showNotification("Seleccione una agente de inspeccion... ",
+         Clients.showNotification("Para enviar a prevención de incendios debe adjuntar la solicitud",
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
     }

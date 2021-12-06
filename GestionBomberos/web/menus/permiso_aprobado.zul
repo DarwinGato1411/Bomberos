@@ -96,7 +96,7 @@
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
                                                        class="btn btn-primary btn-xs"
                                                        onClick="@command('cambiarEstado',valor=each)" 
-                                                       tooltiptext="Enviar a Revisión (Documentación)"/> 
+                                                       tooltiptext="Enviar a entrega de permisos"/> 
                                     
                             </listcell>
                             <listcell zclass = "mycss-listcell">

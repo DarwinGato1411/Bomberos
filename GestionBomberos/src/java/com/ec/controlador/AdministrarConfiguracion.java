@@ -205,7 +205,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                filePathImg = parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -235,7 +235,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                filePathImg = parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -243,12 +243,13 @@ public class AdministrarConfiguracion {
                 }
                 Files.copy(new File(filePathImg + media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParPathLogo(filePathImg);
+                parametrizarselected.setParFirmaUno(filePathImg);
                 servicioParametrizar.modificar(parametrizarselected);
             }
             System.out.println(" no es imagen ");
         }
     }
+
     @Command
     @NotifyChange({"fileContent", "parametrizarselected"})
     public void subirPathImagenFirmaDos() throws InterruptedException, IOException {
@@ -264,7 +265,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                filePathImg =parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -272,13 +273,13 @@ public class AdministrarConfiguracion {
                 }
                 Files.copy(new File(filePathImg + media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParPathLogo(filePathImg);
+                parametrizarselected.setParFirmaDos(filePathImg);
                 servicioParametrizar.modificar(parametrizarselected);
             }
             System.out.println(" no es imagen ");
         }
     }
-    
+
     @Command
     @NotifyChange("parametrizarselected")
     public void guardar() {

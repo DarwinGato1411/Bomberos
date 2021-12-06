@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantillamenu/plantilla.zul"?>
+<div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+     viewModel="@id('vm') @init('com.ec.controlador.AdministrarConsultas')" >
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="start"  >
+        <tabbox  width="100%"  tabscroll="true" >
+            <tabs >
+                
+                <tab label="${labels.app.consultar}" sclass="menutabs"/>                         
+            </tabs>
+            <tabpanels >
+                <tabpanel  height="auto"   >
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                <label  style="font-weight:bold;padding-left: 10px" 
+                                        value="Consultar:"  />
+                                <textbox   class="form-control form-control-sm"
+                                           style="font-size:10px;background-color:trasnsparent;
+                                                   font-weight:bold;height:25px"
+                                           onCtrlKey="" 
+                                           placeholder="Solicitud"
+                                           value="@bind(vm.buscarSolicitud)"
+                                           onOK="@command('buscarLikeSolicitudes')"                                                  
+                                           maxlength="13"  />
+                            </div>
+                           
+                            <listbox  width="99%"
+                                      model="@load(vm.lstsolicitudPermiso)" 
+                                      nonselectableTags="*" 
+                                      mold="paging" pageSize="20">
+                                                             
+                                <listhead sizable="false">
+                                    <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>
+                                    <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
+                                    <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
+                                    <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>                       
+                                    <listheader label="Agente"  align="left" hflex="6"></listheader>
+                                    <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <listheader label=""  align="left" width="33px"></listheader>
+                                    <!--<listheader label=""  align="left" width="33px"></listheader>-->
+                                </listhead>
+                   
+                
+                                <template name="model">
+                                    <listitem  >
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpNumero)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.solNumCedula)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.solpNombreSol)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell>                            
+                                        <listcell zclass = "mycss-listcell">                                          
+                                            <datebox compact="true" value="@bind(each.solpFecha)" 
+                                                     buttonVisible="false" lenient="true" readonly="true"
+                                                     format="medium" width="98%"  />
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell" >                                          
+                              
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" >                                          
+                              
+                                            <label sclass="letraLisbox" 
+                                                   value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                                   width="100%"/>
+                                        </listcell> 
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px; background: grey" 
+                                                    iconSclass="z-icon-print "                                
+                                                    class="btn btn-primary btn-xs"
+                                                    onClick="@command('verPermiso',valor=each)" 
+                                                    tooltiptext="Ver permiso"/> 
+                                    
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
+                                
+                                                    class="btn btn-primary btn-xs"
+                                                    onClick="@command('modificarPermiso',valor=each)" 
+                                                    tooltiptext="${labels.app.editar}"/> 
+                                    
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
+                                                    class="btn btn-primary btn-xs"
+                                                    onClick="@command('cambiarEstado',valor=each)" 
+                                                    tooltiptext="Enviar a Prevención de Incendios"/> 
+                                    
+                                        </listcell>  
+                                        <listcell zclass = "mycss-listcell">
+                                                     
+                                            <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
+                                                    class="btn btn-primary btn-xs"
+                                                    onClick="@command('anularSolicitud',valor=each)" 
+                                                    tooltiptext="Anular Solicitud"/> 
+                                    
+                                        </listcell>                                
+                                    </listitem>
+                                </template> 
+                       
+                            </listbox>
+                        </div>
+                        
+                    </div>                        
+                </tabpanel>
+               
+            </tabpanels>
+        </tabbox>
+    </div>
+</div>
+
+
+

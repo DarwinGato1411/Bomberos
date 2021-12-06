@@ -30,8 +30,10 @@ public class MenuOpciones extends SelectorComposer<Component> {
     Menuitem btnPerIngresados;
 //    @Wire("#btnPorRevisar")
 //    Menuitem btnPorRevisar;
-    @Wire("#btnPerRevisados")
-    Menuitem btnPerRevisados;
+//    @Wire("#btnPerRevisados")
+//    Menuitem btnPerRevisados;
+    @Wire("#btnConsultas")
+    Menuitem btnConsultas;
     @Wire("#btnPerAprobados")
     Menuitem btnPerAprobados;
     @Wire("#btnEntregaPermiso")
@@ -65,7 +67,8 @@ public class MenuOpciones extends SelectorComposer<Component> {
             if (credential.getUsuarioSistema().getUsuNivel() == 1) {
                 btnPerIngresados.setVisible(Boolean.TRUE);
 //                btnPorRevisar.setVisible(Boolean.TRUE);
-                btnPerRevisados.setVisible(Boolean.TRUE);
+//                btnPerRevisados.setVisible(Boolean.TRUE);
+                btnConsultas.setVisible(Boolean.TRUE);
                 btnPerAprobados.setVisible(Boolean.TRUE);
                 btnEntregaPermiso.setVisible(Boolean.TRUE);
                 btnParteDiario.setVisible(Boolean.TRUE);
@@ -78,7 +81,8 @@ public class MenuOpciones extends SelectorComposer<Component> {
 
                 btnPerIngresados.setVisible(Boolean.TRUE);
 //                btnPorRevisar.setVisible(Boolean.TRUE);
-                btnPerRevisados.setVisible(Boolean.TRUE);
+//                btnPerRevisados.setVisible(Boolean.TRUE);
+                btnConsultas.setVisible(Boolean.TRUE);
                 btnPerAprobados.setVisible(Boolean.TRUE);
                 btnEntregaPermiso.setVisible(Boolean.TRUE);
                 btnParteDiario.setVisible(Boolean.FALSE);
@@ -91,7 +95,8 @@ public class MenuOpciones extends SelectorComposer<Component> {
             } else if (credential.getUsuarioSistema().getUsuNivel() == 3) {
                 btnPerIngresados.setVisible(Boolean.FALSE);
 //                btnPorRevisar.setVisible(Boolean.FALSE);
-                btnPerRevisados.setVisible(Boolean.TRUE);
+//                btnPerRevisados.setVisible(Boolean.TRUE);
+                btnConsultas.setVisible(Boolean.FALSE);
                 btnPerAprobados.setVisible(Boolean.FALSE);
                 btnEntregaPermiso.setVisible(Boolean.FALSE);
                 btnParteDiario.setVisible(Boolean.TRUE);
@@ -103,7 +108,8 @@ public class MenuOpciones extends SelectorComposer<Component> {
             } else if (credential.getUsuarioSistema().getUsuNivel() == 4) {
                 btnPerIngresados.setVisible(Boolean.FALSE);
 //                btnPorRevisar.setVisible(Boolean.FALSE);
-                btnPerRevisados.setVisible(Boolean.FALSE);
+//                btnPerRevisados.setVisible(Boolean.FALSE);
+                btnConsultas.setVisible(Boolean.FALSE);
                 btnPerAprobados.setVisible(Boolean.FALSE);
                 btnEntregaPermiso.setVisible(Boolean.FALSE);
                 btnParteDiario.setVisible(Boolean.FALSE);
@@ -171,9 +177,13 @@ public class MenuOpciones extends SelectorComposer<Component> {
 //        Executions.sendRedirect("/menus/permiso_por_revisar.zul");
 //    }
 
-    @Listen("onClick = #btnPerRevisados")
+//    @Listen("onClick = #btnPerRevisados")
+//    public void btnPerRevisados() {
+//        Executions.sendRedirect("/menus/permiso_revisado.zul");
+//    }
+    @Listen("onClick = #btnConsultas")
     public void btnPerRevisados() {
-        Executions.sendRedirect("/menus/permiso_revisado.zul");
+        Executions.sendRedirect("/consulta/consultas.zul");
     }
 
     @Listen("onClick = #btnPerAprobados")

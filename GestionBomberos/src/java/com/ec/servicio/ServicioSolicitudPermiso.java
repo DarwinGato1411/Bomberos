@@ -207,5 +207,32 @@ public class ServicioSolicitudPermiso {
         }
         return null;
     }
+    public SolicitudPermiso FindLikeBuscarSolicitud(String valor) {
+
+        List<SolicitudPermiso> lstsolicitudPermiso = new ArrayList<SolicitudPermiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula LIKE :solNumCedula AND u.solpNombreSol LIKE :solpNombreSol AND u.solpNombreSol LIKE :solpNombreSol ");
+            query.setParameter("solNumCedula", valor);
+            query.setParameter("solpNombreSol", valor);
+
+            lstsolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
+            em.getTransaction().commit();
+            if (!lstsolicitudPermiso.isEmpty()) {
+                return lstsolicitudPermiso.get(0);
+            } else {
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta solicitudPermiso  FindLikeBuscarSolicitud  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        return null;
+    }
 
 }

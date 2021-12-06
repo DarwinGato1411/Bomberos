@@ -47,9 +47,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Parametrizar.findByParImpAutomatico", query = "SELECT p FROM Parametrizar p WHERE p.parImpAutomatico = :parImpAutomatico")
     , @NamedQuery(name = "Parametrizar.findByParNombreImpresora", query = "SELECT p FROM Parametrizar p WHERE p.parNombreImpresora = :parNombreImpresora")
     , @NamedQuery(name = "Parametrizar.findByParCiudad", query = "SELECT p FROM Parametrizar p WHERE p.parCiudad = :parCiudad")
-    , @NamedQuery(name = "Parametrizar.findByParCorreoDefecto", query = "SELECT p FROM Parametrizar p WHERE p.parCorreoDefecto = :parCorreoDefecto")
-    , @NamedQuery(name = "Parametrizar.findByIsprincipal", query = "SELECT p FROM Parametrizar p WHERE p.isprincipal = :isprincipal")
-    , @NamedQuery(name = "Parametrizar.findByIsprincipal", query = "SELECT p FROM Parametrizar p WHERE p.parFirmaUno = :parFirmaUno")})
+    , @NamedQuery(name = "Parametrizar.findByParCorreoDefecto", query = "SELECT p FROM Parametrizar p WHERE p.parCorreoDefecto = :parCorreoDefecto")})
 public class Parametrizar implements Serializable {
 
     private static final long serialVersionUID = 1L;
