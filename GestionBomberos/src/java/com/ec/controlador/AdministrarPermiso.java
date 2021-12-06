@@ -31,6 +31,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 /**
@@ -83,11 +84,17 @@ public class AdministrarPermiso {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Enviar a prevencion de incendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
-            valor.setIdEstadoDocumento(estadoDocumento);
-            servicioPermiso.modificar(valor);
-            consultarPermisosIng();
+        if (valor.getSolPathSolicitud() != null) {
+
+            if (Messagebox.show("Enviar a prevencion de incendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+                EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
+                valor.setIdEstadoDocumento(estadoDocumento);
+                servicioPermiso.modificar(valor);
+                consultarPermisosIng();
+            }
+        }else{
+         Clients.showNotification("Seleccione una agente de inspeccion... ",
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
     }
 
