@@ -6,13 +6,10 @@ package com.ec.controlador;
 
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
-import com.ec.entidad.Opciones;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
-import com.ec.entidad.TipoSolicitud;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
-import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;
@@ -134,6 +131,32 @@ public class AdministrarPermisoEntrega {
                 String nombreReporte = "permiso.jasper";
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
             }
+        } catch (JRException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Command
+    public void cobrar(@BindingParam("valor") SolicitudPermiso valor) {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("numeracion", valor.getSolpNumeracion());
+
+        try {
+            String nombreReporte = "reciboCobro.jasper";
+            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

@@ -78,7 +78,7 @@
                             </listcell>  -->
                             <listcell zclass = "mycss-listcell" >                                          
                               
-                                    <label sclass="letraLisbox" 
+                                <label sclass="letraLisbox" 
                                            value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
                                            width="100%"/>
                                 
@@ -86,27 +86,27 @@
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>  
                                                   
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: grey" iconSclass="z-icon-print"
-                                                     onClick="@command('verPermiso',valor=each)"
-                                                       class="btn btn-primary btn-xs"
-                                                       tooltiptext="Imprimir permiso"/> 
+                                           onClick="@command('verPermiso',valor=each)"
+                                           class="btn btn-primary btn-xs"
+                                           tooltiptext="Imprimir permiso"/> 
                                     
                             </listcell>  
-<!--                            <listcell zclass = "mycss-listcell">
+                            <listcell zclass = "mycss-listcell">
                                                      
-                                <button    style="width:30px;height:30px; background: orange" iconSclass="z-icon-cloud-upload"
+                                <button    style="width:30px;height:30px; background: orange" iconSclass="z-icon-print"
                                 
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('cargarArchivos',valor=each)" 
-                                                       tooltiptext="Cargar archivos"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('cobrar',valor=each)" 
+                                           tooltiptext="Cobrar e imprimir recibo"/> 
                                     
-                            </listcell>-->
+                            </listcell>
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
@@ -115,17 +115,6 @@
                                            tooltiptext="Parte diario"/> 
                                     
                             </listcell>
-<<<<<<< HEAD
-<!--                            <listcell zclass = "mycss-listcell">
-                                                     
-                                <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
-                                           class="btn btn-primary btn-xs"
-                                           onClick="@command('EstadoParteDiario',valor=each)" 
-                                           tooltiptext="Parte diario"/> 
-                                    
-                            </listcell>                                -->
-=======
->>>>>>> 687b483ed537cc8b21103b7569a56e0c85a90300
                         </listitem>
                     </template>   
                 </listbox>
