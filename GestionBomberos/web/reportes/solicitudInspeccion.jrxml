@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudInspeccion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1000000000000023"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="432"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -584,9 +584,6 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	</columnFooter>
 	<pageFooter>
 		<band height="162" splitType="Stretch">
-			<rectangle radius="10">
-				<reportElement x="267" y="6" width="273" height="142" forecolor="#000099"/>
-			</rectangle>
 			<staticText>
 				<reportElement positionType="Float" x="72" y="10" width="75" height="22" forecolor="#000099"/>
 				<textElement>
@@ -613,13 +610,35 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<rectangle radius="10">
+				<reportElement x="267" y="5" width="274" height="142" forecolor="#000099"/>
+			</rectangle>
 			<staticText>
-				<reportElement positionType="Float" x="372" y="10" width="75" height="22" forecolor="#000099"/>
+				<reportElement positionType="Float" x="371" y="10" width="75" height="22" forecolor="#000099"/>
 				<textElement>
 					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[CROQUIS]]></text>
 			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="267" y="105" width="64" height="22" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Obsevación]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="331" y="107" width="209" height="40"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_observacion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
