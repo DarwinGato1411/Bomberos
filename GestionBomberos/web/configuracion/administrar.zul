@@ -15,7 +15,7 @@
                 <tab label="${labels.app.recinto}" sclass="menutabs"/>                    
                 <tab label="${labels.app.categorianegocio}" sclass="menutabs"/>                    
                 <tab label="${labels.app.tarifa}" sclass="menutabs"/>                    
-                <tab label="${labels.app.tramitador}" sclass="menutabs"/>                    
+                <tab label="${labels.app.inspector}" sclass="menutabs"/>                    
             </tabs>
             <tabpanels >
                 <!--                

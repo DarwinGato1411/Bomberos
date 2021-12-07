@@ -106,6 +106,15 @@ public class AdministrarPermisoEntrega {
             Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void agregarcobromanual() {
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/cobromanual.zul", null, null);
+        window.doModal();
+        consultarPermisosPorentr();
+    }
 
     public List<SolicitudPermiso> getListaSolicitudPermisos() {
         return listaSolicitudPermisos;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="wObservaPreve"  position="center" class="col-12 col-sm-12 col-md-5 col-lg-5" closable="true"  
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.ObservacionPrevencion')">
+    
+    <caption label="${labels.app.newcobromanu}" style="font-weight:bold"/> 
+    <div  class="container-fluid" >
+        <div  class="row" >  
+            
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    ${labels.app.cantidad}                 
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    ${labels.app.descripcion}                 
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                    ${labels.app.valor}                                
+                    <textbox  maxlength="100" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              value="" 
+                              class="form-control" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
+                    <button    iconSclass="z-icon-save"
+                               label="Guardar"
+                               class="btn btn-primary btn-xs "                                                               
+                               onClick="@command('guardar',valor=each)"
+                               tooltiptext="Aprobar"/>    
+                </div> 
+            </div>                
+        </div>
+    </div>           
+</window>

@@ -38,7 +38,7 @@
                     </combobox>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label    value="(*) "  >Agente</label>
+                    <label    value="(*) "  >${labels.app.inspector}</label>
           
                     <combobox  model="@load(vm.listBomberos)"  
                                width="100%"
