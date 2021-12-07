@@ -15,7 +15,7 @@
                 <tabpanel  height="auto"   >
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 btn-group">
                                 <label  style="font-weight:bold;padding-left: 10px" 
                                         value="Consultar:"  />
                                 <textbox   class="form-control form-control-sm"
@@ -27,9 +27,29 @@
                                            onOK="@command('buscarLikeSolicitudes')"                                                  
                                            maxlength="13"  />
                             </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 btn-group">
+                                <label value="Inicio: " style="font-weight: bold;padding: 5px;"   />
+                                <datebox compact="true" value="@bind(vm.fechainicio)" 
+                                         style="font-weight:bold;width:100px"
+                                      
+                                         buttonVisible="true" 
+                                         lenient="true" format="dd/MM/yyyy" 
+                                         constraint="no empty: Ingrese la fecha "/>
+                                <label value="Fin: "  style="font-weight: bold;padding: 30px;"   />
+                                <datebox compact="true" value="@bind(vm.fechafin)" 
+                                         style="font-weight:bold;width:100px"                                               
+                                         buttonVisible="true" 
+                                         lenient="true" format="dd/MM/yyyy" 
+                                         constraint="no empty: Ingrese la fecha "/> 
+<!--                                <button   image="/imagenes/buscar1.png"  
+                                          onClick="@command('buscarFechas')"  
+                                          class="btn btn-primary btn-sm  "
+                                          tooltiptext="Buscar facturas por fecha"/>-->
+                            </div>
+                            
                            
                             <listbox  width="99%"
-                                      model="@load(vm.lstsolicitudPermiso)" 
+                                      model="@load(vm.lstSolicitudPermiso)" 
                                       nonselectableTags="*" 
                                       mold="paging" pageSize="20">
                                                              
@@ -86,35 +106,35 @@
                                         <listcell zclass = "mycss-listcell">
                                                      
                                             <button    style="width:30px;height:30px; background: grey" 
-                                                    iconSclass="z-icon-print "                                
-                                                    class="btn btn-primary btn-xs"
-                                                    onClick="@command('verPermiso',valor=each)" 
-                                                    tooltiptext="Ver permiso"/> 
+                                                       iconSclass="z-icon-print "                                
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('verPermiso',valor=each)" 
+                                                       tooltiptext="Ver permiso"/> 
                                     
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                                      
                                             <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
                                 
-                                                    class="btn btn-primary btn-xs"
-                                                    onClick="@command('modificarPermiso',valor=each)" 
-                                                    tooltiptext="${labels.app.editar}"/> 
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('modificarPermiso',valor=each)" 
+                                                       tooltiptext="${labels.app.editar}"/> 
                                     
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                                      
                                             <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
-                                                    class="btn btn-primary btn-xs"
-                                                    onClick="@command('cambiarEstado',valor=each)" 
-                                                    tooltiptext="Enviar a Prevención de Incendios"/> 
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('cambiarEstado',valor=each)" 
+                                                       tooltiptext="Enviar a Prevención de Incendios"/> 
                                     
                                         </listcell>  
                                         <listcell zclass = "mycss-listcell">
                                                      
                                             <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down "
-                                                    class="btn btn-primary btn-xs"
-                                                    onClick="@command('anularSolicitud',valor=each)" 
-                                                    tooltiptext="Anular Solicitud"/> 
+                                                       class="btn btn-primary btn-xs"
+                                                       onClick="@command('anularSolicitud',valor=each)" 
+                                                       tooltiptext="Anular Solicitud"/> 
                                     
                                         </listcell>                                
                                     </listitem>

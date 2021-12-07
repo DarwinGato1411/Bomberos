@@ -6,6 +6,7 @@ package com.ec.servicio;
 
 import com.ec.entidad.SolicitudPermiso;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -209,20 +210,20 @@ public class ServicioSolicitudPermiso {
     }
     public SolicitudPermiso FindLikeBuscarSolicitud(String valor) {
 
-        List<SolicitudPermiso> lstsolicitudPermiso = new ArrayList<SolicitudPermiso>();
+        List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula LIKE :solNumCedula AND u.solpNombreSol LIKE :solpNombreSol AND u.solpNombreSol LIKE :solpNombreSol ");
-            query.setParameter("solNumCedula", valor);
-            query.setParameter("solpNombreSol", valor);
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula LIKE :solNumCedula");
+            query.setParameter("solNumCedula", valor );
+//            query.setParameter("solNumCedula", "%" + valor + "%" );
 
-            lstsolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
+            lstSolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
             em.getTransaction().commit();
-            if (!lstsolicitudPermiso.isEmpty()) {
-                return lstsolicitudPermiso.get(0);
+            if (!lstSolicitudPermiso.isEmpty()) {
+                return lstSolicitudPermiso.get(0);
             } else {
                 return null;
             }
@@ -233,6 +234,43 @@ public class ServicioSolicitudPermiso {
             em.close();
         }
         return null;
+    }
+    
+     public List<SolicitudPermiso> findSolFecha(Date inicio, Date fin, String estado) {
+
+        List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
+        try {
+            Query query;
+
+//            String SQL = "SELECT f FROM Factura f WHERE f.facFecha BETWEEN :inicio and :fin ORDER BY f.facFecha DESC";
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            if (!estado.equals("TODO")) {
+                query = em.createQuery("SELECT f FROM Factura f WHERE f.facFecha BETWEEN :inicio and :fin AND f.facEstado=:facEstado AND f.facTipo='FACT' ORDER BY f.facFecha DESC");
+                query.setParameter("inicio", inicio);
+                query.setParameter("fin", fin);
+                query.setParameter("facEstado", estado);
+            } else {
+                query = em.createQuery("SELECT f FROM Factura f WHERE f.facFecha BETWEEN :inicio and :fin  AND f.facTipo='FACT' ORDER BY f.facFecha DESC");
+                query.setParameter("inicio", inicio);
+                query.setParameter("fin", fin);
+            }
+
+//            query.setMaxResults(400);
+            lstSolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta factura " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return lstSolicitudPermiso;
+    }
+
+    public List<SolicitudPermiso> findSolFecha(Date fechainicio, Date fechafin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

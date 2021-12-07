@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.zkoss.bind.annotation.BindingParam;
@@ -52,22 +53,35 @@ public class AdministrarConsultas {
 ////    Window wParametrizar;
     
     ServicioSolicitudPermiso servicioSolicitudPermiso = new ServicioSolicitudPermiso();
-    private List<SolicitudPermiso> lstsolicitudPermiso = new ArrayList<SolicitudPermiso>();
+    private List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
     private String buscarSolicitud = "";
+    private Date fechainicio = new Date();
+    private Date fechafin = new Date();
 
     public AdministrarConsultas() {
+        consultarSolicitudes();
         
     }
      @Command
-    @NotifyChange({"buscarSolicitud"})
+    @NotifyChange({"lstsolicitudPermiso","buscarSolicitud"})
     public void buscarLikeSolicitudes() {
 
         consultarSolicitudes();
 
     }
-     private void consultarSolicitudes() {
-         lstsolicitudPermiso = (List<SolicitudPermiso>) servicioSolicitudPermiso.FindLikeBuscarSolicitud(buscarSolicitud);
+    @Command
+    @NotifyChange({"lstsolicitudPermiso", "fechafin", "fechainicio"})
+    public void buscarFechas() {
+        consultarFacturaFecha();
     }
+    
+     private void consultarSolicitudes() {
+         lstSolicitudPermiso = (List<SolicitudPermiso>) servicioSolicitudPermiso.FindLikeBuscarSolicitud(buscarSolicitud);
+    }
+     
+     private void consultarFacturaFecha() {
+        lstSolicitudPermiso = servicioSolicitudPermiso.findSolFecha(fechainicio, fechafin);
+    }     
 
     public String getBuscarSolicitud() {
         return buscarSolicitud;
@@ -77,20 +91,36 @@ public class AdministrarConsultas {
         this.buscarSolicitud = buscarSolicitud;
     }
 
-    public List<SolicitudPermiso> getLstsolicitudPermiso() {
-        return lstsolicitudPermiso;
-    }
-
-    public void setLstsolicitudPermiso(List<SolicitudPermiso> lstsolicitudPermiso) {
-        this.lstsolicitudPermiso = lstsolicitudPermiso;
-    }
-    
     public ServicioSolicitudPermiso getServicioSolicitudPermiso() {
         return servicioSolicitudPermiso;
     }
 
     public void setServicioSolicitudPermiso(ServicioSolicitudPermiso servicioSolicitudPermiso) {
         this.servicioSolicitudPermiso = servicioSolicitudPermiso;
+    }
+
+    public List<SolicitudPermiso> getLstSolicitudPermiso() {
+        return lstSolicitudPermiso;
+    }
+
+    public void setLstSolicitudPermiso(List<SolicitudPermiso> lstSolicitudPermiso) {
+        this.lstSolicitudPermiso = lstSolicitudPermiso;
+    }
+
+    public Date getFechainicio() {
+        return fechainicio;
+    }
+
+    public void setFechainicio(Date fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public Date getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(Date fechafin) {
+        this.fechafin = fechafin;
     }
     
     
