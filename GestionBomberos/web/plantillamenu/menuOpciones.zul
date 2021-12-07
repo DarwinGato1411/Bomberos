@@ -12,8 +12,8 @@
             <!--<menuitem label="Por revisar (Pendientes aprobar)"  id="btnPorRevisar"/>-->
             <menuitem label="Aprobados"  id="btnPerAprobados"/>
             <!--<menuitem label="Revision (documentacion)"  id="btnPerRevisados"/>--> 
-            <menuitem label="Consultar información"  id="btnConsultas"/> 
             <menuitem label="Entrega de Permiso"  id="btnEntregaPermiso"/>
+            <menuitem label="Consultar información"  id="btnConsultas"/> 
             <!--menu tesoreria-->
             <menuitem label="Parte Diario"  id="btnParteDiario"/>
             <!--PREVENCION DE INCENDIOS-->

@@ -5,6 +5,7 @@
 package com.ec.servicio;
 
 import com.ec.entidad.SolicitudPermiso;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -208,33 +209,35 @@ public class ServicioSolicitudPermiso {
         }
         return null;
     }
-    public SolicitudPermiso FindLikeBuscarSolicitud(String valor) {
+    
+    
+    public List<SolicitudPermiso> findLikeBuscarSolicitudes(String valor,Date fechaInicio, Date fechaFin) {
 
-        List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
+       
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solNumCedula LIKE :solNumCedula");
-            query.setParameter("solNumCedula", valor );
-//            query.setParameter("solNumCedula", "%" + valor + "%" );
-
-            lstSolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE (u.solpFecha BETWEEN :inicio and :fin) and ( u.solpNumero LIKE :solpNumero OR u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol) ORDER BY u.solpFecha DESC");
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
+            query.setParameter("solpNumero", "%" + valor + "%");
+            query.setParameter("inicio", fechaInicio);
+            query.setParameter("fin", fechaFin);
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
+            System.out.println("numero  de elementos  "+listaClientes.size());
             em.getTransaction().commit();
-            if (!lstSolicitudPermiso.isEmpty()) {
-                return lstSolicitudPermiso.get(0);
-            } else {
-                return null;
-            }
-
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta solicitudPermiso  FindLikeBuscarSolicitud  " + e.getMessage());
+            System.out.println("Error en lsa consulta solicitudPermiso  findLikeBuscarSolicitudes  " + e.getMessage());
         } finally {
             em.close();
         }
-        return null;
+
+        return listaClientes;
     }
+    
     
      public List<SolicitudPermiso> findSolFecha(Date inicio, Date fin, String estado) {
 
@@ -268,9 +271,4 @@ public class ServicioSolicitudPermiso {
 
         return lstSolicitudPermiso;
     }
-
-    public List<SolicitudPermiso> findSolFecha(Date fechainicio, Date fechafin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
