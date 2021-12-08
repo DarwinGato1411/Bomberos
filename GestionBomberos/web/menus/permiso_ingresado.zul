@@ -97,7 +97,7 @@
                                            iconSclass="z-icon-print "                                
                                            class="btn btn-primary btn-xs"
                                            onClick="@command('verPermiso',valor=each)" 
-                                           tooltiptext="Ver permiso"/> 
+                                           tooltiptext="Ver Solicitud"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
@@ -114,7 +114,7 @@
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
                                            class="btn btn-primary btn-xs"
                                            onClick="@command('cambiarEstado',valor=each)" 
-                                           tooltiptext="Enviar a Prevención de Incendios"/> 
+                                           tooltiptext="Enviar a inspección pendiente"/> 
                                     
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
