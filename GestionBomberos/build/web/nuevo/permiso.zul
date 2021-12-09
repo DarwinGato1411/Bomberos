@@ -60,7 +60,7 @@
                         <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
                                    class="btn btn-primary btn-xs"
                                    onClick="@command('subirSolicitud')" 
-                                   tooltiptext="${labels.app.editar}"/> 
+                                   tooltiptext="${labels.app.cargar}"/> 
                         <!--                        </div>
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  > -->
                         <label   value="@bind(vm.entidadSelected.solpArchivoImpuesto)"  />
