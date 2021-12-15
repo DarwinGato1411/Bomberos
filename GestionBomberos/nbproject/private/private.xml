@@ -11,6 +11,7 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/servicio/ServicioCobro.java</file>
             <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/entidad/SolicitudPermiso.java</file>
@@ -20,5 +21,8 @@
             <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/entidad/Cobro.java</file>
             <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/entidad/Parametrizar.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 91b0cbdcb8d8da0d8bab61b3e0a43271f151e10e
     </open-files>
 </project-private>

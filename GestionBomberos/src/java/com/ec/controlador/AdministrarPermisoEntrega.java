@@ -181,7 +181,7 @@ public class AdministrarPermisoEntrega {
                 
                 Map<String, Object> parametros = new HashMap<String, Object>();
 //                parametros.put("numeracion", valor.getSolpNumeracion());
-                 parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolNombreSolicitud());
+                 parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
                 String nombreReporte = "reciboCobro.jasper";
 
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
