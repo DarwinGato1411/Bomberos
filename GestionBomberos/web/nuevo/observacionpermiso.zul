@@ -3,7 +3,7 @@
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.ObservacionPermiso')">
     
-    <caption label="${labels.app.obsinspeccion}" style="font-weight:bold"/> 
+    <caption label="Observacion permiso" style="font-weight:bold"/> 
     <div  class="container-fluid" >
         <div  class="row" >  
             
