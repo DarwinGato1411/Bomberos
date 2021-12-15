@@ -52,10 +52,9 @@ public class AdministrarPermisoEntrega {
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
-    
+
     /*cobro del permiso*/
-    
-    ServicioCobro servicioCobro=new ServicioCobro();
+    ServicioCobro servicioCobro = new ServicioCobro();
 
     public AdministrarPermisoEntrega() {
         parametrizar = servicioParametrizar.findActivo();
@@ -71,7 +70,7 @@ public class AdministrarPermisoEntrega {
     public void cambiarEstado(@BindingParam("valor") Permiso valor) {
         if (Messagebox.show("Confirmar cambio de estado?", "Confirmar", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ENTR");
-           SolicitudPermiso solicitud= valor.getIdInspeccion().getIdSolcitudPer();
+            SolicitudPermiso solicitud = valor.getIdInspeccion().getIdSolcitudPer();
             solicitud.setIdEstadoDocumento(estadoDocumento);
             servicioSolicitudPermiso.modificar(solicitud);
             consultarPermisosPorentr();
@@ -132,8 +131,6 @@ public class AdministrarPermisoEntrega {
         this.listaPermisos = listaPermisos;
     }
 
-
-
     @Command
     public void verPermiso(@BindingParam("valor") Permiso valor) {
         Map<String, Object> parametros = new HashMap<String, Object>();
@@ -171,21 +168,24 @@ public class AdministrarPermisoEntrega {
     public void cobrar(@BindingParam("valor") Permiso valor) {
 
         try {
-            if (Messagebox.show("Desea realizar el cobro", "Pregunta", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-                Cobro cobro = new Cobro();
-                cobro.setIdPermiso(valor);
-                cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
-                cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
-                cobro.setCobFecha(new Date());
-                servicioCobro.crear(cobro);
-                
+            if (valor.getPerPagado() == Boolean.FALSE) {
+                if (Messagebox.show("Desea realizar el cobro", "Pregunta", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+                    Cobro cobro = new Cobro();
+                    cobro.setIdPermiso(valor);
+                    cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
+                    cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
+                    cobro.setCobFecha(new Date());
+                    servicioCobro.crear(cobro);
+                }
+            } else {
                 Map<String, Object> parametros = new HashMap<String, Object>();
 //                parametros.put("numeracion", valor.getSolpNumeracion());
-                 parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
+                parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
                 String nombreReporte = "reciboCobro.jasper";
 
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
             }
+
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
