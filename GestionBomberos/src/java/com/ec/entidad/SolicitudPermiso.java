@@ -144,6 +144,7 @@ public class SolicitudPermiso implements Serializable {
     private Date solpFechaReinspeccion;
     @OneToMany(mappedBy = "idSolcitudPer")
     private Collection<DocumentosAdjunto> documentosAdjuntoCollection;
+
     @OneToMany(mappedBy = "idSolcitudPer")
     private Collection<Inspeccion> inspeccionCollection;
     @JoinColumn(name = "id_estado_documento", referencedColumnName = "id_estado_documento")
@@ -173,6 +174,9 @@ public class SolicitudPermiso implements Serializable {
     @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
     @ManyToOne
     private Bombero idBombero;
+
+    @OneToMany(mappedBy = "idSolicitudPermiso")
+    private Collection<Cobro> cobrotoCollection;
 
     public SolicitudPermiso() {
     }
@@ -576,7 +580,6 @@ public class SolicitudPermiso implements Serializable {
         this.solpEsvehiculo = solpEsvehiculo;
     }
 
-    
     public String getSolpNombreLocal() {
         return solpNombreLocal;
     }
@@ -647,6 +650,14 @@ public class SolicitudPermiso implements Serializable {
 
     public void setIdBombero(Bombero idBombero) {
         this.idBombero = idBombero;
+    }
+
+    public Collection<Cobro> getCobrotoCollection() {
+        return cobrotoCollection;
+    }
+
+    public void setCobrotoCollection(Collection<Cobro> cobrotoCollection) {
+        this.cobrotoCollection = cobrotoCollection;
     }
 
     @Override

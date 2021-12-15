@@ -18,7 +18,6 @@ import com.ec.servicio.ServicioBombero;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
-import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioRecinto;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.servicio.ServicioTarifa;
@@ -99,7 +98,7 @@ public class NuevoPermiso {
     private Boolean activaVehiculo = Boolean.FALSE;
 
     private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
-    private Tarifa tarifaSelected =null;
+    private Tarifa tarifaSelected = null;
     ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
 
     private List<Bombero> listBomberos = new ArrayList<Bombero>();
@@ -120,7 +119,10 @@ public class NuevoPermiso {
                 if (valor.getSolPathSolicitud() != null) {
                     fileContent = new AMedia("Visor", "pdf", "application/pdf", ArchivoUtils.Imagen_A_Bytes(valor.getSolPathSolicitud()));
                 }
-                tipoPermiso();
+                if (tipoSoliSelected != null) {
+                    tipoPermiso();
+                }
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -178,6 +180,7 @@ public class NuevoPermiso {
         activaOtro = Boolean.FALSE;
         activaConstruccion = Boolean.FALSE;
         activaVehiculo = Boolean.FALSE;
+
         if (tipoSoliSelected.getTipsSigla().equals("CC")) {
             entidadSelected.setSolpEsinspeccion(Boolean.FALSE);
             entidadSelected.setSolpEsotro(Boolean.FALSE);

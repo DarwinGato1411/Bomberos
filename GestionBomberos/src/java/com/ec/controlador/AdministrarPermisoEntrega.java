@@ -165,26 +165,29 @@ public class AdministrarPermisoEntrega {
     }
 
     @Command
+    @NotifyChange("listaPermisos")
     public void cobrar(@BindingParam("valor") Permiso valor) {
 
         try {
-            if (valor.getPerPagado() == Boolean.FALSE) {
+            if (!valor.getPerPagado()) {
                 if (Messagebox.show("Desea realizar el cobro", "Pregunta", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
                     Cobro cobro = new Cobro();
                     cobro.setIdPermiso(valor);
                     cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
                     cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
                     cobro.setCobFecha(new Date());
+                    valor.setPerPagado(Boolean.TRUE);
+                    servicioPermiso.modificar(valor);
                     servicioCobro.crear(cobro);
-                }
-            } else {
-                Map<String, Object> parametros = new HashMap<String, Object>();
-//                parametros.put("numeracion", valor.getSolpNumeracion());
-                parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
-                String nombreReporte = "reciboCobro.jasper";
 
-                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+                }
             }
+            Map<String, Object> parametros = new HashMap<String, Object>();
+//                parametros.put("numeracion", valor.getSolpNumeracion());
+            parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
+            String nombreReporte = "reciboCobro.jasper";
+
+            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
 
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
