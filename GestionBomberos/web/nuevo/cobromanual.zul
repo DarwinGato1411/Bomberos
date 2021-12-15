@@ -22,7 +22,7 @@
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
-                    ${labels.app.valor}                                
+                    ${labels.app.valor} Unitario                                
                     <textbox  maxlength="5" 
                               width="30%"
                               constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"

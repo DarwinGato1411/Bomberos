@@ -28,7 +28,7 @@
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.valor}"  align="left" hflex="5"></listheader>
-                        <listheader label="${labels.app.estado"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.estado}"  align="left" hflex="5"></listheader>
                         <listheader label="Agente"  align="left" hflex="7"></listheader>
                         <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
@@ -67,13 +67,24 @@
                                     value="@bind(each.idInspeccion.idSolcitudPer.idTarifa.tarValor)" style="font-weight:bold" 
                                     width="100%"/>
                             </listcell>
-                            <listcell zclass = "mycss-listcell">
+                            <zk if="${each.perPagado}"  >
+                            <listcell zclass = "mycss-listcell"  style="background:#C7FEC1">
                                 <textbox
                                     readonly="true"                             
                                     sclass="letraLisbox" 
-                                    value="@bind(each.idInspeccion.idSolcitudPer.idTarifa.tarValor)" style="font-weight:bold" 
+                                    value="PAGADO" style="font-weight:bold ;background:#C7FEC1" 
                                     width="100%"/>
                             </listcell>
+                            </zk>
+                             <zk if="${!each.perPagado}"  >
+                            <listcell zclass = "mycss-listcell" style="background:#FCFE74">
+                                <textbox
+                                    readonly="true"                             
+                                    sclass="letraLisbox" 
+                                    value="PENDIENTE" style="font-weight:bold;background:#FCFE74" 
+                                    width="100%"/>
+                            </listcell>
+                            </zk>
 <!--                            <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 

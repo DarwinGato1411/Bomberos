@@ -49,6 +49,7 @@ public class ObservacionPermiso extends SelectorComposer<Component> {
     @Command
     public void guardar() {
         entidad.setIdInspeccion(inspeccion);
+        entidad.setPerPagado(Boolean.FALSE);
         servicioInspeccion.crear(entidad);
         EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("PORENTR");
         solicitudPermiso.setIdEstadoDocumento(estadoDocumento);
