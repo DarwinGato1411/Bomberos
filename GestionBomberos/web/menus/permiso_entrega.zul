@@ -20,14 +20,7 @@
                           mold="paging" pageSize="20">
                 
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>
-                    <auxhead>
-                        <auxheader colspan="10" >  
-                            <button    iconSclass="z-icon-list-alt"
-                                            class="btn btn-primary btn-xs botongeneral"                                            
-                                            onClick="@command('agregarcobromanual')" 
-                                            tooltiptext="Ingresar cobro manual"/>
-                        </auxheader>
-                    </auxhead>
+                    
                     
                     <listhead sizable="false">
                         <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>

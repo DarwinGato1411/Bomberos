@@ -38,15 +38,21 @@ public class Cobro implements Serializable {
     private String cobDetalle;
     @Column(name = "cob_valor")
     private BigDecimal cobValor;
+    @Column(name = "cob_cantidad")
+    private BigDecimal cobCantidad;
     @Column(name = "cob_fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date cobFecha;
     @Column(name = "cob_estado")
     private boolean cobEstado;
-    
+
     @JoinColumn(name = "id_permiso", referencedColumnName = "id_permiso")
     @ManyToOne
     private Permiso idPermiso;
+
+    @JoinColumn(name = "id_solcitud_per", referencedColumnName = "id_solcitud_per")
+    @ManyToOne
+    private SolicitudPermiso idSolicitudPermiso;
 
     public Cobro() {
     }
@@ -57,6 +63,14 @@ public class Cobro implements Serializable {
 
     public void setIdCobro(Integer idCobro) {
         this.idCobro = idCobro;
+    }
+
+    public BigDecimal getCobCantidad() {
+        return cobCantidad;
+    }
+
+    public void setCobCantidad(BigDecimal cobCantidad) {
+        this.cobCantidad = cobCantidad;
     }
 
     public String getCobDetalle() {
@@ -97,6 +111,14 @@ public class Cobro implements Serializable {
 
     public void setIdPermiso(Permiso idPermiso) {
         this.idPermiso = idPermiso;
+    }
+
+    public SolicitudPermiso getIdSolicitudPermiso() {
+        return idSolicitudPermiso;
+    }
+
+    public void setIdSolicitudPermiso(SolicitudPermiso idSolicitudPermiso) {
+        this.idSolicitudPermiso = idSolicitudPermiso;
     }
 
 }

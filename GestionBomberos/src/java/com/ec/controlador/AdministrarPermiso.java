@@ -85,16 +85,16 @@ public class AdministrarPermiso {
     @NotifyChange("listaSolicitudPermisos")
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
         if (valor.getSolPathSolicitud() != null) {
-                
+
             if (Messagebox.show("Enviar a prevencion de incendios?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
                 EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("INSPEC");
                 valor.setIdEstadoDocumento(estadoDocumento);
                 servicioPermiso.modificar(valor);
                 consultarPermisosIng();
             }
-        }else{
-         Clients.showNotification("Para enviar a prevención de incendios debe adjuntar la solicitud",
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        } else {
+            Clients.showNotification("Para enviar a prevención de incendios debe adjuntar la solicitud",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
     }
 
@@ -149,6 +149,16 @@ public class AdministrarPermiso {
 
     public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
+    }
+
+    /*cobro de permiso*/
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void agregarcobromanual() {
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/cobromanual.zul", null, null);
+        window.doModal();
+        consultarPermisosIng();
     }
 
 }

@@ -21,7 +21,7 @@
     
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
-                <tab label="Ingresar nueva solicitud" sclass="menutabs" /> 
+            <tab label="Ingresar nueva solicitud" sclass="menutabs" /> 
         </tabs>
         
         <tabpanels>
@@ -32,13 +32,17 @@
                           mold="paging" pageSize="20">
                 
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>
-                
+                   
                     <auxhead>
                         <auxheader colspan="10" >  
                             <button    iconSclass="z-icon-plus-circle"
-                                            class="btn btn-primary btn-xs botongeneral"                                            
-                                            onClick="@command('agregarPermiso')" 
-                                            tooltiptext="${labels.app.permiso}"/>
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarPermiso')" 
+                                       tooltiptext="${labels.app.permiso}"/>   
+                            <button    iconSclass="z-icon-list-alt"
+                                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                                       onClick="@command('agregarcobromanual')" 
+                                                       tooltiptext="Ingresar cobro manual"/>
                         </auxheader>
                     </auxhead>
                     <listhead sizable="false">
@@ -60,36 +64,36 @@
                         <listitem  >
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNumero)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.solpNumero)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solNumCedula)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.solNumCedula)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNombreSol)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.solpNombreSol)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>                            
                             <listcell zclass = "mycss-listcell">                                          
                                 <datebox compact="true" value="@bind(each.solpFecha)" 
-                                                     buttonVisible="false" lenient="true" readonly="true"
-                                                     format="medium" width="98%"  />
+                                         buttonVisible="false" lenient="true" readonly="true"
+                                         format="medium" width="98%"  />
                             </listcell>  
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
+                                       width="100%"/>
                                 
                             </listcell>
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell> 
                             <listcell zclass = "mycss-listcell">
                                                      
