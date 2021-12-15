@@ -63,6 +63,9 @@ public class Permiso implements Serializable {
     @ManyToOne
     private Usuario idUsuario;
 
+    @OneToMany(mappedBy = "idPermiso")
+    private Collection<Cobro> cobroCollection;
+
     public Permiso() {
     }
 
@@ -167,5 +170,13 @@ public class Permiso implements Serializable {
     public String toString() {
         return "com.ec.entidad.Permiso[ idPermiso=" + idPermiso + " ]";
     }
-    
+
+    public Collection<Cobro> getCobroCollection() {
+        return cobroCollection;
+    }
+
+    public void setCobroCollection(Collection<Cobro> cobroCollection) {
+        this.cobroCollection = cobroCollection;
+    }
+
 }

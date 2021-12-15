@@ -7,18 +7,6 @@
       viewModel="@id('vm') @init('com.ec.controlador.AdministrarPermisoEntrega')" >
  
     
-<!--    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
-    <label value="Cuerpo de Bomberos" style ="color:red; font-size: 40px"/>
-    </div>
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
-        <image src="/imagenes/LogoBomberosPVM.png" class="imgRedondaLogoLogin" width="25%" style="center"  />
-    
-    </div>
-    
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center">
-    <label value="''Pedro Vicente Maldonado''" style ="color:red; font-size: 40px"/>
-    </div>-->
-    
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
                 <tab label="Permisos aprobados por entregar" sclass="menutabs" /> 
@@ -27,7 +15,7 @@
         <tabpanels>
             <tabpanel  height="98%" width="99%"  >
                 <listbox  width="99%"
-                          model="@load(vm.listaSolicitudPermisos)" 
+                          model="@load(vm.listaPermisos)" 
                           nonselectableTags="*" 
                           mold="paging" pageSize="20">
                 
@@ -46,6 +34,7 @@
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.valor}"  align="left" hflex="5"></listheader>
                         <!--<listheader label="Barrio"  align="left" hflex="6"></listheader>-->
                         <listheader label="Agente"  align="left" hflex="7"></listheader>
                         <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
@@ -59,24 +48,32 @@
                         <listitem  >
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNumero)" style="font-weight:bold" 
+                                                   value="@bind(each.idInspeccion.idSolcitudPer.solpNumero)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solNumCedula)" style="font-weight:bold" 
+                                                   value="@bind(each.idInspeccion.idSolcitudPer.solNumCedula)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNombreSol)" style="font-weight:bold" 
+                                                   value="@bind(each.idInspeccion.idSolcitudPer.solpNombreSol)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>   
                             <listcell zclass = "mycss-listcell">                                          
-                                <datebox compact="true" value="@bind(each.solpFecha)" 
+                                <datebox compact="true" value="@bind(each.idInspeccion.idSolcitudPer.solpFecha)" 
                                                      buttonVisible="false" lenient="true" readonly="true"
                                                      format="medium" width="98%"  />
                             </listcell>  
+                            
+                            <listcell zclass = "mycss-listcell">
+                                <textbox
+                                    readonly="true"                             
+                                    sclass="letraLisbox" 
+                                    value="@bind(each.idInspeccion.idSolcitudPer.idTarifa.tarValor)" style="font-weight:bold" 
+                                    width="100%"/>
+                            </listcell>
 <!--                            <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
@@ -86,14 +83,14 @@
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                       value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
+                                       value="@bind(each.idInspeccion.idSolcitudPer.idBombero.bomNombre)" style="font-weight:bold" 
                                        width="100%"/>
                                 
                             </listcell>  
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                       value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                       value="@bind(each.idInspeccion.idSolcitudPer.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
                                        width="100%"/>
                             </listcell>  
                                                   
@@ -114,14 +111,14 @@
                                            tooltiptext="Cobrar e imprimir recibo"/> 
                                     
                             </listcell>
-                            <listcell zclass = "mycss-listcell">
+<!--                            <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
                                            class="btn btn-primary btn-xs"
                                            onClick="@command('cambiarEstado',valor=each)" 
                                            tooltiptext="Parte diario"/> 
                                     
-                            </listcell>
+                            </listcell>-->
                         </listitem>
                     </template>   
                 </listbox>

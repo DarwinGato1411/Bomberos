@@ -27,7 +27,7 @@
         <tabpanels>
             <tabpanel  height="98%" width="99%"  >
                 <listbox  width="99%"
-                          model="@load(vm.listaSolicitudPermisos)" 
+                          model="@load(vm.listaInspeccion)" 
                           nonselectableTags="*" 
                           mold="paging" pageSize="20">
                 
@@ -51,35 +51,35 @@
                         <listitem  >
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNumero)" style="font-weight:bold" 
+                                                   value="@bind(each.idSolcitudPer.solpNumero)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solNumCedula)" style="font-weight:bold" 
+                                                   value="@bind(each.idSolcitudPer.solNumCedula)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.solpNombreSol)" style="font-weight:bold" 
+                                                   value="@bind(each.idSolcitudPer.solpNombreSol)" style="font-weight:bold" 
                                                    width="100%"/>
                             </listcell>    
                             <listcell zclass = "mycss-listcell">                                          
-                                <datebox compact="true" value="@bind(each.solpFecha)" 
+                                <datebox compact="true" value="@bind(each.idSolcitudPer.solpFecha)" 
                                                      buttonVisible="false" lenient="true" readonly="true"
                                                      format="medium" width="98%"  />
                             </listcell>  
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                           value="@bind(each.idBombero.bomNombre)" style="font-weight:bold" 
+                                           value="@bind(each.idSolcitudPer.idBombero.bomNombre)" style="font-weight:bold" 
                                            width="100%"/>
                                 
                             </listcell>
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                       value="@bind(each.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
+                                       value="@bind(each.idSolcitudPer.idTipoSolicitud.tipsDescripcion)" style="font-weight:bold" 
                                        width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
@@ -95,7 +95,7 @@
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
                                                        class="btn btn-primary btn-xs"
-                                                       onClick="@command('cambiarEstado',valor=each)" 
+                                                       onClick="@command('observacionper',valor=each)" 
                                                        tooltiptext="Enviar a entrega de permisos"/> 
                                     
                             </listcell>

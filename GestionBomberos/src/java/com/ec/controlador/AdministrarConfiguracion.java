@@ -89,7 +89,7 @@ public class AdministrarConfiguracion {
         consultarTipoTarifa();
         parametrizarselected = servicioParametrizar.findActivo();
 
-        FOLDER_IMG = parametrizarselected != null ? parametrizarselected.getParDisco() + parametrizarselected.getParCarpeta() : "";
+        FOLDER_IMG = parametrizarselected != null ? parametrizarselected.getParDisco() + parametrizarselected.getParCarpeta()+File.separator : "";
         File folderAu = new File(FOLDER_IMG);
         if (!folderAu.exists()) {
             folderAu.mkdirs();
@@ -205,7 +205,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
+                filePathImg =  FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -235,7 +235,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
+                filePathImg =  FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -265,7 +265,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg =parametrizarselected.getParDisco() + File.separator + FOLDER_IMG + File.separator + media.getName();
+                filePathImg = FOLDER_IMG + File.separator + media.getName();
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {

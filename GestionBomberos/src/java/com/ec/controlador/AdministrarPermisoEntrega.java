@@ -4,18 +4,23 @@
  */
 package com.ec.controlador;
 
+import com.ec.entidad.Cobro;
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
 import com.ec.entidad.Parametrizar;
+import com.ec.entidad.Permiso;
 import com.ec.entidad.SolicitudPermiso;
+import com.ec.servicio.ServicioCobro;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
+import com.ec.servicio.ServicioPermiso;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +42,20 @@ import org.zkoss.zul.Messagebox;
 public class AdministrarPermisoEntrega {
 
     /*PERMISOS INGRESADOS*/
-    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
+    ServicioPermiso servicioPermiso = new ServicioPermiso();
+    ServicioSolicitudPermiso servicioSolicitudPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
-    private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
+    private List<Permiso> listaPermisos = new ArrayList<Permiso>();
     private String buscarPorentr = "PORENTR";
     private String buscar = "";
     AMedia fileContent = null;
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
+    
+    /*cobro del permiso*/
+    
+    ServicioCobro servicioCobro=new ServicioCobro();
 
     public AdministrarPermisoEntrega() {
         parametrizar = servicioParametrizar.findActivo();
@@ -53,41 +63,23 @@ public class AdministrarPermisoEntrega {
     }
 
     private void consultarPermisosPorentr() {
-        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarPorentr, buscar);
+        listaPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarPorentr, buscar);
     }
 
-    /*Perfil*/
-//    @Command
-//    @NotifyChange("listaSolicitudPermisos")
-//    public void agregarPermiso() {
-//        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-//                "/nuevo/permiso.zul", null, null);
-//        window.doModal();
-//        consultarPermisosIng();
-//    }
-//    @Command
-//    @NotifyChange("listaSolicitudPermisos")
-//    public void modificarPermiso(@BindingParam("valor") SolicitudPermiso valor) {
-//        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
-//        map.put("valor", valor);
-//        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-//                "/nuevo/permiso.zul", null, map);
-//        window.doModal();
-//     consultarPermisosIng();
-//    }
     @Command
-    @NotifyChange("listaSolicitudPermisos")
-    public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Confirmar cambio de estado?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+    @NotifyChange("listaPermisos")
+    public void cambiarEstado(@BindingParam("valor") Permiso valor) {
+        if (Messagebox.show("Confirmar cambio de estado?", "Confirmar", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ENTR");
-            valor.setIdEstadoDocumento(estadoDocumento);
-            servicioPermiso.modificar(valor);
+           SolicitudPermiso solicitud= valor.getIdInspeccion().getIdSolcitudPer();
+            solicitud.setIdEstadoDocumento(estadoDocumento);
+            servicioSolicitudPermiso.modificar(solicitud);
             consultarPermisosPorentr();
         }
     }
 
     @Command
-    @NotifyChange("listaSolicitudPermisos")
+    @NotifyChange("listaPermisos")
     public void cargarArchivos(@BindingParam("valor") SolicitudPermiso valor) {
         final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
         map.put("valor", valor);
@@ -106,9 +98,9 @@ public class AdministrarPermisoEntrega {
             Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Command
-    @NotifyChange("listaSolicitudPermisos")
+    @NotifyChange("listaPermisos")
     public void agregarcobromanual() {
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/cobromanual.zul", null, null);
@@ -116,24 +108,42 @@ public class AdministrarPermisoEntrega {
         consultarPermisosPorentr();
     }
 
-    public List<SolicitudPermiso> getListaSolicitudPermisos() {
-        return listaSolicitudPermisos;
+    public String getBuscarPorentr() {
+        return buscarPorentr;
     }
 
-    public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
-        this.listaSolicitudPermisos = listaSolicitudPermisos;
+    public void setBuscarPorentr(String buscarPorentr) {
+        this.buscarPorentr = buscarPorentr;
     }
+
+    public String getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(String buscar) {
+        this.buscar = buscar;
+    }
+
+    public List<Permiso> getListaPermisos() {
+        return listaPermisos;
+    }
+
+    public void setListaPermisos(List<Permiso> listaPermisos) {
+        this.listaPermisos = listaPermisos;
+    }
+
+
 
     @Command
-    public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
+    public void verPermiso(@BindingParam("valor") Permiso valor) {
         Map<String, Object> parametros = new HashMap<String, Object>();
-        parametros.put("numeracion", valor.getSolpNumeracion());
+        parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
 
         try {
-            if (valor.getIdTipoSolicitud().getTipsSigla().equals("CC")) {
+            if (valor.getIdInspeccion().getIdSolcitudPer().getIdTipoSolicitud().getTipsSigla().equals("CC")) {
                 String nombreReporteConstruccion = "certificadoConstruccion.jasper";
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteConstruccion);
-            } else if (valor.getIdTipoSolicitud().getTipsSigla().equals("VA")) {
+            } else if (valor.getIdInspeccion().getIdSolcitudPer().getIdTipoSolicitud().getTipsSigla().equals("VA")) {
                 String nombreReporteVehiculo = "certificadoVehiculo.jasper";
                 ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporteVehiculo);
             } else {
@@ -158,14 +168,24 @@ public class AdministrarPermisoEntrega {
     }
 
     @Command
-    public void cobrar(@BindingParam("valor") SolicitudPermiso valor) {
-        Map<String, Object> parametros = new HashMap<String, Object>();
-        parametros.put("numeracion", valor.getSolpNumeracion());
+    public void cobrar(@BindingParam("valor") Permiso valor) {
 
         try {
-            String nombreReporte = "reciboCobro.jasper";
-            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+            if (Messagebox.show("Desea realizar el cobro", "Pregunta", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+                Cobro cobro = new Cobro();
+                cobro.setIdPermiso(valor);
+                cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
+                cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
+                cobro.setCobFecha(new Date());
+                servicioCobro.crear(cobro);
+                
+                Map<String, Object> parametros = new HashMap<String, Object>();
+//                parametros.put("numeracion", valor.getSolpNumeracion());
+                 parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolNombreSolicitud());
+                String nombreReporte = "reciboCobro.jasper";
 
+                ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+            }
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

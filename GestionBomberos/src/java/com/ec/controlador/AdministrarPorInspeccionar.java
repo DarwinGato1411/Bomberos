@@ -33,6 +33,8 @@ public class AdministrarPorInspeccionar {
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
     private String buscarPorinspec = "INSPEC";
     private String buscar = "";
+    
+    /*enviar a insppeccion*/
 
     public AdministrarPorInspeccionar() {
 
@@ -79,6 +81,7 @@ public class AdministrarPorInspeccionar {
     public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
             entidadInspeccion.setInsFecha(new Date());
             entidadInspeccion.setInsObservacion("");
+            
 //            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
 //            valor.setIdEstadoDocumento(estadoDocumento);
 //            servicioPermiso.modificar(valor);
