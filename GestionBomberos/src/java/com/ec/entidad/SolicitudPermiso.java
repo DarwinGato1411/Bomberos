@@ -138,6 +138,8 @@ public class SolicitudPermiso implements Serializable {
     private String solpOtro;
     @Column(name = "solp_numeracion")
     private Integer solpNumeracion;
+    @Column(name = "solp_anio")
+    private Integer solpAnio;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -658,6 +660,14 @@ public class SolicitudPermiso implements Serializable {
 
     public void setCobrotoCollection(Collection<Cobro> cobrotoCollection) {
         this.cobrotoCollection = cobrotoCollection;
+    }
+
+    public Integer getSolpAnio() {
+        return solpAnio;
+    }
+
+    public void setSolpAnio(Integer solpAnio) {
+        this.solpAnio = solpAnio;
     }
 
     @Override

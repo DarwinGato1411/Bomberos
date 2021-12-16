@@ -133,6 +133,9 @@ public class NuevoPermiso {
             Date finAno = new Date();
             finAno.setMonth(11);
             finAno.setDate(31);
+            
+            
+            entidadSelected.setSolpAnio((finAno.getYear() + 1900));
             entidadSelected.setSolpFecha(new Date());
             entidadSelected.setSolpFechaReinspeccion(finAno);
             entidadSelected.setSolpBarrioUrbanizacion("PEDRO VICENTE MALDONADO");

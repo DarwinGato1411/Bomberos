@@ -108,7 +108,7 @@ public class ServicioSolicitudPermiso {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol )");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.solpNumeracion DESC");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");

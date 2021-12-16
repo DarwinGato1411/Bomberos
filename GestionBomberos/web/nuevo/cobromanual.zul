@@ -10,7 +10,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     ${labels.app.cantidad}               
-                     <intbox value="@bind(vm.cobro.cobCantidad)"  
+                     <intbox value="@bind(vm.cantidadSolicitud)"  
                             width="30%" 
                             class="form-control" />  
                 </div>

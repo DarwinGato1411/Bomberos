@@ -6,13 +6,10 @@ package com.ec.controlador;
 
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
-import com.ec.entidad.Opciones;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
-import com.ec.servicio.ServicioInspeccion;
-import com.ec.servicio.ServicioRecinto;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;

@@ -5,11 +5,16 @@
 package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
+import com.ec.entidad.ParteDiario;
+import com.ec.entidad.ParteDiarioTipoSolicitud;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioParteDiario;
+import com.ec.servicio.ServicioParteDiarioTipoSolicitud;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -22,42 +27,48 @@ import org.zkoss.zul.Messagebox;
  */
 public class AdministrarParteDiario {
 
-   
-
-    /*PERMISOS INGRESADOS*/
-     ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
-     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
-    private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
-    private String buscarEntr = "ENTR";
-    private String buscar = "";
-
+    /*total por rubro*/
+    ServicioParteDiario servicioParteDiario = new ServicioParteDiario();
+    private List<ParteDiario> listaParteDiarios = new ArrayList<ParteDiario>();
+    private Date fecha = new Date();
+/*total tipo de solicitud*/
+    
+    ServicioParteDiarioTipoSolicitud servicioParteDiarioTipoSolicitud= new ServicioParteDiarioTipoSolicitud();
+    private List<ParteDiarioTipoSolicitud> listaDiarioTipoSolicituds = new ArrayList<ParteDiarioTipoSolicitud>();
     public AdministrarParteDiario() {
 
         consultarPermisosEntr();
     }
 
-   
     private void consultarPermisosEntr() {
-        listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarEntr , buscar);
-    }
-    /*Perfil*/
-    @Command
-    @NotifyChange("listaSolicitudPermisos")
-    public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
-        if (Messagebox.show("Desea anular la solicitud", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ANU");
-            valor.setIdEstadoDocumento(estadoDocumento);
-            servicioPermiso.modificar(valor);
-            consultarPermisosEntr();
-        }
+        listaParteDiarios = servicioParteDiario.findByFecha(fecha);
+        listaDiarioTipoSolicituds=servicioParteDiarioTipoSolicitud.findByFecha(fecha);
     }
 
-    public List<SolicitudPermiso> getListaSolicitudPermisos() {
-        return listaSolicitudPermisos;
+    public List<ParteDiario> getListaParteDiarios() {
+        return listaParteDiarios;
     }
 
-    public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
-        this.listaSolicitudPermisos = listaSolicitudPermisos;
+    public void setListaParteDiarios(List<ParteDiario> listaParteDiarios) {
+        this.listaParteDiarios = listaParteDiarios;
     }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<ParteDiarioTipoSolicitud> getListaDiarioTipoSolicituds() {
+        return listaDiarioTipoSolicituds;
+    }
+
+    public void setListaDiarioTipoSolicituds(List<ParteDiarioTipoSolicitud> listaDiarioTipoSolicituds) {
+        this.listaDiarioTipoSolicituds = listaDiarioTipoSolicituds;
+    }
+
+    
 
 }

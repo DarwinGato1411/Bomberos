@@ -18,6 +18,7 @@ import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -176,6 +177,7 @@ public class AdministrarPermisoEntrega {
                     cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
                     cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
                     cobro.setCobFecha(new Date());
+                    cobro.setCobCantidad(BigDecimal.ONE);
                     valor.setPerPagado(Boolean.TRUE);
                     servicioPermiso.modificar(valor);
                     servicioCobro.crear(cobro);
