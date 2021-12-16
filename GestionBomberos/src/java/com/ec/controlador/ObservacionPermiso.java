@@ -11,6 +11,7 @@ import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioPermiso;
 import com.ec.servicio.ServicioSolicitudPermiso;
+import com.ec.utilitario.ArchivoUtils;
 import java.util.Date;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
@@ -31,7 +32,7 @@ public class ObservacionPermiso extends SelectorComposer<Component> {
 
     @Wire
     Window wObservaPreve;
-    ServicioPermiso servicioInspeccion = new ServicioPermiso();
+    ServicioPermiso servicioPermiso = new ServicioPermiso();
     ServicioSolicitudPermiso servicioSolicitudPermiso = new ServicioSolicitudPermiso();
     ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private Permiso entidad = new Permiso();
@@ -45,12 +46,27 @@ public class ObservacionPermiso extends SelectorComposer<Component> {
         entidad.setPerFecha(new Date());
         solicitudPermiso = valor.getIdSolcitudPer();
     }
+  private Integer generarNumeracion() {
+        Permiso recuperada = servicioPermiso.findUltimoPermiso();
+        Integer numeracion = 0;
+        if (recuperada != null) {
+            // System.out.println("numero de factura " + recuperada);
+            numeracion = recuperada.getPerNumero()+ 1;
 
+        } else {
+            numeracion = 1;
+
+        }
+        return numeracion;
+    }
     @Command
     public void guardar() {
         entidad.setIdInspeccion(inspeccion);
         entidad.setPerPagado(Boolean.FALSE);
-        servicioInspeccion.crear(entidad);
+        Integer numero=generarNumeracion();
+        entidad.setPerNumero(numero);
+        entidad.setPerNumeroText(ArchivoUtils.numeroTexto(numero));
+        servicioPermiso.crear(entidad);
         EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("PORENTR");
         solicitudPermiso.setIdEstadoDocumento(estadoDocumento);
         servicioSolicitudPermiso.modificar(solicitudPermiso);

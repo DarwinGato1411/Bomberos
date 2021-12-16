@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboCobro" language="groovy" pageWidth="595" pageHeight="421" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.1269722013523664"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboCobro" language="groovy" pageWidth="330" pageHeight="396" columnWidth="290" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.239669421487604"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="7"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -102,217 +102,42 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 	<field name="id_tipo_tarifa" class="java.lang.Integer"/>
 	<field name="par_descripcion" class="java.lang.String"/>
 	<field name="rec_descripcion" class="java.lang.String"/>
-	<background>
-		<band height="381" splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="84" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="105" y="0" width="310" height="21" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CUERPO DE BOMBEROS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="105" y="21" width="310" height="20" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="false"/>
-				</textElement>
-				<text><![CDATA[GADC DE PEDRO VICENTE MALDONADO]]></text>
-			</staticText>
-			<image onErrorType="Blank">
-				<reportElement x="22" y="11" width="48" height="61"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement positionType="Float" x="105" y="41" width="310" height="10" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[RUC: 1768077250001]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="105" y="51" width="310" height="11" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Creado el 29 de Noviembre de 1999 - Acuerdo Ministerial 00320]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="105" y="72" width="310" height="12" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Direccion: By Pass 1 y margen derecho - Telfs: 2392-363 // 2392-519]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="105" y="62" width="310" height="10" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[ORDENANZA MUNICIPAL N| 019-2015]]></text>
-			</staticText>
-			<rectangle radius="0">
-				<reportElement x="415" y="0" width="140" height="62" forecolor="#000066"/>
-			</rectangle>
-			<staticText>
-				<reportElement positionType="Float" x="415" y="0" width="140" height="21" forecolor="#003399" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RECIBO DE COBRO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="415" y="24" width="140" height="27" forecolor="#CC0000"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="false"/>
-				</textElement>
-				<text><![CDATA[0000746]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="40" splitType="Stretch">
-			<rectangle radius="5">
-				<reportElement x="415" y="12" width="140" height="28" forecolor="#000066"/>
-			</rectangle>
-			<staticText>
-				<reportElement positionType="Float" x="377" y="12" width="38" height="17" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[POR $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="22" y="2" width="107" height="26" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="10" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Pedro V. Maldonado]]></text>
-			</staticText>
-			<line>
-				<reportElement x="129" y="22" width="172" height="1" forecolor="#000099"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<textField>
-				<reportElement x="415" y="13" width="140" height="27"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tar_valor}]]></textFieldExpression>
-			</textField>
+	<detail>
+		<band height="243" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
-				<reportElement x="129" y="3" width="211" height="20"/>
-				<textElement/>
+				<reportElement x="117" y="58" width="173" height="20"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="3" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="87" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="0" y="0" width="105" height="19" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Recibo del  Sr. (es)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="38" width="105" height="16" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Dirección:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="19" width="105" height="19" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Razón Social:]]></text>
-			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="105" y="18" width="353" height="20">
+				<reportElement x="8" y="112" width="282" height="14">
 					<printWhenExpression><![CDATA[$F{solp_nombre_negocio}]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_negocio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="105" y="0" width="450" height="18"/>
+				<reportElement x="8" y="98" width="282" height="14"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="105" y="38" width="353" height="16"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_descripcion}+" / "+$F{rec_descripcion}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="54" width="105" height="16" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[La cantidad de]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="70" width="105" height="16" forecolor="#000099"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Por concepto de]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="105" y="70" width="353" height="16"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_descripcion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="54" width="353" height="16"/>
+				<reportElement x="8" y="126" width="282" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_valor}+" DOLARES"]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="161" y="78" width="129" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tar_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="158" width="282" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_descripcion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="58" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="10" y="31" width="271" height="19" forecolor="#000099"/>
-				<textElement textAlignment="Center">
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[RECAUDACIÓN]]></text>
-			</staticText>
-			<line>
-				<reportElement x="57" y="30" width="172" height="1" forecolor="#000099"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<rectangle radius="0">
-				<reportElement x="328" y="1" width="227" height="51" forecolor="#000066"/>
-			</rectangle>
-			<staticText>
-				<reportElement positionType="Float" x="328" y="1" width="227" height="51" forecolor="#000066"/>
-				<textElement textAlignment="Justified">
-					<font size="6" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Art. 35 (Facultades especiales de los primeros jefes de cuerpos de bomberos). Facultades a los primeros jefes de los cuerpos de bomberos conceder permisos anuales y ocasionales cobrar las tasas de servicios, ordenar clausuras de locales y adoptar todas las medidas necesarias para prevenir flagelos. Dentro de su respectiva jurisdicción conforme a los previsto en el Reglamento General de esta Ley. ETC]]></text>
-			</staticText>
-			<image onErrorType="Blank">
-				<reportElement x="91" y="2" width="113" height="28"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
-			</image>
-		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="5" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="6" splitType="Stretch"/>
-	</summary>
 </jasperReport>

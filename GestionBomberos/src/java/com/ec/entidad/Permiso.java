@@ -57,6 +57,12 @@ public class Permiso implements Serializable {
     @Column(name = "per_pagado")
     private Boolean perPagado;
 
+    
+     @Column(name = "per_numero")
+    private Integer perNumero;
+     
+      @Column(name = "per_numero_text")
+    private String perNumeroText;
     @OneToMany(mappedBy = "idPermiso")
     private Collection<DocumentosAdjuntoPermiso> documentosAdjuntoPermisoCollection;
     @JoinColumn(name = "id_estado_documento", referencedColumnName = "id_estado_documento")
@@ -166,6 +172,22 @@ public class Permiso implements Serializable {
 
     public void setPerPagado(Boolean perPagado) {
         this.perPagado = perPagado;
+    }
+
+    public Integer getPerNumero() {
+        return perNumero;
+    }
+
+    public void setPerNumero(Integer perNumero) {
+        this.perNumero = perNumero;
+    }
+
+    public String getPerNumeroText() {
+        return perNumeroText;
+    }
+
+    public void setPerNumeroText(String perNumeroText) {
+        this.perNumeroText = perNumeroText;
     }
 
     @Override

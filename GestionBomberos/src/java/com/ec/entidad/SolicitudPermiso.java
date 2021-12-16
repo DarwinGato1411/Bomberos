@@ -140,10 +140,23 @@ public class SolicitudPermiso implements Serializable {
     private Integer solpNumeracion;
     @Column(name = "solp_anio")
     private Integer solpAnio;
+    @Column(name = "solp_capacidad")
+    private String solpCapacidad;
+    @Column(name = "solp_placa")
+    private String solpPlaca;
+    @Column(name = "solp_color")
+    private String solpColor;
+    @Column(name = "solp_marca")
+    private String solpMarca;
+    @Column(name = "solp_modelo")
+    private String solpModelo;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date solpFechaReinspeccion;
+    @Column(name = "solp_caduca")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date solpCaduca;
     @OneToMany(mappedBy = "idSolcitudPer")
     private Collection<DocumentosAdjunto> documentosAdjuntoCollection;
 
@@ -668,6 +681,54 @@ public class SolicitudPermiso implements Serializable {
 
     public void setSolpAnio(Integer solpAnio) {
         this.solpAnio = solpAnio;
+    }
+
+    public String getSolpCapacidad() {
+        return solpCapacidad;
+    }
+
+    public void setSolpCapacidad(String solpCapacidad) {
+        this.solpCapacidad = solpCapacidad;
+    }
+
+    public String getSolpPlaca() {
+        return solpPlaca;
+    }
+
+    public void setSolpPlaca(String solpPlaca) {
+        this.solpPlaca = solpPlaca;
+    }
+
+    public String getSolpColor() {
+        return solpColor;
+    }
+
+    public void setSolpColor(String solpColor) {
+        this.solpColor = solpColor;
+    }
+
+    public String getSolpMarca() {
+        return solpMarca;
+    }
+
+    public void setSolpMarca(String solpMarca) {
+        this.solpMarca = solpMarca;
+    }
+
+    public String getSolpModelo() {
+        return solpModelo;
+    }
+
+    public void setSolpModelo(String solpModelo) {
+        this.solpModelo = solpModelo;
+    }
+
+    public Date getSolpCaduca() {
+        return solpCaduca;
+    }
+
+    public void setSolpCaduca(Date solpCaduca) {
+        this.solpCaduca = solpCaduca;
     }
 
     @Override

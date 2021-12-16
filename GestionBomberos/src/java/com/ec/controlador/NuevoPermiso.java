@@ -332,6 +332,14 @@ public class NuevoPermiso {
                     Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
+                if (recintoSelected != null) {
+                    entidadSelected.setIdRecinto(recintoSelected);
+                }
+
+                if (parroquiaSelected != null) {
+                    entidadSelected.setIdParroquia(parroquiaSelected);
+                }
+
                 servicio.modificar(entidadSelected);
             }
             wOpcion.detach();

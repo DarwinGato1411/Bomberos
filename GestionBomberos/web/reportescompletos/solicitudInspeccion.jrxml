@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudInspeccion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.8264462809917371"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numeracion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select pa.*,sp.*
+, (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
+(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion
+from parametrizar pa,
+ solicitud_permiso sp, parroquia pr, recinto rc
+where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracion} limit 1;]]>
+	</queryString>
+	<field name="cod_parametrizar" class="java.lang.Integer"/>
+	<field name="par_contacto_empresa" class="java.lang.String"/>
+	<field name="par_empresa" class="java.lang.String"/>
+	<field name="par_ruc_empresa" class="java.lang.String"/>
+	<field name="par_codigo_iva" class="java.lang.String"/>
+	<field name="par_iva_actual" class="java.math.BigDecimal"/>
+	<field name="par_caduca" class="java.sql.Date"/>
+	<field name="par_host" class="java.lang.String"/>
+	<field name="par_port" class="java.lang.String"/>
+	<field name="par_protocol" class="java.lang.String"/>
+	<field name="par_usuario_smpt" class="java.lang.String"/>
+	<field name="par_password" class="java.lang.String"/>
+	<field name="par_imp_automatico" class="java.lang.Boolean"/>
+	<field name="par_nombre_impresora" class="java.lang.String"/>
+	<field name="par_ciudad" class="java.lang.String"/>
+	<field name="par_correo_defecto" class="java.lang.String"/>
+	<field name="isprincipal" class="java.lang.Boolean"/>
+	<field name="par_disco" class="java.lang.String"/>
+	<field name="par_carpeta" class="java.lang.String"/>
+	<field name="par_folder_adicional" class="java.lang.String"/>
+	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
+	<field name="id_solcitud_per" class="java.lang.Integer"/>
+	<field name="id_estado_documento" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="solp_descripcion" class="java.lang.String"/>
+	<field name="solp_fecha" class="java.sql.Timestamp"/>
+	<field name="sol_num_cedula" class="java.lang.String"/>
+	<field name="solp_nombre_sol" class="java.lang.String"/>
+	<field name="solp_apellido_sol" class="java.lang.String"/>
+	<field name="solp_direccion" class="java.lang.String"/>
+	<field name="solp_referencia" class="java.lang.String"/>
+	<field name="solp_path_fotografia" class="java.lang.String"/>
+	<field name="solp_observacion" class="java.lang.String"/>
+	<field name="solp_path_ruc" class="java.lang.String"/>
+	<field name="solp_path_cedula" class="java.lang.String"/>
+	<field name="solp_pago_impuesto" class="java.lang.String"/>
+	<field name="solp_actividad" class="java.lang.String"/>
+	<field name="solp_barrio_urbanizacion" class="java.lang.String"/>
+	<field name="solp_calle" class="java.lang.String"/>
+	<field name="solp_numero" class="java.lang.String"/>
+	<field name="solp_interseccion" class="java.lang.String"/>
+	<field name="solp_edificio" class="java.lang.String"/>
+	<field name="solp_piso" class="java.lang.Integer"/>
+	<field name="solp_departamento" class="java.lang.String"/>
+	<field name="solp_persona_contacto" class="java.lang.String"/>
+	<field name="solp_telefono_contacto" class="java.lang.String"/>
+	<field name="solp_numero_ocupantes" class="java.lang.Integer"/>
+	<field name="solp_area_construccion" class="java.math.BigDecimal"/>
+	<field name="solp_nombre_negocio" class="java.lang.String"/>
+	<field name="id_parroquia" class="java.lang.Integer"/>
+	<field name="solp_telefono" class="java.lang.String"/>
+	<field name="solp_archivo_ruc" class="java.lang.String"/>
+	<field name="solp_archivo_impuesto" class="java.lang.String"/>
+	<field name="solp_path_croquis" class="java.lang.String"/>
+	<field name="solp_archivo_croquis" class="java.lang.String"/>
+	<field name="solp_lote" class="java.lang.String"/>
+	<field name="solp_recinto" class="java.lang.String"/>
+	<field name="sol_path_solicitud" class="java.lang.String"/>
+	<field name="sol_nombre_solicitud" class="java.lang.String"/>
+	<field name="solp_num_calle" class="java.lang.String"/>
+	<field name="solp_nota" class="java.lang.String"/>
+	<field name="solp_fecha_reinspeccion" class="java.sql.Timestamp"/>
+	<field name="id_tipo_solicitud" class="java.lang.Integer"/>
+	<field name="id_recinto" class="java.lang.Integer"/>
+	<field name="id_parametrizar" class="java.lang.Integer"/>
+	<field name="solp_esinspeccion" class="java.lang.Boolean"/>
+	<field name="solp_esplanos" class="java.lang.Boolean"/>
+	<field name="solp_esotro" class="java.lang.Boolean"/>
+	<field name="solp_nombre_local" class="java.lang.String"/>
+	<field name="solp_telefono_inspeccion" class="java.lang.String"/>
+	<field name="solp_proyecto" class="java.lang.String"/>
+	<field name="solp_telefono_proyecto" class="java.lang.String"/>
+	<field name="solp_otro" class="java.lang.String"/>
+	<field name="solp_numeracion" class="java.lang.Integer"/>
+	<field name="id_tarifa" class="java.lang.Integer"/>
+	<field name="id_bombero" class="java.lang.Integer"/>
+	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
+	<field name="par_descripcion" class="java.lang.String"/>
+	<field name="rec_descripcion" class="java.lang.String"/>
+	<background>
+		<band height="381" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="243" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CUERPO DE BOMBEROS DEL G.A.D.C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="23" width="243" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PEDRO VICENTE MALDONADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="311" y="0" width="243" height="46" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE PREVENCION DE INCENDIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="46" width="243" height="33" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Creado el 29 de Noviembre de 1999. Acuerdo Ministeria 00320 Oredenanza Municipa Nr 1-2015]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="311" y="46" width="243" height="33" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dirección: By Pass Lote 1 y margen derecho - Telefono: 2392-363]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="243" y="62" width="68" height="17" forecolor="#000066"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[R.U.C: 1768077250001]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="254" y="0" width="49" height="46"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="169" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ESPECIE VALORADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="23" width="169" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[USD. 1.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="169" y="0" width="243" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SOLICITUD DE INSPECCIÓN]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="412" y="0" width="142" height="23" forecolor="#FF0000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_numero}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="354" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="87" y="304" width="40" height="35" forecolor="#000099"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="87" y="259" width="40" height="35" forecolor="#000099"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="88" y="210" width="40" height="35" forecolor="#000099"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="101" width="188" height="23" forecolor="#000099"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="11" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Presente.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="124" width="188" height="23" forecolor="#000099"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="11" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[De mi consideración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="144" width="32" height="23" forecolor="#000099"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="11" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Yo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="170" width="555" height="23" forecolor="#000099"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="11" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Por medio de la presente solicito a usted se digne autorizar a quien corresponda realice el siguiente trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="206" width="81" height="46" forecolor="#000099"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[INSPECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="261" width="81" height="46" forecolor="#000099"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[VTO. BNO. EN PLANOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="309" width="81" height="45" forecolor="#000099"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[OTROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="135" y="206" width="152" height="23" forecolor="#000099"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="135" y="229" width="152" height="23" forecolor="#000099"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TELEFONOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="32" y="170" width="508" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="287" y="229" width="253" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="287" y="252" width="253" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="135" y="351" width="405" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="32" y="147" width="509" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="135" y="284" width="153" height="23" forecolor="#000099"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TELEFONOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="135" y="261" width="153" height="23" forecolor="#000099"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL PROYECTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="287" y="306" width="253" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="287" y="283" width="253" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="25" width="188" height="23" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Señor.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="48" width="188" height="52" forecolor="#000099"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CMANDANTE GENERAL CUERPO DE BOMBEROS DE PEDRO VICENTE MALDONADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="412" y="25" width="142" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<image hAlign="Right">
+				<reportElement x="384" y="27" width="171" height="110"/>
+				<imageExpression class="java.awt.Image"><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+    new com.google.zxing.qrcode.QRCodeWriter().encode(
+        "NUMERO DOCUMENTO: "+$F{solp_numero}+"\n"+
+        "RUC: "+$F{sol_num_cedula}+"\n"+
+        "REPRESENTANTE: "+$F{solp_nombre_sol}+"\n"+
+        "EMISOR: "+$F{par_empresa}
+        , com.google.zxing.BarcodeFormat.QR_CODE, 200, 200))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="254" y="2" width="130" height="23" forecolor="#000099"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="11" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Pedro Vicente Madonado.]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="384" y="2" width="170" height="23"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="214" width="34" height="26" forecolor="#000099">
+					<printWhenExpression><![CDATA[$F{solp_esinspeccion}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="91" y="263" width="34" height="26" forecolor="#000099" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{solp_esplanos}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="18" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="309" width="34" height="26" forecolor="#000099">
+					<printWhenExpression><![CDATA[$F{solp_esotro}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="206" width="248" height="20">
+					<printWhenExpression><![CDATA[$F{solp_esinspeccion}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_local}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="232" width="248" height="20">
+					<printWhenExpression><![CDATA[$F{solp_esinspeccion}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_telefono_inspeccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="261" width="248" height="20">
+					<printWhenExpression><![CDATA[$F{solp_esplanos}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="292" y="284" width="249" height="20">
+					<printWhenExpression><![CDATA[$F{solp_esplanos}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_telefono_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="322" width="405" height="29">
+					<printWhenExpression><![CDATA[$F{solp_esotro}]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_otro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="121" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="243" y="2" width="81" height="20" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="20" width="81" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PARROQUIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="43" width="81" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[BARRIO/URB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="324" y="43" width="68" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LOTE/URB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="330" y="91" width="62" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RECINTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="66" width="45" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CALLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="91" width="101" height="23" forecolor="#000099"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[INTERSECCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="331" y="68" width="61" height="23" forecolor="#000099"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="81" y="43" width="459" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="81" y="65" width="243" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="392" y="118" width="148" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="45" y="88" width="279" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="392" y="89" width="148" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="392" y="64" width="148" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="102" y="120" width="222" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="45" width="243" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="392" y="91" width="148" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="23" width="459" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_barrio_urbanizacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="392" y="44" width="148" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_lote}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="67" width="279" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_calle}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="102" y="92" width="222" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_interseccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="392" y="70" width="148" height="18"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_num_calle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="162" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="72" y="10" width="75" height="22" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Atentamente.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="32" y="126" width="30" height="22" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[C. C.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="126" width="187" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="62" y="147" width="146" height="1" forecolor="#000099"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<rectangle radius="10">
+				<reportElement x="267" y="5" width="274" height="122" forecolor="#000099"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="371" y="10" width="75" height="22" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CROQUIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="129" width="68" height="30" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Obsevación:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="129" width="205" height="30"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -4,7 +4,6 @@
  */
 package com.ec.controlador;
 
-import static com.ec.controlador.CargarArchivoPermiso.FOLDER_IMG;
 import com.ec.entidad.Bombero;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Parroquia;
@@ -24,7 +23,6 @@ import com.ec.servicio.ServicioTipoTarifa;
 import com.ec.servicio.ServicioUsuario;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +34,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Fileupload;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -205,15 +202,15 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg =  FOLDER_IMG + File.separator + media.getName();
+                filePathImg =  FOLDER_IMG + File.separator ;
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
                     baseDir.mkdirs();
                 }
-                Files.copy(new File(filePathImg + media.getName()),
+                Files.copy(new File(filePathImg+ media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParPathLogo(filePathImg);
+                parametrizarselected.setParPathLogo(filePathImg+ media.getName());
                 servicioParametrizar.modificar(parametrizarselected);
             }
             System.out.println(" no es imagen ");
@@ -235,15 +232,15 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg =  FOLDER_IMG + File.separator + media.getName();
+                filePathImg =  FOLDER_IMG + File.separator ;
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
                     baseDir.mkdirs();
                 }
-                Files.copy(new File(filePathImg + media.getName()),
+                Files.copy(new File(filePathImg+ media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParFirmaUno(filePathImg);
+                parametrizarselected.setParFirmaUno(filePathImg+ media.getName());
                 servicioParametrizar.modificar(parametrizarselected);
             }
             System.out.println(" no es imagen ");
@@ -265,7 +262,7 @@ public class AdministrarConfiguracion {
                     System.out.println(" retorna ");
                     return;
                 }
-                filePathImg = FOLDER_IMG + File.separator + media.getName();
+                filePathImg = FOLDER_IMG + File.separator ;
                 System.out.println(" filePathImg " + filePathImg);
                 File baseDir = new File(filePathImg);
                 if (!baseDir.exists()) {
@@ -273,7 +270,7 @@ public class AdministrarConfiguracion {
                 }
                 Files.copy(new File(filePathImg + media.getName()),
                         media.getStreamData());
-                parametrizarselected.setParFirmaDos(filePathImg);
+                parametrizarselected.setParFirmaDos(filePathImg+ media.getName());
                 servicioParametrizar.modificar(parametrizarselected);
             }
             System.out.println(" no es imagen ");

@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoConstruccion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="159"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select pa.*,sp.*
+		<![CDATA[select pa.*,sp.*,per.per_numero, per.per_numero_text
 , (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
 (select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion
 from parametrizar pa,
- solicitud_permiso sp, parroquia pr, recinto rc
-where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracion} limit 1;]]>
+ solicitud_permiso sp, parroquia pr, recinto rc, permiso per, inspeccion ins
+where pa.cod_parametrizar=sp.id_parametrizar and
+sp.id_solcitud_per=ins.id_solcitud_per
+and ins.id_inspeccion=per.id_inspeccion and sp.solp_numeracion=$P{numeracion} limit 1;]]>
 	</queryString>
 	<field name="cod_parametrizar" class="java.lang.Integer"/>
 	<field name="par_contacto_empresa" class="java.lang.String"/>
@@ -35,6 +37,10 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	<field name="par_carpeta" class="java.lang.String"/>
 	<field name="par_folder_adicional" class="java.lang.String"/>
 	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
 	<field name="id_solcitud_per" class="java.lang.Integer"/>
 	<field name="id_estado_documento" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -91,248 +97,69 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	<field name="id_tarifa" class="java.lang.Integer"/>
 	<field name="id_bombero" class="java.lang.Integer"/>
 	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
+	<field name="solp_anio" class="java.lang.Integer"/>
+	<field name="per_numero" class="java.lang.Integer"/>
+	<field name="per_numero_text" class="java.lang.String"/>
 	<field name="par_descripcion" class="java.lang.String"/>
 	<field name="rec_descripcion" class="java.lang.String"/>
-	<background>
-		<band height="381" splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<image onErrorType="Blank">
-				<reportElement x="243" y="0" width="68" height="62"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="0" width="243" height="23" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="18" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[CUERPO DE BOMBEROS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="23" width="243" height="23" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="15" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[PEDRO VICENTE MALDONADO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="311" y="0" width="243" height="46" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true" isItalic="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[DEPARTAMENTO DE PREVENCION DE INCENDIOS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="46" width="243" height="33" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Creado el 29 de Noviembre de 1999. Acuerdo Ministeria 00320            R.U.C: 1768077250001]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="311" y="46" width="243" height="33" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Dirección: By Pass Lote 1 y margen derecho - Telefono: 2392-363]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="243" y="62" width="68" height="17" forecolor="#000066"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="false"/>
-				</textElement>
-				<text><![CDATA[R.U.C: 1768077250001]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="56" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="133" y="11" width="279" height="23" forecolor="#000000"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[CERTIFICADO DE CONSTRUCCIÓN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="412" y="11" width="142" height="23" forecolor="#FF0000"/>
-				<textElement textAlignment="Center">
-					<font size="15" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[0007666]]></text>
-			</staticText>
-			<line>
-				<reportElement x="133" y="34" width="279" height="1"/>
-			</line>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="139" splitType="Stretch">
-			<line>
-				<reportElement x="120" y="30" width="420" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="120" y="56" width="420" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="120" y="99" width="420" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="62" y="76" width="478" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="100" width="51" height="23" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Teléfono]]></text>
-			</staticText>
-			<line>
-				<reportElement x="51" y="122" width="227" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="11" width="119" height="23" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Nombre del inmueble]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="1" y="34" width="119" height="23" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Gerente o Propietario]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="1" y="57" width="60" height="23" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Dirección]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="1" y="77" width="118" height="23" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Tipo de Construcción]]></text>
-			</staticText>
+	<detail>
+		<band height="744" splitType="Stretch">
 			<textField>
-				<reportElement x="120" y="34" width="434" height="22"/>
+				<reportElement x="56" y="173" width="388" height="22"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="61" y="60" width="243" height="16"/>
+				<reportElement x="56" y="196" width="388" height="22"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_barrio_urbanizacion}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{par_descripcion}==null?"":$F{par_descripcion}+" / ")
++($F{rec_descripcion}==null?"":$F{par_descripcion}+" / ")
++($F{solp_calle}==null?"":$F{solp_calle}+" / ")
++($F{solp_interseccion}==null?"":$F{solp_interseccion})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="51" y="99" width="248" height="20"/>
+				<reportElement x="56" y="148" width="390" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_proyecto}==null?"S/N":$F{solp_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="56" y="264" width="244" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_telefono}]]></textFieldExpression>
 			</textField>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="95" splitType="Stretch">
+			<textField pattern="dd">
+				<reportElement x="162" y="381" width="63" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="651" width="175" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_respon_firma_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="650" width="175" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{par_respon_firma_dos}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="548" width="160" height="86"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="279" y="548" width="157" height="86"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_dos}]]></imageExpression>
+			</image>
+			<textField pattern="MMMM">
+				<reportElement x="237" y="381" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="0" width="554" height="53" forecolor="#000000"/>
-				<textElement>
-					<font size="11" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Este departamento en atención a la solicitud presentada y considerando que en esta construcción se cumple las disposiciones relatadas a DEFENSA CONTRA INCENDIOS, concede el presente: CERTIFICADO DE CONSTRUCCIÓN, documento válido exclusivamente para dicho fin.]]></text>
+				<reportElement x="397" y="381" width="41" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[21]]></text>
 			</staticText>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="57" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="473" y="0" width="37" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[del 20]]></text>
-			</staticText>
-			<line>
-				<reportElement x="374" y="11" width="99" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement positionType="Float" x="360" y="0" width="14" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[de]]></text>
-			</staticText>
-			<line>
-				<reportElement x="304" y="10" width="56" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement positionType="Float" x="146" y="0" width="158" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Pedro Vicente Maldonado, a]]></text>
-			</staticText>
-			<line>
-				<reportElement x="510" y="12" width="45" height="1" forecolor="#000000"/>
-				<graphicElement>
-					<pen lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-			<textField pattern="yyyy">
-				<reportElement x="459" y="30" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="326" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="194" y="74" width="166" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[ABNEGACIÓN Y DISCIPLINA.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="34" y="240" width="113" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[JEFATURA CB-PVM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="361" y="240" width="127" height="22" forecolor="#000000"/>
-				<textElement>
-					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[TESORERÍA CB-PVM]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
 </jasperReport>

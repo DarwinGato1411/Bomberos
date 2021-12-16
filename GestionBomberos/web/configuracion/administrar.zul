@@ -158,7 +158,7 @@
                             </div>
                             
                             <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
-                                <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion firma 1
+                                <label value="(*)" style="color:red;font-weight:bold"/> Ubicacion firma tesoreria
                                 <div class="input-group "  >
                                     <textbox value="@bind(vm.parametrizarselected.parFirmaUno)" 
                                              placeholder="Firma"
@@ -167,7 +167,7 @@
                                     <image src="/imagenes/folder.png" 
                                            onClick="@command('subirPathImagenFirmaUno')"  
                                            tooltiptext="Subir firma"
-                                           style="font-size:20px;font-weight:bold"/>Agregar firma 1
+                                           style="font-size:20px;font-weight:bold"/>Agregar firma tesoreria
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
@@ -179,7 +179,7 @@
                                           class="form-control" />
                             </div>
                             <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >
-                                <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion firma 2
+                                <label value="(*)" style="color:red;font-weight:bold"/>Ubicacion firma jefatura
                                 <div class="input-group "  >
                                     <textbox value="@bind(vm.parametrizarselected.parFirmaDos)" 
                                              placeholder="Logotipo de la empresa"
@@ -188,7 +188,7 @@
                                     <image src="/imagenes/folder.png" 
                                            onClick="@command('subirPathImagenFirmaDos')"  
                                            tooltiptext="Subir firma"
-                                           style="font-size:20px;font-weight:bold"/>Agregar firma 2
+                                           style="font-size:20px;font-weight:bold"/>Agregar firma jefatura
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-3 col-lg-3  form-group "  >

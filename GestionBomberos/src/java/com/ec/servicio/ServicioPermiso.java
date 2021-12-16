@@ -162,7 +162,7 @@ public class ServicioPermiso {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u ORDER BY u.solpNumeracion desc");
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE u.perNumero IS NOT NULL ORDER BY u.perNumero desc");
             query.setMaxResults(1);
 
             List<Permiso> lista = (List<Permiso>) query.getResultList();
@@ -207,5 +207,7 @@ public class ServicioPermiso {
         }
         return null;
     }
+    
+    
 
 }

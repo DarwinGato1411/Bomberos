@@ -104,8 +104,8 @@
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
                                            class="btn btn-primary btn-xs"
-                                           onClick="@command('cambiarEstado',valor=each)" 
-                                           tooltiptext="Aprobar"/> 
+                                           onClick="@command('observacionpre',valor=each)" 
+                                           tooltiptext="Aprobar reinpeccion"/> 
                                     
                             </listcell>
                             <listcell zclass = "mycss-listcell">

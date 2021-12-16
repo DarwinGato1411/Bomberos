@@ -101,7 +101,8 @@
                             </listcell>
                             <listcell zclass = "mycss-listcell">
                                                      
-                                <button    style="width:30px;height:30px; background: red" iconSclass="z-icon-thumbs-o-down"
+                                <button    style="width:30px;height:30px; background: red" 
+                                           iconSclass="z-icon-thumbs-o-down"
                                                        class="btn btn-primary btn-xs"
                                                        onClick="@command('anularSolicitud',valor=each)" 
                                                        tooltiptext="Anular Solicitud"/> 

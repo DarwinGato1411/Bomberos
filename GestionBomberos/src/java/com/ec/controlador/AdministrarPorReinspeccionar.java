@@ -5,10 +5,8 @@
 package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
-import com.ec.entidad.Opciones;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
-import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,6 +89,17 @@ public class AdministrarPorReinspeccionar {
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/cargarArchivos.zul", null, map);
+        window.doModal();
+        consultarPermisosPorReinspec();
+    }
+    
+      @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void observacionpre(@BindingParam("valor") SolicitudPermiso valor) {
+        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+        map.put("valor", valor);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/observacionprevencion.zul", null, map);
         window.doModal();
         consultarPermisosPorReinspec();
     }

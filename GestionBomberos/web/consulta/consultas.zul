@@ -31,14 +31,14 @@
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 btn-group">
                                 <label value="Inicio: " style="font-weight: bold;padding: 5px;"   />
                                 <datebox compact="true" value="@bind(vm.fechainicio)" 
-                                         style="font-weight:bold;width:100px"
+                                         style="font-weight:bold;"
                                       
                                          buttonVisible="true" 
                                          lenient="true" format="dd/MM/yyyy" 
                                          constraint="no empty: Ingrese la fecha "/>
                                 <label value="Fin: "  style="font-weight: bold;padding: 30px;"   />
                                 <datebox compact="true" value="@bind(vm.fechafin)" 
-                                         style="font-weight:bold;width:100px"                                               
+                                         style="font-weight:bold;"                                               
                                          buttonVisible="true" 
                                          lenient="true" format="dd/MM/yyyy" 
                                          constraint="no empty: Ingrese la fecha "/> 
