@@ -35,6 +35,10 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 	<field name="par_carpeta" class="java.lang.String"/>
 	<field name="par_folder_adicional" class="java.lang.String"/>
 	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
 	<field name="id_solcitud_per" class="java.lang.Integer"/>
 	<field name="id_estado_documento" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -299,6 +303,10 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 				</textElement>
 				<text><![CDATA[Art. 35 (Facultades especiales de los primeros jefes de cuerpos de bomberos). Facultades a los primeros jefes de los cuerpos de bomberos conceder permisos anuales y ocasionales cobrar las tasas de servicios, ordenar clausuras de locales y adoptar todas las medidas necesarias para prevenir flagelos. Dentro de su respectiva jurisdicción conforme a los previsto en el Reglamento General de esta Ley. ETC]]></text>
 			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="91" y="2" width="113" height="28"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
+			</image>
 		</band>
 	</columnFooter>
 	<pageFooter>
