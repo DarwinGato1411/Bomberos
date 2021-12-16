@@ -35,6 +35,10 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	<field name="par_carpeta" class="java.lang.String"/>
 	<field name="par_folder_adicional" class="java.lang.String"/>
 	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
 	<field name="id_solcitud_per" class="java.lang.Integer"/>
 	<field name="id_estado_documento" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -291,9 +295,13 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="80" y="55" width="96" height="31"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
+			<image onErrorType="Blank">
+				<reportElement x="361" y="55" width="113" height="28"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="80" y="55" width="113" height="28"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

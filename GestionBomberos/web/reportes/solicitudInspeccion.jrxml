@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudInspeccion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.1000000000000023"/>
+	<property name="ireport.zoom" value="0.8264462809917371"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="432"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numeracion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -35,6 +35,10 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	<field name="par_carpeta" class="java.lang.String"/>
 	<field name="par_folder_adicional" class="java.lang.String"/>
 	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
 	<field name="id_solcitud_per" class="java.lang.Integer"/>
 	<field name="id_estado_documento" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -88,6 +92,9 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	<field name="solp_telefono_proyecto" class="java.lang.String"/>
 	<field name="solp_otro" class="java.lang.String"/>
 	<field name="solp_numeracion" class="java.lang.Integer"/>
+	<field name="id_tarifa" class="java.lang.Integer"/>
+	<field name="id_bombero" class="java.lang.Integer"/>
+	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
 	<field name="par_descripcion" class="java.lang.String"/>
 	<field name="rec_descripcion" class="java.lang.String"/>
 	<background>
@@ -95,10 +102,6 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image onErrorType="Blank">
-				<reportElement x="243" y="0" width="68" height="62"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="0" width="243" height="23" forecolor="#000099"/>
 				<textElement textAlignment="Center">
@@ -141,6 +144,17 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				</textElement>
 				<text><![CDATA[R.U.C: 1768077250001]]></text>
 			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="254" y="0" width="49" height="46"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -611,7 +625,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				</graphicElement>
 			</line>
 			<rectangle radius="10">
-				<reportElement x="267" y="5" width="274" height="142" forecolor="#000099"/>
+				<reportElement x="267" y="5" width="274" height="122" forecolor="#000099"/>
 			</rectangle>
 			<staticText>
 				<reportElement positionType="Float" x="371" y="10" width="75" height="22" forecolor="#000099"/>
@@ -621,23 +635,23 @@ where pa.cod_parametrizar=sp.id_parametrizar and sp.solp_numeracion=$P{numeracio
 				<text><![CDATA[CROQUIS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="267" y="105" width="64" height="22" forecolor="#000099"/>
+				<reportElement x="267" y="129" width="68" height="30" forecolor="#000099"/>
 				<textElement>
 					<font size="12" isBold="false" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Obsevación]]></text>
+				<text><![CDATA[Obsevación:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="331" y="107" width="209" height="40"/>
+				<reportElement x="335" y="129" width="205" height="30"/>
 				<box>
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement verticalAlignment="Top"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_observacion}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nota}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
