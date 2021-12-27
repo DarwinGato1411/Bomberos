@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/controlador/ObservacionPermiso.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/entidad/Vehiculo.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/controlador/AdministrarPorReinspeccionar.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/web/menus/permiso_por_reinspeccion.zul</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/controlador/NuevoPermiso.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/servicio/ServicioPermiso.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/controlador/AdministrarPorInspeccionar.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/servicio/ServicioSolicitudPermiso.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/controlador/ObservacionPrevencion.java</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/web/nuevo/permiso.zul</file>
-            <file>file:/E:/DARWIN/Proyecto%20Bomberos/Bomberos/GestionBomberos/src/java/com/ec/entidad/Permiso.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

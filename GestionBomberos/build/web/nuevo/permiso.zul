@@ -192,7 +192,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
                     <label value="(*)" style="color:red;font-weight:bold"/>Fecha caduca
-                    <datebox compact="true"  value="@bind(vm.entidadSelected.solpModelo)" 
+                    <datebox compact="true"  value="@bind(vm.entidadSelected.solpCaduca)" 
                              readonly="true" style="font-weight:bold;" 
                              buttonVisible="true" 
                              lenient="true" format="dd/MM/yyyy" 
