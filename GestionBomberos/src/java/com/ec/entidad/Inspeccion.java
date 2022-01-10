@@ -53,6 +53,9 @@ public class Inspeccion implements Serializable {
     private String insLocalidad;
     @Column(name = "ins_referencia")
     private String insReferencia;
+    @Column(name = "ins_num_doc_por_agente")
+    private Integer insNumDocPorAgente;
+    
     @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
     @ManyToOne
     private Bombero idBombero;
@@ -125,6 +128,14 @@ public class Inspeccion implements Serializable {
         this.insReferencia = insReferencia;
     }
 
+    public Integer getInsNumDocPorAgente() {
+        return insNumDocPorAgente;
+    }
+
+    public void setInsNumDocPorAgente(Integer insNumDocPorAgente) {
+        this.insNumDocPorAgente = insNumDocPorAgente;
+    }
+    
     public Bombero getIdBombero() {
         return idBombero;
     }

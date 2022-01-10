@@ -116,6 +116,7 @@ and sp.solp_numeracion=$P{numeracion} limit 1]]>
 	<field name="ins_observacion" class="java.lang.String"/>
 	<field name="ins_localidad" class="java.lang.String"/>
 	<field name="ins_referencia" class="java.lang.String"/>
+	<field name="ins_num_doc_por_agente" class="java.lang.Integer"/>
 	<field name="id_perfil" class="java.lang.Integer"/>
 	<field name="usu_nombre" class="java.lang.String"/>
 	<field name="usu_login" class="java.lang.String"/>
@@ -167,7 +168,7 @@ and sp.solp_numeracion=$P{numeracion} limit 1]]>
 				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_inspeccion}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ins_num_doc_por_agente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="286" y="360" width="122" height="20"/>
