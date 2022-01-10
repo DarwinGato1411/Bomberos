@@ -5,12 +5,21 @@
 package com.ec.controlador;
 
 import com.ec.entidad.EstadoDocumento;
+import com.ec.entidad.Parametrizar;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioSolicitudPermiso;
+import com.ec.utilitario.ArchivoUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import net.sf.jasperreports.engine.JRException;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -29,6 +38,7 @@ public class AdministrarPorReinspeccionar {
      ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
      ServicioEstadoDocumento servicioEstadoDocumento = new ServicioEstadoDocumento();
     private List<SolicitudPermiso> listaSolicitudPermisos = new ArrayList<SolicitudPermiso>();
+    private Parametrizar parametrizar = new Parametrizar();
     private String buscarReins = "REINS";
     private String buscar = "";
 
@@ -103,6 +113,31 @@ public class AdministrarPorReinspeccionar {
         window.doModal();
         consultarPermisosPorReinspec();
     }
+    
+    @Command
+    public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("numeracion", valor.getSolpNumeracion());
+        try {
+            String nombreReporte = "solicitudInspeccion.jasper";
+            ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
+        } catch (JRException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public List<SolicitudPermiso> getListaSolicitudPermisos() {
         return listaSolicitudPermisos;
     }

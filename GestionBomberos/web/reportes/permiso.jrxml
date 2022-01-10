@@ -162,10 +162,6 @@ and sp.solp_numeracion=$P{numeracion} limit 1]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{solp_fecha_reinspeccion}]]></textFieldExpression>
 			</textField>
-			<image onErrorType="Blank">
-				<reportElement x="48" y="284" width="150" height="74"/>
-				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
-			</image>
 			<textField>
 				<reportElement mode="Transparent" x="291" y="188" width="100" height="16" forecolor="#000099" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
@@ -191,7 +187,7 @@ and sp.solp_numeracion=$P{numeracion} limit 1]]>
 			<staticText>
 				<reportElement x="269" y="267" width="22" height="16"/>
 				<textElement/>
-				<text><![CDATA[21]]></text>
+				<text><![CDATA[22]]></text>
 			</staticText>
 		</band>
 	</detail>
