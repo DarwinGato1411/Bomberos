@@ -362,11 +362,11 @@
                                       mold="paging" pageSize="20">
                                                              
                                 <listhead sizable="false">
-                                    <listheader label="${labels.app.codtarifa}"  align="left " width="10%"></listheader>
-                                    <listheader label="${labels.app.tarifa}"  align="left " width="40%"></listheader>
+                                    <listheader label="${labels.app.codtarifa}"  align="left " width="15%"></listheader>
+                                    <listheader label="${labels.app.tarifa}"  align="left " width="45%"></listheader>
                                     <listheader label="${labels.app.categoria}"  align="left " width="25%"></listheader>
-                                    <listheader label="${labels.app.valortarifa}"  align="left " width="10%"></listheader>
-                                    <listheader label="${labels.app.valortarifatext}"  align="left " width="25%"></listheader>
+                                    <listheader label="${labels.app.valortarifa}"  align="left " width="15%"></listheader>
+                                    <!--<listheader label="${labels.app.valortarifatext}"  align="left " width="25%"></listheader>-->
                                     <listheader label=""  align="left" width="33px"></listheader>
                                 </listhead>
                    
@@ -397,12 +397,12 @@
                                                      value="@bind(each.tarValor)" style="font-weight:bold" 
                                                      width="100%"/>
                                         </listcell>  
-                                        <listcell zclass = "mycss-listcell">
+<!--                                        <listcell zclass = "mycss-listcell">
                                             <textbox sclass="letraLisbox" 
                                                      readonly="true"
                                                      value="@bind(each.tarValorText)" style="font-weight:bold" 
                                                      width="100%"/>
-                                        </listcell>  
+                                        </listcell>  -->
                                         <listcell zclass = "mycss-listcell">  
                                             <button    style="width:30px;height:30px;" 
                                                        iconSclass="z-icon-edit"
