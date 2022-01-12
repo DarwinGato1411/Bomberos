@@ -23,6 +23,9 @@
                         label="Inicio"   >
                 </button>
                 <label value="Gestion de permisos " style="  color:white;font-size:20px" />
+<!--                 <label value="${sessionScope.usuario.usuarioSistema.usuNivel}" 
+                           style=" border-radius: 100%;color:red; background:transparent; font-size:20px" 
+                            if="${not sessionScope.userCredential.anonymous}" />-->
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 " align="end" style="float: right; " >
                 <label value="Usuario: " 

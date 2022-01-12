@@ -9,7 +9,8 @@
 	<queryString>
 		<![CDATA[select pa.*,sp.*,tar.*
 , (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
-(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion
+(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion,
+(select public.f_numerosletras(tar.tar_valor)) as tarifaletras
 from parametrizar pa,
  solicitud_permiso sp, parroquia pr, recinto rc, tarifa tar
 where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and sp.solp_numeracion=$P{numeracion} limit 1]]>
@@ -110,6 +111,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 	<field name="tar_valor_text" class="java.lang.String"/>
 	<field name="par_descripcion" class="java.lang.String"/>
 	<field name="rec_descripcion" class="java.lang.String"/>
+	<field name="tarifaletras" class="java.lang.String"/>
 	<detail>
 		<band height="243" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
@@ -132,7 +134,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 			<textField>
 				<reportElement x="8" y="126" width="282" height="14"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_valor}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tarifaletras} +" /100 dólares"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="161" y="78" width="129" height="27"/>
@@ -141,11 +143,16 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tar_valor}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="8" y="158" width="282" height="16"/>
+			<textField pattern="yyyy">
+				<reportElement x="185" y="158" width="79" height="16"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_descripcion}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="158" width="185" height="16"/>
+				<textElement/>
+				<text><![CDATA[Permiso de funcionamiento para el  año]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

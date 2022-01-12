@@ -8,12 +8,13 @@
         <div  class="row" >  
             
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+<!--                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label    value="(*) "  >Tarifa</label>
           
                     <combobox id="cmbCategoria"  model="@load(vm.listTarifa)"  
                               width="100%"
-                              readonly="true"       
+                               buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" 
+                              readonly="true"                                     
                               selectedItem="@bind(vm.tarifaSelected)"
                               value="@bind(vm.tarifaSelected.tarDescripcion)" >
                         <template name="model">
@@ -22,7 +23,7 @@
                     </combobox>
       
 
-                </div>
+                </div>-->
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Tipo de solicitud 
                 
@@ -30,7 +31,9 @@
                                 selectedItem="@bind(vm.tipoSoliSelected)" 
                                 value="@bind(vm.tipoSoliSelected.tipsDescripcion)"
                                 onSelect="@command('tipoPermiso')"                                 
-                                readonly="true"                         
+                                readonly="true"         
+                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"    
+                                           
                                 width="100%">
                         <template name="model">
                             <comboitem  label="@bind(each.tipsDescripcion)"/>
@@ -42,7 +45,8 @@
           
                     <combobox  model="@load(vm.listBomberos)"  
                                width="100%"
-                               readonly="true"       
+                               readonly="true"    
+                                  buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
                                selectedItem="@bind(vm.bomberoSelected)"
                                value="@bind(vm.bomberoSelected.bomNombre)" >
                         <template name="model">
@@ -59,6 +63,7 @@
                         Subir la solicitud en formato PDF
                         <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
                                    class="btn btn-primary btn-xs"
+                                      disabled="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"                               
                                    onClick="@command('subirSolicitud')" 
                                    tooltiptext="${labels.app.cargar}"/> 
                         <!--                        </div>
@@ -83,7 +88,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.fechaemi}
                     <datebox compact="true"  value="@bind(vm.entidadSelected.solpFecha)" 
                              readonly="true" style="font-weight:bold;" 
-                             buttonVisible="true" 
+                             buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
                              lenient="true" format="dd/MM/yyyy" 
                              constraint="no empty: Ingrese la fecha "/>
 
@@ -92,7 +97,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.fechainps}
                     <datebox compact="true"  value="@bind(vm.entidadSelected.solpFechaReinspeccion)" 
                              readonly="true" style="font-weight:bold;" 
-                             buttonVisible="true" 
+                             buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
                              lenient="true" format="dd/MM/yyyy" 
                              constraint="no empty: Ingrese la fecha "/>
 
@@ -102,6 +107,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ci} 
                 
                     <textbox  maxlength="13"
+                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}" 
                               onOK="@command('buscarInpeccion')"
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solNumCedula)" 
@@ -305,9 +311,10 @@
                 <iframe height="550px" class="col-12 col-sm-12 col-md-12 col-lg-12" id="reportframe1"                
                         content="@bind(vm.fileContent)"/>   
             </div>                
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center" >
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"  visible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" >
                 <button    iconSclass="z-icon-save"
                            label="Guardar"
+                            
                            class="btn btn-primary btn-xs "                                                               
                            onClick="@command('guardar')"
                            tooltiptext="GUARDAR"/>     

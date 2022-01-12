@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="wAsingatarifa"  position="center" class="col-12 col-sm-12 col-md-11 col-lg-11" closable="true"  
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.AsignarTarifa')">
+    
+    <caption label="${labels.app.solicitudinsp}" style="font-weight:bold"/> 
+    <div  class="container-fluid" >
+        <div  class="row" >  
+            
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+               <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
+                    <label    value="(*) "  >Tarifa</label>
+          
+                    <combobox id="cmbCategoria"  model="@load(vm.listTarifa)"  
+                              width="100%"
+                               buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" 
+                              readonly="true"                                     
+                              selectedItem="@bind(vm.tarifaSelected)"
+                              value="@bind(vm.tarifaSelected.tarDescripcion)" >
+                        <template name="model">
+                            <comboitem  label="@bind(each.tarDescripcion)"/>
+                        </template>                                      
+                    </combobox>
+      
+
+                </div>
+                            
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"   >
+                <button    iconSclass="z-icon-save"
+                           label="Guardar"
+                            
+                           class="btn btn-primary btn-xs "                                                               
+                           onClick="@command('guardar')"
+                           tooltiptext="GUARDAR"/>     
+            </div> 
+           
+        </div>
+   
+    </div>
+    </div>
+                    
+                  
+</window>

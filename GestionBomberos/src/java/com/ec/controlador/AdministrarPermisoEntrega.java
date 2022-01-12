@@ -108,6 +108,18 @@ public class AdministrarPermisoEntrega {
         consultarPermisosPorentr();
     }
 
+    @Command
+    @NotifyChange("listaPermisos")
+    public void modificarPermiso(@BindingParam("valor") Permiso valor) {
+        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+        map.put("valor", valor.getIdInspeccion().getIdSolcitudPer());
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/nuevo/asignartarifa.zul", null, map);
+        window.doModal();
+//        consultarPermisosIng();
+    }
+
+    
     public String getBuscarPorentr() {
         return buscarPorentr;
     }
