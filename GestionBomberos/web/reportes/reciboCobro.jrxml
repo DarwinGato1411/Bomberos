@@ -132,7 +132,7 @@ where pa.cod_parametrizar=sp.id_parametrizar and tar.id_tarifa=sp.id_tarifa and 
 			<textField>
 				<reportElement x="8" y="126" width="282" height="14"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_valor_text}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tar_valor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="161" y="78" width="129" height="27"/>
