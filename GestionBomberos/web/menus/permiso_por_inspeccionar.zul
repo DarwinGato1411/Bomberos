@@ -38,6 +38,7 @@
                             <listheader label=""  align="left" width="33px"></listheader>
                             <listheader label=""  align="left" width="33px"></listheader>
                             <listheader label=""  align="left" width="33px"></listheader>
+                            <listheader label=""  align="left" width="33px"></listheader>
                         </listhead>
                    
                 
@@ -88,12 +89,21 @@
                                 <listcell zclass = "mycss-listcell">
                                                      
                                     <button    style="width:30px;height:30px; background: grey" 
-                                            iconSclass="z-icon-print "                                
-                                            class="btn btn-primary btn-xs"
-                                            onClick="@command('verPermiso',valor=each)" 
-                                            tooltiptext="Ver Solicitud"/> 
+                                               iconSclass="z-icon-print "                                
+                                               class="btn btn-primary btn-xs"
+                                               onClick="@command('verPermiso',valor=each)" 
+                                               tooltiptext="Ver Solicitud"/> 
                                     
                                 </listcell> 
+                                <listcell zclass = "mycss-listcell">
+                                                     
+                                    <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
+                                
+                                            class="btn btn-primary btn-xs"
+                                            onClick="@command('modificarPermiso',valor=each)" 
+                                            tooltiptext="${labels.app.editar}"/> 
+                                    
+                                </listcell>
                                 <listcell zclass = "mycss-listcell">
                                                      
                                     <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
