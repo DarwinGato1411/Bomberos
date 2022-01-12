@@ -126,7 +126,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group " visible="@bind(vm.activaOtro)"  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.otro}  
                 
-                    <textbox  maxlength="15" 
+                    <textbox  maxlength="150" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpOtro)" 
                               class="form-control" />

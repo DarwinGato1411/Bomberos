@@ -47,6 +47,14 @@
                           value="@bind(vm.entidadSelected.tarValor)"
                           class="form-control" />
             </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <label value="(*)" style="color:transparent;font-weight:bold"/>Valor en text:
+              
+                <textbox  maxlength="150"
+                          onChange="self.setValue(self.getValue().toUpperCase())"
+                          value="@bind(vm.entidadSelected.tarValorText)"
+                          class="form-control" />
+            </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group" align="center" >
                     

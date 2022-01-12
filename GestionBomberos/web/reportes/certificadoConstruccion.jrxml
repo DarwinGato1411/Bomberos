@@ -158,7 +158,7 @@ and ins.id_inspeccion=per.id_inspeccion and sp.solp_numeracion=$P{numeracion} li
 			<staticText>
 				<reportElement x="397" y="381" width="41" height="20"/>
 				<textElement textAlignment="Right"/>
-				<text><![CDATA[21]]></text>
+				<text><![CDATA[22]]></text>
 			</staticText>
 		</band>
 	</detail>
