@@ -1,0 +1,17 @@
+-- View: public.partediario
+
+-- DROP VIEW public.partediario;
+
+CREATE OR REPLACE VIEW public.partediario
+ AS
+ SELECT max(cobro.id_cobro) AS id_cobro,
+    cobro.cob_detalle,
+    sum(cobro.cob_valor) AS cob_valor,
+    sum(cobro.cob_cantidad) AS cob_cantidad,
+    cobro.cob_fecha,
+	sum(cobro.cob_impuesto_predial_cobro) as cob_impuesto_predial_cobro
+   FROM cobro
+  GROUP BY cobro.cob_detalle, cobro.cob_fecha;
+
+ALTER TABLE public.partediario
+    OWNER TO postgres;
