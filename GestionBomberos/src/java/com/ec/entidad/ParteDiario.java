@@ -32,6 +32,8 @@ public class ParteDiario implements Serializable {
     private BigDecimal cobValor;
     @Column(name = "cob_cantidad")
     private BigDecimal cobCantidad;
+    @Column(name = "cob_impuesto_predial_cobro")
+    private BigDecimal cobImpuestoPredialcobro;
     @Column(name = "cob_fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date cobFecha;
@@ -78,5 +80,15 @@ public class ParteDiario implements Serializable {
     public void setCobFecha(Date cobFecha) {
         this.cobFecha = cobFecha;
     }
+
+    public BigDecimal getCobImpuestoPredialcobro() {
+        return cobImpuestoPredialcobro;
+    }
+
+    public void setCobImpuestoPredialcobro(BigDecimal cobImpuestoPredialcobro) {
+        this.cobImpuestoPredialcobro = cobImpuestoPredialcobro;
+    }
+
+
 
 }

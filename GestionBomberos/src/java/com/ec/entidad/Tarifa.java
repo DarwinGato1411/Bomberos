@@ -84,7 +84,7 @@ public class Tarifa implements Serializable {
     }
 
     public BigDecimal getTarValor() {
-        return tarValor;
+        return tarValor!=null?tarValor:BigDecimal.ZERO;
     }
 
     public void setTarValor(BigDecimal tarValor) {

@@ -61,7 +61,7 @@ public class AsignarTarifa {
         tarifaSelected = valor.getIdTarifa() == null ? null : valor.getIdTarifa();
         valorCobroImpuesto = valor.getSolpImpuestoPredialValor() != null ? valor.getSolpImpuestoPredialValor() : BigDecimal.ZERO;
         valorImpuesto = valor.getSolpImpuestoPredial() != null ? valor.getSolpImpuestoPredial() : BigDecimal.ZERO;
-        totalCobrar = valorCobroImpuesto.add(tarifaSelected.getTarValor()!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
+        totalCobrar = valorCobroImpuesto.add(tarifaSelected!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
     }
 
     public AsignarTarifa() {

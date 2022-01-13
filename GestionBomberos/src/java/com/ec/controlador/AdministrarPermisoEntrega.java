@@ -202,9 +202,7 @@ public class AdministrarPermisoEntrega {
                     System.out.println("TOTAL " + valorTotal);
                     cobro.setCobValor(valorTotal);
                     cobro.setCobImpuestoPredial(valorImpuesto);
-                    cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);
-
-                    cobro.setCobImpuestoPredialCobro(valorImpuesto);
+                    cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);            
                     valor.setPerPagado(Boolean.TRUE);
                     servicioPermiso.modificar(valor);
                     servicioCobro.crear(cobro);
@@ -229,9 +227,7 @@ public class AdministrarPermisoEntrega {
                 System.out.println("TOTAL " + valorTotal);
                 cobro.setCobValor(valorTotal);
                 cobro.setCobImpuestoPredial(valorImpuesto);
-                cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);
-
-                cobro.setCobImpuestoPredialCobro(valorImpuesto);
+                cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);   
                 valor.setPerPagado(Boolean.TRUE);
                 servicioPermiso.modificar(valor);
                 servicioCobro.modificar(cobro);

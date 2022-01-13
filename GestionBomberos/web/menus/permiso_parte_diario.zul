@@ -69,6 +69,7 @@
                                 <listheader label="Cantidad"  align="left" hflex="1"></listheader>
                                 <listheader label="Detalle"  align="left" hflex="5"></listheader>
                                 <listheader label="Total ($)"  align="left" hflex="1"></listheader>                     
+                                <listheader label="Imp Predial"  align="left" hflex="1"></listheader>                     
 
                             </listhead>
                    
@@ -96,6 +97,13 @@
                                         <textbox sclass="letraLisbox" 
                                                  readonly="true"
                                                  value="@bind(each.cobValor)" style="font-weight:bold" 
+                                                 width="100%"/>                                        
+                               
+                                    </listcell>  
+                                    <listcell zclass = "mycss-listcell">  
+                                        <textbox sclass="letraLisbox" 
+                                                 readonly="true"
+                                                 value="@bind(each.cobImpuestoPredialcobro)" style="font-weight:bold" 
                                                  width="100%"/>                                        
                                
                                     </listcell>  

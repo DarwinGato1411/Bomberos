@@ -8,22 +8,24 @@
         <menubar id="menubar" orient="vertical"  autodrop="false" >
             <!--Menu Recaudacion-->
             <!--<menuitem label="Nueva solicitud"  id="btnNuevaSolicitud" style="backgroud:green"/>--> 
-            <menuitem label="Ingresado"  id="btnPerIngresados"/> 
+            <menuitem label="Ingresado"   tooltiptext="Ingreso de solicitudes" id="btnPerIngresados"/> 
+            <!--PREVENCION DE INCENDIOS-->
+             <menuitem label="Inspeccion pendiente" tooltiptext="Prevencion de incendios" id="btnPorInspeccionar"/>
             <!--<menuitem label="Por revisar (Pendientes aprobar)"  id="btnPorRevisar"/>-->
-            <menuitem label="Aprobados"  id="btnPerAprobados"/>
+            <menuitem label="Aprobados" tooltiptext="Permisos aprobados"  id="btnPerAprobados"/>
             <!--<menuitem label="Revision (documentacion)"  id="btnPerRevisados"/>--> 
-            <menuitem label="Entrega de Permiso"  id="btnEntregaPermiso"/>
-            <menuitem label="Consultar información"  id="btnConsultas"/> 
+            <menuitem label="Entrega de Permiso" tooltiptext="Entrega de permisos y cobro"  id="btnEntregaPermiso"/>
+          
             <!--menu tesoreria-->
             <menuitem label="Parte Diario"  id="btnParteDiario"/>
-            <!--PREVENCION DE INCENDIOS-->
-            <menuitem label="Inspeccion pendiente"  id="btnPorInspeccionar"/>
+            
+           
             <menuitem label="Reinspección"  id="btnPerReinspeccion"/>
             <!--GENERAL-->
              <menuitem label="Anulados" id="btnPerAnulados"/>   
              <!--ADMINISTRADOR-->  
               <menuitem label="Configuracion" id="btnConfigurar"/>
-            
+              <menuitem label="Historial de solicitudes"  id="btnConsultas"/> 
             
           
         </menubar>
