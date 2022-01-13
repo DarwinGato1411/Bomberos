@@ -56,6 +56,9 @@ public class Cobro implements Serializable {
     
     @Column(name = "cob_impuesto_predial")
     private BigDecimal cobImpuestoPredial;
+    
+    @Column(name = "cob_impuesto_predial_cobro")
+    private BigDecimal cobImpuestoPredialCobro;
 
     public Cobro() {
     }
@@ -131,4 +134,13 @@ public class Cobro implements Serializable {
     public void setCobImpuestoPredial(BigDecimal cobImpuestoPredial) {
         this.cobImpuestoPredial = cobImpuestoPredial;
     }
+
+    public BigDecimal getCobImpuestoPredialCobro() {
+        return cobImpuestoPredialCobro;
+    }
+
+    public void setCobImpuestoPredialCobro(BigDecimal cobImpuestoPredialCobro) {
+        this.cobImpuestoPredialCobro = cobImpuestoPredialCobro;
+    }
+    
 }

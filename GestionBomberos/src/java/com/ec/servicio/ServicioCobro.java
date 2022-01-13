@@ -5,6 +5,7 @@
 package com.ec.servicio;
 
 import com.ec.entidad.Cobro;
+import com.ec.entidad.Permiso;
 import com.ec.entidad.SolicitudPermiso;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class ServicioCobro {
 
     }
 
-    public List<Cobro> findByPermiso(SolicitudPermiso idPermiso) {
+    public Cobro findByPermiso(Permiso idPermiso) {
 
         List<Cobro> listaDatos = new ArrayList<Cobro>();
         try {
@@ -83,11 +84,14 @@ public class ServicioCobro {
             em.getTransaction().begin();
             Query query = em.createQuery("SELECT u FROM Cobro u WHERE u.idPermiso =:idPermiso");
             query.setParameter("idPermiso", idPermiso);
-          
-            listaDatos = (List<Cobro>) query.getResultList();
-           
             em.getTransaction().commit();
-             return listaDatos;
+            listaDatos = (List<Cobro>) query.getResultList();
+            if (!listaDatos.isEmpty()) {
+                return listaDatos.get(0);
+            } else {
+                return null;
+            }
+
         } catch (Exception e) {
             System.out.println("Error en lsa consulta cobro  findLikePerNombre  " + e.getMessage());
         } finally {

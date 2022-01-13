@@ -11,6 +11,8 @@ import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.servicio.ServicioTarifa;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -41,17 +43,25 @@ public class AsignarTarifa {
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
 
     UserCredential credential = new UserCredential();
-    
+
     private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
     private Tarifa tarifaSelected = null;
     ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
 
     private Inspeccion entidadInspeccion = new Inspeccion();
-    
+
+    private BigDecimal valorImpuesto = BigDecimal.ZERO;
+    private BigDecimal valorCobroImpuesto = BigDecimal.ZERO;
+    private BigDecimal totalCobrar = BigDecimal.ZERO;
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
         entidadSelected = valor;
+        tarifaSelected = valor.getIdTarifa() == null ? null : valor.getIdTarifa();
+        valorCobroImpuesto = valor.getSolpImpuestoPredialValor() != null ? valor.getSolpImpuestoPredialValor() : BigDecimal.ZERO;
+        valorImpuesto = valor.getSolpImpuestoPredial() != null ? valor.getSolpImpuestoPredial() : BigDecimal.ZERO;
+        totalCobrar = valorCobroImpuesto.add(tarifaSelected.getTarValor()!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
     }
 
     public AsignarTarifa() {
@@ -63,10 +73,19 @@ public class AsignarTarifa {
     }
 
     @Command
+    @NotifyChange({"valorCobroImpuesto", "totalCobrar"})
+    public void calcularValor() {
+        valorCobroImpuesto = (valorImpuesto.multiply(BigDecimal.valueOf(0.15)).setScale(6)).divide(BigDecimal.valueOf(1000), 4, RoundingMode.FLOOR);
+        totalCobrar = valorCobroImpuesto.add(tarifaSelected.getTarValor()!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
+    }
+
+    @Command
     @NotifyChange("entidadSelected")
     public void guardar() {
         if (tarifaSelected != null) {
             entidadSelected.setIdTarifa(tarifaSelected);
+            entidadSelected.setSolpImpuestoPredial(valorImpuesto);
+            entidadSelected.setSolpImpuestoPredialValor(valorCobroImpuesto);
             servicio.modificar(entidadSelected);
             wAsingatarifa.detach();
         } else {
@@ -105,6 +124,30 @@ public class AsignarTarifa {
 
     public void setTarifaSelected(Tarifa tarifaSelected) {
         this.tarifaSelected = tarifaSelected;
+    }
+
+    public BigDecimal getValorImpuesto() {
+        return valorImpuesto;
+    }
+
+    public void setValorImpuesto(BigDecimal valorImpuesto) {
+        this.valorImpuesto = valorImpuesto;
+    }
+
+    public BigDecimal getValorCobroImpuesto() {
+        return valorCobroImpuesto;
+    }
+
+    public void setValorCobroImpuesto(BigDecimal valorCobroImpuesto) {
+        this.valorCobroImpuesto = valorCobroImpuesto;
+    }
+
+    public BigDecimal getTotalCobrar() {
+        return totalCobrar;
+    }
+
+    public void setTotalCobrar(BigDecimal totalCobrar) {
+        this.totalCobrar = totalCobrar;
     }
 
 }
