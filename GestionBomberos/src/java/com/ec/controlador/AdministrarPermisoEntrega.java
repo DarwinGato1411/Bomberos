@@ -50,22 +50,22 @@ public class AdministrarPermisoEntrega {
     private String buscarPorentr = "PORENTR";
     private String buscar = "";
     AMedia fileContent = null;
-
+    
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
 
     /*cobro del permiso*/
     ServicioCobro servicioCobro = new ServicioCobro();
-
+    
     public AdministrarPermisoEntrega() {
         parametrizar = servicioParametrizar.findActivo();
         consultarPermisosPorentr();
     }
-
+    
     private void consultarPermisosPorentr() {
         listaPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarPorentr, buscar);
     }
-
+    
     @Command
     @NotifyChange("listaPermisos")
     public void cambiarEstado(@BindingParam("valor") Permiso valor) {
@@ -77,7 +77,7 @@ public class AdministrarPermisoEntrega {
             consultarPermisosPorentr();
         }
     }
-
+    
     @Command
     @NotifyChange("listaPermisos")
     public void cargarArchivos(@BindingParam("valor") SolicitudPermiso valor) {
@@ -88,7 +88,7 @@ public class AdministrarPermisoEntrega {
         window.doModal();
         consultarPermisosPorentr();
     }
-
+    
     @Command
     @NotifyChange({"listadoAdjuntos", "fileContent"})
     public void verArchivo(@BindingParam("valor") DocumentosAdjunto valor) {
@@ -98,7 +98,7 @@ public class AdministrarPermisoEntrega {
             Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Command
     @NotifyChange("listaPermisos")
     public void agregarcobromanual() {
@@ -107,7 +107,7 @@ public class AdministrarPermisoEntrega {
         window.doModal();
         consultarPermisosPorentr();
     }
-
+    
     @Command
     @NotifyChange("listaPermisos")
     public void modificarPermiso(@BindingParam("valor") Permiso valor) {
@@ -118,37 +118,36 @@ public class AdministrarPermisoEntrega {
         window.doModal();
 //        consultarPermisosIng();
     }
-
     
     public String getBuscarPorentr() {
         return buscarPorentr;
     }
-
+    
     public void setBuscarPorentr(String buscarPorentr) {
         this.buscarPorentr = buscarPorentr;
     }
-
+    
     public String getBuscar() {
         return buscar;
     }
-
+    
     public void setBuscar(String buscar) {
         this.buscar = buscar;
     }
-
+    
     public List<Permiso> getListaPermisos() {
         return listaPermisos;
     }
-
+    
     public void setListaPermisos(List<Permiso> listaPermisos) {
         this.listaPermisos = listaPermisos;
     }
-
+    
     @Command
     public void verPermiso(@BindingParam("valor") Permiso valor) {
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
-
+        
         try {
             if (valor.getIdInspeccion().getIdSolcitudPer().getIdTipoSolicitud().getTipsSigla().equals("CC")) {
                 String nombreReporteConstruccion = "certificadoConstruccion.jasper";
@@ -176,33 +175,39 @@ public class AdministrarPermisoEntrega {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Command
     @NotifyChange("listaPermisos")
     public void cobrar(@BindingParam("valor") Permiso valor) {
-
+        
         try {
             if (!valor.getPerPagado()) {
                 if (Messagebox.show("Desea realizar el cobro", "Pregunta", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+//                   cob_impuesto_predial
                     Cobro cobro = new Cobro();
                     cobro.setIdPermiso(valor);
                     cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
-                    cobro.setCobValor(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor());
+                    
                     cobro.setCobFecha(new Date());
                     cobro.setCobCantidad(BigDecimal.ONE);
+//                    ins_impuesto_Predial
+                    cobro.setCobImpuestoPredial(valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredial());
+                    BigDecimal valorTotal = valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor().add(valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredial());
+                    cobro.setCobValor(valorTotal);
+                    cobro.setCobImpuestoPredial(valorTotal);
                     valor.setPerPagado(Boolean.TRUE);
                     servicioPermiso.modificar(valor);
                     servicioCobro.crear(cobro);
-
+                    
                 }
             }
             Map<String, Object> parametros = new HashMap<String, Object>();
 //                parametros.put("numeracion", valor.getSolpNumeracion());
             parametros.put("numeracion", valor.getIdInspeccion().getIdSolcitudPer().getSolpNumeracion());
             String nombreReporte = "reciboCobro.jasper";
-
+            
             ArchivoUtils.reporteGeneral(parametros, parametrizar, nombreReporte);
-
+            
         } catch (JRException ex) {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -219,5 +224,5 @@ public class AdministrarPermisoEntrega {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
 }

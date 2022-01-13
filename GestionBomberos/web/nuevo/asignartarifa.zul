@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window  id="wAsingatarifa"  position="center" class="col-12 col-sm-12 col-md-11 col-lg-11" closable="true"  
+<window  id="wAsingatarifa"  position="center" class="col-12 col-sm-12 col-md-6 col-lg-6" closable="true"  
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.AsignarTarifa')">
     
@@ -7,13 +7,12 @@
     <div  class="container-fluid" >
         <div  class="row" >  
             
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
-               <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label    value="(*) "  >Tarifa</label>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+               <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                    <label    value="(*) "  >${labels.app.tarifa}</label>
           
                     <combobox id="cmbCategoria"  model="@load(vm.listTarifa)"  
-                              width="100%"
-                               buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" 
+                              width="100%"                             
                               readonly="true"                                     
                               selectedItem="@bind(vm.tarifaSelected)"
                               value="@bind(vm.tarifaSelected.tarDescripcion)" >
@@ -24,6 +23,16 @@
       
 
                 </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.valorImpuestoPre} 
+                
+                    <textbox  maxlength="8" 
+                              value="@bind(vm.entidadSelected.solpImpuestoPredial)" 
+                              onChange="self.setValue(self.getValue().toUpperCase())"
+                              
+                              class="form-control" />
+                </div>
+                
                             
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"   >
                 <button    iconSclass="z-icon-save"

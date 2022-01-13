@@ -4,6 +4,7 @@
  */
 package com.ec.controlador;
 
+import com.ec.entidad.Inspeccion;
 import com.ec.entidad.SolicitudPermiso;
 import com.ec.entidad.Tarifa;
 import com.ec.seguridad.EnumSesion;
@@ -40,11 +41,13 @@ public class AsignarTarifa {
     private SolicitudPermiso entidadSelected = new SolicitudPermiso();
 
     UserCredential credential = new UserCredential();
-
+    
     private List<Tarifa> listTarifa = new ArrayList<Tarifa>();
     private Tarifa tarifaSelected = null;
     ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
 
+    private Inspeccion entidadInspeccion = new Inspeccion();
+    
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);

@@ -6,6 +6,7 @@
 package com.ec.entidad;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -55,6 +56,8 @@ public class Inspeccion implements Serializable {
     private String insReferencia;
     @Column(name = "ins_num_doc_por_agente")
     private Integer insNumDocPorAgente;
+    @Column(name = "ins_impuesto_predial")
+    private BigDecimal insImpuestoPredial;
     
     @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
     @ManyToOne
@@ -177,6 +180,14 @@ public class Inspeccion implements Serializable {
         this.documentosAdjuntoInspeccionCollection = documentosAdjuntoInspeccionCollection;
     }
 
+    public BigDecimal getInsImpuestoPredial() {
+        return insImpuestoPredial;
+    }
+
+    public void setInsImpuestoPredial(BigDecimal insImpuestoPredial) {
+        this.insImpuestoPredial = insImpuestoPredial;
+    }
+    
     @XmlTransient
     public Collection<Permiso> getPermisoCollection() {
         return permisoCollection;

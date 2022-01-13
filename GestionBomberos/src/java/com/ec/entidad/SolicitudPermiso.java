@@ -150,6 +150,8 @@ public class SolicitudPermiso implements Serializable {
     private String solpMarca;
     @Column(name = "solp_modelo")
     private String solpModelo;
+    @Column(name = "solp_impuesto_predial")
+    private BigDecimal solpImpuestoPredial;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -754,6 +756,14 @@ public class SolicitudPermiso implements Serializable {
     @Override
     public String toString() {
         return "com.ec.entidad.SolicitudPermiso[ idSolcitudPer=" + idSolcitudPer + " ]";
+    }
+
+    public BigDecimal getSolpImpuestoPredial() {
+        return solpImpuestoPredial;
+    }
+
+    public void setSolpImpuestoPredial(BigDecimal solpImpuestoPredial) {
+        this.solpImpuestoPredial = solpImpuestoPredial;
     }
 
 }

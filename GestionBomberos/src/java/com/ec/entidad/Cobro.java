@@ -53,6 +53,9 @@ public class Cobro implements Serializable {
     @JoinColumn(name = "id_solcitud_per", referencedColumnName = "id_solcitud_per")
     @ManyToOne
     private SolicitudPermiso idSolicitudPermiso;
+    
+    @Column(name = "cob_impuesto_predial")
+    private BigDecimal cobImpuestoPredial;
 
     public Cobro() {
     }
@@ -121,4 +124,11 @@ public class Cobro implements Serializable {
         this.idSolicitudPermiso = idSolicitudPermiso;
     }
 
+    public BigDecimal getCobImpuestoPredial() {
+        return cobImpuestoPredial;
+    }
+
+    public void setCobImpuestoPredial(BigDecimal cobImpuestoPredial) {
+        this.cobImpuestoPredial = cobImpuestoPredial;
+    }
 }
