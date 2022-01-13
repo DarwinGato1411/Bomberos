@@ -106,7 +106,7 @@ public class ServicioPermiso {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Permiso u WHERE  (u.idInspeccion.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idInspeccion.idSolcitudPer.solpNombreSol LIKE :solpNombreSol )");
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE  (u.idInspeccion.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idInspeccion.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.idInspeccion.idSolcitudPer.solpNumero DESC");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");

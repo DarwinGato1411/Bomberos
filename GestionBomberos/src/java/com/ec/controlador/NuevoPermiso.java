@@ -113,6 +113,7 @@ public class NuevoPermiso {
                 tipoAccion = "update";
                 entidadSelected = valor;
                 parroquiaSelected = valor.getIdParroquia() != null ? valor.getIdParroquia() : null;
+                recintoSelected = valor.getIdRecinto() != null ? valor.getIdRecinto() : null;
                 tarifaSelected = entidadSelected.getIdTarifa() != null ? entidadSelected.getIdTarifa() : null;
                 tipoSoliSelected = entidadSelected.getIdTipoSolicitud() != null ? entidadSelected.getIdTipoSolicitud() : null;
                 bomberoSelected = entidadSelected.getIdBombero() != null ? entidadSelected.getIdBombero() : null;

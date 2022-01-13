@@ -246,10 +246,11 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.barriourb}  
                 
-                    <combobox   model="@load(vm.listaParrquia)"                                        
+                    <combobox   model="@load(vm.listaParrquia)"
+                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"
+                                readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
                                 selectedItem="@bind(vm.parroquiaSelected)" 
-                                value="Seleccione una parroquia" 
-                                readonly="true"                         
+                                value="Seleccione una parroquia"                       
                                 width="100%">
                         <template name="model">
                             <comboitem  label="@bind(each.parrDescripcion)"/>
@@ -261,10 +262,11 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.recinto}  
                 
-                    <combobox   model="@load(vm.listaRecintos)"                                        
+                    <combobox   model="@load(vm.listaRecintos)" 
+                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" 
+                                readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"                                      
                                 selectedItem="@bind(vm.recintoSelected)" 
-                                value="Seleccione un recinto" 
-                                readonly="true"                         
+                                value="Seleccione un recinto"                         
                                 width="100%">
                         <template name="model">
                             <comboitem  label="@bind(each.recDescripcion)"/>
