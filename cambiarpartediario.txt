@@ -1,4 +1,4 @@
--- View: public.partediario
+
 
 -- DROP VIEW public.partediario;
 
