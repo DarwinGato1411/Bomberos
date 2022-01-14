@@ -57,6 +57,20 @@ public class AdministrarPermiso {
         listaSolicitudPermisos = servicioPermiso.findLikePermisoForEstadoCedulaNombre(buscarIng, buscar);
     }
 
+     //buscart num solicitudes
+    @Command
+    @NotifyChange({"listaSolicitudPermisos", "buscar"})
+    public void buscarLikeNumSolicitud() {
+
+        consultarSolicitudNum();
+
+    }
+
+    private void consultarSolicitudNum() {
+        listaSolicitudPermisos = servicioPermiso.FindLikeNumeroSolicitud(buscar);
+        //saldoPorCobrar();
+    }
+    
     /*Perfil*/
     @Command
     @NotifyChange("listaSolicitudPermisos")
@@ -147,6 +161,16 @@ public class AdministrarPermiso {
     public void setListaSolicitudPermisos(List<SolicitudPermiso> listaSolicitudPermisos) {
         this.listaSolicitudPermisos = listaSolicitudPermisos;
     }
+
+    public String getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(String buscar) {
+        this.buscar = buscar;
+    }
+    
+    
 
     /*cobro de permiso*/
     @Command

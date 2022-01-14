@@ -12,6 +12,7 @@ import com.ec.servicio.ServicioInspeccion;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.Date;
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
@@ -20,6 +21,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Window;
 
 /**
@@ -44,13 +46,18 @@ public class ObservacionPrevencion extends SelectorComposer<Component> {
     }
 
     @Command
-    public void guardar() {
-        entidad.setIdSolcitudPer(solicitudPermiso);
-        servicioInspeccion.crear(entidad);
-        EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
-        solicitudPermiso.setIdEstadoDocumento(estadoDocumento);
-        servicioSolicitudPermiso.modificar(solicitudPermiso);
-        wObservaPreve.detach();
+    public void guardar(@BindingParam("valor") SolicitudPermiso valor) {
+        if (valor.getSolPathSolicitud() != null) {
+            entidad.setIdSolcitudPer(solicitudPermiso);
+            servicioInspeccion.crear(entidad);
+            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
+            solicitudPermiso.setIdEstadoDocumento(estadoDocumento);
+            servicioSolicitudPermiso.modificar(solicitudPermiso);
+            wObservaPreve.detach();
+        } else {
+            Clients.showNotification("Para enviar a prevención de incendios debe adjuntar la solicitud",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        }
     }
 
     public Inspeccion getEntidad() {

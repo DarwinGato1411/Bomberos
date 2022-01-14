@@ -9,6 +9,21 @@
             
             <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 "  >
+                    <label value="(*) " style="color:red;font-weight:bold" />${labels.app.formapago}
+                    <radiogroup Id=""   
+                                onCheck="@command('')" >
+                        <space bar="true"  />
+                        <radio label="Efectivo" value=""/>
+                        <space bar="true"  /> 
+                        <radio label="Transferencia" value=""/>                             
+                                   
+                        <space bar="true"  /> 
+                                        
+                        <radio label="Cheque" value=""/>                                    
+                           
+                    </radiogroup>  
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 "  >
                     <label    value="(*) "  >${labels.app.tarifa}</label>
           
                     <combobox id="cmbCategoria"  model="@load(vm.listTarifa)"  
@@ -24,7 +39,7 @@
       
 
                 </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>tarifa 
                     <decimalbox format="####.##"  readonly="true"                           
                                 value="@bind(vm.tarifaSelected.tarValor)" 
@@ -40,6 +55,14 @@
                               class="form-control"  />
                  
                 </div>
+<!--                <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  >
+                    <label value="(*)" style="color:red;font-weight:bold"/>Valor extra 
+                    <textbox  maxlength="8"  constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"
+                              onChange="@command('calcularValor')"
+                              value="@bind(vm.tarValorExtra)"  
+                              class="form-control"  />
+                 
+                </div>-->
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  >
                     <label value="(*)" style="color:red;font-weight:bold"/>Valor a cobrar por impuesto predial: 
                     <decimalbox format="####.####"  readonly="true"                         

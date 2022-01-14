@@ -44,6 +44,8 @@ public class Tarifa implements Serializable {
     private Boolean tarEstado;
     @Column(name = "tar_valor_text")
     private String tarValorText;
+    @Column(name = "tar_valor_extra")
+    private BigDecimal tarValorExtra;
     @OneToMany(mappedBy = "idTarifa")
     private Collection<SolicitudPermiso> solicitudPermisoCollection;
     @JoinColumn(name = "id_tipo_tarifa", referencedColumnName = "id_tipo_tarifa")
@@ -104,6 +106,14 @@ public class Tarifa implements Serializable {
         return tarValorText;
     }
 
+    public BigDecimal getTarValorExtra() {
+        return tarValorExtra;
+    }
+
+    public void setTarValorExtra(BigDecimal tarValorExtra) {
+        this.tarValorExtra = tarValorExtra;
+    }
+    
     public void setTarValorText(String tarValorText) {
         this.tarValorText = tarValorText;
     }

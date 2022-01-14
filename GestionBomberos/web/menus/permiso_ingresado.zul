@@ -40,13 +40,21 @@
                                        onClick="@command('agregarPermiso')" 
                                        tooltiptext="${labels.app.permiso}"/>   
                             <button    iconSclass="z-icon-list-alt"
-                                                       class="btn btn-primary btn-xs botongeneral"                                            
-                                                       onClick="@command('agregarcobromanual')" 
-                                                       tooltiptext="Ingresar cobro manual"/>
+                                       class="btn btn-primary btn-xs botongeneral"                                            
+                                       onClick="@command('agregarcobromanual')" 
+                                       tooltiptext="Ingresar cobro manual"/>
                         </auxheader>
                     </auxhead>
                     <listhead sizable="false">
-                        <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>
+                        <listheader width="8%"  >
+                            <textbox value="@bind(vm.buscar)"  
+                                          tooltiptext="# Solicitud"
+                                          class="form-control form-control-sm"                                         
+                                          placeholder="Numero de solicitud"
+                                          onOK="@command('buscarLikeNumSolicitud')"
+                                          onChange="self.setValue(self.getValue().toUpperCase());" />
+                                
+                        </listheader> 
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>                       

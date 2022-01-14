@@ -57,7 +57,7 @@
 
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 "  >
-                    <div class="col-12 col-sm-12 col-md-8 col-lg-8  form-group "  >
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                         <!--<div class="row">-->
                         <!--<div class="col-12 col-sm-12 col-md-8 col-lg-8  "  >--> 
                         Subir la solicitud en formato PDF
@@ -73,9 +73,12 @@
                         <!--</div>-->
                     </div>
                 
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
+                    <div class="col-12 col-sm-12 col-md-1 col-lg-1  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
                         <label value="#"  style="color:red;font-weight:bold; font-size:20px" />
-                        <label  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group " visible="@bind(vm.tipoAccion eq 'update')" >
+                        <textbox  value="@bind(vm.entidadSelected.solpNumero)"  style="color:red;font-weight:bold; font-size:20px"/>
 
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group " visible="@bind(vm.tipoAccion eq 'new')" >

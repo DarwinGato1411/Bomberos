@@ -271,4 +271,25 @@ public class ServicioSolicitudPermiso {
 
         return lstSolicitudPermiso;
     }
+     
+     public List<SolicitudPermiso> FindLikeNumeroSolicitud(String numsol) {
+
+        List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solpNumero LIKE :solpNumero AND u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.solpNumero DESC");
+            query.setMaxResults(400);
+            query.setParameter("solpNumero", "%" + numsol + "%");
+            lstSolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta num solicitud");
+        } finally {
+            em.close();
+        }
+
+        return lstSolicitudPermiso;
+    }
 }
