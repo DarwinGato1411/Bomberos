@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDiario" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2100000000000277"/>
+	<property name="ireport.zoom" value="1.464100000000034"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="420"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="detallecobro">
-		<queryString language="SQL">
-			<![CDATA[select * from partediario]]>
+		<parameter name="fecha" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select * from partediario where cob_fecha=$P{fecha}]]>
 		</queryString>
-		<field name="numero" class="java.lang.Long"/>
-		<field name="cob_forma_pago" class="java.lang.String"/>
 		<field name="id_cobro" class="java.lang.Integer"/>
-		<field name="detalle" class="java.lang.String"/>
+		<field name="cob_detalle" class="java.lang.String"/>
 		<field name="cob_valor" class="java.math.BigDecimal"/>
 		<field name="cob_cantidad" class="java.math.BigDecimal"/>
 		<field name="cob_fecha" class="java.sql.Date"/>
-		<field name="comision_banco" class="java.math.BigDecimal"/>
+		<field name="cob_impuesto_predial_cobro" class="java.math.BigDecimal"/>
+		<field name="cob_forma_pago" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="fecha" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -254,20 +276,6 @@
 				<text><![CDATA[SEGÚN RECIBOS N°:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="336" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[TOTAL]]></text>
-			</staticText>
-			<staticText>
 				<reportElement positionType="Float" x="29" y="510" width="214" height="23" forecolor="#000099"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
@@ -275,7 +283,7 @@
 				<text><![CDATA[TESORERO/A]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="267" width="325" height="23" forecolor="#000099"/>
+				<reportElement positionType="Float" x="0" y="215" width="351" height="23" forecolor="#000099"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -286,7 +294,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[SUBTOTAL EFECTIVO + CHEQUE]]></text>
+				<text><![CDATA[SUBTOTAL EFECTIVO + CHEQUE + TRANFERENCIA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="311" y="610" width="214" height="23" forecolor="#000099"/>
@@ -294,48 +302,6 @@
 					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[FIRMA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="221" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement>
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[EFECTIVO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="290" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[TARJETA DE CREDITO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="313" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[OTROS MEDIOS DE PAGO - TRANSFERENCIA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="311" y="510" width="214" height="23" forecolor="#000099"/>
@@ -352,54 +318,12 @@
 				<text><![CDATA[FIRMA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="198" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[MONTOS RECAUDADOS]]></text>
-			</staticText>
-			<staticText>
 				<reportElement positionType="Float" x="0" y="466" width="127" height="23" forecolor="#000099"/>
 				<box leftPadding="2"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[ANULADO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="324" y="198" width="231" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[VALOR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="244" width="325" height="23" forecolor="#000099"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[CHEQUE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="443" width="127" height="23" forecolor="#000099"/>
@@ -410,7 +334,7 @@
 				<text><![CDATA[OBSERVACIONES:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="382" width="324" height="23" forecolor="#000099"/>
+				<reportElement positionType="Float" x="0" y="261" width="351" height="23" forecolor="#000099"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -424,7 +348,7 @@
 				<text><![CDATA[TOTAL DEPÓSITO $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="359" width="325" height="23" forecolor="#000099"/>
+				<reportElement positionType="Float" x="0" y="238" width="351" height="23" forecolor="#000099"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -438,77 +362,7 @@
 				<text><![CDATA[COMISIÓN BANCARIA]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Transparent" x="324" y="221" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="324" y="244" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<textField>
-				<reportElement mode="Transparent" x="324" y="267" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="324" y="290" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="324" y="313" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.25"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.25"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<textField>
-				<reportElement mode="Transparent" x="324" y="336" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
+				<reportElement positionType="Float" mode="Transparent" x="351" y="215" width="204" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -522,7 +376,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="324" y="359" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
+				<reportElement positionType="Float" mode="Transparent" x="351" y="238" width="204" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -536,7 +390,7 @@
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{comision_banco}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="324" y="382" width="231" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
+				<reportElement positionType="Float" mode="Transparent" x="351" y="261" width="204" height="23" forecolor="#000099" backcolor="#FFFFFF"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -718,50 +572,85 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="211" y="433" width="360" height="140"/>
+				<reportElement key="table" x="0" y="175" width="555" height="40" forecolor="#3333FF"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="detallecobro">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+						<datasetParameter name="fecha">
+							<datasetParameterExpression><![CDATA[$P{fecha}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="90">
-						<jr:tableHeader height="30"/>
-						<jr:tableFooter height="30"/>
-						<jr:columnHeader height="30"/>
-						<jr:columnFooter height="30"/>
-						<jr:detailCell height="20"/>
-					</jr:column>
-					<jr:column width="90">
-						<jr:tableHeader height="30"/>
-						<jr:tableFooter height="30"/>
-						<jr:columnHeader height="30">
+					<jr:column width="351">
+						<jr:columnHeader style="table_TD" height="18" rowSpan="1">
+							<box>
+								<pen lineColor="#3333FF"/>
+								<topPen lineColor="#3333FF"/>
+								<leftPen lineColor="#3333FF"/>
+								<bottomPen lineColor="#3333FF"/>
+								<rightPen lineColor="#3333FF"/>
+							</box>
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="351" height="18" forecolor="#000099" backcolor="#FFFFFF"/>
+								<box leftPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
+								<text><![CDATA[MONTOS RECAUDADOS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<box>
+								<pen lineColor="#3333FF"/>
+								<topPen lineColor="#3333FF"/>
+								<leftPen lineColor="#3333FF"/>
+								<bottomPen lineColor="#3333FF"/>
+								<rightPen lineColor="#3333FF"/>
+							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30"/>
-								<textElement/>
+								<reportElement mode="Transparent" x="0" y="0" width="351" height="20" forecolor="#000099" backcolor="#FFFFFF"/>
+								<box leftPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{cob_forma_pago}]]></textFieldExpression>
 							</textField>
-						</jr:columnHeader>
-						<jr:columnFooter height="30"/>
-						<jr:detailCell height="20"/>
+						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90">
-						<jr:tableHeader height="30"/>
-						<jr:tableFooter height="30"/>
-						<jr:columnHeader height="30">
-							<textField>
-								<reportElement x="0" y="0" width="90" height="30"/>
-								<textElement/>
+					<jr:column width="204">
+						<jr:columnHeader style="table_TD" height="18" rowSpan="1">
+							<box>
+								<pen lineColor="#3333FF"/>
+								<topPen lineColor="#3333FF"/>
+								<leftPen lineColor="#3333FF"/>
+								<bottomPen lineColor="#3333FF"/>
+								<rightPen lineColor="#3333FF"/>
+							</box>
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="204" height="18" forecolor="#000099" backcolor="#FFFFFF"/>
+								<box leftPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
+								<text><![CDATA[VALOR]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<box>
+								<pen lineColor="#3333FF"/>
+								<topPen lineColor="#3333FF"/>
+								<leftPen lineColor="#3333FF"/>
+								<bottomPen lineColor="#3333FF"/>
+								<rightPen lineColor="#3333FF"/>
+							</box>
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="204" height="20" forecolor="#000099" backcolor="#FFFFFF"/>
+								<box leftPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
 								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
 							</textField>
-						</jr:columnHeader>
-						<jr:columnFooter height="30"/>
-						<jr:detailCell height="20"/>
-					</jr:column>
-					<jr:column width="90">
-						<jr:tableHeader height="30"/>
-						<jr:tableFooter height="30"/>
-						<jr:columnHeader height="30"/>
-						<jr:columnFooter height="30"/>
-						<jr:detailCell height="20"/>
+						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>

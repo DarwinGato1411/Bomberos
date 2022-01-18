@@ -17,6 +17,7 @@ public class UserCredential implements Serializable {
     String nombreUsuario;
     private Integer nivelUsuario;
     private Usuario usuarioSistema;
+    private Boolean puedeEditar = Boolean.FALSE;
     Set<String> roles = new HashSet<String>();
 
     public UserCredential(Usuario usuario, String account, String name, Integer nivelUsuario, String nombreUsuario) {
@@ -83,6 +84,20 @@ public class UserCredential implements Serializable {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public Boolean getPuedeEditar() {
+        if (usuarioSistema.getUsuNivel() == 1 || usuarioSistema.getUsuNivel() == 2) {
+            puedeEditar = Boolean.TRUE;
+        } else {
+            puedeEditar = Boolean.FALSE;
+        }
+
+        return puedeEditar;
+    }
+
+    public void setPuedeEditar(Boolean puedeEditar) {
+        this.puedeEditar = puedeEditar;
     }
 
 }

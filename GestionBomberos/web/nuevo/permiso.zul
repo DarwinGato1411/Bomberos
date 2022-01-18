@@ -32,7 +32,7 @@
                                 value="@bind(vm.tipoSoliSelected.tipsDescripcion)"
                                 onSelect="@command('tipoPermiso')"                                 
                                 readonly="true"         
-                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"    
+                                buttonVisible="${sessionScope.usuario.puedeEditar}"    
                                            
                                 width="100%">
                         <template name="model">
@@ -46,7 +46,7 @@
                     <combobox  model="@load(vm.listBomberos)"  
                                width="100%"
                                readonly="true"    
-                                  buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
+                                  buttonVisible="${sessionScope.usuario.puedeEditar}"  
                                selectedItem="@bind(vm.bomberoSelected)"
                                value="@bind(vm.bomberoSelected.bomNombre)" >
                         <template name="model">
@@ -63,7 +63,7 @@
                         Subir la solicitud en formato PDF
                         <button    style="width:30px;height:30px;" iconSclass="z-icon-cloud-upload  "
                                    class="btn btn-primary btn-xs"
-                                      disabled="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"                               
+                                      disabled="${!sessionScope.usuario.puedeEditar}"                               
                                    onClick="@command('subirSolicitud')" 
                                    tooltiptext="${labels.app.cargar}"/> 
                         <!--                        </div>
@@ -91,7 +91,8 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.fechaemi}
                     <datebox compact="true"  value="@bind(vm.entidadSelected.solpFecha)" 
                              readonly="true" style="font-weight:bold;" 
-                             buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
+                         
+                             buttonVisible="${sessionScope.usuario.puedeEditar}"  
                              lenient="true" format="dd/MM/yyyy" 
                              constraint="no empty: Ingrese la fecha "/>
 
@@ -100,7 +101,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.fechainps}
                     <datebox compact="true"  value="@bind(vm.entidadSelected.solpFechaReinspeccion)" 
                              readonly="true" style="font-weight:bold;" 
-                             buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"  
+                             buttonVisible="${sessionScope.usuario.puedeEditar}"  
                              lenient="true" format="dd/MM/yyyy" 
                              constraint="no empty: Ingrese la fecha "/>
 
@@ -110,7 +111,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ci} 
                 
                     <textbox  maxlength="13"
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}" 
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onOK="@command('buscarInpeccion')"
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solNumCedula)" 
@@ -120,7 +121,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombre} 
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpNombreSol)" 
                               class="form-control" />
@@ -129,7 +130,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombrecomercial} 
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                                readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpNombreNegocio)" 
                               class="form-control" />
@@ -138,7 +139,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.otro}  
                 
                     <textbox  maxlength="150" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpOtro)" 
                               class="form-control" />
@@ -149,7 +150,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombreproy}  
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                               readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpProyecto)" 
                               class="form-control" />
@@ -159,7 +160,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.telefono} del proyecto
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                               readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpTetefonoProyecto)" 
                               class="form-control" />
@@ -168,7 +169,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>Capacidad
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                               readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpCapacidad)" 
                               class="form-control" />
@@ -177,7 +178,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>Placas
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                               readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpPlaca)" 
                               class="form-control" />
@@ -186,7 +187,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>Color
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpColor)" 
                               class="form-control" />
@@ -195,7 +196,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>Marca
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                             readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpMarca)" 
                               class="form-control" />
@@ -204,7 +205,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>Modelo
                 
                     <textbox  maxlength="15" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpModelo)" 
                               class="form-control" />
@@ -212,7 +213,7 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group " visible="@bind(vm.activaVehiculo)"  >                                 
                     <label value="(*)" style="color:red;font-weight:bold"/>Fecha caduca
                     <datebox compact="true"  value="@bind(vm.entidadSelected.solpCaduca)" 
-                             readonly="true" style="font-weight:bold;" 
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                              buttonVisible="true" 
                              lenient="true" format="dd/MM/yyyy" 
                              constraint="no empty: Ingrese la fecha "/>
@@ -223,7 +224,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.telefono} 
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpTelefono)" 
                               class="form-control" />
@@ -241,7 +242,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.parroquia}
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                                readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpBarrioUrbanizacion)" 
                               class="form-control" />
@@ -250,8 +251,8 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.barriourb}  
                 
                     <combobox   model="@load(vm.listaParrquia)"
-                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}"
-                                readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                                buttonVisible="${sessionScope.usuario.puedeEditar}"
+                                 readonly="${!sessionScope.usuario.puedeEditar}" 
                                 selectedItem="@bind(vm.parroquiaSelected)" 
                                 value="Seleccione una parroquia"                       
                                 width="100%">
@@ -266,8 +267,8 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.recinto}  
                 
                     <combobox   model="@load(vm.listaRecintos)" 
-                                buttonVisible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" 
-                                readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"                                      
+                                 buttonVisible="${sessionScope.usuario.puedeEditar}"
+                                 readonly="${!sessionScope.usuario.puedeEditar}"                                   
                                 selectedItem="@bind(vm.recintoSelected)" 
                                 value="Seleccione un recinto"                         
                                 width="100%">
@@ -282,7 +283,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.calleprinc}   
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpCalle)" 
                               class="form-control" />
@@ -291,7 +292,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.numcalle}  
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpNumCalle)" 
                               class="form-control" />
@@ -300,7 +301,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.lote}  
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpLote)" 
                               class="form-control" />
@@ -309,7 +310,7 @@
                     <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.interseccion}  
                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                             readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpInterseccion)" 
                               class="form-control" />
@@ -317,7 +318,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
                     ${labels.app.observacion}                 
                     <textbox  maxlength="100" 
-                              readonly="${sessionScope.usuario.usuarioSistema.usuNivel != '1'}"
+                              readonly="${!sessionScope.usuario.puedeEditar}" 
                               onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpNota)" 
                               class="form-control" />
@@ -333,7 +334,7 @@
                 <iframe height="550px" class="col-12 col-sm-12 col-md-12 col-lg-12" id="reportframe1"                
                         content="@bind(vm.fileContent)"/>   
             </div>                
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"  visible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" >
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"  visible="${sessionScope.usuario.puedeEditar}" >
                 <button    iconSclass="z-icon-save"
                            label="Guardar"
                             
