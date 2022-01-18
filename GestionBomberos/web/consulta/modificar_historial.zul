@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="wOpcion"  position="center" class="col-12 col-sm-12 col-md-5 col-lg-5" closable="true"  
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.NuevoPermiso')">
+    
+    <caption label="${labels.app.solicitudinsp}" style="font-weight:bold"/> 
+    <div  class="container-fluid" >
+        <div  class="row" >  
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5  form-group "  >
+                <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.ci} 
+                
+                <textbox  maxlength="13" 
+                          onChange="self.setValue(self.getValue().toUpperCase())"
+                          value="@bind(vm.entidadSelected.solNumCedula)" 
+                          class="form-control" />
+            </div>                
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7  form-group "  >
+                <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombre} 
+                
+                <textbox  maxlength="100" 
+                          onChange="self.setValue(self.getValue().toUpperCase())"
+                          value="@bind(vm.entidadSelected.solpNombreSol)" 
+                          class="form-control" />
+            </div>   
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  form-group "  >
+                <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.obsActulizaDatos} 
+                
+                <textbox  maxlength="200" 
+                          onChange="self.setValue(self.getValue().toUpperCase())"
+                          value="@bind(vm.entidadSelected.solpObsActualizaDatos)" 
+                          class="form-control" />
+            </div>              
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12  " align="center"  visible="${sessionScope.usuario.usuarioSistema.usuNivel == '1'}" >
+                <button    iconSclass="z-icon-save"
+                           label="Guardar"
+                           class="btn btn-primary btn-xs "                                                               
+                           onClick="@command('guardar')"
+                           tooltiptext="GUARDAR"/>     
+            </div> 
+
+   
+        </div>
+    
+    </div>        
+                  
+</window>

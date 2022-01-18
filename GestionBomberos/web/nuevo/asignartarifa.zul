@@ -55,7 +55,7 @@
                  
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6  "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Valor adicional 
+                    <label value="Valor adicional " />
                     <textbox  maxlength="8"  constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"
                               onOK="@command('calcularValor')"
                               onChange="@command('calcularValor')"
@@ -64,7 +64,7 @@
                  
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12  "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>Detalle de valor adicional
+                    <label value="Detalle de valor adicional" />
                     <textbox  onChange="self.setValue(self.getValue().toUpperCase())"
                               value="@bind(vm.entidadSelected.solpDetValorAdicional)"  
                               class="form-control"  />

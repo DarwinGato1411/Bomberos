@@ -8,9 +8,12 @@ import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioSolicitudPermiso;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 
 /**
  *
@@ -29,9 +32,7 @@ public class AdministrarConsultas {
     private Date fechafin = new Date();
 
     public AdministrarConsultas() {
-     
-        
-        
+
             fechainicio.setMonth(0);
             fechainicio.setDate(01);
                consultarSolicitudes();
@@ -48,6 +49,17 @@ public class AdministrarConsultas {
     @NotifyChange({"lstsolicitudPermiso","buscarSolicitud", "fechafin", "fechainicio"})
     public void buscarFechas() {
         consultarSolicitudFecha();
+    }
+    
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void modificarHistoSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
+        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+        map.put("valor", valor);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/consulta/modificar_historial.zul", null, map);
+        window.doModal();
+        consultarSolicitudes();
     }
     
      private void consultarSolicitudes() {

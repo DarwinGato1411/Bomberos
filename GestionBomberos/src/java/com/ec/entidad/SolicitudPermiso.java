@@ -162,6 +162,8 @@ public class SolicitudPermiso implements Serializable {
     private BigDecimal solpValorAdicional;
     @Column(name = "solp_det_valor_adicional")
     private String solpDetValorAdicional;
+    @Column(name = "solp_obs_actualiza_datos")
+    private String solpObsActualizaDatos;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -818,4 +820,13 @@ public class SolicitudPermiso implements Serializable {
         this.solpDetValorAdicional = solpDetValorAdicional;
     }
 
+    public String getSolpObsActualizaDatos() {
+        return solpObsActualizaDatos;
+    }
+
+    public void setSolpObsActualizaDatos(String solpObsActualizaDatos) {
+        this.solpObsActualizaDatos = solpObsActualizaDatos;
+    }
+
+   
 }

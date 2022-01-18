@@ -54,6 +54,7 @@ public class AsignarTarifa {
     private BigDecimal valorCobroImpuesto = BigDecimal.ZERO;
     private BigDecimal totalCobrar = BigDecimal.ZERO;
     private BigDecimal valorAdicional = BigDecimal.ZERO;
+//    private String solpFormaPago = "EFECTIVO";
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -64,6 +65,7 @@ public class AsignarTarifa {
         valorImpuesto = valor.getSolpImpuestoPredial() != null ? valor.getSolpImpuestoPredial() : BigDecimal.ZERO;
         valorAdicional = valor.getSolpValorAdicional() != null ? valor.getSolpValorAdicional() : BigDecimal.ZERO;
         totalCobrar = valorAdicional.add(valorCobroImpuesto.add(tarifaSelected != null ? tarifaSelected.getTarValor() : BigDecimal.ZERO));
+//        solpFormaPago = valor.getSolpFormaPago() != null ? valor.getSolpFormaPago() : "EFECTIVO";
     }
 
     public AsignarTarifa() {
@@ -85,7 +87,8 @@ public class AsignarTarifa {
     @Command
     @NotifyChange("entidadSelected")
     public void guardar() {
-        if (tarifaSelected != null) {
+        if (tarifaSelected != null && entidadSelected.getSolpFormaPago()!=null) {
+//            entidadSelected.setSolpFormaPago(solpFormaPago);
             entidadSelected.setIdTarifa(tarifaSelected);
             entidadSelected.setSolpImpuestoPredial(valorImpuesto);
             entidadSelected.setSolpValorAdicional(valorAdicional);
@@ -161,5 +164,15 @@ public class AsignarTarifa {
     public void setValorAdicional(BigDecimal valorAdicional) {
         this.valorAdicional = valorAdicional;
     }
+
+//    public String getSolpFormaPago() {
+//        return solpFormaPago;
+//    }
+//
+//    public void setSolpFormaPago(String solpFormaPago) {
+//        this.solpFormaPago = solpFormaPago;
+//    }
+
+
 
 }
