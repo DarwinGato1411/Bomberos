@@ -39,3 +39,10 @@ ALTER TABLE public.solicitud_permiso
 
 ALTER TABLE public.solicitud_permiso
     ADD COLUMN solp_det_valor_adicional character varying(200) COLLATE pg_catalog."default";
+
+-- Column: public.solicitud_permiso.solp_obs_actualiza_datos
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN solp_obs_actualiza_datos;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN solp_obs_actualiza_datos character varying(200) COLLATE pg_catalog."default";
