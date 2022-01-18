@@ -53,6 +53,7 @@ public class AsignarTarifa {
     private BigDecimal valorImpuesto = BigDecimal.ZERO;
     private BigDecimal valorCobroImpuesto = BigDecimal.ZERO;
     private BigDecimal totalCobrar = BigDecimal.ZERO;
+    private BigDecimal valorAdicional = BigDecimal.ZERO;
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -61,7 +62,8 @@ public class AsignarTarifa {
         tarifaSelected = valor.getIdTarifa() == null ? null : valor.getIdTarifa();
         valorCobroImpuesto = valor.getSolpImpuestoPredialValor() != null ? valor.getSolpImpuestoPredialValor() : BigDecimal.ZERO;
         valorImpuesto = valor.getSolpImpuestoPredial() != null ? valor.getSolpImpuestoPredial() : BigDecimal.ZERO;
-        totalCobrar = valorCobroImpuesto.add(tarifaSelected!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
+        valorAdicional = valor.getSolpValorAdicional() != null ? valor.getSolpValorAdicional() : BigDecimal.ZERO;
+        totalCobrar = valorAdicional.add(valorCobroImpuesto.add(tarifaSelected != null ? tarifaSelected.getTarValor() : BigDecimal.ZERO));
     }
 
     public AsignarTarifa() {
@@ -76,7 +78,8 @@ public class AsignarTarifa {
     @NotifyChange({"valorCobroImpuesto", "totalCobrar"})
     public void calcularValor() {
         valorCobroImpuesto = (valorImpuesto.multiply(BigDecimal.valueOf(0.15)).setScale(6)).divide(BigDecimal.valueOf(1000), 4, RoundingMode.FLOOR);
-        totalCobrar = valorCobroImpuesto.add(tarifaSelected.getTarValor()!=null?tarifaSelected.getTarValor():BigDecimal.ZERO);
+
+        totalCobrar = valorAdicional.add(valorCobroImpuesto.add(tarifaSelected.getTarValor() != null ? tarifaSelected.getTarValor() : BigDecimal.ZERO));
     }
 
     @Command
@@ -85,6 +88,7 @@ public class AsignarTarifa {
         if (tarifaSelected != null) {
             entidadSelected.setIdTarifa(tarifaSelected);
             entidadSelected.setSolpImpuestoPredial(valorImpuesto);
+            entidadSelected.setSolpValorAdicional(valorAdicional);
             entidadSelected.setSolpImpuestoPredialValor(valorCobroImpuesto);
             servicio.modificar(entidadSelected);
             wAsingatarifa.detach();
@@ -148,6 +152,14 @@ public class AsignarTarifa {
 
     public void setTotalCobrar(BigDecimal totalCobrar) {
         this.totalCobrar = totalCobrar;
+    }
+
+    public BigDecimal getValorAdicional() {
+        return valorAdicional;
+    }
+
+    public void setValorAdicional(BigDecimal valorAdicional) {
+        this.valorAdicional = valorAdicional;
     }
 
 }

@@ -11,6 +11,7 @@ import com.ec.entidad.SolicitudPermiso;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParteDiario;
 import com.ec.servicio.ServicioParteDiarioTipoSolicitud;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -46,6 +47,9 @@ public class AdministrarParteDiario {
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
+    ServicioSolicitudPermiso servicioSolicitudPermiso = new ServicioSolicitudPermiso();
+    private List<SolicitudPermiso> listaSolicitud = new ArrayList();
+    private Integer totalSolicitudes = 0;
 
     public AdministrarParteDiario() {
         parametrizar = servicioParametrizar.findActivo();
@@ -54,6 +58,8 @@ public class AdministrarParteDiario {
 
     private void consultarPermisosEntr() {
         totalizar = BigDecimal.ZERO;
+        listaSolicitud = servicioSolicitudPermiso.findByFecha(fecha);
+        totalSolicitudes=listaSolicitud.size();
         listaParteDiarios = servicioParteDiario.findByFecha(fecha);
         listaDiarioTipoSolicituds = servicioParteDiarioTipoSolicitud.findByFecha(fecha);
         for (ParteDiario listaParteDiario : listaParteDiarios) {
@@ -62,7 +68,7 @@ public class AdministrarParteDiario {
     }
 
     @Command
-    @NotifyChange({"listaParteDiarios", "listaDiarioTipoSolicituds", "totalizar"})
+    @NotifyChange({"listaParteDiarios", "listaDiarioTipoSolicituds", "totalizar","totalSolicitudes"})
     public void buscarFechas() {
         consultarPermisosEntr();
     }
@@ -121,6 +127,22 @@ public class AdministrarParteDiario {
 
     public void setTotalizar(BigDecimal totalizar) {
         this.totalizar = totalizar;
+    }
+
+    public List<SolicitudPermiso> getListaSolicitud() {
+        return listaSolicitud;
+    }
+
+    public void setListaSolicitud(List<SolicitudPermiso> listaSolicitud) {
+        this.listaSolicitud = listaSolicitud;
+    }
+
+    public Integer getTotalSolicitudes() {
+        return totalSolicitudes;
+    }
+
+    public void setTotalSolicitudes(Integer totalSolicitudes) {
+        this.totalSolicitudes = totalSolicitudes;
     }
 
 }

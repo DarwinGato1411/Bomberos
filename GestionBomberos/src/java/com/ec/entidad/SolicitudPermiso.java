@@ -154,6 +154,14 @@ public class SolicitudPermiso implements Serializable {
     private BigDecimal solpImpuestoPredial;
     @Column(name = "solp_impuesto_predial_valor")
     private BigDecimal solpImpuestoPredialValor;
+    @Column(name = "solp_sube_archivo_prevencion")
+    private Boolean solpSubeArchivoPrevencion;
+    @Column(name = "solp_forma_pago")
+    private String solpFormaPago;
+    @Column(name = "solp_valor_adicional")
+    private BigDecimal solpValorAdicional;
+    @Column(name = "solp_det_valor_adicional")
+    private String solpDetValorAdicional;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -196,6 +204,8 @@ public class SolicitudPermiso implements Serializable {
 
     @OneToMany(mappedBy = "idSolicitudPermiso")
     private Collection<Cobro> cobrotoCollection;
+
+    
 
     public SolicitudPermiso() {
     }
@@ -735,6 +745,14 @@ public class SolicitudPermiso implements Serializable {
         this.solpCaduca = solpCaduca;
     }
 
+    public Boolean getSolpSubeArchivoPrevencion() {
+        return solpSubeArchivoPrevencion == null ? Boolean.FALSE : solpSubeArchivoPrevencion;
+    }
+
+    public void setSolpSubeArchivoPrevencion(Boolean solpSubeArchivoPrevencion) {
+        this.solpSubeArchivoPrevencion = solpSubeArchivoPrevencion;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -774,6 +792,30 @@ public class SolicitudPermiso implements Serializable {
 
     public void setSolpImpuestoPredialValor(BigDecimal solpImpuestoPredialValor) {
         this.solpImpuestoPredialValor = solpImpuestoPredialValor;
+    }
+
+    public String getSolpFormaPago() {
+        return solpFormaPago;
+    }
+
+    public void setSolpFormaPago(String solpFormaPago) {
+        this.solpFormaPago = solpFormaPago;
+    }
+
+    public BigDecimal getSolpValorAdicional() {
+        return solpValorAdicional == null ? BigDecimal.ZERO : solpValorAdicional;
+    }
+
+    public void setSolpValorAdicional(BigDecimal solpValorAdicional) {
+        this.solpValorAdicional = solpValorAdicional;
+    }
+
+    public String getSolpDetValorAdicional() {
+        return solpDetValorAdicional;
+    }
+
+    public void setSolpDetValorAdicional(String solpDetValorAdicional) {
+        this.solpDetValorAdicional = solpDetValorAdicional;
     }
 
 }

@@ -46,8 +46,8 @@ public class ObservacionPrevencion extends SelectorComposer<Component> {
     }
 
     @Command
-    public void guardar(@BindingParam("valor") SolicitudPermiso valor) {
-        if (valor.getSolPathSolicitud() != null) {
+    public void guardar() {
+        if (solicitudPermiso.getSolpSubeArchivoPrevencion()) {
             entidad.setIdSolcitudPer(solicitudPermiso);
             servicioInspeccion.crear(entidad);
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");

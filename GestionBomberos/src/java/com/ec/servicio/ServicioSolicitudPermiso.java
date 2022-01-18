@@ -4,11 +4,13 @@
  */
 package com.ec.servicio;
 
+import com.ec.entidad.ParteDiarioTipoSolicitud;
 import com.ec.entidad.SolicitudPermiso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -209,11 +211,9 @@ public class ServicioSolicitudPermiso {
         }
         return null;
     }
-    
-    
-    public List<SolicitudPermiso> findLikeBuscarSolicitudes(String valor,Date fechaInicio, Date fechaFin) {
 
-       
+    public List<SolicitudPermiso> findLikeBuscarSolicitudes(String valor, Date fechaInicio, Date fechaFin) {
+
         List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
@@ -227,7 +227,7 @@ public class ServicioSolicitudPermiso {
             query.setParameter("inicio", fechaInicio);
             query.setParameter("fin", fechaFin);
             listaClientes = (List<SolicitudPermiso>) query.getResultList();
-            System.out.println("numero  de elementos  "+listaClientes.size());
+            System.out.println("numero  de elementos  " + listaClientes.size());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta solicitudPermiso  findLikeBuscarSolicitudes  " + e.getMessage());
@@ -237,9 +237,8 @@ public class ServicioSolicitudPermiso {
 
         return listaClientes;
     }
-    
-    
-     public List<SolicitudPermiso> findSolFecha(Date inicio, Date fin, String estado) {
+
+    public List<SolicitudPermiso> findSolFecha(Date inicio, Date fin, String estado) {
 
         List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
         try {
@@ -271,25 +270,68 @@ public class ServicioSolicitudPermiso {
 
         return lstSolicitudPermiso;
     }
-     
-     public List<SolicitudPermiso> FindLikeNumeroSolicitud(String numsol) {
+
+    public List<SolicitudPermiso> FindLikeNumeroSolicitud(String valor, String sigla) {
 
         List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
         try {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE u.solpNumero LIKE :solpNumero AND u.idEstadoDocumento.estSigla =:estSigla AND (u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.solpNumero DESC");
-            query.setMaxResults(400);
-            query.setParameter("solpNumero", "%" + numsol + "%");
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE  (u.solpNumero LIKE :solpNumero OR u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol ) AND u.idEstadoDocumento.estSigla =:estSigla   ORDER BY u.solpNumero DESC");
+//            query.setMaxResults(400);
+            query.setParameter("solpNumero", "%" + valor + "%");
+            query.setParameter("estSigla", sigla);
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
             lstSolicitudPermiso = (List<SolicitudPermiso>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta num solicitud");
+            System.out.println("Error en lsa consulta num solicitud " + e.getMessage());
         } finally {
             em.close();
         }
 
         return lstSolicitudPermiso;
+    }
+
+    public List<SolicitudPermiso> findByFecha(Date fecha) {
+
+        List<SolicitudPermiso> listaClientes = new ArrayList<SolicitudPermiso>();
+        try {
+            String pattern = "yyyy MMMMM dd  HH:mm:ss";
+            SimpleDateFormat simpleDateFormat
+                    = new SimpleDateFormat(pattern);
+            //Connection connection = em.unwrap(Connection.class);
+            Date inicio = fecha;
+            inicio.setHours(0);
+            inicio.setMinutes(0);
+            String inicioText = simpleDateFormat.format(inicio);
+
+            Date fin = fecha;
+            fin.setHours(11);
+            fin.setMinutes(59);
+            String finText = simpleDateFormat.format(fin);
+
+            Date paramInicio = simpleDateFormat.parse(inicioText);
+            Date paramFin = simpleDateFormat.parse(finText);
+
+            System.out.println("inicio " + paramInicio);
+            System.out.println("fin " + paramFin);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE  u.solpFecha BETWEEN :inicio and :fin");
+            query.setParameter("inicio", paramInicio);
+            query.setParameter("fin", paramFin);
+            listaClientes = (List<SolicitudPermiso>) query.getResultList();
+            System.out.println("CANTIDAD SOLICIU¿TUDES " + listaClientes.size());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta parteDiario  findLikePerNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaClientes;
     }
 }

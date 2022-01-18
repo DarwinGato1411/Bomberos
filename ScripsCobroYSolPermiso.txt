@@ -1,0 +1,41 @@
+-- Column: public.cobro.cob_forma_pago
+
+-- ALTER TABLE public.cobro DROP COLUMN cob_forma_pago;
+
+ALTER TABLE public.cobro
+    ADD COLUMN cob_forma_pago character varying(50) COLLATE pg_catalog."default";
+
+-- Column: public.cobro.cob_valor_adicional
+
+-- ALTER TABLE public.cobro DROP COLUMN cob_valor_adicional;
+
+ALTER TABLE public.cobro
+    ADD COLUMN cob_valor_adicional numeric(8,4);
+
+-- Column: public.solicitud_permiso.solp_sube_archivo_prevencion
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN solp_sube_archivo_prevencion;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN solp_sube_archivo_prevencion boolean;
+
+-- Column: public.solicitud_permiso.solp_forma_pago
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN solp_forma_pago;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN solp_forma_pago character varying(50) COLLATE pg_catalog."default";
+
+-- Column: public.solicitud_permiso.solp_valor_adicional
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN solp_valor_adicional;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN solp_valor_adicional numeric(8,4);
+
+-- Column: public.solicitud_permiso.solp_det_valor_adicional
+
+-- ALTER TABLE public.solicitud_permiso DROP COLUMN solp_det_valor_adicional;
+
+ALTER TABLE public.solicitud_permiso
+    ADD COLUMN solp_det_valor_adicional character varying(200) COLLATE pg_catalog."default";

@@ -2,7 +2,20 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDiario" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.2100000000000277"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="36"/>
+	<property name="ireport.y" value="420"/>
+	<subDataset name="detallecobro">
+		<queryString language="SQL">
+			<![CDATA[select * from partediario]]>
+		</queryString>
+		<field name="numero" class="java.lang.Long"/>
+		<field name="cob_forma_pago" class="java.lang.String"/>
+		<field name="id_cobro" class="java.lang.Integer"/>
+		<field name="detalle" class="java.lang.String"/>
+		<field name="cob_valor" class="java.math.BigDecimal"/>
+		<field name="cob_cantidad" class="java.math.BigDecimal"/>
+		<field name="cob_fecha" class="java.sql.Date"/>
+		<field name="comision_banco" class="java.math.BigDecimal"/>
+	</subDataset>
 	<parameter name="fecha" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -704,6 +717,54 @@
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement x="211" y="433" width="360" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="detallecobro">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:tableHeader height="30"/>
+						<jr:tableFooter height="30"/>
+						<jr:columnHeader height="30"/>
+						<jr:columnFooter height="30"/>
+						<jr:detailCell height="20"/>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader height="30"/>
+						<jr:tableFooter height="30"/>
+						<jr:columnHeader height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{cob_forma_pago}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter height="30"/>
+						<jr:detailCell height="20"/>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader height="30"/>
+						<jr:tableFooter height="30"/>
+						<jr:columnHeader height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter height="30"/>
+						<jr:detailCell height="20"/>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader height="30"/>
+						<jr:tableFooter height="30"/>
+						<jr:columnHeader height="30"/>
+						<jr:columnFooter height="30"/>
+						<jr:detailCell height="20"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
 </jasperReport>

@@ -59,6 +59,7 @@ public class AdministrarPermisoEntrega {
     ServicioCobro servicioCobro = new ServicioCobro();
     private BigDecimal valorImpuesto = BigDecimal.ZERO;
     private BigDecimal valorCobroImpuesto = BigDecimal.ZERO;
+    private BigDecimal valorAdicional = BigDecimal.ZERO;
 
     public AdministrarPermisoEntrega() {
         parametrizar = servicioParametrizar.findActivo();
@@ -198,11 +199,14 @@ public class AdministrarPermisoEntrega {
 
                     valorImpuesto = valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredial();
                     valorCobroImpuesto = valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredialValor();
-                    BigDecimal valorTotal = valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor().add(valorCobroImpuesto);
+                    valorAdicional = valor.getIdInspeccion().getIdSolcitudPer().getSolpValorAdicional();
+                    BigDecimal valorTotal = valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor().add(valorCobroImpuesto).add(valorAdicional);
                     System.out.println("TOTAL " + valorTotal);
                     cobro.setCobValor(valorTotal);
                     cobro.setCobImpuestoPredial(valorImpuesto);
-                    cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);            
+                    cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);
+                    cobro.setCobValorAdicional(valorAdicional);
+                    cobro.setCobFormaPago(valor.getIdInspeccion().getIdSolcitudPer().getSolpFormaPago());
                     valor.setPerPagado(Boolean.TRUE);
                     servicioPermiso.modificar(valor);
                     servicioCobro.crear(cobro);
@@ -211,6 +215,9 @@ public class AdministrarPermisoEntrega {
             } else {
 
                 Cobro cobro = servicioCobro.findByPermiso(valor);
+                if (cobro == null) {
+                    cobro = new Cobro();
+                }
                 cobro.setIdPermiso(valor);
                 cobro.setCobDetalle(valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarDescripcion());
 
@@ -221,13 +228,15 @@ public class AdministrarPermisoEntrega {
 
                 valorImpuesto = valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredial();
                 valorCobroImpuesto = valor.getIdInspeccion().getIdSolcitudPer().getSolpImpuestoPredialValor();
-                BigDecimal valorTotal = valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor().add(valorCobroImpuesto);
+                valorAdicional = valor.getIdInspeccion().getIdSolcitudPer().getSolpValorAdicional();
+                BigDecimal valorTotal = valor.getIdInspeccion().getIdSolcitudPer().getIdTarifa().getTarValor().add(valorCobroImpuesto).add(valorAdicional);
                 System.out.println("Predial " + valorImpuesto);
                 System.out.println("COBRO PREDIAL " + valorCobroImpuesto);
                 System.out.println("TOTAL " + valorTotal);
                 cobro.setCobValor(valorTotal);
                 cobro.setCobImpuestoPredial(valorImpuesto);
-                cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);   
+                cobro.setCobImpuestoPredialCobro(valorCobroImpuesto);
+                cobro.setCobValorAdicional(valorAdicional);
                 valor.setPerPagado(Boolean.TRUE);
                 servicioPermiso.modificar(valor);
                 servicioCobro.modificar(cobro);

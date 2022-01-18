@@ -40,11 +40,14 @@ public class Cobro implements Serializable {
     private BigDecimal cobValor;
     @Column(name = "cob_cantidad")
     private BigDecimal cobCantidad;
+    @Column(name = "cob_valor_adicional")
+    private BigDecimal cobValorAdicional;
     @Column(name = "cob_fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date cobFecha;
     @Column(name = "cob_estado")
     private boolean cobEstado;
+    
 
     @JoinColumn(name = "id_permiso", referencedColumnName = "id_permiso")
     @ManyToOne
@@ -59,6 +62,10 @@ public class Cobro implements Serializable {
     
     @Column(name = "cob_impuesto_predial_cobro")
     private BigDecimal cobImpuestoPredialCobro;
+    
+     @Column(name = "cob_forma_pago")
+    private String cobFormaPago;
+
 
     public Cobro() {
     }
@@ -141,6 +148,22 @@ public class Cobro implements Serializable {
 
     public void setCobImpuestoPredialCobro(BigDecimal cobImpuestoPredialCobro) {
         this.cobImpuestoPredialCobro = cobImpuestoPredialCobro;
+    }
+
+    public String getCobFormaPago() {
+        return cobFormaPago;
+    }
+
+    public void setCobFormaPago(String cobFormaPago) {
+        this.cobFormaPago = cobFormaPago;
+    }
+
+    public BigDecimal getCobValorAdicional() {
+        return cobValorAdicional;
+    }
+
+    public void setCobValorAdicional(BigDecimal cobValorAdicional) {
+        this.cobValorAdicional = cobValorAdicional;
     }
     
 }

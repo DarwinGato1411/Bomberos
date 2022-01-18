@@ -58,7 +58,7 @@ public class Inspeccion implements Serializable {
     private Integer insNumDocPorAgente;
     @Column(name = "ins_impuesto_predial")
     private BigDecimal insImpuestoPredial;
-    
+
     @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
     @ManyToOne
     private Bombero idBombero;
@@ -138,7 +138,7 @@ public class Inspeccion implements Serializable {
     public void setInsNumDocPorAgente(Integer insNumDocPorAgente) {
         this.insNumDocPorAgente = insNumDocPorAgente;
     }
-    
+
     public Bombero getIdBombero() {
         return idBombero;
     }
@@ -187,6 +187,7 @@ public class Inspeccion implements Serializable {
     public void setInsImpuestoPredial(BigDecimal insImpuestoPredial) {
         this.insImpuestoPredial = insImpuestoPredial;
     }
+
     
     @XmlTransient
     public Collection<Permiso> getPermisoCollection() {
@@ -221,5 +222,5 @@ public class Inspeccion implements Serializable {
     public String toString() {
         return "com.ec.entidad.Inspeccion[ idInspeccion=" + idInspeccion + " ]";
     }
-    
+
 }

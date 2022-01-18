@@ -7,6 +7,7 @@ package com.ec.controlador;
 import static com.ec.controlador.NuevoPermiso.FOLDER_IMG;
 import com.ec.entidad.DocumentosAdjunto;
 import com.ec.entidad.EstadoDocumento;
+import com.ec.entidad.Inspeccion;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Parroquia;
 import com.ec.entidad.SolicitudPermiso;
@@ -17,6 +18,7 @@ import com.ec.servicio.ServicioEstadoDocumento;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioParroquia;
 import com.ec.servicio.ServicioInspeccion;
+import com.ec.servicio.ServicioSolicitudPermiso;
 import com.ec.utilitario.ArchivoUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,6 +61,7 @@ public class CargarArchivoPermiso {
     private List<DocumentosAdjunto> listadoAdjuntos = new ArrayList<DocumentosAdjunto>();
     private DocumentosAdjunto adjunto = new DocumentosAdjunto();
     private SolicitudPermiso permiso = new SolicitudPermiso();
+    private Inspeccion inspeccion = new Inspeccion();
     UserCredential credential = new UserCredential();
 //    para cargar el pdf de la cedula
     private String filePath;
@@ -66,8 +69,10 @@ public class CargarArchivoPermiso {
     private AImage fotoCedula = null;
     public static String FOLDER_IMG = "";
     AMedia fileContent = null;
-    
-     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
+
+    ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
+    ServicioSolicitudPermiso servicioPermiso = new ServicioSolicitudPermiso();
+    ServicioInspeccion servicioInspeccion = new ServicioInspeccion();
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") SolicitudPermiso valor, @ContextParam(ContextType.VIEW) Component view) {
@@ -125,6 +130,11 @@ public class CargarArchivoPermiso {
                 adjunto.setIdSolcitudPer(permiso);
                 adjunto.setAdjEstadoArchivo(Boolean.TRUE);
                 servicioArchivoAdjunto.crear(adjunto);
+                if (permiso.getIdEstadoDocumento().getEstSigla().equals("INSPEC")) {
+//                    Boolean.TRUE;
+                    permiso.setSolpSubeArchivoPrevencion(Boolean.TRUE);
+                    servicioPermiso.modificar(permiso);
+                } 
                 cargarLista();
 //                valor.setPathImgPedido(filePath + nombre);
                 Clients.showNotification("Solicitud cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);
@@ -144,16 +154,18 @@ public class CargarArchivoPermiso {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CargarArchivoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }        
+    }
+
     @Command
     @NotifyChange({"listadoAdjuntos", "fileContent"})
     public void EstadoArchivo(@BindingParam("valor") DocumentosAdjunto valor) {
         if (Messagebox.show("Eliminar archivo", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
-           valor.setAdjEstadoArchivo(Boolean.FALSE);
-           servicioArchivoAdjunto.modificar(valor);
-           cargarLista();
+            valor.setAdjEstadoArchivo(Boolean.FALSE);
+            servicioArchivoAdjunto.modificar(valor);
+            cargarLista();
         }
-    }        
+    }
+
     public UserCredential getCredential() {
         return credential;
     }
@@ -186,6 +198,14 @@ public class CargarArchivoPermiso {
         this.permiso = permiso;
     }
 
+    public Inspeccion getInspeccion() {
+        return inspeccion;
+    }
+
+    public void setInspeccion(Inspeccion inspeccion) {
+        this.inspeccion = inspeccion;
+    }
+
     public static String getFOLDER_IMG() {
         return FOLDER_IMG;
     }
@@ -202,5 +222,4 @@ public class CargarArchivoPermiso {
         this.fileContent = fileContent;
     }
 
-    
 }

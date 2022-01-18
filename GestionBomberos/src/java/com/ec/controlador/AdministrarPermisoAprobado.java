@@ -19,6 +19,7 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 /**
@@ -80,12 +81,15 @@ public class AdministrarPermisoAprobado {
       @Command
     @NotifyChange("listaInspeccion")
     public void observacionper(@BindingParam("valor") Inspeccion valor) {
+       
+        
         final HashMap<String, Inspeccion> map = new HashMap<String, Inspeccion>();
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                 "/nuevo/observacionpermiso.zul", null, map);
         window.doModal();
         consultarPermisosApr();
+        
     }
     @Command
     @NotifyChange("listaInspeccion")

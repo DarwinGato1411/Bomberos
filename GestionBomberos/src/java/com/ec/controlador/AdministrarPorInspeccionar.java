@@ -27,6 +27,7 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 /**
@@ -43,9 +44,8 @@ public class AdministrarPorInspeccionar {
     private Parametrizar parametrizar = new Parametrizar();
     private String buscarPorinspec = "INSPEC";
     private String buscar = "";
-    
-    /*enviar a insppeccion*/
 
+    /*enviar a insppeccion*/
     public AdministrarPorInspeccionar() {
 
         consultarPermisosPorInspec();
@@ -79,27 +79,41 @@ public class AdministrarPorInspeccionar {
     @Command
     @NotifyChange("listaSolicitudPermisos")
     public void observacionpre(@BindingParam("valor") SolicitudPermiso valor) {
-        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
-        map.put("valor", valor);
-        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                "/nuevo/observacionprevencion.zul", null, map);
-        window.doModal();
-        consultarPermisosPorInspec();
+        if (valor.getSolpSubeArchivoPrevencion()) {
+            final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+            map.put("valor", valor);
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                    "/nuevo/observacionprevencion.zul", null, map);
+            window.doModal();
+            consultarPermisosPorInspec();
+        } else {
+            Clients.showNotification("Para aprobar la solicitud debe adjuntar un archivo",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        }
     }
+
     @Command
     @NotifyChange("listaSolicitudPermisos")
-    public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor) {
+    public void cambiarEstado(@BindingParam("valor") SolicitudPermiso valor
+    ) {
+        if (valor.getSolpSubeArchivoPrevencion()) {
             entidadInspeccion.setInsFecha(new Date());
             entidadInspeccion.setInsObservacion("");
-            
+        } else {
+            Clients.showNotification("Para enviar a prevención de incendios debe adjuntar un archivo",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        }
+
 //            EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("APR");
 //            valor.setIdEstadoDocumento(estadoDocumento);
 //            servicioPermiso.modificar(valor);
 //            consultarPermisosPorInspec();
     }
+
     @Command
     @NotifyChange("listaSolicitudPermisos")
-    public void EstadoReinspeccion(@BindingParam("valor") SolicitudPermiso valor) {
+    public void EstadoReinspeccion(@BindingParam("valor") SolicitudPermiso valor
+    ) {
         if (Messagebox.show("Enviar a reinspeccion?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("REINS");
             valor.setIdEstadoDocumento(estadoDocumento);
@@ -110,7 +124,8 @@ public class AdministrarPorInspeccionar {
 
     @Command
     @NotifyChange("listaSolicitudPermisos")
-    public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor) {
+    public void anularSolicitud(@BindingParam("valor") SolicitudPermiso valor
+    ) {
         if (Messagebox.show("Anular documento", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
             EstadoDocumento estadoDocumento = servicioEstadoDocumento.findBySigla("ANU");
             valor.setIdEstadoDocumento(estadoDocumento);
@@ -121,7 +136,8 @@ public class AdministrarPorInspeccionar {
 
     @Command
     @NotifyChange("listaSolicitudPermisos")
-    public void cargarArchivos(@BindingParam("valor") SolicitudPermiso valor) {
+    public void cargarArchivos(@BindingParam("valor") SolicitudPermiso valor
+    ) {
         final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
         map.put("valor", valor);
         org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
@@ -131,7 +147,8 @@ public class AdministrarPorInspeccionar {
     }
 
     @Command
-    public void verPermiso(@BindingParam("valor") SolicitudPermiso valor) {
+    public void verPermiso(@BindingParam("valor") SolicitudPermiso valor
+    ) {
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("numeracion", valor.getSolpNumeracion());
         try {
@@ -153,7 +170,7 @@ public class AdministrarPorInspeccionar {
             Logger.getLogger(NuevoPermiso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public List<SolicitudPermiso> getListaSolicitudPermisos() {
         return listaSolicitudPermisos;
     }

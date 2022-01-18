@@ -67,7 +67,7 @@ public class AdministrarPermiso {
     }
 
     private void consultarSolicitudNum() {
-        listaSolicitudPermisos = servicioPermiso.FindLikeNumeroSolicitud(buscar);
+        listaSolicitudPermisos = servicioPermiso.FindLikeNumeroSolicitud(buscar,buscarIng);
         //saldoPorCobrar();
     }
     
