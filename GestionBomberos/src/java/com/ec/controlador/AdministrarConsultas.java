@@ -62,6 +62,18 @@ public class AdministrarConsultas {
         consultarSolicitudes();
     }
     
+    @Command
+    @NotifyChange("listaSolicitudPermisos")
+    public void cargarArchivos(@BindingParam("valor") SolicitudPermiso valor
+    ) {
+        final HashMap<String, SolicitudPermiso> map = new HashMap<String, SolicitudPermiso>();
+        map.put("valor", valor);
+        org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                "/consulta/historial_archivos.zul", null, map);
+        window.doModal();
+        consultarSolicitudes();
+    }
+    
      private void consultarSolicitudes() {
          lstSolicitudPermiso = servicioSolicitudPermiso.findLikeBuscarSolicitudes(buscarSolicitud,fechainicio,fechafin );
     }
