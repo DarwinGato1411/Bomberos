@@ -28,7 +28,7 @@
                             <button   iconSclass="z-icon-search  "
                                       onClick="@command('buscarFechas')"  
                                       class="btn btn-primary btn-sm  "
-                                      tooltiptext="Buscar facturas por fecha"/>  
+                                      tooltiptext="Buscar solicitudes por fecha"/>  
                             <button   iconSclass="z-icon-print"
                                        onClick="@command('imprimir')"  
                                        class="btn btn-primary btn-sm  "

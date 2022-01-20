@@ -26,15 +26,9 @@
         
         <tabpanels>
             <tabpanel  height="98%" width="99%"  >
-                <listbox  width="99%"
-                          model="@load(vm.listaSolicitudPermisos)" 
-                          nonselectableTags="*" 
-                          mold="paging" pageSize="20">
-                
-                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>
-                   
-                    <auxhead>
-                        <auxheader colspan="10" >  
+                <div class="row" >   
+                    <div class="input-group col-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <div class=" col-12 col-sm-12 col-md-8 col-lg-8 " > 
                             <button    iconSclass="z-icon-plus-circle"
                                        class="btn btn-primary btn-xs botongeneral"                                            
                                        onClick="@command('agregarPermiso')" 
@@ -43,18 +37,36 @@
                                        class="btn btn-primary btn-xs botongeneral"                                            
                                        onClick="@command('agregarcobromanual')" 
                                        tooltiptext="Ingresar cobro manual"/>
-                        </auxheader>
-                    </auxhead>
-                    <listhead sizable="false">
-                        <listheader width="8%"  >
+                        </div>
+                        <div class=" col-12 col-sm-12 col-md-3 col-lg-3 "  >                                  
                             <textbox value="@bind(vm.buscar)"  
-                                          tooltiptext="# Solicitud"
-                                          class="form-control form-control-sm"                                         
-                                          placeholder="Numero de solicitud"
-                                          onOK="@command('buscarLikeNumSolicitud')"
-                                          onChange="self.setValue(self.getValue().toUpperCase());" />
-                                
-                        </listheader> 
+                                     tooltiptext="# Solicitud"
+                                     class="form-control form-control-sm"                                         
+                                     placeholder="Numero de solicitud"
+                                     onOK="@command('buscarLikeNumSolicitud')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </div>
+                        <div class=" input-group col-12 col-sm-12 col-md-1 col-lg-1 "  >                                            
+                            <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                      onClick="@command('buscarLikeNumSolicitud')"  
+                                      tooltiptext="Buscar Solicitud"
+                                      class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+<!--                            <button   style="width:30px;height:30px; background: #974A39" iconSclass="z-icon-cloud-download"
+                                      onClick=""  
+                                      class="btn btn-primary btn-sm "
+                                      tooltiptext="Exportar a excel"/>-->
+                        </div>
+                    </div>
+                </div>
+                <listbox  width="99%"
+                          model="@load(vm.listaSolicitudPermisos)" 
+                          nonselectableTags="*" 
+                          mold="paging" pageSize="20">
+                
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                    
+                    <listhead sizable="false">
+                        <listheader label="${labels.app.numsol}"  align="left" width="8%"  ></listheader> 
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>                       

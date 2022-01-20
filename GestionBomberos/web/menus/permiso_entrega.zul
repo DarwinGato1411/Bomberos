@@ -14,6 +14,32 @@
         
         <tabpanels>
             <tabpanel  height="98%" width="99%"  >
+                <div class="row" >   
+                    <div class="input-group col-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <div class=" col-12 col-sm-12 col-md-3 col-lg-3 " > 
+                            <textbox value="@bind(vm.buscar)"  
+                                     tooltiptext="# Solicitud"
+                                     class="form-control form-control-sm"                                         
+                                     placeholder="Numero de solicitud"
+                                     onOK="@command('buscarLikeNumSolicitud')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                          
+                        </div>
+                        <div class=" col-12 col-sm-12 col-md-8 col-lg-8 "  >                                  
+                            <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                      onClick="@command('buscarLikeNumSolicitud')"  
+                                      tooltiptext="Buscar Solicitud"
+                                      class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                        </div>
+                        <div class=" input-group col-12 col-sm-12 col-md-1 col-lg-1 "   align="center">                                            
+                                
+                            <button   style="width:30px;height:30px; background: #77E100" iconSclass="z-icon-cloud-download"
+                                      onClick="@command('exportListboxToExcel')"  
+                                      class="btn btn-primary btn-sm "
+                                      tooltiptext="Exportar a excel"/>
+                        </div>
+                    </div>
+                </div>
                 <listbox  width="99%"
                           model="@load(vm.listaPermisos)" 
                           nonselectableTags="*" 
@@ -25,9 +51,9 @@
                     <listhead sizable="false">
                         <listheader label="N° Solicitud"  align="left" hflex="3"></listheader>
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
-                        <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
+                        <listheader label="${labels.app.nombre}"  align="left" hflex="10"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
-                        <listheader label="${labels.app.valor}"  align="left" hflex="5"></listheader>
+                        <!--<listheader label="${labels.app.valor}"  align="left" hflex="5"></listheader>-->
                         <listheader label="${labels.app.estado}"  align="left" hflex="5"></listheader>
                         <listheader label="Agente"  align="left" hflex="7"></listheader>
                         <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
@@ -61,13 +87,13 @@
                                                      format="medium" width="98%"  />
                             </listcell>  
                             
-                            <listcell zclass = "mycss-listcell">
+<!--                            <listcell zclass = "mycss-listcell">
                                 <textbox
                                     readonly="true"                             
                                     sclass="letraLisbox" 
                                     value="@bind(each.idInspeccion.idSolcitudPer.idTarifa.tarValor)" style="font-weight:bold" 
                                     width="100%"/>
-                            </listcell>
+                            </listcell>-->
                             <zk if="${each.perPagado}"  >
                             <listcell zclass = "mycss-listcell"  style="background:#C7FEC1">
                                 <textbox

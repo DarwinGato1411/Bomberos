@@ -5,6 +5,7 @@
 package com.ec.servicio;
 
 import com.ec.entidad.Permiso;
+import com.ec.entidad.SolicitudPermiso;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -207,7 +208,52 @@ public class ServicioPermiso {
         }
         return null;
     }
-    
-    
+
+    public List<Permiso> FindLikeNumeroSolicitud(String valor, String sigla) {
+
+        List<Permiso> listaPermisos = new ArrayList<Permiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE  (u.idInspeccion.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idInspeccion.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.idInspeccion.idSolcitudPer.solpNumero DESC");
+//            query.setMaxResults(400);
+            query.setParameter("solpNumero", "%" + valor + "%");
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
+            listaPermisos = (List<Permiso>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta num solicitud " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaPermisos;
+    }
+
+    public List<Permiso> FindLikeNumeroSolEntrega(String valor, String sigla) {
+
+        List<Permiso> lstBuscarSolEntrega = new ArrayList<Permiso>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Permiso u WHERE (u.idInspeccion.idSolcitudPer.solpNumero LIKE :solpNumero OR u.idInspeccion.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idInspeccion.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) AND u.idInspeccion.idSolcitudPer.idEstadoDocumento.estSigla =:estSigla   ORDER BY u.idInspeccion.idSolcitudPer.solpNumero DESC");
+//            query.setMaxResults(400);
+            query.setParameter("solpNumero", "%" + valor + "%");
+            query.setParameter("estSigla", sigla);
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
+            lstBuscarSolEntrega = (List<Permiso>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta  FindLikeNumeroInspeccion " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return lstBuscarSolEntrega;
+    }
 
 }

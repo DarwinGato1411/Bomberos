@@ -14,7 +14,7 @@
             <tabpanels >
                 <tabpanel  height="auto"   >
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
+                        <div class="input-group col-12 col-sm-12 col-md-12 col-lg-12 form-group " align="start"  >
                             <div class="col-12 col-sm-12 col-md-4 col-lg-4 btn-group">
                                 <label  style="font-weight:bold;padding-left: 10px" 
                                         value="Consultar:"  />
@@ -28,7 +28,7 @@
                                            onChange="self.setValue(self.getValue().toUpperCase().trim());" 
                                            maxlength="13"  />
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 btn-group">
+                            <div class=" input-group col-12 col-sm-12 col-md-6 col-lg-6 ">
                                 <label value="Inicio: " style="font-weight: bold;padding: 5px;"   />
                                 <datebox compact="true" value="@bind(vm.fechainicio)" 
                                          style="font-weight:bold;"
@@ -42,12 +42,11 @@
                                          buttonVisible="true" 
                                          lenient="true" format="dd/MM/yyyy" 
                                          constraint="no empty: Ingrese la fecha "/> 
-<!--                                <button   image="/imagenes/buscar1.png"  
-                                          onClick="@command('buscarFechas')"  
+                               <button   iconSclass="z-icon-search  " 
+                                          onClick="@command('buscarLikeSolicitudes')"  
                                           class="btn btn-primary btn-sm  "
-                                          tooltiptext="Buscar facturas por fecha"/>-->
+                                          tooltiptext="Buscar solicitudes por fecha"/>
                             </div>
-                            
                            
                             <listbox  width="99%"
                                       model="@load(vm.lstSolicitudPermiso)" 

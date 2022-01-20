@@ -27,6 +27,7 @@ public class AdministrarConsultas {
     ServicioSolicitudPermiso servicioSolicitudPermiso = new ServicioSolicitudPermiso();
 //    private List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
     private List<SolicitudPermiso> lstSolicitudPermiso = new ArrayList<SolicitudPermiso>();
+    private List<SolicitudPermiso> listaSolicitud = new ArrayList();
     private String buscarSolicitud = "";
     private Date fechainicio = new Date();
     private Date fechafin = new Date();
@@ -48,7 +49,7 @@ public class AdministrarConsultas {
     @Command
     @NotifyChange({"lstsolicitudPermiso","buscarSolicitud", "fechafin", "fechainicio"})
     public void buscarFechas() {
-        consultarSolicitudFecha();
+        consultarSolicitudes();
     }
     
     @Command
@@ -77,11 +78,7 @@ public class AdministrarConsultas {
      private void consultarSolicitudes() {
          lstSolicitudPermiso = servicioSolicitudPermiso.findLikeBuscarSolicitudes(buscarSolicitud,fechainicio,fechafin );
     }
-     
-     private void consultarSolicitudFecha() {
-        lstSolicitudPermiso =  servicioSolicitudPermiso.findSolFecha(fechainicio, fechafin, buscarSolicitud);
-    }     
-
+    
     public String getBuscarSolicitud() {
         return buscarSolicitud;
     }
@@ -121,4 +118,13 @@ public class AdministrarConsultas {
     public void setFechafin(Date fechafin) {
         this.fechafin = fechafin;
     }
+
+    public List<SolicitudPermiso> getListaSolicitud() {
+        return listaSolicitud;
+    }
+
+    public void setListaSolicitud(List<SolicitudPermiso> listaSolicitud) {
+        this.listaSolicitud = listaSolicitud;
+    }
+    
 }

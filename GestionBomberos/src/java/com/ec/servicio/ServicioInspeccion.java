@@ -123,6 +123,30 @@ public class ServicioInspeccion {
         return listaClientes;
     }
 
+    public List<Inspeccion> FindLikeNumeroInspeccion(String valor, String sigla) {
+
+        List<Inspeccion> lstBuscarInspeccion = new ArrayList<Inspeccion>();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE (u.idSolcitudPer.solpNumero LIKE :solpNumero OR u.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) AND u.idSolcitudPer.idEstadoDocumento.estSigla =:estSigla   ORDER BY u.idSolcitudPer.solpNumero DESC");
+//            query.setMaxResults(400);
+            query.setParameter("solpNumero", "%" + valor + "%");
+            query.setParameter("estSigla", sigla);
+            query.setParameter("solNumCedula", "%" + valor + "%");
+            query.setParameter("solpNombreSol", "%" + valor + "%");
+            lstBuscarInspeccion = (List<Inspeccion>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta  FindLikeNumeroInspeccion " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return lstBuscarInspeccion;
+    }
+    
     public Inspeccion findByPerSigla(String perSigla) {
 
         List<Inspeccion> listaClientes = new ArrayList<Inspeccion>();

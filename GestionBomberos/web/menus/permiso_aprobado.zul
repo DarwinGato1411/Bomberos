@@ -21,11 +21,37 @@
     
     <tabbox id="tboxPrincipal"  width="100%">
         <tabs>
-                <tab label="Documentos aprobados por prevencion de incendios" sclass="menutabs" /> 
+            <tab label="Documentos aprobados por prevencion de incendios" sclass="menutabs" /> 
         </tabs>
         
         <tabpanels>
             <tabpanel  height="98%" width="99%"  >
+                <div class="row" >   
+                    <div class="input-group col-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <div class=" col-12 col-sm-12 col-md-3 col-lg-3 " > 
+                            <textbox value="@bind(vm.buscar)"  
+                                     tooltiptext="# Solicitud"
+                                     class="form-control form-control-sm"                                         
+                                     placeholder="Numero de solicitud"
+                                     onOK="@command('buscarLikeNumSolicitud')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                          
+                        </div>
+                        <div class=" col-12 col-sm-12 col-md-8 col-lg-8 "  >                                  
+                            <button   style="font-size:10px;background-color:trasnsparent;font-weight:bold"
+                                      onClick="@command('buscarLikeNumSolicitud')"  
+                                      tooltiptext="Buscar Solicitud"
+                                      class="glyphicon glyphicon-search btn btn-outline-primary btn  btn-primary btn-sm "/>
+                        </div>
+                        <div class=" input-group col-12 col-sm-12 col-md-1 col-lg-1 "   align="center">                                            
+                                
+                            <button   style="width:30px;height:30px; background: #77E100" iconSclass="z-icon-cloud-download"
+                                      onClick="@command('exportListboxToExcel')"  
+                                      class="btn btn-primary btn-sm "
+                                      tooltiptext="Exportar a excel"/>
+                        </div>
+                    </div>
+                </div>
                 <listbox  width="99%"
                           model="@load(vm.listaInspeccion)" 
                           nonselectableTags="*" 
@@ -39,7 +65,7 @@
                         <listheader label="${labels.app.ci}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.nombre}"  align="left" hflex="5"></listheader>
                         <listheader label="${labels.app.fecha}"  align="left" hflex="5"></listheader>
-                       <listheader label="${labels.app.inspector}"  align="left" hflex="6"></listheader>
+                        <listheader label="${labels.app.inspector}"  align="left" hflex="6"></listheader>
                         <listheader label="T. Solicitud"  align="left" hflex="6"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
                         <listheader label=""  align="left" width="33px"></listheader>
@@ -51,29 +77,29 @@
                         <listitem  >
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idSolcitudPer.solpNumero)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idSolcitudPer.solpNumero)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idSolcitudPer.solNumCedula)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idSolcitudPer.solNumCedula)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                 <label sclass="letraLisbox" 
-                                                   value="@bind(each.idSolcitudPer.solpNombreSol)" style="font-weight:bold" 
-                                                   width="100%"/>
+                                       value="@bind(each.idSolcitudPer.solpNombreSol)" style="font-weight:bold" 
+                                       width="100%"/>
                             </listcell>    
                             <listcell zclass = "mycss-listcell">                                          
                                 <datebox compact="true" value="@bind(each.idSolcitudPer.solpFecha)" 
-                                                     buttonVisible="false" lenient="true" readonly="true"
-                                                     format="medium" width="98%"  />
+                                         buttonVisible="false" lenient="true" readonly="true"
+                                         format="medium" width="98%"  />
                             </listcell>  
                             <listcell zclass = "mycss-listcell" >                                          
                               
                                 <label sclass="letraLisbox" 
-                                           value="@bind(each.idSolcitudPer.idBombero.bomNombre)" style="font-weight:bold" 
-                                           width="100%"/>
+                                       value="@bind(each.idSolcitudPer.idBombero.bomNombre)" style="font-weight:bold" 
+                                       width="100%"/>
                                 
                             </listcell>
                             <listcell zclass = "mycss-listcell" >                                          
@@ -86,26 +112,26 @@
                                                      
                                 <button    style="width:30px;height:30px; background: orange" iconSclass="z-icon-cloud-upload"
                                 
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('cargarArchivos',valor=each)" 
-                                                       tooltiptext="Cargar archivos"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('cargarArchivos',valor=each)" 
+                                           tooltiptext="Cargar archivos"/> 
                                     
                             </listcell>                      
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('observacionper',valor=each)" 
-                                                       tooltiptext="Enviar a entrega de permisos"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('observacionper',valor=each)" 
+                                           tooltiptext="Enviar a entrega de permisos"/> 
                                     
                             </listcell>
                             <listcell zclass = "mycss-listcell">
                                                      
                                 <button    style="width:30px;height:30px; background: red" 
                                            iconSclass="z-icon-thumbs-o-down"
-                                                       class="btn btn-primary btn-xs"
-                                                       onClick="@command('anularSolicitud',valor=each)" 
-                                                       tooltiptext="Anular Solicitud"/> 
+                                           class="btn btn-primary btn-xs"
+                                           onClick="@command('anularSolicitud',valor=each)" 
+                                           tooltiptext="Anular Solicitud"/> 
                                     
                             </listcell>
                         </listitem>

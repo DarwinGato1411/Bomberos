@@ -279,6 +279,7 @@ public class ServicioSolicitudPermiso {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
             Query query = em.createQuery("SELECT u FROM SolicitudPermiso u WHERE  (u.solpNumero LIKE :solpNumero OR u.solNumCedula LIKE :solNumCedula OR u.solpNombreSol LIKE :solpNombreSol ) AND u.idEstadoDocumento.estSigla =:estSigla   ORDER BY u.solpNumero DESC");
+//            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE (u.idSolcitudPer.solpNumero LIKE :solpNumero OR u.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) AND u.idEstadoDocumento.estSigla =:estSigla   ORDER BY u.solpNumero DESC");
 //            query.setMaxResults(400);
             query.setParameter("solpNumero", "%" + valor + "%");
             query.setParameter("estSigla", sigla);
@@ -327,11 +328,12 @@ public class ServicioSolicitudPermiso {
             System.out.println("CANTIDAD SOLICIU¿TUDES " + listaClientes.size());
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta parteDiario  findLikePerNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta parteDiario  findByFecha  " + e.getMessage());
         } finally {
             em.close();
         }
 
         return listaClientes;
     }
+    
 }
