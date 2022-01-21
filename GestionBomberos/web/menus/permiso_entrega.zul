@@ -33,7 +33,7 @@
                         </div>
                         <div class=" input-group col-12 col-sm-12 col-md-1 col-lg-1 "   align="center">                                            
                                 
-                            <button   style="width:30px;height:30px; background: #77E100" iconSclass="z-icon-cloud-download"
+                            <button   style="width:30px;height:30px; background: #217246" iconSclass="z-icon-cloud-download"
                                       onClick="@command('exportListboxToExcel')"  
                                       class="btn btn-primary btn-sm "
                                       tooltiptext="Exportar a excel"/>

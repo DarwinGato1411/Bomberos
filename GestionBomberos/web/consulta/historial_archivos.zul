@@ -3,14 +3,14 @@
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.HistorialArchivos')">
     
-    <caption label="Cargar Archivo" style="font-weight:bold"/> 
+    <caption label="Historial de archivos" style="font-weight:bold"/> 
     <div  class="container-fluid" >
         <div  class="row" >  
             
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  form-group "  >
                 <tabbox id="tboxPrincipal"  width="100%">
                     <tabs>
-                        <tab label="Cargar archivos" sclass="menutabs " /> 
+                        <tab label="Archivos" sclass="menutabs " /> 
                     </tabs>
                     
                     <tabpanels>
@@ -33,7 +33,7 @@
                                     </auxheader>
                                 </auxhead>-->
                                 <listhead sizable="false">
-                                    <listheader label="Solicitud"  align="left" hflex="3"></listheader>
+                                    <listheader label="Archivos Cargados"  align="left" hflex="3"></listheader>
                                     <listheader label=""  align="left" width="33px"></listheader>
                                 </listhead>
                    
@@ -54,7 +54,7 @@
                                                        onClick="@command('verArchivo',valor=each)" 
                                                        tooltiptext="Ver"/> 
                                     
-                                        </listcell>                                
+                                        </listcell>                               
                                     </listitem>
                                 </template>   
                             </listbox>

@@ -135,7 +135,7 @@
                             </listcell>  
                             <listcell zclass = "mycss-listcell">
                                                      
-                                <button    style="width:30px;height:30px; background: green" iconSclass="z-icon-thumbs-o-up"
+                                <button    style="width:30px;height:30px; background: #00c101" iconSclass="z-icon-thumbs-o-up"
                                            class="btn btn-primary btn-xs"
                                            onClick="@command('cambiarEstado',valor=each)" 
                                            tooltiptext="Enviar a inspección pendiente"/> 

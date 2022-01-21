@@ -190,6 +190,11 @@ and sp.solp_numeracion=$P{numeracion} limit 1]]>
 				<textElement/>
 				<text><![CDATA[22]]></text>
 			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="260" y="316" width="173" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

@@ -104,7 +104,7 @@ public class ServicioInspeccion {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.idSolcitudPer.idEstadoDocumento.estSigla =:estSigla AND (u.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idSolcitudPer.solpNombreSol LIKE :solpNombreSol )");
+            Query query = em.createQuery("SELECT u FROM Inspeccion u WHERE u.idSolcitudPer.idEstadoDocumento.estSigla =:estSigla AND (u.idSolcitudPer.solNumCedula LIKE :solNumCedula OR u.idSolcitudPer.solpNombreSol LIKE :solpNombreSol ) ORDER BY u.idSolcitudPer.solpNumeracion DESC");
 //            query.setParameter("solNumCedula", "%" + valor + "%");
 //            query.setParameter("solpNombreSol", "%" + valor + "%");
 //            query.setParameter("solpApellidoSol", "%" + valor + "%");
