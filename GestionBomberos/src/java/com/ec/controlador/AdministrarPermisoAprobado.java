@@ -217,38 +217,35 @@ public class AdministrarPermisoAprobado {
             ch2.setCellValue(new HSSFRichTextString("Inspector"));
             ch2.setCellStyle(estiloCelda);
 
-            HSSFCell ch22 = r.createCell(j++);
-            ch22.setCellValue(new HSSFRichTextString("Tipo Solicitud"));
-            ch22.setCellStyle(estiloCelda);
+            HSSFCell ch3 = r.createCell(j++);
+            ch3.setCellValue(new HSSFRichTextString("Tipo Solicitud"));
+            ch3.setCellStyle(estiloCelda);
 
             int rownum = 1;
             int i = 0;
 
-            for (SolicitudPermiso item : listaSolicitudPermisos) {
+            for (Inspeccion item : listaInspeccion) {
+                
                 i = 0;
-
                 r = s.createRow(rownum);
 
                 HSSFCell cf = r.createCell(i++);
-                cf.setCellValue(new HSSFRichTextString(item.getSolpNumero().toString()));
+                cf.setCellValue(new HSSFRichTextString(item.getIdSolcitudPer().getSolpNumero().toString()));
 
                 HSSFCell cf0 = r.createCell(i++);
-                cf0.setCellValue(new HSSFRichTextString(item.getSolNumCedula().toString()));
+                cf0.setCellValue(new HSSFRichTextString(item.getIdSolcitudPer().getSolNumCedula().toString()));
 
                 HSSFCell cf1 = r.createCell(i++);
-                cf1.setCellValue(new HSSFRichTextString(item.getSolpNombreSol().toString()));
+                cf1.setCellValue(new HSSFRichTextString(item.getIdSolcitudPer().getSolpNombreSol().toString()));
 
                 HSSFCell cf2 = r.createCell(i++);
-                cf2.setCellValue(new HSSFRichTextString(sm.format(item.getSolpFecha())));
+                cf2.setCellValue(new HSSFRichTextString(sm.format(item.getIdSolcitudPer().getSolpFecha())));
 
                 HSSFCell cf3 = r.createCell(i++);
-                cf3.setCellValue(new HSSFRichTextString((item.getIdBombero() != null ? item.getIdBombero().getBomNombre() : "")));
-               
-                HSSFCell cf4 = r.createCell(i++);
-                cf4.setCellValue(new HSSFRichTextString((item.getIdBombero() != null ? item.getIdBombero().getBomNombre() : "")));
-
-                 HSSFCell cf5 = r.createCell(i++);
-                cf5.setCellValue(new HSSFRichTextString((item.getIdTipoSolicitud()!= null ? item.getIdTipoSolicitud().getTipsDescripcion(): "")));
+                cf3.setCellValue(new HSSFRichTextString((item.getIdSolcitudPer().getIdBombero() != null ? item.getIdSolcitudPer().getIdBombero().getBomNombre() : "")));
+             
+                 HSSFCell cf4 = r.createCell(i++);
+                cf4.setCellValue(new HSSFRichTextString((item.getIdSolcitudPer().getIdTipoSolicitud()!= null ? item.getIdSolcitudPer().getIdTipoSolicitud().getTipsDescripcion(): "")));
 
                 /*autemta la siguiente fila*/
                 rownum += 1;
