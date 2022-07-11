@@ -135,6 +135,15 @@ public class CargarArchivoPermiso {
                     permiso.setSolpSubeArchivoPrevencion(Boolean.TRUE);
                     servicioPermiso.modificar(permiso);
                 } 
+                if (permiso.getIdEstadoDocumento().getEstSigla().equals("APR")) {
+//                    Boolean.TRUE;
+                     permiso.setSolpSubeArchivoRecaudacion(Boolean.TRUE);
+                    servicioPermiso.modificar(permiso);
+                }
+                if (permiso.getSolpSubeArchivoRecaudacion().equals(Boolean.TRUE)) {
+                    inspeccion.setInsSubeArchivoRecaudacion(Boolean.TRUE);
+                    servicioInspeccion.modificar(inspeccion);
+                }
                 cargarLista();
 //                valor.setPathImgPedido(filePath + nombre);
                 Clients.showNotification("Solicitud cargada", Clients.NOTIFICATION_TYPE_INFO, null, "end_before", 1000, true);

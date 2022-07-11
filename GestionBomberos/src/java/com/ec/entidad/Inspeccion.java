@@ -58,7 +58,9 @@ public class Inspeccion implements Serializable {
     private Integer insNumDocPorAgente;
     @Column(name = "ins_impuesto_predial")
     private BigDecimal insImpuestoPredial;
-
+    @Column(name = "ins_sube_archivo_recaudacion")
+    private Boolean insSubeArchivoRecaudacion;
+     
     @JoinColumn(name = "id_bombero", referencedColumnName = "id_bombero")
     @ManyToOne
     private Bombero idBombero;
@@ -197,6 +199,16 @@ public class Inspeccion implements Serializable {
     public void setPermisoCollection(Collection<Permiso> permisoCollection) {
         this.permisoCollection = permisoCollection;
     }
+
+    public Boolean getInsSubeArchivoRecaudacion() {
+        return insSubeArchivoRecaudacion == null ? Boolean.FALSE : insSubeArchivoRecaudacion;
+    }
+
+    public void setInsSubeArchivoRecaudacion(Boolean insSubeArchivoRecaudacion) {
+        this.insSubeArchivoRecaudacion = insSubeArchivoRecaudacion;
+    }
+    
+    
 
     @Override
     public int hashCode() {

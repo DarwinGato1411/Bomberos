@@ -40,8 +40,8 @@
                         </template>                                      
                     </combobox>
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group "  >
-                    <label    value="(*) "  >${labels.app.inspector}</label>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4  form-group" >
+                    <label>${labels.app.inspector}</label>
           
                     <combobox  model="@load(vm.listBomberos)"  
                                width="100%"
@@ -127,7 +127,7 @@
                               class="form-control" />
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 form-group "  >
-                    <label value="(*)" style="color:red;font-weight:bold"/>${labels.app.nombrecomercial} 
+                    <label />${labels.app.nombrecomercial} 
                 
                     <textbox  maxlength="100" 
                                 readonly="${!sessionScope.usuario.puedeEditar}" 

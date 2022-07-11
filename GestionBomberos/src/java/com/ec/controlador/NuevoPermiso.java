@@ -102,7 +102,7 @@ public class NuevoPermiso {
     ServicioTarifa servicioTipoTarifa = new ServicioTarifa();
 
     private List<Bombero> listBomberos = new ArrayList<Bombero>();
-    private Bombero bomberoSelected = new Bombero();
+    private Bombero bomberoSelected = null;
     ServicioBombero servicioBombero = new ServicioBombero();
 
     @AfterCompose
@@ -134,8 +134,7 @@ public class NuevoPermiso {
             Date finAno = new Date();
             finAno.setMonth(11);
             finAno.setDate(31);
-            
-            
+
             entidadSelected.setSolpAnio((finAno.getYear() + 1900));
             entidadSelected.setSolpFecha(new Date());
             entidadSelected.setSolpFechaReinspeccion(finAno);
@@ -261,11 +260,11 @@ public class NuevoPermiso {
 //                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
 //                return;
 //            }
-            if (bomberoSelected == null) {
-                Clients.showNotification("Seleccione una agente de inspeccion... ",
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
-                return;
-            }
+//            if (bomberoSelected == null) {
+//                Clients.showNotification("Seleccione un agente de inspeccion... ",
+//                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+//                return;
+//            }
 
             if (tipoSoliSelected.getTipsSigla().equals("CC")) {
                 if (entidadSelected.getSolpProyecto() == null || entidadSelected.getSolpTetefonoProyecto() == null) {
@@ -288,8 +287,10 @@ public class NuevoPermiso {
             if (tarifaSelected != null) {
                 entidadSelected.setIdTarifa(tarifaSelected);
             }
+            if (bomberoSelected != null) {
+                entidadSelected.setIdBombero(bomberoSelected);
+            }
 
-            entidadSelected.setIdBombero(bomberoSelected);
             entidadSelected.setSolpNombreLocal(entidadSelected.getSolpNombreNegocio());
             entidadSelected.setSolpTelefonoInspeccion(entidadSelected.getSolpTelefonoContacto() != null ? entidadSelected.getSolpTelefonoContacto() : "");
             entidadSelected.setIdTipoSolicitud(tipoSoliSelected);

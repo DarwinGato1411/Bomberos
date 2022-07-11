@@ -164,6 +164,8 @@ public class SolicitudPermiso implements Serializable {
     private String solpDetValorAdicional;
     @Column(name = "solp_obs_actualiza_datos")
     private String solpObsActualizaDatos;
+    @Column(name = "solp_sube_archivo_recaudacion")
+    private Boolean solpSubeArchivoRecaudacion;
 
     @Column(name = "solp_fecha_reinspeccion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -826,6 +828,14 @@ public class SolicitudPermiso implements Serializable {
 
     public void setSolpObsActualizaDatos(String solpObsActualizaDatos) {
         this.solpObsActualizaDatos = solpObsActualizaDatos;
+    }
+
+    public Boolean getSolpSubeArchivoRecaudacion() {
+        return solpSubeArchivoRecaudacion == null ? Boolean.FALSE : solpSubeArchivoRecaudacion;
+    }
+
+    public void setSolpSubeArchivoRecaudacion(Boolean solpSubeArchivoRecaudacion) {
+        this.solpSubeArchivoRecaudacion = solpSubeArchivoRecaudacion;
     }
 
    

@@ -20,7 +20,7 @@
                             <button    style="width:30px;height:30px; background: blue" iconSclass="z-icon-edit "
                                        class="btn btn-primary btn-xs"
                                        onClick="@command('cargarArchivo')" 
-                                       tooltiptext="${labels.app.editar}"/> 
+                                       tooltiptext="${labels.app.cargar}"/> 
 
                             <listbox  width="99%"
                                       model="@load(vm.listadoAdjuntos)" 
